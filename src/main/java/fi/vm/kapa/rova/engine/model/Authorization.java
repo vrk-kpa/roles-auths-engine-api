@@ -2,14 +2,13 @@ package fi.vm.kapa.rova.engine.model;
 
 public class Authorization {
 
-	private AuthorizationResult result;
+	private AuthorizationType result;
 
-	public AuthorizationResult getResult() {
+	public AuthorizationType getResult() {
 		return result;
 	}
 
-	public void setResult(AuthorizationResult result) {
+	public void setResult(AuthorizationType result) {
 		this.result = result;
 	}
-
 }
