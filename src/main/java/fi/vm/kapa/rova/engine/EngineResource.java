@@ -2,6 +2,8 @@ package fi.vm.kapa.rova.engine;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 
 import fi.vm.kapa.rova.engine.model.Authorization;
 import fi.vm.kapa.rova.engine.model.Delegate;
@@ -11,10 +13,10 @@ public interface EngineResource {
 
 	@GET
 	@Path("/delegate")
-	public Delegate getDelegate(String personId, String industry, String service, String issue);
+	public Delegate getDelegate(@PathParam("personId") String personId, @QueryParam("industry") String industry, @QueryParam("service") String service, @QueryParam("issue") String issue);
 
 	@GET
 	@Path("/authorization")
-	public Authorization getAuthorization(String delegateId, String principalId, String industry, String service, String issue);
+	public Authorization getAuthorization(@PathParam("delegateId") String delegateId, @PathParam("principalId") String principalId, @QueryParam("industry") String industry, @QueryParam("service") String service, @QueryParam("issue") String issue);
 
 }
