@@ -12,11 +12,11 @@ import fi.vm.kapa.rova.engine.model.Delegate;
 public interface EngineResource {
 
 	@GET
-	@Path("/delegate")
+	@Path("/delegate/{personId}")
 	public Delegate getDelegate(@PathParam("personId") String personId, @QueryParam("industry") String industry, @QueryParam("service") String service, @QueryParam("issue") String issue);
 
 	@GET
-	@Path("/authorization")
+	@Path("/authorization/{delegateId}/{principalId}")
 	public Authorization getAuthorization(@PathParam("delegateId") String delegateId, @PathParam("principalId") String principalId, @QueryParam("industry") String industry, @QueryParam("service") String service, @QueryParam("issue") String issue);
 
 }
