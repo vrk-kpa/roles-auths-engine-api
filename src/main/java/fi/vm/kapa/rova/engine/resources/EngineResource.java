@@ -1,4 +1,4 @@
-package fi.vm.kapa.rova.engine;
+package fi.vm.kapa.rova.engine.resources;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
