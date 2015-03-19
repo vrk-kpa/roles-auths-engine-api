@@ -1,0 +1,147 @@
+{
+	"VTJHenkiloVastaussanoma":{
+		"attributes":{
+			"xsi:schemaLocation":"http://xml.vrk.fi/schema/vtjkysely ROV2.xsd",
+			"tietojenPoimintaaika":"20150319145655",
+			"sanomatunnus":"ROV2",
+			"versio":"1.0"
+		},
+		"Asiakasinfo":{
+			"InfoS":"19.03.2015 14:56",
+			"InfoR":"19.03.2015 14:56",
+			"InfoE":"19.03.2015 14:56"
+		},
+		"Paluukoodi":{
+			"attributes":{
+				"koodi":"0000"
+			},
+			"$value":"Haku onnistui"
+		},
+		"Hakuperusteet":{
+			"Henkilotunnus":{
+				"attributes":{
+					"hakuperustePaluukoodi":"1",
+					"hakuperusteTekstiS":"Löytyi",
+					"hakuperusteTekstiR":"Hittades",
+					"hakuperusteTekstiE":"Found"
+				},
+				"$value":"151199-999A"
+			}
+		},
+		"Henkilo":{
+			"Henkilotunnus":{
+				"attributes":{
+					"voimassaolokoodi":"1"
+				},
+				"$value":"151199-999A"
+			},
+			"NykyinenSukunimi":{
+				"Sukunimi":"Kuitunen"
+			},
+			"NykyisetEtunimet":{
+				"Etunimet":"Joel Jonatan"
+			},
+			"Kuolintiedot":{
+				"Kuollut":{
+					
+				}
+			},
+			"HuoltajaLkm":"1",
+			"Huoltaja":{
+				"Henkilotunnus":"210263-999M",
+				"Syntymaaika":{
+					
+				},
+				"Sukunimi":"Kuitunen",
+				"Etunimet":"Tobias Jonatan",
+				"Huoltotiedot":{
+					"Huollonjakokoodi":{
+						
+					}
+				}
+			},
+			"Edunvalvonta":{
+				"Alkupvm":{
+					
+				},
+				"Rajoituskoodi":{
+					
+				},
+				"RajoitustekstiS":{
+					
+				},
+				"RajoitustekstiR":{
+					
+				},
+				"HenkiloEdunvalvoja":{
+					"Henkilotunnus":{
+						
+					},
+					"Syntymaaika":{
+						
+					},
+					"NykyinenSukunimi":{
+						"Sukunimi":{
+							
+						}
+					},
+					"NykyisetEtunimet":{
+						"Etunimet":{
+							
+						}
+					}
+				},
+				"OikeusaputoimistoEdunvalvoja":{
+					"Viranomaisnumero":{
+						
+					},
+					"ViranomainenS":{
+						
+					},
+					"ViranomainenR":{
+						
+					}
+				},
+				"YritysJaYhteisoEdunvalvoja":{
+					"Ytunnus":{
+						
+					},
+					"Nimi":{
+						
+					}
+				}
+			},
+			"Edunvalvontavaltuutus":{
+				"Alkupvm":{
+					
+				},
+				"HenkiloEdunvalvontavaltuutettu":{
+					"Henkilotunnus":{
+						
+					},
+					"Syntymaaika":{
+						
+					},
+					"NykyinenSukunimi":{
+						"Sukunimi":{
+							
+						}
+					},
+					"NykyisetEtunimet":{
+						"Etunimet":{
+							
+						}
+					}
+				}
+			},
+			"Turvakielto":{
+				"TurvakieltoTieto":{
+					
+				}
+			},
+			"Huostaanotto":{
+				"HuostaanottoTieto":"0"
+			}
+		}
+	}
+}
