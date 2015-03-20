@@ -10,7 +10,7 @@ public class Person {
 	
 	private String lastName;
 	
-	private List<Person> dependents = new ArrayList<Person>(); // huollettavat (sekä lapset että edunvalvottavat)
+	private List<Person> principals = new ArrayList<Person>(); // huollettavat (sekä lapset että edunvalvottavat)
 	
 	private List<Person> guardians = new ArrayList<Person>(); // edunvalvojat
 	
@@ -86,12 +86,12 @@ public class Person {
 		this.parents = parents;
 	}
 
-	public List<Person> getDependents() {
-		return dependents;
+	public List<Person> getPrincipals() {
+		return principals;
 	}
 
-	public void setDependents(List<Person> dependents) {
-		this.dependents = dependents;
+	public void setPrincipals(List<Person> principals) {
+		this.principals = principals;
 	}
 
 }
