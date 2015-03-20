@@ -10,13 +10,11 @@ public class Person {
 	
 	private String lastName;
 	
-	private List<Person> children = new ArrayList<Person>();
+	private List<Person> dependents = new ArrayList<Person>(); // huollettavat (sekä lapset että edunvalvottavat)
 	
-	private List<Person> custodians = new ArrayList<Person>();
+	private List<Person> guardians = new ArrayList<Person>(); // edunvalvojat
 	
-	private List<Person> guardians = new ArrayList<Person>();
-	
-	private List<Person> parents = new ArrayList<Person>();
+	private List<Person> parents = new ArrayList<Person>(); // vanhemmat
 
 	private boolean deceased; // kuollut
 	
@@ -72,22 +70,6 @@ public class Person {
 		this.custody = custody;
 	}
 
-	public List<Person> getChildren() {
-		return children;
-	}
-
-	public void setChildren(List<Person> children) {
-		this.children = children;
-	}
-
-	public List<Person> getCustodians() {
-		return custodians;
-	}
-
-	public void setCustodians(List<Person> custodians) {
-		this.custodians = custodians;
-	}
-
 	public List<Person> getGuardians() {
 		return guardians;
 	}
@@ -102,6 +84,14 @@ public class Person {
 
 	public void setParents(List<Person> parents) {
 		this.parents = parents;
+	}
+
+	public List<Person> getDependents() {
+		return dependents;
+	}
+
+	public void setDependents(List<Person> dependents) {
+		this.dependents = dependents;
 	}
 
 }
