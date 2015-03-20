@@ -10,9 +10,13 @@ public class Person {
 	
 	private String lastName;
 	
-	private List<Person> principals = new ArrayList<Person>();
+	private List<Person> children = new ArrayList<Person>();
 	
-	private PrincipalType principality; // CHILD or EDUNVALVONNASSA
+	private List<Person> custodians = new ArrayList<Person>();
+	
+	private List<Person> guardians = new ArrayList<Person>();
+	
+	private List<Person> parents = new ArrayList<Person>();
 
 	private boolean deceased; // kuollut
 	
@@ -44,22 +48,6 @@ public class Person {
 		this.lastName = lastName;
 	}
 
-	public List<Person> getPrincipals() {
-		return principals;
-	}
-
-	public void setPrincipals(List<Person> principals) {
-		this.principals = principals;
-	}
-
-	public PrincipalType getPrincipality() {
-		return principality;
-	}
-
-	public void setPrincipality(PrincipalType principality) {
-		this.principality = principality;
-	}
-
 	public boolean isDeceased() {
 		return deceased;
 	}
@@ -82,6 +70,38 @@ public class Person {
 
 	public void setCustody(boolean custody) {
 		this.custody = custody;
+	}
+
+	public List<Person> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<Person> children) {
+		this.children = children;
+	}
+
+	public List<Person> getCustodians() {
+		return custodians;
+	}
+
+	public void setCustodians(List<Person> custodians) {
+		this.custodians = custodians;
+	}
+
+	public List<Person> getGuardians() {
+		return guardians;
+	}
+
+	public void setGuardians(List<Person> guardians) {
+		this.guardians = guardians;
+	}
+
+	public List<Person> getParents() {
+		return parents;
+	}
+
+	public void setParents(List<Person> parents) {
+		this.parents = parents;
 	}
 
 }
