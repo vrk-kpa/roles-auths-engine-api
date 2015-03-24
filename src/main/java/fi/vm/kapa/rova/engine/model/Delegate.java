@@ -7,6 +7,7 @@ public class Delegate extends BaseBean {
 
 	private String delegateId;
 	private List<Principal> principal;
+	private Boolean guardianship;
 	
 	public Delegate() {
 		List<Principal> l=new ArrayList<Principal>();
@@ -23,6 +24,13 @@ public class Delegate extends BaseBean {
 	}
 	public void setPrincipal(List<Principal> principal) {
 		this.principal = principal;
+	}
+		
+	public Boolean getGuardianship() {
+		return guardianship;
+	}
+	public void setGuardianship(Boolean guardianship) {
+		this.guardianship=true;
 	}
 	
 	public void addPrincipal(String personId, String name, String industry, String service, String issue) {
