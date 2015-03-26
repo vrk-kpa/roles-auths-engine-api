@@ -14,13 +14,15 @@ public class Person {
 	
 	private List<Person> guardians = new ArrayList<Person>(); // edunvalvojat
 	
-	private List<Person> parents = new ArrayList<Person>(); // vanhemmat
+	private List<Person> custodians = new ArrayList<Person>(); // huoltajat
 
 	private boolean deceased; // kuollut
 	
 	private boolean protectionOrder; // turvakielto
 	
 	private boolean custody; // huostaanotettu
+	
+	private boolean guardianship; //edunvalvoja määrätty
 	
 	public String getSsn() {
 		return ssn;
@@ -78,12 +80,12 @@ public class Person {
 		this.guardians = guardians;
 	}
 
-	public List<Person> getParents() {
-		return parents;
+	public List<Person> getCustodians() {
+		return custodians;
 	}
 
-	public void setParents(List<Person> parents) {
-		this.parents = parents;
+	public void setCustodians(List<Person> custodians) {
+		this.custodians = custodians;
 	}
 
 	public List<Person> getPrincipals() {
@@ -92,6 +94,14 @@ public class Person {
 
 	public void setPrincipals(List<Person> principals) {
 		this.principals = principals;
+	}
+
+	public boolean isGuardianship() {
+		return guardianship;
+	}
+
+	public void setGuardianship(boolean guardianship) {
+		this.guardianship = guardianship;
 	}
 
 }
