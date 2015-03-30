@@ -22,5 +22,4 @@ public interface EngineResource {
 	@Path("/authorization/{delegateId}/{principalId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Authorization getAuthorization(@PathParam("delegateId") String delegateId, @PathParam("principalId") String principalId, @QueryParam("industry") String industry, @QueryParam("service") String service, @QueryParam("issue") String issue, @QueryParam("enduserId") String endUserId);
-
 }

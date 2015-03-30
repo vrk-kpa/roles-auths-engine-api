@@ -6,6 +6,8 @@ import java.util.List;
 public class Person {
 	private String ssn;
 	
+	private boolean ssnValid;
+	
 	private String firstNames;
 	
 	private String lastName;
@@ -30,6 +32,14 @@ public class Person {
 
 	public void setSsn(String ssn) {
 		this.ssn = ssn;
+	}
+	
+	public boolean isSsnValid() {
+		return ssnValid;
+	}
+
+	public void setSsnValid(boolean ssnValid) {
+		this.ssnValid = ssnValid;
 	}
 
 	public String getFirstNames() {

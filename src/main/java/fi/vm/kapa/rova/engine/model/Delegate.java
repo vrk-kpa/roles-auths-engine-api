@@ -6,19 +6,29 @@ import java.util.List;
 public class Delegate extends BaseBean {
 
 	private String delegateId;
+	private boolean delegateIdValid;
 	private List<Principal> principal;
-	private Boolean guardianship;
+	private boolean guardianship;
 	
 	public Delegate() {
 		List<Principal> l=new ArrayList<Principal>();
 		this.setPrincipal(l);
 	}
+	
 	public String getDelegateId() {
 		return delegateId;
 	}
 	public void setDelegateId(String delegateId) {
 		this.delegateId = delegateId;
 	}
+	
+	public boolean getDelegateIdValid() {
+		return delegateIdValid;
+	}
+	public void setDelegateIdValid(boolean delegateIdValid) {
+		this.delegateIdValid = delegateIdValid;
+	}
+
 	public List<Principal> getPrincipal() {
 		return principal;
 	}
