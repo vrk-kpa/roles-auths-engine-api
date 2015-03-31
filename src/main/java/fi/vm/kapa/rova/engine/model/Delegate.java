@@ -36,10 +36,10 @@ public class Delegate extends BaseBean {
 		this.principal = principal;
 	}
 		
-	public Boolean getGuardianship() {
+	public boolean isGuardianship() {
 		return guardianship;
 	}
-	public void setGuardianship(Boolean guardianship) {
+	public void setGuardianship(boolean guardianship) {
 		this.guardianship=true;
 	}
 	
@@ -51,7 +51,5 @@ public class Delegate extends BaseBean {
 		p.setService(service);
 		p.setIssue(issue);
 		this.principal.add(p);
-		
 	}
-
 }
