@@ -18,7 +18,7 @@ public interface EngineResource {
 	@GET
 	@Path("/delegate/{service}/{enduserId}/{personId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Map<String, Object> getDelegate(@PathParam("personId") String personId, @QueryParam("industry") String industry, @QueryParam("service") String service, @QueryParam("issue") String issue, @QueryParam("enduserId") String endUserId);
+	public Map<String, Object> getDelegate(@PathParam("personId") String personId, @QueryParam("industry") String industry, @PathParam("service") String service, @PathParam("enduserId") String endUserId);
 
 	@GET
 	@Path("/delegate/{service}/{enduserId}/{personId}/{issue}")
@@ -35,5 +35,4 @@ public interface EngineResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Map<String, Object> getAuthorizationWithIssue(@PathParam("delegateId") String delegateId, @PathParam("principalId") String principalId, @QueryParam("industry") String industry, @PathParam("service") String service, @PathParam("issue") String issue, @PathParam("enduserId") String endUserId);
 
-	public Map<String, Object> getAuthorization(@PathParam("delegateId") String delegateId, @PathParam("principalId") String principalId, @QueryParam("industry") String industry, @QueryParam("service") String service, @QueryParam("issue") String issue, @QueryParam("enduserId") String endUserId);
 }
