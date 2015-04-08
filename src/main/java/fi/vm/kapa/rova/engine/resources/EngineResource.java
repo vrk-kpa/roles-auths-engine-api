@@ -14,12 +14,23 @@ import fi.vm.kapa.rova.engine.model.Delegate;
 public interface EngineResource {
 
 	@GET
-	@Path("/delegate/{personId}")
+	@Path("/delegate/{service}/{enduserId}/{personId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Delegate getDelegate(@PathParam("personId") String personId, @QueryParam("industry") String industry, @QueryParam("service") String service, @QueryParam("issue") String issue, @QueryParam("enduserId") String endUserId);
+	public Delegate getDelegate(@PathParam("personId") String personId, @QueryParam("industry") String industry, @PathParam("service") String service, @PathParam("enduserId") String endUserId);
 
 	@GET
-	@Path("/authorization/{delegateId}/{principalId}")
+	@Path("/delegate/{service}/{enduserId}/{personId}/{issue}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Authorization getAuthorization(@PathParam("delegateId") String delegateId, @PathParam("principalId") String principalId, @QueryParam("industry") String industry, @QueryParam("service") String service, @QueryParam("issue") String issue, @QueryParam("enduserId") String endUserId);
+	public Delegate getDelegateWithIssue(@PathParam("personId") String personId, @QueryParam("industry") String industry, @PathParam("service") String service, @PathParam("issue") String issue, @PathParam("enduserId") String endUserId);
+
+	@GET
+	@Path("/authorization/{service}/{enduserId}/{delegateId}/{principalId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Authorization getAuthorization(@PathParam("delegateId") String delegateId, @PathParam("principalId") String principalId, @QueryParam("industry") String industry, @PathParam("service") String service, @PathParam("enduserId") String endUserId);
+
+	@GET
+	@Path("/authorization/{service}/{enduserId}/{delegateId}/{principalId}/{issue}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Authorization getAuthorizationWithIssue(@PathParam("delegateId") String delegateId, @PathParam("principalId") String principalId, @QueryParam("industry") String industry, @PathParam("service") String service, @PathParam("issue") String issue, @PathParam("enduserId") String endUserId);
+
 }
