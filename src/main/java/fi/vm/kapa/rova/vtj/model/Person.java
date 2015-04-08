@@ -22,7 +22,7 @@ public class Person {
 	
 	private boolean protectionOrder; // turvakielto
 	
-	private boolean custody; // huostaanotettu
+	private boolean huostaanotettu;
 	
 	private boolean guardianship; //edunvalvoja määrätty
 	
@@ -74,12 +74,12 @@ public class Person {
 		this.protectionOrder = protectionOrder;
 	}
 
-	public boolean isCustody() {
-		return custody;
+	public boolean isHuostaanotettu() {
+		return huostaanotettu;
 	}
 
-	public void setCustody(boolean custody) {
-		this.custody = custody;
+	public void setHuostaanotettu(boolean huostaanotettu) {
+		this.huostaanotettu = huostaanotettu;
 	}
 
 	public List<Person> getGuardians() {
@@ -120,7 +120,7 @@ public class Person {
 				+ ", firstNames=" + firstNames + ", lastName=" + lastName
 				+ ", principals=" + principals + ", guardians=" + guardians
 				+ ", custodians=" + custodians + ", deceased=" + deceased
-				+ ", protectionOrder=" + protectionOrder + ", custody="
-				+ custody + ", guardianship=" + guardianship + "]";
+				+ ", protectionOrder=" + protectionOrder + ", huostaanotettu="
+				+ huostaanotettu + ", guardianship=" + guardianship + "]";
 	}
 }
