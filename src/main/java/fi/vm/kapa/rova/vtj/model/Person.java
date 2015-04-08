@@ -98,15 +98,6 @@ public class Person {
 		this.custodians = custodians;
 	}
 
-	@Override
-	public String toString() {
-		return "Person [ssn=" + ssn + ", ssnValid=" + ssnValid
-				+ ", firstNames=" + firstNames + ", lastName=" + lastName
-				+ ", deceased=" + deceased + ", protectionOrder="
-				+ protectionOrder + ", custody=" + custody + ", guardianship="
-				+ guardianship + "]";
-	}
-
 	public List<Person> getPrincipals() {
 		return principals;
 	}
@@ -121,5 +112,15 @@ public class Person {
 
 	public void setGuardianship(boolean guardianship) {
 		this.guardianship = guardianship;
+	}
+
+	@Override
+	public String toString() {
+		return "Person [ssn=" + ssn + ", ssnValid=" + ssnValid
+				+ ", firstNames=" + firstNames + ", lastName=" + lastName
+				+ ", principals=" + principals + ", guardians=" + guardians
+				+ ", custodians=" + custodians + ", deceased=" + deceased
+				+ ", protectionOrder=" + protectionOrder + ", custody="
+				+ custody + ", guardianship=" + guardianship + "]";
 	}
 }
