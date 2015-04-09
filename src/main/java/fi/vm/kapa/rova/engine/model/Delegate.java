@@ -9,10 +9,14 @@ public class Delegate extends BaseBean {
 	private boolean delegateIdValid;
 	private List<Principal> principal;
 	private boolean guardianship;
+	private List<DecisionReason> reasons;
 	
 	public Delegate() {
 		List<Principal> l=new ArrayList<Principal>();
+		List<DecisionReason> r = new ArrayList<DecisionReason>();
+		
 		this.setPrincipal(l);
+		this.setReasons(r);
 	}
 	
 	public String getDelegateId() {
@@ -51,5 +55,13 @@ public class Delegate extends BaseBean {
 		p.setService(service);
 		p.setIssue(issue);
 		this.principal.add(p);
+	}
+
+	public List<DecisionReason> getReasons() {
+		return reasons;
+	}
+
+	public void setReasons(List<DecisionReason> reasons) {
+		this.reasons = reasons;
 	}
 }
