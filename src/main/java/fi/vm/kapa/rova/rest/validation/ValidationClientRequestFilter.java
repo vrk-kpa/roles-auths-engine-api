@@ -13,8 +13,8 @@ public class ValidationClientRequestFilter implements ClientRequestFilter {
 
 	private ValidationUtil validationUtil;
 	
-	public ValidationClientRequestFilter(String apiKey) {
-		validationUtil = new ValidationUtil(apiKey);
+	public ValidationClientRequestFilter(String apiKey, int requestAliveSeconds) {
+		validationUtil = new ValidationUtil(apiKey, requestAliveSeconds);
 	}
 	
 	@Override

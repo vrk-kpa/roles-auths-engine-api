@@ -2,7 +2,7 @@ package fi.vm.kapa.rova.rest.validation;
 
 import java.io.IOException;
 import java.util.Base64;
-import java.util.Map;
+import java.util.logging.Logger;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -14,8 +14,16 @@ public class ValidationUtil {
 	public final static String HASH_HEADER_NAME = "X-RoVa-Hash";
 	public final static String TIMESTAMP_HEADER_NAME = "X-RoVa-timestamp";
 
+	public static Logger LOG = Logger.getLogger(ValidationUtil.class.toString());
+
 	private final static String HMAC_ALGORITHM = "HmacSHA256";
 	private String apiKey;
+	private long requestAliveMillis;
+
+	public ValidationUtil(String apiKey, int requestAliveSeconds) {
+		this.apiKey = apiKey;
+		this.requestAliveMillis = requestAliveSeconds * 1000;
+	}
 	
 	/**
 	 * Handle out bound client request
@@ -23,7 +31,6 @@ public class ValidationUtil {
 	 * @return
 	 */
 	public boolean handleClientRequestContext(ClientRequestContext context) throws IOException {
-		System.out.println(context.getUri());
 		MultivaluedMap<String, Object> headers = context.getHeaders();
 		String timestamp = "" + System.currentTimeMillis();
 		String data = context.getUri().getPath();
@@ -31,7 +38,6 @@ public class ValidationUtil {
 		String hash = generateHash(data);
 		headers.putSingle(HASH_HEADER_NAME, hash);
 		headers.putSingle(TIMESTAMP_HEADER_NAME, timestamp);
-		System.out.println("OUT: " + data + " " + hash);
 		return true;
 	}
 
@@ -42,14 +48,19 @@ public class ValidationUtil {
 	 */
 	public boolean handleContainerRequestContext(ContainerRequestContext context) throws IOException {
 		String timestamp = context.getHeaderString(TIMESTAMP_HEADER_NAME);
-		String data = "/"+context.getUriInfo().getPath() + timestamp;
-		String hash = context.getHeaderString(HASH_HEADER_NAME);
-		System.out.println("IN: " + data + " " + hash);
-		return matches(hash, data);
+		if (requestAlive(timestamp)) {
+			String data = "/"+context.getUriInfo().getPath() + timestamp;
+			String hash = context.getHeaderString(HASH_HEADER_NAME);
+			return matches(hash, data);
+		} else {
+			LOG.info("Request rejected found request that was older than " + requestAliveMillis);
+			return false;
+		}
 	}
 	
-	public ValidationUtil(String apiKey) {
-		this.apiKey = apiKey;
+	private boolean requestAlive(String timestampHeader) {
+		long timestamp = Long.parseLong(timestampHeader);
+		return (System.currentTimeMillis() < (timestamp + requestAliveMillis));
 	}
 	
 	private boolean matches(String hash, String data) throws IOException {
