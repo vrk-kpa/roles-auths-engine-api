@@ -26,6 +26,8 @@ public class Person {
 	
 	private boolean guardianship; //edunvalvoja määrätty
 	
+	private boolean guardianshipLimited; //edunvalvonta rajoitettu
+	
 	public String getSsn() {
 		return ssn;
 	}
@@ -112,6 +114,14 @@ public class Person {
 
 	public void setGuardianship(boolean guardianship) {
 		this.guardianship = guardianship;
+	}
+	
+	public boolean isGuardianshipLimited() {
+		return guardianshipLimited;
+	}
+
+	public void setGuardianshipLimited(boolean guardianshipLimited) {
+		this.guardianshipLimited = guardianshipLimited;
 	}
 
 	@Override

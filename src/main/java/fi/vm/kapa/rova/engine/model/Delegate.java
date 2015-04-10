@@ -9,6 +9,10 @@ public class Delegate extends BaseBean {
 	private boolean delegateIdValid;
 	private List<Principal> principal;
 	private boolean guardianship;
+	private boolean hetuValid;
+	private boolean deceased;
+	private boolean huostaanotto;
+		
 	private List<DecisionReason> reasons;
 	
 	public Delegate() {
@@ -47,6 +51,30 @@ public class Delegate extends BaseBean {
 		this.guardianship=true;
 	}
 	
+	public boolean isHetuValid() {
+		return hetuValid;
+	}
+
+	public void setHetuValid(boolean hetuValid) {
+		this.hetuValid = hetuValid;
+	}
+	
+	public boolean isDeceased() {
+		return deceased;
+	}
+
+	public void setDeceased(boolean deceased) {
+		this.deceased = deceased;
+	}
+	
+	public boolean isHuostaanotto() {
+		return huostaanotto;
+	}
+
+	public void setHuostaanotto(boolean huostaanotto) {
+		this.huostaanotto = huostaanotto;
+	}
+	
 	public void addPrincipal(String personId, String name, String industry, String service, String issue) {
 		Principal p=new Principal();
 		p.setName(name);
@@ -64,4 +92,5 @@ public class Delegate extends BaseBean {
 	public void setReasons(List<DecisionReason> reasons) {
 		this.reasons = reasons;
 	}
+
 }
