@@ -28,6 +28,9 @@ public class Person {
 	
 	private boolean guardianshipLimited; //edunvalvonta rajoitettu
 	
+	private boolean huollonjakoSopimus;
+	
+	
 	public String getSsn() {
 		return ssn;
 	}
@@ -123,6 +126,14 @@ public class Person {
 	public void setGuardianshipLimited(boolean guardianshipLimited) {
 		this.guardianshipLimited = guardianshipLimited;
 	}
+	
+	public boolean isHuollonjakoSopimus() {
+		return huollonjakoSopimus;
+	}
+
+	public void setHuollonjakoSopimus(boolean huollonjakoSopimus) {
+		this.huollonjakoSopimus = huollonjakoSopimus;
+	}
 
 	@Override
 	public String toString() {
@@ -131,6 +142,6 @@ public class Person {
 				+ ", principals=" + principals + ", guardians=" + guardians
 				+ ", custodians=" + custodians + ", deceased=" + deceased
 				+ ", protectionOrder=" + protectionOrder + ", huostaanotettu="
-				+ huostaanotettu + ", guardianship=" + guardianship + "]";
+				+ huostaanotettu + ", guardianship=" + guardianship + ", huollonjakosopimus=" + huollonjakoSopimus + "]";
 	}
 }
