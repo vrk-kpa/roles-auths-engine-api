@@ -28,8 +28,13 @@ public class Person {
 	
 	private boolean guardianshipLimited; //edunvalvonta rajoitettu
 	
+	private boolean guardianshipUnlimited; //edunvalvontaa ei rajoitettu
+	
+	private boolean guardianshipAnnounced; //edunvalvonta julistettu
+	
 	private boolean huollonjakoSopimus;
 	
+	private boolean huollonjakoMaarays;
 	
 	public String getSsn() {
 		return ssn;
@@ -127,12 +132,36 @@ public class Person {
 		this.guardianshipLimited = guardianshipLimited;
 	}
 	
+	public boolean isGuardianshipUnlimited() {
+		return guardianshipUnlimited;
+	}
+
+	public void setGuardianshipUnlimited(boolean guardianshipUnlimited) {
+		this.guardianshipUnlimited = guardianshipUnlimited;
+	}
+
+	public boolean isGuardianshipAnnounced() {
+		return guardianshipAnnounced;
+	}
+
+	public void setGuardianshipAnnounced(boolean guardianshipAnnounced) {
+		this.guardianshipAnnounced = guardianshipAnnounced;
+	}
+
 	public boolean isHuollonjakoSopimus() {
 		return huollonjakoSopimus;
 	}
 
 	public void setHuollonjakoSopimus(boolean huollonjakoSopimus) {
 		this.huollonjakoSopimus = huollonjakoSopimus;
+	}
+
+	public boolean isHuollonjakoMaarays() {
+		return huollonjakoMaarays;
+	}
+
+	public void setHuollonjakoMaarays(boolean huollonjakoMaarays) {
+		this.huollonjakoMaarays = huollonjakoMaarays;
 	}
 
 	@Override
@@ -142,6 +171,7 @@ public class Person {
 				+ ", principals=" + principals + ", guardians=" + guardians
 				+ ", custodians=" + custodians + ", deceased=" + deceased
 				+ ", protectionOrder=" + protectionOrder + ", huostaanotettu="
-				+ huostaanotettu + ", guardianship=" + guardianship + ", huollonjakosopimus=" + huollonjakoSopimus + "]";
+				+ huostaanotettu + ", guardianship=" + guardianship + ", huollonjakosopimus="
+				+ huollonjakoSopimus + ", huollonjakomaarays=" + huollonjakoMaarays + "]";
 	}
 }

@@ -11,7 +11,7 @@ public class Delegate extends BaseBean {
 	private boolean guardianship;
 	private boolean hetuValid;
 	private boolean deceased;
-	private boolean huostaanotto;
+	
 		
 	private List<DecisionReason> reasons;
 	
@@ -67,6 +67,7 @@ public class Delegate extends BaseBean {
 		this.deceased = deceased;
 	}
 	
+	/*
 	public boolean isHuostaanotto() {
 		return huostaanotto;
 	}
@@ -74,6 +75,7 @@ public class Delegate extends BaseBean {
 	public void setHuostaanotto(boolean huostaanotto) {
 		this.huostaanotto = huostaanotto;
 	}
+	*/
 	
 	public void addPrincipal(String personId, String name, String industry, String service, String issue) {
 		Principal p=new Principal();
