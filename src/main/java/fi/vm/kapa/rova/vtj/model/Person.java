@@ -12,9 +12,13 @@ public class Person {
 	
 	private String lastName;
 	
+	private String birthdate;
+	
 	private List<Person> principals = new ArrayList<Person>(); // huollettavat (sekä lapset että edunvalvottavat)
 	
-	private List<Person> guardians = new ArrayList<Person>(); // edunvalvojat
+	private List<Person> guardians = new ArrayList<Person>(); // henkilö edunvalvojat
+	
+	private List<Person> guardianshipAuthorizedPersons = new ArrayList<Person>(); //henkilöedunvalvontavaltuutetut
 	
 	private List<Person> custodians = new ArrayList<Person>(); // huoltajat
 
@@ -68,6 +72,14 @@ public class Person {
 		this.lastName = lastName;
 	}
 
+	public String getBirthdate() {
+		return birthdate;
+	}
+
+	public void setBirthdate(String birthdate) {
+		this.birthdate = birthdate;
+	}
+
 	public boolean isDeceased() {
 		return deceased;
 	}
@@ -98,6 +110,15 @@ public class Person {
 
 	public void setGuardians(List<Person> guardians) {
 		this.guardians = guardians;
+	}
+
+	public List<Person> getGuardianshipAuthorizedPersons() {
+		return guardianshipAuthorizedPersons;
+	}
+
+	public void setGuardianshipAuthorizedPersons(
+			List<Person> guardianshipAuthorizedPersons) {
+		this.guardianshipAuthorizedPersons = guardianshipAuthorizedPersons;
 	}
 
 	public List<Person> getCustodians() {
