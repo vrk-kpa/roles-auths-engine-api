@@ -9,8 +9,8 @@ public class ValidationContainerRequestFilter implements ContainerRequestFilter 
 
 	private ValidationUtil validationUtil;
 	
-	public ValidationContainerRequestFilter(String apiKey, int requestAliveSeconds) {
-		validationUtil = new ValidationUtil(apiKey, requestAliveSeconds);
+	public ValidationContainerRequestFilter(String apiKey, int requestAliveSeconds, String pathPrefix) {
+		validationUtil = new ValidationUtil(apiKey, requestAliveSeconds, pathPrefix);
 	}
 	
 	@Override

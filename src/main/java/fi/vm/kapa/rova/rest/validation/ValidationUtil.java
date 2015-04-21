@@ -19,10 +19,12 @@ public class ValidationUtil {
 	private final static String HMAC_ALGORITHM = "HmacSHA256";
 	private String apiKey;
 	private long requestAliveMillis;
-
-	public ValidationUtil(String apiKey, int requestAliveSeconds) {
+	private String pathPrefix; // url prefix, for client side
+	
+	public ValidationUtil(String apiKey, int requestAliveSeconds, String pathPrefix) {
 		this.apiKey = apiKey;
 		this.requestAliveMillis = requestAliveSeconds * 1000;
+		this.pathPrefix = pathPrefix == null ? "" : pathPrefix;
 	}
 	
 	/**
@@ -49,7 +51,7 @@ public class ValidationUtil {
 	public boolean handleContainerRequestContext(ContainerRequestContext context) throws IOException {
 		String timestamp = context.getHeaderString(TIMESTAMP_HEADER_NAME);
 		if (requestAlive(timestamp)) {
-			String data = "/"+context.getUriInfo().getPath() + timestamp;
+			String data = pathPrefix+"/"+context.getUriInfo().getPath() + timestamp;
 			String hash = context.getHeaderString(HASH_HEADER_NAME);
 			return matches(hash, data);
 		} else {
