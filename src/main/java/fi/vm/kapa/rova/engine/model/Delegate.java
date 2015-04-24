@@ -11,7 +11,7 @@ public class Delegate extends BaseBean {
 	private boolean guardianship;
 	private boolean hetuValid;
 	private boolean deceased;
-	
+	private AuthorizationType authorizationType;
 		
 	private List<DecisionReason> reasons;
 	
@@ -77,6 +77,14 @@ public class Delegate extends BaseBean {
 	}
 	*/
 	
+	public AuthorizationType getAuthorizationType() {
+		return authorizationType;
+	}
+
+	public void setAuthorizationType(AuthorizationType authorizationType) {
+		this.authorizationType = authorizationType;
+	}
+
 	public void addPrincipal(String personId, String name, String industry, String service, String issue) {
 		Principal p=new Principal();
 		p.setName(name);
