@@ -3,7 +3,7 @@ package fi.vm.kapa.rova.engine.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Delegate extends BaseBean {
+public class Delegate {
 
 	private String delegateId;
 	private boolean delegateIdValid;
@@ -67,16 +67,6 @@ public class Delegate extends BaseBean {
 		this.deceased = deceased;
 	}
 	
-	/*
-	public boolean isHuostaanotto() {
-		return huostaanotto;
-	}
-
-	public void setHuostaanotto(boolean huostaanotto) {
-		this.huostaanotto = huostaanotto;
-	}
-	*/
-	
 	public AuthorizationType getAuthorizationType() {
 		return authorizationType;
 	}
@@ -85,13 +75,10 @@ public class Delegate extends BaseBean {
 		this.authorizationType = authorizationType;
 	}
 
-	public void addPrincipal(String personId, String name, String industry, String service, String issue) {
+	public void addPrincipal(String personId, String name) {
 		Principal p=new Principal();
 		p.setName(name);
 		p.setPersonId(personId);
-		p.setIndustry(industry);
-		p.setService(service);
-		p.setIssue(issue);
 		this.principal.add(p);
 	}
 

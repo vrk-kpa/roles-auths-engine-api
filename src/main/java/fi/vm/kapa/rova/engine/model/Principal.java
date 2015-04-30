@@ -1,6 +1,6 @@
 package fi.vm.kapa.rova.engine.model;
 
-public class Principal extends BaseBean {
+public class Principal {
 
 	private String personId;
 	private String name;

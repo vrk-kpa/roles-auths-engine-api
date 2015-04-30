@@ -16,7 +16,6 @@ public class ValidationContainerRequestFilter implements ContainerRequestFilter 
 	@Override
 	public void filter(ContainerRequestContext requestContext)
 			throws IOException {
-		System.out.println("validating request hash");
 		if (!validationUtil.handleContainerRequestContext(requestContext)) {
 			throw new IOException("Request validation failed (hash).");
 		}
