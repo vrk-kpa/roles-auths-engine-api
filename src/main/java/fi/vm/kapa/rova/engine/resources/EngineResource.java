@@ -14,11 +14,11 @@ public interface EngineResource {
 	@GET
 	@Path("/delegate/{service}/{enduserId}/{personId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getDelegate(@PathParam("personId") String personId, @PathParam("service") String service, @PathParam("enduserId") String endUserId, @QueryParam("queryId") String queryId);
+	public Response getDelegate(@PathParam("personId") String personId, @PathParam("service") String service, @PathParam("enduserId") String endUserId, @QueryParam("requestId") String requestId);
 
 	@GET
 	@Path("/authorization/{service}/{enduserId}/{delegateId}/{principalId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getAuthorization(@PathParam("delegateId") String delegateId, @PathParam("principalId") String principalId, @PathParam("service") String service, @PathParam("enduserId") String endUserId, @QueryParam("queryId") String queryId);
+	public Response getAuthorization(@PathParam("delegateId") String delegateId, @PathParam("principalId") String principalId, @PathParam("service") String service, @PathParam("enduserId") String endUserId, @QueryParam("requestId") String requestId);
 
 }
