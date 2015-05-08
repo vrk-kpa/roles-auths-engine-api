@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Person {
-	private String ssn;
+	private String hetu;
 	
-	private boolean ssnValid;
+	private boolean hetuValid;
 	
 	private String firstNames;
 	
@@ -16,44 +16,44 @@ public class Person {
 	
 	private List<Person> principals = new ArrayList<Person>(); // huollettavat (sekä lapset että edunvalvottavat)
 	
-	private List<Person> guardians = new ArrayList<Person>(); // henkilö edunvalvojat
+	private List<Person> edunvalvojat = new ArrayList<Person>(); // henkilö edunvalvojat
 	
-	private List<Person> guardianshipAuthorizedPersons = new ArrayList<Person>(); //henkilöedunvalvontavaltuutetut
+	private List<Person> edunvalvontaValtuutetut = new ArrayList<Person>(); //henkilöedunvalvontavaltuutetut
 	
-	private List<Person> custodians = new ArrayList<Person>(); // huoltajat
+	private List<Person> huoltajat = new ArrayList<Person>(); // huoltajat
 
 	private boolean deceased; // kuollut
 	
-	private boolean protectionOrder; // turvakielto
+	private boolean turvakielto; // turvakielto
 	
 	private boolean huostaanotettu;
 	
-	private boolean guardianship; //edunvalvoja määrätty
+	private boolean edunvalvonta; //edunvalvoja määrätty
 	
-	private boolean guardianshipLimited; //edunvalvonta rajoitettu
+	private boolean edunvalvontaRajoitettu; //edunvalvonta rajoitettu
 	
-	private boolean guardianshipUnlimited; //edunvalvontaa ei rajoitettu
+	private boolean edunvalvontaEiRajoitettu; //edunvalvontaa ei rajoitettu
 	
-	private boolean guardianshipAnnounced; //edunvalvonta julistettu
+	private boolean edunvalvontaJulistettu; //edunvalvonta julistettu
 	
 	private boolean huollonjakoSopimus;
 	
 	private boolean huollonjakoMaarays;
 	
-	public String getSsn() {
-		return ssn;
+	public String getHetu() {
+		return hetu;
 	}
 
-	public void setSsn(String ssn) {
-		this.ssn = ssn;
+	public void setHetu(String hetu) {
+		this.hetu = hetu;
 	}
 	
-	public boolean isSsnValid() {
-		return ssnValid;
+	public boolean isHetuValid() {
+		return hetuValid;
 	}
 
-	public void setSsnValid(boolean ssnValid) {
-		this.ssnValid = ssnValid;
+	public void setHetuValid(boolean hetuValid) {
+		this.hetuValid = hetuValid;
 	}
 
 	public String getFirstNames() {
@@ -88,12 +88,12 @@ public class Person {
 		this.deceased = deceased;
 	}
 
-	public boolean isProtectionOrder() {
-		return protectionOrder;
+	public boolean isTurvakielto() {
+		return turvakielto;
 	}
 
-	public void setProtectionOrder(boolean protectionOrder) {
-		this.protectionOrder = protectionOrder;
+	public void setTurvakielto(boolean turvakielto) {
+		this.turvakielto = turvakielto;
 	}
 
 	public boolean isHuostaanotettu() {
@@ -104,29 +104,29 @@ public class Person {
 		this.huostaanotettu = huostaanotettu;
 	}
 
-	public List<Person> getGuardians() {
-		return guardians;
+	public List<Person> getEdunvalvojat() {
+		return edunvalvojat;
 	}
 
-	public void setGuardians(List<Person> guardians) {
-		this.guardians = guardians;
+	public void setEdunvalvojat(List<Person> edunvalvojat) {
+		this.edunvalvojat = edunvalvojat;
 	}
 
-	public List<Person> getGuardianshipAuthorizedPersons() {
-		return guardianshipAuthorizedPersons;
+	public List<Person> getEdunvalvontaValtuutetut() {
+		return edunvalvontaValtuutetut;
 	}
 
-	public void setGuardianshipAuthorizedPersons(
-			List<Person> guardianshipAuthorizedPersons) {
-		this.guardianshipAuthorizedPersons = guardianshipAuthorizedPersons;
+	public void setEdunvalvontaValtuutetut(
+			List<Person> edunvalvontaValtuutetut) {
+		this.edunvalvontaValtuutetut = edunvalvontaValtuutetut;
 	}
 
-	public List<Person> getCustodians() {
-		return custodians;
+	public List<Person> getHuoltajat() {
+		return huoltajat;
 	}
 
-	public void setCustodians(List<Person> custodians) {
-		this.custodians = custodians;
+	public void setHuoltajat(List<Person> huoltajat) {
+		this.huoltajat = huoltajat;
 	}
 
 	public List<Person> getPrincipals() {
@@ -137,36 +137,36 @@ public class Person {
 		this.principals = principals;
 	}
 
-	public boolean isGuardianship() {
-		return guardianship;
+	public boolean isEdunvalvonta() {
+		return edunvalvonta;
 	}
 
-	public void setGuardianship(boolean guardianship) {
-		this.guardianship = guardianship;
+	public void setEdunvalvonta(boolean edunvalvonta) {
+		this.edunvalvonta = edunvalvonta;
 	}
 	
-	public boolean isGuardianshipLimited() {
-		return guardianshipLimited;
+	public boolean isEdunvalvontaRajoitettu() {
+		return edunvalvontaRajoitettu;
 	}
 
-	public void setGuardianshipLimited(boolean guardianshipLimited) {
-		this.guardianshipLimited = guardianshipLimited;
+	public void setEdunvalvontaRajoitettu(boolean edunvalvontaRajoitettu) {
+		this.edunvalvontaRajoitettu = edunvalvontaRajoitettu;
 	}
 	
-	public boolean isGuardianshipUnlimited() {
-		return guardianshipUnlimited;
+	public boolean isEdunvalvontaEiRajoitettu() {
+		return edunvalvontaEiRajoitettu;
 	}
 
-	public void setGuardianshipUnlimited(boolean guardianshipUnlimited) {
-		this.guardianshipUnlimited = guardianshipUnlimited;
+	public void setEdunvalvontaEiRajoitettu(boolean edunvalvontaEiRajoitettu) {
+		this.edunvalvontaEiRajoitettu = edunvalvontaEiRajoitettu;
 	}
 
-	public boolean isGuardianshipAnnounced() {
-		return guardianshipAnnounced;
+	public boolean isEdunvalvontaJulistettu() {
+		return edunvalvontaJulistettu;
 	}
 
-	public void setGuardianshipAnnounced(boolean guardianshipAnnounced) {
-		this.guardianshipAnnounced = guardianshipAnnounced;
+	public void setEdunvalvontaJulistettu(boolean edunvalvontaJulistettu) {
+		this.edunvalvontaJulistettu = edunvalvontaJulistettu;
 	}
 
 	public boolean isHuollonjakoSopimus() {
@@ -187,12 +187,12 @@ public class Person {
 
 	@Override
 	public String toString() {
-		return "Person [ssn=" + ssn + ", ssnValid=" + ssnValid
+		return "Person [ssn=" + hetu + ", ssnValid=" + hetuValid
 				+ ", firstNames=" + firstNames + ", lastName=" + lastName
-				+ ", principals=" + principals + ", guardians=" + guardians
-				+ ", custodians=" + custodians + ", deceased=" + deceased
-				+ ", protectionOrder=" + protectionOrder + ", huostaanotettu="
-				+ huostaanotettu + ", guardianship=" + guardianship + ", huollonjakosopimus="
+				+ ", principals=" + principals + ", guardians=" + edunvalvojat
+				+ ", custodians=" + huoltajat + ", deceased=" + deceased
+				+ ", protectionOrder=" + turvakielto + ", huostaanotettu="
+				+ huostaanotettu + ", guardianship=" + edunvalvonta + ", huollonjakosopimus="
 				+ huollonjakoSopimus + ", huollonjakomaarays=" + huollonjakoMaarays + "]";
 	}
 }
