@@ -8,7 +8,7 @@ public class Delegate {
 	private String delegateId;
 	private boolean delegateIdValid;
 	private List<Principal> principal;
-	private boolean guardianship;
+	private boolean edunvalvonta;
 	private boolean hetuValid;
 	private boolean deceased;
 	private AuthorizationType authorizationType;
@@ -44,11 +44,12 @@ public class Delegate {
 		this.principal = principal;
 	}
 		
-	public boolean isGuardianship() {
-		return guardianship;
+	public boolean isEdunvalvonta() {
+		return edunvalvonta;
 	}
-	public void setGuardianship(boolean guardianship) {
-		this.guardianship=true;
+	
+	public void setEdunvalvonta(boolean edunvalvonta) {
+		this.edunvalvonta=true;
 	}
 	
 	public boolean isHetuValid() {
