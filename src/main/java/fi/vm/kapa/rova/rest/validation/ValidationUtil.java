@@ -52,9 +52,7 @@ public class ValidationUtil {
 		String timestamp = context.getHeaderString(TIMESTAMP_HEADER_NAME);
 		if (requestAlive(timestamp)) {
 			String data = pathPrefix+"/"+context.getUriInfo().getPath() + timestamp;
-			System.out.println(data);
 			String hash = context.getHeaderString(HASH_HEADER_NAME);
-			System.out.println(hash);
 			return matches(hash, data);
 		} else {
 			LOG.info("Request rejected found request that was older than " + requestAliveMillis);
@@ -78,7 +76,6 @@ public class ValidationUtil {
 			mac.init(signingKey);
 			byte[] rawHmac = mac.doFinal(data.getBytes());
 			String result = new String(Base64.getEncoder().encode(rawHmac));
-			System.out.println(result);
 			return result;
 		} catch (Exception e) {
 
