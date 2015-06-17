@@ -5,39 +5,22 @@ import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-//@Component
-//@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class Logger { // extends org.slf4j.impl.SimpleLogger implements org.slf4j.Logger {
+public class Logger {
 	
-	private static final String ALPHANUMERICS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	private org.slf4j.Logger slf4jLogger;
-	private String component;
+	private static final String ALPHANUMERICS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"; // new ReqID is randomized from these chars 
+	private org.slf4j.Logger slf4jLogger; // actual logger inside this warpper
+	private String component; // like "soap-service"/"engine"/"vtj-client"
 	private Random random;
 	
-	public static final String REQUEST_ID = "RequestID"; 
+	public static final String REQUEST_ID = "ReqID"; 
+	public static final String NO_REQUEST_ID = "no_request"; // will be shown as ReqID if logging outside request scope 
 	
-//	@SuppressWarnings("rawtypes")
-//	public Logger(Class cls, String component) {
-//		this.slf4jLogger = LoggerFactory.getLogger(cls);
-//		this.component = component;
-//		this.random = new Random(System.currentTimeMillis());
-//	}
-//
 	private Logger() {
 	}
-//	
-//	public void initialize(Class cls, String component) {
-//		this.slf4jLogger = LoggerFactory.getLogger(cls);
-//		this.component = component;
-//	}
 
 	@SuppressWarnings("rawtypes")
 	public static Logger getLogger(Class cls, String component) {
@@ -73,6 +56,14 @@ public class Logger { // extends org.slf4j.impl.SimpleLogger implements org.slf4
 		builder.append(component);
 		builder.append(" ");
 		
+		builder.append(fetchRequestId());
+		builder.append(" ");
+		
+		builder.append(msg);
+		return builder.toString();
+	}
+	
+	private String fetchRequestId() {
 		RequestAttributes attrs = RequestContextHolder.getRequestAttributes();
 		if (attrs != null) {
 			String requestId = (String) attrs.getAttribute(REQUEST_ID, RequestAttributes.SCOPE_REQUEST);
@@ -89,15 +80,12 @@ public class Logger { // extends org.slf4j.impl.SimpleLogger implements org.slf4
 				}
 				
 				attrs.setAttribute(REQUEST_ID, requestId, RequestAttributes.SCOPE_REQUEST);
-			} 
-			builder.append(requestId);
-			builder.append(" ");
+			}
+			
+			return requestId;
 		} else {
-			builder.append("no_request ");
+			return NO_REQUEST_ID;
 		}
-		
-		builder.append(msg);
-		return builder.toString();
 	}
 
 }
