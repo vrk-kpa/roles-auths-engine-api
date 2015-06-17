@@ -12,7 +12,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 public class Logger {
 	
 	private static final String ALPHANUMERICS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"; // new ReqID is randomized from these chars 
-	private org.slf4j.Logger slf4jLogger; // actual logger inside this warpper
+	private org.slf4j.Logger slf4jLogger; // actual logger inside this wrapper
 	private String component; // like "soap-service"/"engine"/"vtj-client"
 	private Random random;
 	
