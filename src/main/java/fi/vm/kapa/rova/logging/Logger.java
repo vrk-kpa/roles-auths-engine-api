@@ -17,7 +17,10 @@ public class Logger {
 	private Random random;
 	
 	public static final String REQUEST_ID = "ReqID"; 
-	public static final String NO_REQUEST_ID = "no_request"; // will be shown as ReqID if logging outside request scope 
+	public static final String NO_REQUEST_ID = "no_request"; // will be shown as ReqID if logging outside request scope
+	public static final String ENGINE = "Engine";
+	public static final String SOAP_SERVICE = "Soap-service";
+	public static final String VTJ_CLIENT = "Vtj-client";
 	
 	private Logger() {
 	}
