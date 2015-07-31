@@ -1,10 +1,14 @@
 package fi.vm.kapa.rova.admin.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class RuleDTO {
 	private String ruleId;
 	private String identification;
 	private String description;
 	private String group;
+	
 	public String getRuleId() {
 		return ruleId;
 	}
