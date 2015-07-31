@@ -1,12 +1,12 @@
 package fi.vm.kapa.rova.admin.model;
 
 import java.util.List;
-public class Service {
+public class ServiceDTO {
 	private long id;
 	private String name;
 	private String serviceIdentifier;
 	private String description;
-	private List<RuleSet> ruleSets;
+	private List<RuleSetDTO> ruleSets;
 	private boolean showReasons;
 	
 	public long getId() {
@@ -33,10 +33,10 @@ public class Service {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public List<RuleSet> getRuleSets() {
+	public List<RuleSetDTO> getRuleSets() {
 		return ruleSets;
 	}
-	public void setRuleSets(List<RuleSet> ruleSets) {
+	public void setRuleSets(List<RuleSetDTO> ruleSets) {
 		this.ruleSets = ruleSets;
 	}
 	public boolean isShowReasons() {

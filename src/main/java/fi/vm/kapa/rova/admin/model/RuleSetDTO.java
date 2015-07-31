@@ -3,16 +3,16 @@ package fi.vm.kapa.rova.admin.model;
 import java.util.List;
 import java.util.Map;
 
-public class RuleSet {
+public class RuleSetDTO {
 	
-	private List<Rule> rules;
+	private List<RuleDTO> rules;
 	private String type;
 	private Map<String, Map<String, String>> ruleConfigMap;
 
-	public List<Rule> getRules() {
+	public List<RuleDTO> getRules() {
 		return rules;
 	}
-	public void setRules(List<Rule> rules) {
+	public void setRules(List<RuleDTO> rules) {
 		this.rules = rules;
 	}
 	public String getType() {
@@ -21,10 +21,10 @@ public class RuleSet {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public Map<String, Map<String, String>> getRuleConfigMap() {
+	public Map<String, Map<String, String>> getRuleConfig() {
 		return ruleConfigMap;
 	}
-	public void setRuleConfigMap(Map<String, Map<String, String>> ruleConfigMap) {
+	public void setRuleConfig(Map<String, Map<String, String>> ruleConfigMap) {
 		this.ruleConfigMap = ruleConfigMap;
 	}
 	

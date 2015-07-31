@@ -1,6 +1,6 @@
 package fi.vm.kapa.rova.admin.model;
 
-public class Rule {
+public class RuleDTO {
 	private String ruleId;
 	private String identification;
 	private String description;
