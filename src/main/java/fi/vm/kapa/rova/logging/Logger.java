@@ -22,6 +22,7 @@ public class Logger {
 	public static final String SOAP_SERVICE = "Soap-service";
 	public static final String VTJ_CLIENT = "Vtj-client";
 	public static final String TEST_CLIENT = "Test-client";
+	public static final String ADMIN_UI = "Admin-UI";
 	
 	private Logger() {
 	}
