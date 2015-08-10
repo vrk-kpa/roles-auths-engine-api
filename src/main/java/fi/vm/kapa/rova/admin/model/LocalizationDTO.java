@@ -1,33 +1,33 @@
 package fi.vm.kapa.rova.admin.model;
 
 public class LocalizationDTO {
-	
-	private String key;
-	private String lang;
-	private String value;
 
-	public String getKey() {
-		return key;
-	}
+    private String key;
+    private String lang;
+    private String value;
 
-	public void setKey(String key) {
-		this.key = key;
-	}
+    public String getKey() {
+        return key;
+    }
 
-	public String getLang() {
-		return lang;
-	}
+    public void setKey(String key) {
+        this.key = key;
+    }
 
-	public void setLang(String lang) {
-		this.lang = lang;
-	}
+    public String getLang() {
+        return lang;
+    }
 
-	public String getValue() {
-		return value;
-	}
+    public void setLang(String lang) {
+        this.lang = lang;
+    }
 
-	public void setValue(String value) {
-		this.value = value;
-	}
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
 
 }

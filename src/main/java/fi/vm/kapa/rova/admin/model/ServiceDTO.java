@@ -3,59 +3,59 @@ package fi.vm.kapa.rova.admin.model;
 import java.util.List;
 
 public class ServiceDTO {
-	
-	private long id;
-	private String name;
-	private String serviceIdentifier;
-	private String description;
-	private List<RuleSetDTO> ruleSets;
-	private boolean showReasons;
 
-	public long getId() {
-		return id;
-	}
+    private long id;
+    private String name;
+    private String serviceIdentifier;
+    private String description;
+    private List<RuleSetDTO> ruleSets;
+    private boolean showReasons;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getServiceIdentifier() {
-		return serviceIdentifier;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setServiceIdentifier(String serviceIdentifier) {
-		this.serviceIdentifier = serviceIdentifier;
-	}
+    public String getServiceIdentifier() {
+        return serviceIdentifier;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void setServiceIdentifier(String serviceIdentifier) {
+        this.serviceIdentifier = serviceIdentifier;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public List<RuleSetDTO> getRuleSets() {
-		return ruleSets;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setRuleSets(List<RuleSetDTO> ruleSets) {
-		this.ruleSets = ruleSets;
-	}
+    public List<RuleSetDTO> getRuleSets() {
+        return ruleSets;
+    }
 
-	public boolean isShowReasons() {
-		return showReasons;
-	}
+    public void setRuleSets(List<RuleSetDTO> ruleSets) {
+        this.ruleSets = ruleSets;
+    }
 
-	public void setShowReasons(boolean showReasons) {
-		this.showReasons = showReasons;
-	}
+    public boolean isShowReasons() {
+        return showReasons;
+    }
+
+    public void setShowReasons(boolean showReasons) {
+        this.showReasons = showReasons;
+    }
 }

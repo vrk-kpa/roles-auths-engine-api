@@ -6,50 +6,50 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RuleDTO {
-	
-	private String ruleId;
-	private String identification;
-	private String description;
-	private String group;
-	private Collection<String> localizationKeys;
 
-	public String getRuleId() {
-		return ruleId;
-	}
+    private String ruleId;
+    private String identification;
+    private String description;
+    private String group;
+    private Collection<String> localizationKeys;
 
-	public void setRuleId(String ruleId) {
-		this.ruleId = ruleId;
-	}
+    public String getRuleId() {
+        return ruleId;
+    }
 
-	public String getIdentification() {
-		return identification;
-	}
+    public void setRuleId(String ruleId) {
+        this.ruleId = ruleId;
+    }
 
-	public void setIdentification(String identification) {
-		this.identification = identification;
-	}
+    public String getIdentification() {
+        return identification;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void setIdentification(String identification) {
+        this.identification = identification;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public String getGroup() {
-		return group;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setGroup(String group) {
-		this.group = group;
-	}
+    public String getGroup() {
+        return group;
+    }
 
-	public Collection<String> getLocalizationKeys() {
-		return localizationKeys;
-	}
+    public void setGroup(String group) {
+        this.group = group;
+    }
 
-	public void setLocalizationKeys(Collection<String> localizationKeys) {
-		this.localizationKeys = localizationKeys;
-	}
+    public Collection<String> getLocalizationKeys() {
+        return localizationKeys;
+    }
+
+    public void setLocalizationKeys(Collection<String> localizationKeys) {
+        this.localizationKeys = localizationKeys;
+    }
 }
