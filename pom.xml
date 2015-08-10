@@ -5,7 +5,7 @@
 	<artifactId>roles-auths-engine-api</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0-SNAPSHOT</version>
-	<name>engine-api</name>
+	<name>roles-auths-engine-api</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<io.spring.platform-version>1.1.1.RELEASE</io.spring.platform-version>
