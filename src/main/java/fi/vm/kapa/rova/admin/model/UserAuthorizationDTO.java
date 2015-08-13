@@ -4,8 +4,8 @@ public class UserAuthorizationDTO {
 
     private String roleName;
     private String serviceId;
-    private String userName;
-
+    private UserDTO user;
+    
     public String getRoleName() {
         return roleName;
     }
@@ -22,11 +22,11 @@ public class UserAuthorizationDTO {
         this.serviceId = serviceId;
     }
 
-    public String getUserName() {
-        return userName;
+    public UserDTO getUser() {
+        return user;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUser(UserDTO user) {
+        this.user = user;
     }
 }
