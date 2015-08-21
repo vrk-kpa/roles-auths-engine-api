@@ -1,11 +1,12 @@
 package fi.vm.kapa.rova.engine.model;
 
 import java.util.List;
+import java.util.Map;
 
 public class OrganizationalPerson {
     private String personIdentifier;
     private String name;
-    private List<OrganizationalRole> organizationalRoles;
+    private Map<Organization, OrganizationalRole> organizationalRoles;
     
     public String getPersonIdentifier() {
         return personIdentifier;
@@ -23,18 +24,15 @@ public class OrganizationalPerson {
         this.name = name;
     }
     
-    public List<OrganizationalRole> getOrganizationalRoles() {
+    public Map<Organization, OrganizationalRole> getOrganizationalRoles() {
         return organizationalRoles;
     }
 
-    public void setReasons(List<OrganizationalRole> organizationalRoles) {
+    public void setOrganizationRoles(Map<Organization, OrganizationalRole> organizationalRoles) {
         this.organizationalRoles = organizationalRoles;
     }
-    
-    public void addOrganizationalRole(Organization organization, String role) {
-        OrganizationalRole or = new OrganizationalRole();
-        or.setOrganization(organization);
-        or.addRole(role);
-        this.organizationalRoles.add(or);
+
+    public void addOrganizationalRole(Organization organization, OrganizationalRole role) {
+        this.organizationalRoles.put(organization, role);
     }
 }
