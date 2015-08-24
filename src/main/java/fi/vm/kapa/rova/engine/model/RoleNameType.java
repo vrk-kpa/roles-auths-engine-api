@@ -2,10 +2,10 @@ package fi.vm.kapa.rova.engine.model;
 
 public enum RoleNameType {
 
+    HH,
     J,
     PJ,
     VJ,
-    YH,
     IS,
     JO,
     YHM,
