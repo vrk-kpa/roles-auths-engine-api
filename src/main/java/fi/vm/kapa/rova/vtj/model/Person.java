@@ -3,7 +3,9 @@ package fi.vm.kapa.rova.vtj.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person {
+import fi.vm.kapa.rova.engine.evaluation.Evaluable;
+
+public class Person implements Evaluable {
 
     private String hetu;
 
