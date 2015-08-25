@@ -49,23 +49,4 @@ public class Organization {
         this.exceptionStatus = exceptionStatus;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 73 * hash + Objects.hashCode(this.identifier);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Organization other = (Organization) obj;
-        return true;
-    }
-
 }
