@@ -3,13 +3,20 @@ package fi.vm.kapa.rova.engine.model;
 import java.util.List;
 
 public class OrganizationalRole {
-
-    Organization organization;
+    private String personIdentifier;
+    private Organization organization;
     private List<RoleType> roles;
     
     public OrganizationalRole() {
     }
-          
+    
+    public String getPersonIdentifier() {
+        return personIdentifier;
+    }
+    public void setPersonIdentifier(String personIdentifier) {
+        this.personIdentifier = personIdentifier;
+    }
+    
     public List<RoleType> getRoles() {
         return roles;
     }
