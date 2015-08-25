@@ -1,84 +1,34 @@
 package fi.vm.kapa.rova.engine.model;
 
-import java.util.Date;
-import java.util.Objects;
+import java.util.List;
 
 public class OrganizationalRole {
-
-    Organization organization;
-    private RoleNameType roleName;
-    private BodyType bodyType;
-    private Date startDate;
-    private Date expirationDate;
-
+    private String personIdentifier;
+    private Organization organization;
+    private List<RoleType> roles;
+    
     public OrganizationalRole() {
     }
-
-    public OrganizationalRole(Organization organization, RoleNameType roleName, BodyType bodyType) {
-        this.organization = organization;
-        this.roleName = roleName;
-        this.bodyType = bodyType;
+    
+    public String getPersonIdentifier() {
+        return personIdentifier;
+    }
+    public void setPersonIdentifier(String personIdentifier) {
+        this.personIdentifier = personIdentifier;
+    }
+    
+    public List<RoleType> getRoles() {
+        return roles;
+    }
+    public void setRoles(List<RoleType> roles) {
+        this.roles = roles;
     }
 
     public Organization getOrganization() {
         return organization;
     }
-
     public void setOrganization(Organization organization) {
         this.organization = organization;
-    }
-
-    public RoleNameType getRolename() {
-        return roleName;
-    }
-
-    public void setRolename(RoleNameType rolename) {
-        this.roleName = rolename;
-    }
-
-    public BodyType getBodytype() {
-        return bodyType;
-    }
-
-    public void setBodytype(BodyType bodytype) {
-        this.bodyType = bodytype;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getExpirationDate() {
-        return expirationDate;
-    }
-
-    public void setExpirationDate(Date expirationDate) {
-        this.expirationDate = expirationDate;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.organization);
-        hash = 67 * hash + Objects.hashCode(this.roleName);
-        hash = 67 * hash + Objects.hashCode(this.bodyType);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final OrganizationalRole other = (OrganizationalRole) obj;
-        return true;
     }
 
 }
