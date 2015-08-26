@@ -57,7 +57,15 @@ public class Logger {
 
     }
 
+    public static String maskHetuEnding(String hetu) {
+        if (hetu == null) {
+            return hetu;
+        }
+        return hetu.replaceAll("(\\d{6})(-|A|\\+)\\d{3}.(?![A-Z0-9])", "$1$2XXXX");
+    }
+
     private String createMessage(String msg) {
+        msg = maskHetuEnding(msg);
         StringBuilder builder = new StringBuilder();
         builder.append(component);
         builder.append(" ");
