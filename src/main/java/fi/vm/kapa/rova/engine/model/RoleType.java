@@ -1,12 +1,13 @@
 package fi.vm.kapa.rova.engine.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class RoleType {
     private RoleNameType roleName;
     private BodyType bodyType;
-    private Date startDate;
-    private Date expirationDate;
+    private LocalDate startDate;
+    private LocalDate expirationDate;
     
     public RoleNameType getRoleName() {
         return roleName;
@@ -22,17 +23,17 @@ public class RoleType {
         this.bodyType = bodyType;
     }
     
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
     
-    public Date getExpirationDate() {
+    public LocalDate getExpirationDate() {
         return expirationDate;
     }
-    public void setExpirationDate(Date expirationDate) {
+    public void setExpirationDate(LocalDate expirationDate) {
         this.expirationDate = expirationDate;
     }
 

@@ -1,15 +1,29 @@
 package fi.vm.kapa.rova.virre.model;
 
-//TODO: Real VIRRE-model
-import fi.vm.kapa.rova.engine.model.OrganizationalRole;
-
 public class VIRREResponse {
-    private OrganizationalRole organizationalRole;
-       
-    public OrganizationalRole getOrganizationalRole() {
-        return organizationalRole;
+    private OrganizationalPerson organizationalPerson;
+    private boolean success;
+    private String error;
+   
+    public OrganizationalPerson getOrganizationalPerson() {
+        return organizationalPerson;
     }
-    public void setOrganizationalRole(OrganizationalRole organizationalRole) {
-        this.organizationalRole = organizationalRole;
+    public void setOrganizationalPerson(OrganizationalPerson organizationalPerson) {
+        this.organizationalPerson = organizationalPerson;
     }
+        
+    public boolean isSuccess() {
+        return success;
+    }
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public String getError() {
+        return error;
+    }
+    public void setError(String error) {
+        this.error = error;
+    }
+    
 }
