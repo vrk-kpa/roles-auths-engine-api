@@ -14,23 +14,35 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Provider
 @PreMatching
-public class RequestHeaderCopier implements ClientRequestFilter {
+public class RequestIdentificationFilter implements ClientRequestFilter {
 
     public static final String XROAD_REQUEST_IDENTIFIER = "X-XRoad-request-id";
     public static final String XROAD_END_USER = "X-XRoad-orig-userId";
 
+    private String requestId;
+    private String endUserId;
+    
+    public RequestIdentificationFilter() {}
+    
+    public RequestIdentificationFilter(String requestId, String endUserId) {
+        this.requestId = requestId;
+        this.endUserId = endUserId;
+    }
+    
     @Override
     public void filter(ClientRequestContext requestContext) throws IOException {
-        filter(XROAD_REQUEST_IDENTIFIER, requestContext);
-        filter(XROAD_END_USER, requestContext);
+        filter(XROAD_REQUEST_IDENTIFIER, requestContext, requestId);
+        filter(XROAD_END_USER, requestContext, endUserId);
     }
 
-    private void filter(String headerName, ClientRequestContext requestContext) {
+    private void filter(String headerName, ClientRequestContext requestContext, String newValue) {
         RequestAttributes attrs = RequestContextHolder.getRequestAttributes();
         if (attrs != null) {
             String value = (String) attrs.getAttribute(headerName,
                     RequestAttributes.SCOPE_REQUEST);
-
+            if (newValue != null) {
+                value = newValue;
+            }
             if (value == null) {
                 HttpServletRequest httpRequest = ((ServletRequestAttributes) attrs)
                         .getRequest();
