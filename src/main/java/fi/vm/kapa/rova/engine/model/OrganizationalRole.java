@@ -1,8 +1,9 @@
 package fi.vm.kapa.rova.engine.model;
 
+import fi.vm.kapa.rova.engine.evaluation.Evaluable;
 import java.util.List;
 
-public class OrganizationalRole {
+public class OrganizationalRole implements Evaluable {
     private String personIdentifier;
     private Organization organization;
     private List<RoleType> roles;
