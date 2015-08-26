@@ -2,7 +2,7 @@ package fi.vm.kapa.rova.virre.model;
 
 import java.util.List;
 
-import fi.vm.kapa.rova.engine.model.OrganizationalRole;
+import fi.vm.kapa.rova.virre.model.OrganizationalRole;
 
 public class OrganizationalPerson {
     private String personId;
