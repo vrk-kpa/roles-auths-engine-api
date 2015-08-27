@@ -8,6 +8,7 @@ public class OrganizationalRole {
     private List<OrganizationalRoleInfo> roleInfos;
     private List<OrganizationalRepresentation> representations;
     private String exceptionStatus;
+    private String companyFormCode;
     
     public OrganizationalRole() {}
     
@@ -45,6 +46,14 @@ public class OrganizationalRole {
 
     public void setExceptionStatus(String exceptionStatus) {
         this.exceptionStatus = exceptionStatus;
+    }
+
+    public String getCompanyFormCode() {
+        return companyFormCode;
+    }
+
+    public void setCompanyFormCode(String companyFormCode) {
+        this.companyFormCode = companyFormCode;
     }
 
 }
