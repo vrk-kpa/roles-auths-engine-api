@@ -7,6 +7,7 @@ public class OrganizationalRole {
     private String organizationName;
     private List<OrganizationalRoleInfo> roleInfos;
     private List<OrganizationalRepresentation> representations;
+    private String exceptionStatus;
     
     public OrganizationalRole() {}
     
@@ -36,6 +37,14 @@ public class OrganizationalRole {
     }
     public void setRepresentations(List<OrganizationalRepresentation> representations) {
         this.representations = representations;
+    }
+
+    public String getExceptionStatus() {
+        return exceptionStatus;
+    }
+
+    public void setExceptionStatus(String exceptionStatus) {
+        this.exceptionStatus = exceptionStatus;
     }
 
 }
