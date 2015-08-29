@@ -1,6 +1,5 @@
 package fi.vm.kapa.rova.engine.model;
 
-import java.util.Objects;
 
 public class Organization {
     private String identifier;
@@ -47,6 +46,13 @@ public class Organization {
 
     public void setExceptionStatus(String exceptionStatus) {
         this.exceptionStatus = exceptionStatus;
+    }
+
+    @Override
+    public String toString() {
+        return "Organization [identifier=" + identifier + ", name=" + name
+                + ", type=" + type + ", signingCode=" + signingCode
+                + ", exceptionStatus=" + exceptionStatus + "]";
     }
 
 }

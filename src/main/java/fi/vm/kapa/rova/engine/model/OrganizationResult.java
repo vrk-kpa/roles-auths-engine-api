@@ -1,5 +1,8 @@
 package fi.vm.kapa.rova.engine.model;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class OrganizationResult {
@@ -7,7 +10,7 @@ public class OrganizationResult {
     
     private String identifier;
     
-    private Set<ResultRoleType> roles;
+    private Set<ResultRoleType> roles = new HashSet<ResultRoleType>();
 
     public String getName() {
         return name;
@@ -38,4 +41,5 @@ public class OrganizationResult {
         return "OrganizationResult [name=" + name + ", identifier="
                 + identifier + ", roles=" + roles + "]";
     }
+
 }
