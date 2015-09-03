@@ -1,12 +1,21 @@
 package fi.vm.kapa.rova.engine.model;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+//@JsonIgnoreProperties(ignoreUnknown=true)
 public class RoleType {
     private RoleNameType roleName;
     private BodyType bodyType;
+
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime startDate;
+
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime expirationDate;
     
     public RoleNameType getRoleName() {
@@ -35,6 +44,12 @@ public class RoleType {
     }
     public void setExpirationDate(LocalDateTime expirationDate) {
         this.expirationDate = expirationDate;
+    }
+    @Override
+    public String toString() {
+        return "RoleType [roleName=" + roleName + ", bodyType=" + bodyType
+                + ", startDate=" + startDate + ", expirationDate="
+                + expirationDate + "]";
     }
 
 }
