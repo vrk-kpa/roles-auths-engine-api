@@ -8,6 +8,8 @@ public enum BodyType {
 
     HAL,
     YH,
-    YHM
+    YHM,
+    IS,
+    TJ
 
 }
