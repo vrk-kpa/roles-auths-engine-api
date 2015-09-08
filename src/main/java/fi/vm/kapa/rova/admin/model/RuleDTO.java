@@ -12,6 +12,7 @@ public class RuleDTO {
     private String description;
     private String group;
     private Collection<String> localizationKeys;
+    private String ruleType;
 
     public String getRuleId() {
         return ruleId;
@@ -51,5 +52,13 @@ public class RuleDTO {
 
     public void setLocalizationKeys(Collection<String> localizationKeys) {
         this.localizationKeys = localizationKeys;
+    }
+
+    public String getRuleType() {
+        return ruleType;
+    }
+
+    public void setRuleType(String ruleType) {
+        this.ruleType = ruleType;
     }
 }
