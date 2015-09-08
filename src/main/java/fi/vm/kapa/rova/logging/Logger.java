@@ -1,13 +1,12 @@
 package fi.vm.kapa.rova.logging;
 
-import java.util.Random;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.LoggerFactory;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Random;
 
 public class Logger {
 
@@ -55,6 +54,10 @@ public class Logger {
     public void error(String msg) {
         slf4jLogger.error(createMessage(msg));
 
+    }
+
+    public void error(String msg, Exception e) {
+        slf4jLogger.error(msg, e);
     }
 
     public static String maskHetuEnding(String hetu) {

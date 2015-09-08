@@ -14,7 +14,5 @@ public interface YpaResource {
     @GET
     @Path("/ypa/roles/{service}/{enduserId}/{personId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getRoles(@PathParam("personId") String personId, @PathParam("service") String service, 
-            @PathParam("enduserId") String endUserId, @QueryParam("requestId") String requestId,
-            @QueryParam("organizationIds") String organizationIds);
+    public Response getRoles(@PathParam("personId") String personId, @PathParam("service") String service);
 }
