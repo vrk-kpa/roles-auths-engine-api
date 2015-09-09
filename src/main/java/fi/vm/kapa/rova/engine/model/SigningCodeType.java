@@ -26,6 +26,18 @@ public enum SigningCodeType {
     NIMA31,
     NIMA34,
     NIMA35,
-    NIMA37
-
+    NIMA37,
+    NIMA38,
+    NIMA39,
+    NIMA44,
+    NIMA45,
+    NIMA47,
+    NIMA48,
+    NIMA53,
+    NIMA54,
+    NIMA60,
+    NIMA61,
+    NIMA62,
+    NIMA64,
+    NIMA65
 }

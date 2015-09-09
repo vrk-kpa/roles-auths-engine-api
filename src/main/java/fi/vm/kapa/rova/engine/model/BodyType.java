@@ -7,9 +7,13 @@ package fi.vm.kapa.rova.engine.model;
 public enum BodyType {
 
     HAL,
-    YH,
+    HH,
     YHM,
     IS,
-    TJ
+    JO,
+    PIS,
+    TJ,
+    TJS,
+    VTJ
 
 }
