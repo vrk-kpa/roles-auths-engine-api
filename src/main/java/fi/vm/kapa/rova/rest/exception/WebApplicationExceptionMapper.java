@@ -9,7 +9,7 @@ import javax.ws.rs.ext.Provider;
 
 @Provider
 public class WebApplicationExceptionMapper implements ExceptionMapper<WebApplicationException> {
-    private static final Logger LOG = Logger.getLogger(SystemExceptionMapper.class, Logger.ENGINE);
+    private static final Logger LOG = Logger.getLogger(SystemExceptionMapper.class);
 
     @Override
     public Response toResponse(WebApplicationException e) {
