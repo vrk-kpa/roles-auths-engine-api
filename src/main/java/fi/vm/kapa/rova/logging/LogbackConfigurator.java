@@ -7,9 +7,15 @@ import ch.qos.logback.access.tomcat.LogbackValve;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.core.Appender;
+import ch.qos.logback.core.encoder.LayoutWrappingEncoder;
+import ch.qos.logback.core.filter.Filter;
+import ch.qos.logback.core.spi.FilterReply;
 import net.logstash.logback.appender.LogstashAccessTcpSocketAppender;
 import net.logstash.logback.appender.LogstashTcpSocketAppender;
+import net.logstash.logback.encoder.LogstashAccessEncoder;
 import net.logstash.logback.encoder.LogstashEncoder;
+import net.logstash.logback.layout.LogstashAccessLayout;
+import net.logstash.logback.layout.LogstashLayout;
 import org.apache.catalina.Valve;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,21 +47,20 @@ public class LogbackConfigurator {
     @Value("${logstash.level:INFO}")
     private String logLevel;
 
-    //    @Value("${logstash.access.pattern:%clientHost %l %user %date \"%r\" %statusCode %bytesSent}")
-    // "Combined apache log"
-    @Value("${logstash.access.pattern:%h %l %u [%t] \"%r\" %s %b \"%i{Referer}\" \"%i{User-Agent}\"}")
-    private String accessLogPattern;
-
-    @Value(value = "${application.access-log:false}")
+    @Value(value = "${application.access-log:true}")
     protected Boolean accessLog;
 
     @PostConstruct
     public void initLogging() throws Exception {
         LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
-        LogstashEncoder enc = new LogstashEncoder();
-
+        LayoutWrappingEncoder enc = new LayoutWrappingEncoder();
         enc.setContext(lc);
-        enc.setCustomFields("{\"service\":\"" + serviceName + "\", \"type\": \"application_log\"}");
+
+        MaskingLogstashLayout layout = new MaskingLogstashLayout();
+        layout.setCustomFields("{\"service\":\"" + serviceName + "\", \"type\": \"application_log\"}");
+        layout.setContext(lc);
+        layout.start();
+        enc.setLayout(layout);
 
         LogstashTcpSocketAppender logStashAppender = new LogstashTcpSocketAppender();
         logStashAppender.setRemoteHost(logstashHost);
@@ -80,6 +85,7 @@ public class LogbackConfigurator {
                 if(container instanceof TomcatEmbeddedServletContainerFactory){
                     TomcatEmbeddedServletContainerFactory containerFactory = (TomcatEmbeddedServletContainerFactory) container;
                     LogbackValve logbackAccessValve = new LogbackValve();
+
                     logbackAccessValve.addAppender(getAccessLogAppender());
                     containerFactory.addContextValves(logbackAccessValve);
                 }
@@ -89,18 +95,22 @@ public class LogbackConfigurator {
 
     private Appender<IAccessEvent> getAccessLogAppender() {
         LoggerContext lc = (LoggerContext) org.slf4j.LoggerFactory.getILoggerFactory();
-        PatternLayoutEncoder ple = new PatternLayoutEncoder();
+        LayoutWrappingEncoder enc = new LayoutWrappingEncoder();
+        enc.setContext(lc);
 
-        ple.setPattern(accessLogPattern + " " + serviceName);
-        ple.setContext(lc);
+        MaskingLogstashAccessLayout layout = new MaskingLogstashAccessLayout();
+        layout.setContext(lc);
+        enc.setLayout(layout);
+        layout.start();
+
         LogstashAccessTcpSocketAppender logStashAxsAppender = new LogstashAccessTcpSocketAppender();
         logStashAxsAppender.setRemoteHost(logstashHost);
         logStashAxsAppender.setPort(logstashPort);
-        logStashAxsAppender.setEncoder(ple);
+        logStashAxsAppender.setEncoder(enc);
         logStashAxsAppender.setContext(lc);
         logStashAxsAppender.setName("logstash_access");
-        logStashAxsAppender.start();
 
+        logStashAxsAppender.start();
         return logStashAxsAppender;
     }
 }
