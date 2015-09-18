@@ -1,7 +1,6 @@
 package fi.vm.kapa.rova.logging;
 
 import ch.qos.logback.access.PatternLayoutEncoder;
-import ch.qos.logback.access.jetty.RequestLogImpl;
 import ch.qos.logback.access.spi.IAccessEvent;
 import ch.qos.logback.access.tomcat.LogbackValve;
 import ch.qos.logback.classic.Level;
@@ -21,7 +20,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
-import org.springframework.boot.context.embedded.jetty.JettyServerCustomizer;
 import org.springframework.boot.context.embedded.tomcat.TomcatContextCustomizer;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.context.annotation.Bean;
