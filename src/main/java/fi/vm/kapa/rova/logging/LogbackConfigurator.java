@@ -6,6 +6,7 @@ import ch.qos.logback.access.tomcat.LogbackValve;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.core.Appender;
+import ch.qos.logback.core.ConsoleAppender;
 import ch.qos.logback.core.encoder.LayoutWrappingEncoder;
 import ch.qos.logback.core.filter.Filter;
 import ch.qos.logback.core.spi.FilterReply;
@@ -48,6 +49,9 @@ public class LogbackConfigurator {
     @Value(value = "${application.access-log:true}")
     protected Boolean accessLog;
 
+    @Value(value = "${console.logging:false}")
+    protected Boolean consoleLog;
+
     @PostConstruct
     public void initLogging() throws Exception {
         LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
@@ -68,9 +72,13 @@ public class LogbackConfigurator {
         logStashAppender.setName("logstash_application");
         logStashAppender.start();
 
+
         // ROOT LOGGER To use logstash
         ch.qos.logback.classic.Logger logger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(ch.qos.logback.classic.Logger.ROOT_LOGGER_NAME);
         logger.addAppender(logStashAppender);
+        if (consoleLog) {
+            logger.addAppender(new ConsoleAppender<>());
+        }
         logger.setLevel(Level.toLevel(logLevel));
         logger.setAdditive(true); /* set to true if root should log too */
 
