@@ -75,12 +75,24 @@ public class Logger {
         slf4jLogger.info(createMessage(msg));
     }
 
+    public void info(String msg, Object... args) {
+        if (slf4jLogger.isInfoEnabled()) {
+            slf4jLogger.info(createMessage(msg, args));
+        }
+    }
+
     public LogMap infoMap() {
         return new LogMap(Level.INFO, this);
     }
 
     public void warning(String msg) {
         slf4jLogger.warn(createMessage(msg));
+    }
+
+    public void warning(String msg, Object... args)  {
+        if (slf4jLogger.isWarnEnabled()) {
+            slf4jLogger.warn(createMessage(msg, args));
+        }
     }
 
     public LogMap warningMap() {
@@ -91,12 +103,18 @@ public class Logger {
         slf4jLogger.error(createMessage(msg));
     }
 
-    public LogMap errorMap() {
-        return new LogMap(Level.ERROR, this);
+    public void error(String msg, Object... args) {
+        if (slf4jLogger.isErrorEnabled()) {
+            slf4jLogger.error(createMessage(msg, args));
+        }
     }
 
     public void error(String msg, Exception e) {
         slf4jLogger.error(msg, e);
+    }
+
+    public LogMap errorMap() {
+        return new LogMap(Level.ERROR, this);
     }
 
     public static String maskHetuEnding(String hetu) {
