@@ -14,6 +14,7 @@ public class ExceptionMapper implements javax.ws.rs.ext.ExceptionMapper<Exceptio
         LOG.error("Unhandled Exception: ", e);
 
         return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                .entity(ExceptionType.OTHER_EXCEPTION)
                 .build();
     }
 }
