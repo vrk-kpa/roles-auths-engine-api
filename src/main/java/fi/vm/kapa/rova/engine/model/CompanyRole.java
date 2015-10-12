@@ -2,12 +2,11 @@
 package fi.vm.kapa.rova.engine.model;
 
 import fi.vm.kapa.rova.engine.evaluation.Evaluable;
-import java.util.List;
 
 public class CompanyRole implements Evaluable {
 
     private String hetu;
-    private List<String> businessIds;
+    private String businessId;
 
     public CompanyRole() {
     }
@@ -20,12 +19,12 @@ public class CompanyRole implements Evaluable {
         this.hetu = hetu;
     }
 
-    public List<String> getBusinessIds() {
-        return businessIds;
+    public String getBusinessId() {
+        return businessId;
     }
 
-    public void setBusinessIds(List<String> businessIds) {
-        this.businessIds = businessIds;
+    public void setBusinessId(String businessId) {
+        this.businessId = businessId;
     }
     
 }
