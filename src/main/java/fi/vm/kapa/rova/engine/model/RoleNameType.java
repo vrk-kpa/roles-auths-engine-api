@@ -13,6 +13,7 @@ public enum RoleNameType {
     YHM,
     TJ,
     TJS,
-    VTJ
+    VTJ,
+    TIL
 
 }
