@@ -4,10 +4,28 @@ import java.util.List;
 
 public class CompanyRepresentations {
 
+    private String businessId;
+    private String companyName;
     private String companyFormCode;
     private List<CompanyPerson> companyPersons;
 
     public CompanyRepresentations() {
+    }
+
+    public String getBusinessId() {
+        return businessId;
+    }
+
+    public void setBusinessId(String businessId) {
+        this.businessId = businessId;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
     public String getCompanyFormCode() {
