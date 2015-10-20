@@ -6,5 +6,5 @@ package fi.vm.kapa.rova.engine.model.prh;
  */
 public enum RepresentationRightLevel {
     OI, // oikeutettu
-    P;  // prokuristi
+    P  // prokuristi
 }

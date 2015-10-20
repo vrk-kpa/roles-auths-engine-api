@@ -7,5 +7,5 @@ public enum ResultRoleType implements IResultType {
     TJ,
     IS,
     TIL,
-    PJ;
+    PJ
 }
