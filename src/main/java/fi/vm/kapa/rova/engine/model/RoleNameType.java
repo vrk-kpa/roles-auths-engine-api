@@ -14,6 +14,8 @@ public enum RoleNameType {
     TJ,
     TJS,
     VTJ,
-    TIL
+    TIL,
+    ELI,
+    NIMKO
 
 }
