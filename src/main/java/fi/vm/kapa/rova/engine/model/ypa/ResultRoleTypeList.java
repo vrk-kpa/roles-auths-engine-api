@@ -3,10 +3,11 @@ package fi.vm.kapa.rova.engine.model.ypa;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 import fi.vm.kapa.rova.external.model.IResultType;
 
-public class ResultRoleTypeList<ResultRoleType> extends ArrayList<ResultRoleType> implements IResultType {
+public class ResultRoleTypeList extends ArrayList<ResultRoleType> implements IResultType {
     
     private static final long serialVersionUID = 1L;
     
@@ -19,4 +20,10 @@ public class ResultRoleTypeList<ResultRoleType> extends ArrayList<ResultRoleType
     public ResultRoleTypeList(Collection<ResultRoleType> c) {
         super(c);
     }
+    
+    @Override
+    public Iterator<ResultRoleType> iterator() {
+        return super.iterator();
+    }
+    
 }
