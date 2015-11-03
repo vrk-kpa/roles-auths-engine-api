@@ -1,5 +1,5 @@
 
-package fi.vm.kapa.rova.engine.model.prh;
+package fi.vm.kapa.rova.external.model.virre;
 
 public class RepresentationRight {
 

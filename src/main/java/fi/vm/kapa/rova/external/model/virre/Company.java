@@ -1,5 +1,5 @@
 
-package fi.vm.kapa.rova.engine.model.prh;
+package fi.vm.kapa.rova.external.model.virre;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ public class Company {
 
     private String businessId;
     private String companyName;
-    private List<CompanyRole> roles;
+    private List<CompanyRoleType> roles;
 
     public Company() {
     }
@@ -28,11 +28,11 @@ public class Company {
         this.companyName = companyName;
     }
 
-    public List<CompanyRole> getRoles() {
+    public List<CompanyRoleType> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<CompanyRole> roles) {
+    public void setRoles(List<CompanyRoleType> roles) {
         this.roles = roles;
     }
 

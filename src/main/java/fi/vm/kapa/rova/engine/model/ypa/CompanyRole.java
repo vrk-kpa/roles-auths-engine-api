@@ -1,5 +1,5 @@
 
-package fi.vm.kapa.rova.engine.model;
+package fi.vm.kapa.rova.engine.model.ypa;
 
 import fi.vm.kapa.rova.engine.evaluation.Evaluable;
 
@@ -7,9 +7,6 @@ public class CompanyRole implements Evaluable {
 
     private String hetu;
     private String businessId;
-
-    public CompanyRole() {
-    }
 
     public String getHetu() {
         return hetu;

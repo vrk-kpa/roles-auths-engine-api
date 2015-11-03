@@ -1,7 +1,9 @@
-package fi.vm.kapa.rova.engine.model;
+package fi.vm.kapa.rova.engine.model.hpa;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import fi.vm.kapa.rova.external.model.AuthorizationType;
 
 public class Delegate {
 

@@ -1,5 +1,5 @@
 
-package fi.vm.kapa.rova.engine.model;
+package fi.vm.kapa.rova.external.model;
 
 public interface IResultType {
     default String getResultString() {

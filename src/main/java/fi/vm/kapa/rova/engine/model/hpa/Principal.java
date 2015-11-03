@@ -1,4 +1,4 @@
-package fi.vm.kapa.rova.engine.model;
+package fi.vm.kapa.rova.engine.model.hpa;
 
 public class Principal {
 

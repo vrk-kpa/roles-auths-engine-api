@@ -1,4 +1,4 @@
-package fi.vm.kapa.rova.engine.model;
+package fi.vm.kapa.rova.external.model.virre;
 
 public enum RoleNameType {
 

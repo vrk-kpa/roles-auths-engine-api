@@ -1,4 +1,4 @@
-package fi.vm.kapa.rova.vtj.model;
+package fi.vm.kapa.rova.external.model.vtj;
 
 import java.util.ArrayList;
 import java.util.List;

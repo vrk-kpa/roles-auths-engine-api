@@ -1,4 +1,4 @@
-package fi.vm.kapa.rova.engine.model.prh;
+package fi.vm.kapa.rova.external.model.virre;
 
 import java.util.List;
 

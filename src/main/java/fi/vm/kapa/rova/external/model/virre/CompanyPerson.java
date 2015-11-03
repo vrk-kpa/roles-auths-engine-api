@@ -1,15 +1,12 @@
 
-package fi.vm.kapa.rova.engine.model.prh;
+package fi.vm.kapa.rova.external.model.virre;
 
 public class CompanyPerson {
    
     private String firstName;
     private String lastName;
     private String socialSec;
-    private CompanyRole companyRole; 
-
-    public CompanyPerson() {
-    }
+    private CompanyRoleType companyRole; 
 
     public String getFirstName() {
         return firstName;
@@ -35,11 +32,11 @@ public class CompanyPerson {
         this.socialSec = socialSec;
     }
 
-    public CompanyRole getCompanyRole() {
+    public CompanyRoleType getCompanyRole() {
         return companyRole;
     }
 
-    public void setCompanyRole(CompanyRole companyRole) {
+    public void setCompanyRole(CompanyRoleType companyRole) {
         this.companyRole = companyRole;
     }
    
