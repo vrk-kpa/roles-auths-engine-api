@@ -1,8 +1,9 @@
 package fi.vm.kapa.rova.admin.model;
 
-import java.util.Collection;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.util.Collection;
+import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RuleDTO {
@@ -13,6 +14,7 @@ public class RuleDTO {
     private String group;
     private Collection<String> localizationKeys;
     private String ruleType;
+    private Map<String, String> defaultConfiguration;
 
     public String getRuleId() {
         return ruleId;
@@ -60,5 +62,13 @@ public class RuleDTO {
 
     public void setRuleType(String ruleType) {
         this.ruleType = ruleType;
+    }
+
+    public void setDefaultConfiguration(Map<String, String> defaultConfiguration) {
+        this.defaultConfiguration = defaultConfiguration;
+    }
+
+    public Map<String, String> getDefaultConfiguration() {
+        return defaultConfiguration;
     }
 }
