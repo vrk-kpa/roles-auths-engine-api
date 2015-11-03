@@ -3,7 +3,7 @@ package fi.vm.kapa.rova.engine.model.ypa;
 
 import fi.vm.kapa.rova.engine.evaluation.Evaluable;
 
-public class CompanyRole implements Evaluable {
+public class YpaPerson implements Evaluable {
 
     private String hetu;
     private String businessId;
