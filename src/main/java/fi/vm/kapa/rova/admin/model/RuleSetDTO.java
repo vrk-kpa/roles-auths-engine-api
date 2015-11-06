@@ -10,6 +10,7 @@ public class RuleSetDTO {
     private Map<String, RuleDTO> rules;
     private String type;
     private Map<String, Map<String, String>> ruleConfigMap;
+    private Map<String, RuleDTO> fixedRules;
 
     public Map<String, RuleDTO> getRules() {
         return rules;
@@ -35,4 +36,11 @@ public class RuleSetDTO {
         this.ruleConfigMap = ruleConfigMap;
     }
 
+    public Map<String, RuleDTO> getFixedRules() {
+        return fixedRules;
+    }
+
+    public void setFixedRules(Map<String, RuleDTO> fixedRules) {
+        this.fixedRules = fixedRules;
+    }
 }
