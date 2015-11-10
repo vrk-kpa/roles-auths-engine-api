@@ -7,19 +7,42 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDTO {
 
-    private String userName;
+    private String uuid;
+    private String name;
     private List<UserAuthorizationDTO> userAuthorizations;
-    
-    public String getUserName() {
-        return userName;
+    private List<UserIdentityDTO> userIdentities;
+
+    public String getUuid() {
+        return uuid;
     }
-    public void setUserName(String userName) {
-        this.userName = userName;
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
+
     public List<UserAuthorizationDTO> getUserAuthorizations() {
         return userAuthorizations;
     }
-    public void setUserAuthorizations(List<UserAuthorizationDTO> userAuthorizations) {
+
+    public void setUserAuthorizations(
+            List<UserAuthorizationDTO> userAuthorizations) {
         this.userAuthorizations = userAuthorizations;
     }
+
+    public List<UserIdentityDTO> getUserIdentities() {
+        return userIdentities;
+    }
+
+    public void setUserIdentities(List<UserIdentityDTO> userIdentities) {
+        this.userIdentities = userIdentities;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }
