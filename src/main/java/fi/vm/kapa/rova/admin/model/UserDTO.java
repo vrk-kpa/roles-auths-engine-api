@@ -10,7 +10,6 @@ public class UserDTO {
 
     private String uuid;
     private String name;
-    private String userName;
     @JsonIgnore
     private List<UserAuthorizationDTO> userAuthorizations;
     private List<UserIdentityDTO> userIdentities;
@@ -50,6 +49,6 @@ public class UserDTO {
 
     @Override
     public String toString() {
-        return "UserDTO [userName=" + userName + "]";
+        return "UserDTO [name=" + name + "]";
     }
 }
