@@ -2,6 +2,7 @@ package fi.vm.kapa.rova.admin.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -9,6 +10,8 @@ public class UserDTO {
 
     private String uuid;
     private String name;
+    private String userName;
+    @JsonIgnore
     private List<UserAuthorizationDTO> userAuthorizations;
     private List<UserIdentityDTO> userIdentities;
 
@@ -45,4 +48,8 @@ public class UserDTO {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return "UserDTO [userName=" + userName + "]";
+    }
 }

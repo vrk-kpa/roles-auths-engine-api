@@ -1,9 +1,11 @@
 package fi.vm.kapa.rova.admin.model;
 
+
 public class UserAuthorizationDTO {
 
     private String roleName;
     private String serviceId;
+    
     private UserDTO user;
     
     public String getRoleName() {
@@ -28,5 +30,11 @@ public class UserAuthorizationDTO {
 
     public void setUser(UserDTO user) {
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "UserAuthorizationDTO [roleName=" + roleName + ", serviceId="
+                + serviceId + ", user=" + user + "]";
     }
 }
