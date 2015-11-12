@@ -1,6 +1,5 @@
 package fi.vm.kapa.rova.admin.model;
 
-import java.util.List;
 import java.util.Map;
 
 public class ServiceDTO {
@@ -10,7 +9,6 @@ public class ServiceDTO {
     private String serviceIdentifier;
     private String description;
     private Map<String, RuleSetDTO> ruleSets;
-    private Map<String, Map<String, List<String>>> fixedRules;
     private boolean showReasons;
 
     public long getId() {
@@ -59,13 +57,5 @@ public class ServiceDTO {
 
     public void setShowReasons(boolean showReasons) {
         this.showReasons = showReasons;
-    }
-
-    public Map<String, Map<String, List<String>>> getFixedRules() {
-        return fixedRules;
-    }
-
-    public void setFixedRules(Map<String, Map<String, List<String>>> fixedRules) {
-        this.fixedRules = fixedRules;
     }
 }
