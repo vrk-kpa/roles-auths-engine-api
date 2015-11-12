@@ -3,10 +3,26 @@ package fi.vm.kapa.rova.admin.model;
 
 public class UserAuthorizationDTO {
 
+    private long id;
+    private UserDTO user;
     private String roleName;
     private String serviceId;
-    
-    private UserDTO user;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public UserDTO getUser() {
+        return user;
+    }
+
+    public void setUser(UserDTO user) {
+        this.user = user;
+    }
     
     public String getRoleName() {
         return roleName;
@@ -24,17 +40,9 @@ public class UserAuthorizationDTO {
         this.serviceId = serviceId;
     }
 
-    public UserDTO getUser() {
-        return user;
-    }
-
-    public void setUser(UserDTO user) {
-        this.user = user;
-    }
-
     @Override
     public String toString() {
         return "UserAuthorizationDTO [roleName=" + roleName + ", serviceId="
-                + serviceId + ", user=" + user + "]";
+                + serviceId + ", id=" + id+ "]";
     }
 }
