@@ -19,6 +19,8 @@ public final class UserAuthorizationConsts {
     public final static String SERVICEMGMT_ROLE = "SERVICEMGMT";
     public final static String USERMGMT_ROLE = "USERMGMT";
 
+    public final static String ANY = "ANY";
+
     private UserAuthorizationConsts() {
         throw new AssertionError();
     }
