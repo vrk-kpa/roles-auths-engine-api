@@ -38,4 +38,10 @@ public class UserIdentityDTO {
     public void setUserIdentifierType(String userIdentifierType) {
         this.userIdentifierType = userIdentifierType;
     }
+
+    @Override
+    public String toString() {
+        return "UserIdentityDTO [userIdentifier=" + userIdentifier
+                + ", userIdentifierType=" + userIdentifierType + "]";
+    }
 }

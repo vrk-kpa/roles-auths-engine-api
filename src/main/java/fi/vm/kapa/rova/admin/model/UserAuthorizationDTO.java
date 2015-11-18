@@ -43,6 +43,6 @@ public class UserAuthorizationDTO {
     @Override
     public String toString() {
         return "UserAuthorizationDTO [roleName=" + roleName + ", serviceId="
-                + serviceId + ", id=" + id+ "]";
+                + serviceId + "]";
     }
 }
