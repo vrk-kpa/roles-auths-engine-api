@@ -9,7 +9,7 @@ public class ServiceDTO {
     private String serviceIdentifier;
     private String description;
     private Map<String, RuleSetDTO> ruleSets;
-    private boolean showReasons;
+    private ServiceConfigurationDTO serviceConfig;
 
     public long getId() {
         return id;
@@ -51,11 +51,12 @@ public class ServiceDTO {
         this.ruleSets = ruleSets;
     }
 
-    public boolean isShowReasons() {
-        return showReasons;
+    public ServiceConfigurationDTO getServiceConfig() {
+        return serviceConfig;
     }
 
-    public void setShowReasons(boolean showReasons) {
-        this.showReasons = showReasons;
+    public void setServiceConfig(ServiceConfigurationDTO serviceConfig) {
+        this.serviceConfig = serviceConfig;
     }
+
 }
