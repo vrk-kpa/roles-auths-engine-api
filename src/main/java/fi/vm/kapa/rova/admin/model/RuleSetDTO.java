@@ -7,10 +7,19 @@ import java.util.Map;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RuleSetDTO {
 
+    private long id;
     private Map<String, RuleDTO> rules;
     private String type;
     private Map<String, Map<String, String>> ruleConfigMap;
     private Map<String, RuleDTO> fixedRules;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public Map<String, RuleDTO> getRules() {
         return rules;
