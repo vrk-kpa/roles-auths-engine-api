@@ -52,4 +52,12 @@ public class RuleSetDTO {
     public void setFixedRules(Map<String, RuleDTO> fixedRules) {
         this.fixedRules = fixedRules;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }

@@ -7,6 +7,10 @@ public class ServiceDTO {
     private long id;
     private String name;
     private String serviceIdentifier;
+    private String xinstance;
+    private String memberClass;
+    private String memberCode;
+    private String subsystemCode;
     private String description;
     private Map<String, RuleSetDTO> ruleSets;
     private ServiceConfigurationDTO serviceConfig;
@@ -25,14 +29,6 @@ public class ServiceDTO {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getServiceIdentifier() {
-        return serviceIdentifier;
-    }
-
-    public void setServiceIdentifier(String serviceIdentifier) {
-        this.serviceIdentifier = serviceIdentifier;
     }
 
     public String getDescription() {
@@ -59,4 +55,44 @@ public class ServiceDTO {
         this.serviceConfig = serviceConfig;
     }
 
+    public String getServiceIdentifier() {
+        return serviceIdentifier;
+    }
+
+    public void setServiceIdentifier(String serviceIdentifier) {
+        this.serviceIdentifier = serviceIdentifier;
+    }
+
+    public String getXinstance() {
+        return xinstance;
+    }
+
+    public void setXinstance(String xinstance) {
+        this.xinstance = xinstance;
+
+    }
+
+    public String getMemberClass() {
+        return memberClass;
+    }
+
+    public void setMemberClass(String memberClass) {
+        this.memberClass = memberClass;
+    }
+
+    public String getMemberCode() {
+        return memberCode;
+    }
+
+    public void setMemberCode(String memberCode) {
+        this.memberCode = memberCode;
+    }
+
+    public String getSubsystemCode() {
+        return subsystemCode;
+    }
+
+    public void setSubsystemCode(String subsystemCode) {
+        this.subsystemCode = subsystemCode;
+    }
 }
