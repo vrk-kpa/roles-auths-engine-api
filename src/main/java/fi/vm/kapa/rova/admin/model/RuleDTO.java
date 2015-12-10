@@ -13,6 +13,7 @@ public class RuleDTO {
     private String description;
     private String group;
     private boolean selected;
+    private boolean fixed;
     private Collection<String> localizationKeys;
     private String ruleType;
     private Map<String, String> defaultConfiguration;
@@ -79,5 +80,13 @@ public class RuleDTO {
 
     public void setSelected(boolean selected) {
         this.selected = selected;
+    }
+
+    public boolean isFixed() {
+        return fixed;
+    }
+
+    public void setFixed(boolean fixed) {
+        this.fixed = fixed;
     }
 }
