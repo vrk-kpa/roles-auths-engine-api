@@ -5,7 +5,7 @@ import java.util.List;
 
 import fi.vm.kapa.rova.external.model.AuthorizationType;
 
-public class Delegate {
+public class Delegate implements HpaDelegate {
 
     private String delegateId;
     private boolean delegateIdValid;
