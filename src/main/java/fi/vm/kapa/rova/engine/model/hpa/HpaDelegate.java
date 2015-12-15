@@ -11,5 +11,5 @@ public interface HpaDelegate {
     String getDelegateId();
     AuthorizationType getAuthorizationType();
     List<Principal> getPrincipal();
-
+    List<DecisionReason> getReasons();
 }
