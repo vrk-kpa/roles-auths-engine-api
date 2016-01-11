@@ -37,6 +37,11 @@
             <groupId>fi.vm.kapa.rova</groupId>
             <artifactId>roles-auths-common</artifactId>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>

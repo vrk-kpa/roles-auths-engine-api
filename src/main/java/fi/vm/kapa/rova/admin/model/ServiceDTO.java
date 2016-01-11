@@ -1,10 +1,11 @@
 package fi.vm.kapa.rova.admin.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class ServiceDTO {
 
@@ -73,12 +74,17 @@ public class ServiceDTO {
         if (serviceIdentifier == null) {
             return;
         }
-        String [] idParts = serviceIdentifier.split(SERVIDE_IDENTIFIER_DELIMITER);
-        if (idParts.length == 4) {
-            xinstance = idParts[0];
-            memberClass = idParts[1];
-            memberCode = idParts[2];
-            subsystemCode = idParts[3];
+        List<String> idParts = Arrays.asList(serviceIdentifier.split(SERVIDE_IDENTIFIER_DELIMITER));
+        if (idParts.size() >= 4) {
+            xinstance = idParts.get(0);
+            memberClass = idParts.get(1);
+            memberCode = idParts.get(2);
+            subsystemCode = idParts.subList(3, idParts.size()).stream()
+                    .collect(Collectors.joining(SERVIDE_IDENTIFIER_DELIMITER));
+            if(serviceIdentifier.endsWith("_")) {
+                subsystemCode = subsystemCode + "_";
+            }
+            
         }
     }
 
