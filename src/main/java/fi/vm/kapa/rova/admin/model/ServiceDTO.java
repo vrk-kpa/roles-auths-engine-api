@@ -21,6 +21,8 @@ public class ServiceDTO {
     private String description;
     private Map<String, RuleSetDTO> ruleSets;
     private ServiceConfigurationDTO serviceConfig;
+    private String webApiClientId;
+    private String webApiClientSecret;
 
     public long getId() {
         return id;
@@ -120,4 +122,22 @@ public class ServiceDTO {
     public void setSubsystemCode(String subsystemCode) {
         this.subsystemCode = subsystemCode;
     }
+
+    public String getWebApiClientId() {
+        return webApiClientId;
+    }
+
+    public void setWebApiClientId(String webApiClientId) {
+        this.webApiClientId = webApiClientId;
+    }
+
+    public String getWebApiClientSecret() {
+        return webApiClientSecret;
+    }
+
+    public void setWebApiClientSecret(String webApiClientSecret) {
+        this.webApiClientSecret = webApiClientSecret;
+    }
+    
+    
 }
