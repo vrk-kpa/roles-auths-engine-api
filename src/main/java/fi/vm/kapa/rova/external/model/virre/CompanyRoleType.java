@@ -13,4 +13,9 @@ public class CompanyRoleType {
         this.type = type;
     }
 
+    @Override
+    public String toString() {
+        return "CompanyRoleType [type=" + type + "]";
+    }
+
 }

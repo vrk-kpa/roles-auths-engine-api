@@ -4,9 +4,11 @@ package fi.vm.kapa.rova.external.model.virre;
 import java.util.List;
 
 public class Company {
+    public static final String TYPE = Company.class.getName();
 
     private String businessId;
     private String companyName;
+    private String state;
     private List<CompanyRoleType> roles;
 
     public Company() {
@@ -28,12 +30,26 @@ public class Company {
         this.companyName = companyName;
     }
 
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
     public List<CompanyRoleType> getRoles() {
         return roles;
     }
 
     public void setRoles(List<CompanyRoleType> roles) {
         this.roles = roles;
+    }
+
+    @Override
+    public String toString() {
+        return "Company [businessId=" + businessId + ", companyName="
+                + companyName + ", state=" + state + ", roles=" + roles + "]";
     }
 
 }
