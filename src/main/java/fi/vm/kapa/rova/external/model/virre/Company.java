@@ -1,6 +1,7 @@
 
 package fi.vm.kapa.rova.external.model.virre;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 
 public class Company {
@@ -8,6 +9,7 @@ public class Company {
 
     private String businessId;
     private String companyName;
+    @JsonIgnore
     private String state;
     private List<CompanyRoleType> roles;
 

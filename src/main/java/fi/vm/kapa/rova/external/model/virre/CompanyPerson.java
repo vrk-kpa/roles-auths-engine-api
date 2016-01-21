@@ -1,12 +1,15 @@
 
 package fi.vm.kapa.rova.external.model.virre;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class CompanyPerson {
     public static final String TYPE = CompanyPerson.class.getName();
     
     private String firstName;
     private String lastName;
     private String socialSec;
+    @JsonIgnore
     private String status;
     private CompanyRoleType companyRole; 
 
