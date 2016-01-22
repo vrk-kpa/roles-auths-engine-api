@@ -1,11 +1,11 @@
 package fi.vm.kapa.rova.admin.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class ServiceDTO {
 
@@ -66,8 +66,7 @@ public class ServiceDTO {
 
     @JsonIgnore
     public String getServiceIdentifier() {
-        List<String> idParts = Arrays.asList(
-                new String [] { xinstance, memberClass, memberCode, subsystemCode });
+        List<String> idParts = Arrays.asList(xinstance, memberClass, memberCode, subsystemCode);
         return idParts.stream().collect(Collectors.joining(SERVIDE_IDENTIFIER_DELIMITER));
     }
 
