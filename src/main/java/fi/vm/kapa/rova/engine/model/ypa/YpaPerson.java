@@ -7,6 +7,7 @@ public class YpaPerson implements Evaluable {
 
     private String hetu;
     private String businessId;
+    private String status;
 
     public String getHetu() {
         return hetu;
@@ -22,6 +23,14 @@ public class YpaPerson implements Evaluable {
 
     public void setBusinessId(String businessId) {
         this.businessId = businessId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
     
 }

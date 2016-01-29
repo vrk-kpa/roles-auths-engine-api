@@ -9,7 +9,6 @@ public class CompanyPerson {
     private String firstName;
     private String lastName;
     private String socialSec;
-    @JsonIgnore
     private String status;
     private CompanyRoleType companyRole; 
 
