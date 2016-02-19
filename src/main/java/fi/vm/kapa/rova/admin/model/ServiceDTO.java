@@ -23,6 +23,7 @@ public class ServiceDTO {
     private ServiceConfigurationDTO serviceConfig;
     private String apiServiceIdentifier;
     private String apiSecret;
+    private String apiOauthSecret;
 
     public long getId() {
         return id;
@@ -137,6 +138,13 @@ public class ServiceDTO {
     public void setApiSecret(String apiSecret) {
         this.apiSecret = apiSecret;
     }
-    
-    
+
+
+    public String getApiOauthSecret() {
+        return apiOauthSecret;
+    }
+
+    public void setApiOauthSecret(String apiOauthSecret) {
+        this.apiOauthSecret = apiOauthSecret;
+    }
 }
