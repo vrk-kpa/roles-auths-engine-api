@@ -7,6 +7,7 @@ public class CompanyRepresentations {
     private String businessId;
     private String companyName;
     private String companyFormCode;
+    private List<PhaseNameType> phases;
     private List<CompanyPerson> companyPersons;
 
     public CompanyRepresentations() {
@@ -34,6 +35,14 @@ public class CompanyRepresentations {
 
     public void setCompanyFormCode(String companyFormCode) {
         this.companyFormCode = companyFormCode;
+    }
+
+    public List<PhaseNameType> getPhases() {
+        return phases;
+    }
+
+    public void setPhases(List<PhaseNameType> phases) {
+        this.phases = phases;
     }
 
     public List<CompanyPerson> getCompanyPersons() {
