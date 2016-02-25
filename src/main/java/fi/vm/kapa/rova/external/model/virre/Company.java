@@ -11,6 +11,7 @@ public class Company {
     private String companyName;
     @JsonIgnore
     private String state;
+    private List<PhaseNameType> phases;
     private List<CompanyRoleType> roles;
 
     public Company() {
@@ -38,6 +39,14 @@ public class Company {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public List<PhaseNameType> getPhases() {
+        return phases;
+    }
+
+    public void setPhases(List<PhaseNameType> phases) {
+        this.phases = phases;
     }
 
     public List<CompanyRoleType> getRoles() {
