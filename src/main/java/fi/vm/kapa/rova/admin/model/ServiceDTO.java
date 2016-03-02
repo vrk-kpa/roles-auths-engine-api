@@ -24,6 +24,9 @@ public class ServiceDTO {
     private String apiServiceIdentifier;
     private String apiSecret;
     private String apiOauthSecret;
+    private boolean generateApiServiceIdentifier;
+    private boolean generateApiSecret;
+    private boolean generateApiOauthSecret;
 
     public long getId() {
         return id;
@@ -146,5 +149,29 @@ public class ServiceDTO {
 
     public void setApiOauthSecret(String apiOauthSecret) {
         this.apiOauthSecret = apiOauthSecret;
+    }
+
+    public boolean isGenerateApiServiceIdentifier() {
+        return generateApiServiceIdentifier;
+    }
+
+    public void setGenerateApiServiceIdentifier(boolean generateApiServiceIdentifier) {
+        this.generateApiServiceIdentifier = generateApiServiceIdentifier;
+    }
+
+    public boolean isGenerateApiSecret() {
+        return generateApiSecret;
+    }
+
+    public void setGenerateApiSecret(boolean generateApiSecret) {
+        this.generateApiSecret = generateApiSecret;
+    }
+
+    public boolean isGenerateApiOauthSecret() {
+        return generateApiOauthSecret;
+    }
+
+    public void setGenerateApiOauthSecret(boolean generateApiOauthSecret) {
+        this.generateApiOauthSecret = generateApiOauthSecret;
     }
 }
