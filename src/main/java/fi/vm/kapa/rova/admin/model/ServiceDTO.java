@@ -24,6 +24,7 @@ public class ServiceDTO {
     private String apiServiceIdentifier;
     private String apiSecret;
     private String apiOauthSecret;
+    private boolean removeApiServiceIdentifier;
     private boolean generateApiServiceIdentifier;
     private boolean generateApiSecret;
     private boolean generateApiOauthSecret;
@@ -173,5 +174,13 @@ public class ServiceDTO {
 
     public void setGenerateApiOauthSecret(boolean generateApiOauthSecret) {
         this.generateApiOauthSecret = generateApiOauthSecret;
+    }
+
+    public boolean isRemoveApiServiceIdentifier() {
+        return removeApiServiceIdentifier;
+    }
+
+    public void setRemoveApiServiceIdentifier(boolean removeApiServiceIdentifier) {
+        this.removeApiServiceIdentifier = removeApiServiceIdentifier;
     }
 }
