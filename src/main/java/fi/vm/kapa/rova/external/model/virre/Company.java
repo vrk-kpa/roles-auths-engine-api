@@ -2,14 +2,15 @@
 package fi.vm.kapa.rova.external.model.virre;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import fi.vm.kapa.rova.engine.evaluation.Evaluable;
+
 import java.util.List;
 
-public class Company {
+public class Company implements Evaluable {
     public static final String TYPE = Company.class.getName();
 
     private String businessId;
     private String companyName;
-    @JsonIgnore
     private String state;
     private List<PhaseNameType> phases;
     private List<CompanyRoleType> roles;

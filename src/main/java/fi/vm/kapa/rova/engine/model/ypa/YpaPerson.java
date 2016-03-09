@@ -1,12 +1,13 @@
-
 package fi.vm.kapa.rova.engine.model.ypa;
 
 import fi.vm.kapa.rova.engine.evaluation.Evaluable;
+import fi.vm.kapa.rova.external.model.virre.Company;
 
 public class YpaPerson implements Evaluable {
 
     private String hetu;
     private String businessId;
+    private Company company;
     private String status;
 
     public String getHetu() {
@@ -17,7 +18,18 @@ public class YpaPerson implements Evaluable {
         this.hetu = hetu;
     }
 
+    public Company getCompany() {
+        return this.company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
     public String getBusinessId() {
+        if (company != null) {
+            return company.getBusinessId();
+        }
         return businessId;
     }
 
@@ -32,5 +44,5 @@ public class YpaPerson implements Evaluable {
     public void setStatus(String status) {
         this.status = status;
     }
-    
+
 }
