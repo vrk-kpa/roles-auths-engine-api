@@ -3,6 +3,8 @@ package fi.vm.kapa.rova.external.model.virre;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.List;
+
 public class CompanyPerson {
     public static final String TYPE = CompanyPerson.class.getName();
     
@@ -11,6 +13,8 @@ public class CompanyPerson {
     private String socialSec;
     private String status;
     private CompanyRoleType companyRole; 
+
+    private List<Company> companies;
 
     public String getFirstName() {
         return firstName;
@@ -52,11 +56,20 @@ public class CompanyPerson {
         this.companyRole = companyRole;
     }
 
+    public List<Company> getCompanies() {
+        return companies;
+    }
+
+    public void setCompanies(List<Company> companies) {
+        this.companies = companies;
+    }
+
+
     @Override
     public String toString() {
         return "CompanyPerson [firstName=" + firstName + ", lastName="
                 + lastName + ", socialSec=" + socialSec + ", status=" + status
-                + ", companyRole=" + companyRole + "]";
+                + ", companyRole=" + companyRole + ", companies="+ companies +"]";
     }
 
 }
