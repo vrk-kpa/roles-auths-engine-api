@@ -61,7 +61,8 @@ public class Company implements Evaluable {
     @Override
     public String toString() {
         return "Company [businessId=" + businessId + ", companyName="
-                + companyName + ", state=" + state + ", roles=" + roles + "]";
+                + companyName + ", state=" + state + ", phases=" + phases
+                + ", roles=" + roles + "]";
     }
 
 }
