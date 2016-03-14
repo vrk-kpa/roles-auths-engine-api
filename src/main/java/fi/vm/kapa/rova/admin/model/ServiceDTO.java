@@ -1,11 +1,11 @@
 package fi.vm.kapa.rova.admin.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class ServiceDTO {
 
@@ -13,6 +13,7 @@ public class ServiceDTO {
     public static final String SERVIDE_IDENTIFIER_DELIMITER = "_";
 
     private long id;
+    private String uuid;
     private String name;
     private String xinstance;
     private String memberClass;
@@ -35,6 +36,14 @@ public class ServiceDTO {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public String getName() {
