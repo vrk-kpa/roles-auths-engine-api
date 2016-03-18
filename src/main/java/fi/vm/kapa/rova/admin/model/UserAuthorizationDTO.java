@@ -6,7 +6,7 @@ public class UserAuthorizationDTO {
     private long id;
     private UserDTO user;
     private String roleName;
-    private String serviceId;
+    private String serviceUuid;
 
     public long getId() {
         return id;
@@ -32,17 +32,17 @@ public class UserAuthorizationDTO {
         this.roleName = roleName;
     }
 
-    public String getServiceId() {
-        return serviceId;
+    public String getServiceUuid() {
+        return serviceUuid;
     }
 
-    public void setServiceId(String serviceId) {
-        this.serviceId = serviceId;
+    public void setServiceUuid(String serviceUuid) {
+        this.serviceUuid = serviceUuid;
     }
 
     @Override
     public String toString() {
-        return "UserAuthorizationDTO [roleName=" + roleName + ", serviceId="
-                + serviceId + "]";
+        return "UserAuthorizationDTO [roleName=" + roleName + ", serviceUuid="
+                + serviceUuid + "]";
     }
 }
