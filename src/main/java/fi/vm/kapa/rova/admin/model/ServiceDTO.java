@@ -1,5 +1,7 @@
 package fi.vm.kapa.rova.admin.model;
 
+import static org.apache.commons.lang3.StringUtils.isBlank;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -80,6 +82,9 @@ public class ServiceDTO {
 
     @JsonIgnore
     public String getServiceIdentifier() {
+    	if (isBlank(xinstance) && isBlank(memberClass) && isBlank(memberCode) && isBlank(subsystemCode)) {
+			return null;
+		}
         List<String> idParts = Arrays.asList(xinstance, memberClass, memberCode, subsystemCode);
         return idParts.stream().collect(Collectors.joining(SERVIDE_IDENTIFIER_DELIMITER));
     }
