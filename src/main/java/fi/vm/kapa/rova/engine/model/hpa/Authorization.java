@@ -25,9 +25,4 @@ public class Authorization {
     public void setReasons(List<DecisionReason> reasons) {
         this.reasons = reasons;
     }
-
-    @Override
-	public String toString() {
-		return result.toString();
-	}
 }
