@@ -7,7 +7,7 @@ import fi.vm.kapa.rova.external.model.AuthorizationType;
 
 public class Authorization {
 
-    private AuthorizationType result;
+	private AuthorizationType result;
     private List<DecisionReason> reasons = new ArrayList<DecisionReason>();
 
     public AuthorizationType getResult() {
@@ -25,4 +25,9 @@ public class Authorization {
     public void setReasons(List<DecisionReason> reasons) {
         this.reasons = reasons;
     }
+
+    @Override
+	public String toString() {
+		return result.toString();
+	}
 }

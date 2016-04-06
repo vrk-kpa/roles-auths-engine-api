@@ -20,4 +20,10 @@ public class Principal {
     public void setName(String name) {
         this.name = name;
     }
+
+	@Override
+	public String toString() {
+		return "{personId=" + personId + ",name=" + name + "}";
+	}
+    
 }
