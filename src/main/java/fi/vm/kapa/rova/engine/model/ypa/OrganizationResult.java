@@ -36,8 +36,8 @@ public class OrganizationResult {
 
     @Override
     public String toString() {
-        return "OrganizationResult [name=" + name + ", identifier="
-                + identifier + ", roles=" + roles + "]";
+        return "{name=" + name + ", identifier="
+                + identifier + ", roles=" + roles + "}";
     }
 
 }

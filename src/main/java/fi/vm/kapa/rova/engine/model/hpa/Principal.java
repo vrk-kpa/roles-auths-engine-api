@@ -23,7 +23,7 @@ public class Principal {
 
 	@Override
 	public String toString() {
-		return "{\"personId\"=\"" + personId + "\",\"name\"=\"" + name + "\"}";
+		return "{personId=" + personId + ",name=" + name + "}";
 	}
     
 }
