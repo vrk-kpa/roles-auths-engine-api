@@ -6,6 +6,7 @@ public class ServiceConfigurationDTO {
     private long id;
     private ServiceDTO serviceId;
     private Boolean includeReasons;
+    private Boolean allowMultiSelection;
 
     public long getId() {
         return id;
@@ -31,4 +32,11 @@ public class ServiceConfigurationDTO {
         this.includeReasons = includeReasons;
     }
 
+    public Boolean getAllowMultiSelection() {
+        return allowMultiSelection;
+    }
+
+    public void setAllowMultiSelection(Boolean allowMultiSelection) {
+        this.allowMultiSelection = allowMultiSelection;
+    }
 }
