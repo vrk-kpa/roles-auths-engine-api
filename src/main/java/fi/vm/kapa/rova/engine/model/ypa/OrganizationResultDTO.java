@@ -1,9 +1,10 @@
 package fi.vm.kapa.rova.engine.model.ypa;
 
 import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class OrganizationResultDTO {
-    private SortedSet<OrganizationResult> organizationResults;
+    private SortedSet<OrganizationResult> organizationResults = new TreeSet<>();
     private int total;
 
     public SortedSet<OrganizationResult> getOrganizationResults() {
