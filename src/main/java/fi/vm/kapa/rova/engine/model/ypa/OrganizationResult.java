@@ -5,10 +5,18 @@ import java.util.Set;
 
 public class OrganizationResult {
     private String name;
-    
     private String identifier;
-    
     private Set<ResultRoleType> roles = new HashSet<ResultRoleType>();
+
+    public OrganizationResult() {
+        // NOP
+    }
+
+    public OrganizationResult(String name, String identifier, Set<ResultRoleType> roles) {
+        this.name = name;
+        this.identifier = identifier;
+        this.roles = roles;
+    }
 
     public String getName() {
         return name;
