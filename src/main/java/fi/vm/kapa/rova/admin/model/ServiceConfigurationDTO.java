@@ -1,12 +1,16 @@
 
 package fi.vm.kapa.rova.admin.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class ServiceConfigurationDTO {
 
     private long id;
     private ServiceDTO serviceId;
     private Boolean includeReasons;
     private Boolean allowMultiSelection;
+    private Set<String> issueUris = new HashSet<>();
 
     public long getId() {
         return id;
@@ -39,4 +43,12 @@ public class ServiceConfigurationDTO {
     public void setAllowMultiSelection(Boolean allowMultiSelection) {
         this.allowMultiSelection = allowMultiSelection;
     }
+
+	public Set<String> getIssueUris() {
+		return issueUris;
+	}
+
+	public void setIssueUris(Set<String> issueUris) {
+		this.issueUris = issueUris;
+	}
 }
