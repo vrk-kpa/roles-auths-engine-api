@@ -22,8 +22,13 @@
  */
 package fi.vm.kapa.rova.engine.model.ypa;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import fi.vm.kapa.rova.engine.evaluation.Evaluable;
 import fi.vm.kapa.rova.external.model.virre.Company;
+import fi.vm.kapa.rova.external.model.virre.CompanyRoleType;
+import fi.vm.kapa.rova.external.model.virre.RoleNameType;
 
 public class YpaPerson implements Evaluable {
 
@@ -65,6 +70,17 @@ public class YpaPerson implements Evaluable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public List<RoleNameType> getRoles() {
+        List<RoleNameType> roles = new ArrayList<>();
+        if (company != null && company.getRoles() != null) {
+            for (CompanyRoleType crt : company.getRoles()) {
+                roles.add(crt.getType());
+            }
+        }
+
+        return roles;
     }
 
 }
