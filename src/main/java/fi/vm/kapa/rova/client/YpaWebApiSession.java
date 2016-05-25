@@ -24,12 +24,9 @@ package fi.vm.kapa.rova.client;
 
 import java.util.List;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
 import fi.vm.kapa.rova.engine.model.ypa.OrganizationResult;
 
-@JsonDeserialize(as = YpaWebApiSessionImpl.class)
-public interface YpaWebApiSession {
+public interface YpaWebApiSession extends WebApiSession {
     
     public List<OrganizationResult> getCompanyRoles();
 

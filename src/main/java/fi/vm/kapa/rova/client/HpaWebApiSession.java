@@ -24,9 +24,6 @@ package fi.vm.kapa.rova.client;
 
 import java.util.List;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
-@JsonDeserialize(as = HpaWebApiSessionImpl.class)
 public interface HpaWebApiSession extends WebApiSession {
 
     public List<fi.vm.kapa.rova.engine.model.hpa.Principal> getPrincipals();
