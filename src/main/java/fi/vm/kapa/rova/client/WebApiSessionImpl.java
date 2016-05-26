@@ -42,11 +42,11 @@ public class WebApiSessionImpl implements WebApiSession {
     public WebApiSessionImpl() {
     }
 
-    public WebApiSessionImpl(String sessionId, String hetu, String serviseWebApiId,
+    public WebApiSessionImpl(String sessionId, String hetu, String serviceWebApiId,
             ApiSessionType type, String requestId, String endUserId) {
         this.sessionId = sessionId;
         this.hetu = hetu;
-        this.serviceWebApiId = serviseWebApiId;
+        this.serviceWebApiId = serviceWebApiId;
         this.requestId = requestId;
         this.endUserId = endUserId;
         this.type = type.toString();

@@ -23,10 +23,11 @@
 package fi.vm.kapa.rova.client;
 
 import java.util.List;
+import fi.vm.kapa.rova.engine.model.hpa.Principal;
 
 public interface HpaWebApiSession extends WebApiSession {
 
-    public List<fi.vm.kapa.rova.engine.model.hpa.Principal> getPrincipals();
+    public List<Principal> getPrincipals();
 
-    public void setPrincipals(List<fi.vm.kapa.rova.engine.model.hpa.Principal> principals);
+    public void setPrincipals(List<Principal> principals);
 }
