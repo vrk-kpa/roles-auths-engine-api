@@ -56,5 +56,4 @@ public enum RoleNameType {
     YHMÄ,
     PJ,
     VPJ
-
 }
