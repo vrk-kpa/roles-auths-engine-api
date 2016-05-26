@@ -53,6 +53,8 @@ public enum RoleNameType {
     VTJ,
     VU,
     YHM,
-    YHMÄ
+    YHMÄ,
+    PJ,
+    VPJ
 
 }
