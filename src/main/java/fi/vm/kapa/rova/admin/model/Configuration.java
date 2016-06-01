@@ -20,40 +20,53 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package fi.vm.kapa.rova.external.model.virre;
+package fi.vm.kapa.rova.admin.model;
 
-public enum RoleNameType {
+import java.util.HashSet;
+import java.util.Set;
 
-    E,
-    EDU,
-    ELI,
-    HH,
-    IS,
-    J,
-    JO,
-    LT,
-    OI,
-    PIS,
-    PR,
-    PTI,
-    S,
-    SANS,
-    SO,
-    T,
-    TJ,
-    TJS,
-    U,
-    UE,
-    VAH,
-    VED,
-    VIS,
-    VJ,
-    VS,
-    VT,
-    VTJ,
-    VU,
-    YHM,
-    YHMÄ,
-    PJ,
-    VPJ
+public class Configuration {
+    private String ruleid;
+    private String name;
+    private Set<String> values = new HashSet<>();
+//    private Set<ConfigValue> values = new HashSet<>();
+
+    public String getRuleid() {
+        return ruleid;
+    }
+
+    public void setRuleid(String ruleid) {
+        this.ruleid = ruleid;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<String> getValues() {
+        return values;
+    }
+
+    public void setValues(Set<String> values) {
+        this.values = values;
+    }
+
+//    public Set<ConfigValue> getValues() {
+//        return values;
+//    }
+//
+//    public void setValues(Set<ConfigValue> values) {
+//        this.values = values;
+//    }
+
+    @Override
+    public String toString() {
+        return "Configuration [ruleid=" + ruleid + ", name=" + name
+                + ", values=" + values + "]";
+    }
+
 }
