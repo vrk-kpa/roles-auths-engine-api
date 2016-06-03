@@ -20,40 +20,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package fi.vm.kapa.rova.external.model.virre;
+package fi.vm.kapa.rova.admin.model;
 
-public enum RoleNameType {
+import java.util.HashSet;
+import java.util.Set;
 
-    E,
-    EDU,
-    ELI,
-    HH,
-    IS,
-    J,
-    JO,
-    LT,
-    OI,
-    PIS,
-    PR,
-    PTI,
-    S,
-    SANS,
-    SO,
-    T,
-    TJ,
-    TJS,
-    U,
-    UE,
-    VAH,
-    VED,
-    VIS,
-    VJ,
-    VS,
-    VT,
-    VTJ,
-    VU,
-    YHM,
-    YHMÄ,
-    PJ,
-    VPJ
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonInclude(Include.NON_EMPTY)
+public class ConfigValue {
+    private String value;
+    private Set<String> subvalues = new HashSet<>();
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public Set<String> getSubvalues() {
+        return subvalues;
+    }
+
+    public void setSubvalues(Set<String> subvalues) {
+        this.subvalues = subvalues;
+    }
+
+    @Override
+    public String toString() {
+        return "ConfigValue [value=" + value + ", subvalues=" + subvalues + "]";
+    }
+
 }
