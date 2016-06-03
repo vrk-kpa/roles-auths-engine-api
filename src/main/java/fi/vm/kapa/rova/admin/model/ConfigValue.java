@@ -26,30 +26,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
+@JsonInclude(Include.NON_EMPTY)
 public class ConfigValue {
     private String value;
-    private Set<String> subValues = new HashSet<>();
+    private Set<String> subvalues = new HashSet<>();
 
-    // private Set<String> values = new HashSet<>();
-    // private Set<RoleValue> roles = new HashSet<RoleValue>();
-    //
-    // public Set<RoleValue> getRoles() {
-    // return roles;
-    // }
-    //
-    // public void setRoles(Set<RoleValue> roles) {
-    // this.roles = roles;
-    // }
-    //
-    // public Set<String> getValues() {
-    // return values;
-    // }
-    //
-    // public void setValues(Set<String> values) {
-    // this.values = values;
-    // }
     public String getValue() {
         return value;
     }
@@ -58,17 +43,17 @@ public class ConfigValue {
         this.value = value;
     }
 
-    public Set<String> getSubValues() {
-        return subValues;
+    public Set<String> getSubvalues() {
+        return subvalues;
     }
 
-    public void setSubValues(Set<String> subValues) {
-        this.subValues = subValues;
+    public void setSubvalues(Set<String> subvalues) {
+        this.subvalues = subvalues;
     }
 
     @Override
     public String toString() {
-        return "ConfigValue [value=" + value + ", subValues=" + subValues + "]";
+        return "ConfigValue [value=" + value + ", subvalues=" + subvalues + "]";
     }
 
 }

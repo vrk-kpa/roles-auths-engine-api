@@ -28,8 +28,10 @@ import java.util.Set;
 public class Configuration {
     private String ruleid;
     private String name;
-    private Set<String> values = new HashSet<>();
-//    private Set<ConfigValue> values = new HashSet<>();
+    private Set<ConfigValue> values = new HashSet<>();
+
+    public Configuration() {
+    }
 
     public String getRuleid() {
         return ruleid;
@@ -47,21 +49,13 @@ public class Configuration {
         this.name = name;
     }
 
-    public Set<String> getValues() {
+    public Set<ConfigValue> getValues() {
         return values;
     }
 
-    public void setValues(Set<String> values) {
+    public void setValues(Set<ConfigValue> values) {
         this.values = values;
     }
-
-//    public Set<ConfigValue> getValues() {
-//        return values;
-//    }
-//
-//    public void setValues(Set<ConfigValue> values) {
-//        this.values = values;
-//    }
 
     @Override
     public String toString() {
