@@ -85,6 +85,10 @@ public final class UserAuthorizationConsts {
      * {@value}
      */
     public final static String USERMGMT_ROLE = "USERMGMT";
+    /**
+     * {@value}
+     */
+    public final static String NOTIFICATIONMGMT_ROLE = "NOTIFICATIONMGMT";
 
     /**
      * {@value}
