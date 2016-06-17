@@ -24,6 +24,7 @@ package fi.vm.kapa.rova.admin.model;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -49,6 +50,7 @@ public class ServiceDTO {
     private String apiServiceIdentifier;
     private String apiSecret;
     private String apiOauthSecret;
+    private List<String> apiOauthRedirectUrls = new ArrayList<>(); 
     private boolean removeApiServiceIdentifier;
     private boolean generateApiServiceIdentifier;
     private boolean generateApiSecret;
@@ -219,4 +221,14 @@ public class ServiceDTO {
     public void setRemoveApiServiceIdentifier(boolean removeApiServiceIdentifier) {
         this.removeApiServiceIdentifier = removeApiServiceIdentifier;
     }
+
+    public List<String> getApiOauthRedirectUrls() {
+        return apiOauthRedirectUrls;
+    }
+
+    public void setApiOauthRedirectUrls(List<String> apiOauthRedirectUrls) {
+        this.apiOauthRedirectUrls = apiOauthRedirectUrls;
+    }
+
+    
 }
