@@ -79,5 +79,4 @@ public class NotificationDTO {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
-
 }
