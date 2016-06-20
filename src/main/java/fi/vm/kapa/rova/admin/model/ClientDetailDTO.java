@@ -22,11 +22,14 @@
  */
 package fi.vm.kapa.rova.admin.model;
 
+import java.util.Set;
+
 public class ClientDetailDTO {
 
     private String clientId;
     private String apiSecret;
     private String oauthSecret;
+    private Set<String> redirectUris;
 
     public ClientDetailDTO() {
         // NOP
@@ -61,4 +64,13 @@ public class ClientDetailDTO {
     public void setOauthSecret(String oauthSecret) {
         this.oauthSecret = oauthSecret;
     }
+
+    public Set<String> getRedirectUris() {
+        return redirectUris;
+    }
+
+    public void setRedirectUris(Set<String> redirectUris) {
+        this.redirectUris = redirectUris;
+    }
+
 }
