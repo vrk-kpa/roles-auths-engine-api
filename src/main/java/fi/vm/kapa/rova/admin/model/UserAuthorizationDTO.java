@@ -67,4 +67,37 @@ public class UserAuthorizationDTO {
         return "UserAuthorizationDTO [roleName=" + roleName + ", serviceUuid="
                 + serviceUuid + "]";
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result
+                + ((roleName == null) ? 0 : roleName.hashCode());
+        result = prime * result
+                + ((serviceUuid == null) ? 0 : serviceUuid.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        UserAuthorizationDTO other = (UserAuthorizationDTO) obj;
+        if (roleName == null) {
+            if (other.roleName != null)
+                return false;
+        } else if (!roleName.equals(other.roleName))
+            return false;
+        if (serviceUuid == null) {
+            if (other.serviceUuid != null)
+                return false;
+        } else if (!serviceUuid.equals(other.serviceUuid))
+            return false;
+        return true;
+    }
 }
