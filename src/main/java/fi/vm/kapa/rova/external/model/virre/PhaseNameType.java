@@ -23,6 +23,8 @@
 package fi.vm.kapa.rova.external.model.virre;
 
 import fi.vm.kapa.rova.logging.Logger;
+
+import static fi.vm.kapa.rova.logging.Logger.Field.STACKTRACE;
 import static fi.vm.kapa.rova.logging.Logger.Field.WARNINGSTR;
 
 /**
@@ -48,9 +50,9 @@ public enum PhaseNameType {
                 value = PhaseNameType.valueOf(string.trim().toUpperCase());
             } catch (IllegalArgumentException e) {
                 log.warningMap()
-                    .set(WARNINGSTR, "Failed to parse phase '"
-                        + string+ "': " + e.getMessage())
-                    .log();
+                        .set(WARNINGSTR, "Failed to parse phase '" + string+ "': " + e.getMessage())
+                        .set(STACKTRACE, Logger.createStackTrace(e))
+                        .log();
             }
         }
         return value;
