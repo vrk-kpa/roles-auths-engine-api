@@ -51,30 +51,6 @@ public final class UserAuthorizationConsts {
     /**
      * {@value}
      */
-    public static final String ADMIN_NOTIFICATION_MGMT = "SERVICE#ANY#NOTIFICATIONMGMT";
-    /**
-     * {@value}
-     */
-    public static final String ADMIN_NOTIFICATION_ROLE = "ROLE_SERVICE#ANY#NOTIFICATIONMGMT";
-    /**
-     * {@value}
-     */
-    public static final String ADMIN_NOTIFICATION_MGMT = "SERVICE#ANY#NOTIFICATIONMGMT";
-    /**
-     * {@value}
-     */
-    public static final String ADMIN_NOTIFICATION_ROLE = "ROLE_SERVICE#ANY#NOTIFICATIONMGMT";
-    /**
-     * {@value}
-     */
-    public static final String ADMIN_NOTIFICATION_MGMT = "SERVICE#ANY#NOTIFICATIONMGMT";
-    /**
-     * {@value}
-     */
-    public static final String ADMIN_NOTIFICATION_ROLE = "ROLE_SERVICE#ANY#NOTIFICATIONMGMT";
-    /**
-     * {@value}
-     */
     public static final String ADMIN_SERVICE_MGMT = "SERVICE#ANY#SERVICEMGMT";
     /**
      * {@value}
