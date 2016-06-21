@@ -45,4 +45,12 @@ public class RestrictedNotificationDto {
         .collect(Collectors.toList());
     }
 
+    public String getText() {
+        return text;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
 }
