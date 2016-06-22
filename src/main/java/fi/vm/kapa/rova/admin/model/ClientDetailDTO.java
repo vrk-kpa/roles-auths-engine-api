@@ -35,10 +35,11 @@ public class ClientDetailDTO {
         // NOP
     }
 
-    public ClientDetailDTO(String clientId, String apiSecret, String oauthSecret) {
+    public ClientDetailDTO(String clientId, String apiSecret, String oauthSecret, Set<String> redirectUris) {
         this.clientId = clientId;
         this.apiSecret = apiSecret;
         this.oauthSecret = oauthSecret;
+        this.redirectUris = redirectUris;
     }
 
     public String getClientId() {
