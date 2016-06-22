@@ -23,7 +23,6 @@
 
 package fi.vm.kapa.rova.external.model.virre;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import fi.vm.kapa.rova.engine.evaluation.Evaluable;
 
 import java.util.List;
@@ -38,6 +37,7 @@ public class Company implements Evaluable {
     private List<CompanyRoleType> roles;
 
     public Company() {
+        // NOP
     }
 
     public String getBusinessId() {

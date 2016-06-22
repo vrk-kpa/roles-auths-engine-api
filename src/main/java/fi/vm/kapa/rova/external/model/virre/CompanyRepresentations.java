@@ -33,6 +33,7 @@ public class CompanyRepresentations {
     private List<CompanyPerson> companyPersons;
 
     public CompanyRepresentations() {
+        // NOP
     }
 
     public String getBusinessId() {

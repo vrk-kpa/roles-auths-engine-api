@@ -22,10 +22,10 @@
  */
 package fi.vm.kapa.rova.engine.model.hpa;
 
+import fi.vm.kapa.rova.external.model.AuthorizationType;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import fi.vm.kapa.rova.external.model.AuthorizationType;
 
 public class Delegate implements HpaDelegate {
 
@@ -47,6 +47,7 @@ public class Delegate implements HpaDelegate {
         this.setReasons(r);
     }
 
+    @Override
     public String getDelegateId() {
         return delegateId;
     }
@@ -63,6 +64,7 @@ public class Delegate implements HpaDelegate {
         this.delegateIdValid = delegateIdValid;
     }
 
+    @Override
     public List<Principal> getPrincipal() {
         return principal;
     }
@@ -95,6 +97,7 @@ public class Delegate implements HpaDelegate {
         this.deceased = deceased;
     }
 
+    @Override
     public AuthorizationType getAuthorizationType() {
         return authorizationType;
     }
@@ -110,6 +113,7 @@ public class Delegate implements HpaDelegate {
         this.principal.add(p);
     }
 
+    @Override
     public List<DecisionReason> getReasons() {
         return reasons;
     }

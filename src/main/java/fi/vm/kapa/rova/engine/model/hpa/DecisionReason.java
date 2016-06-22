@@ -39,6 +39,7 @@ public class DecisionReason {
     }
 
     public DecisionReason() {
+        // NOP
     }
 
     public String getReasonRule() {
