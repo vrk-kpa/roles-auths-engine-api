@@ -22,44 +22,17 @@
  */
 package fi.vm.kapa.rova.engine.client;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import javax.ws.rs.client.Invocation.Builder;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
 import fi.vm.kapa.rova.admin.model.NotificationDTO;
 import fi.vm.kapa.rova.ui.Channel;
 
-public abstract class AbstractNotificationClient extends AbstractEngineClient {
+import javax.ws.rs.core.GenericType;
 
+import java.util.List;
+
+public abstract class AbstractNotificationClient extends AbstractEngineClient {
     
     public List<NotificationDTO> getNotificationsForChannel(Channel channel) {
         return getGeneric("notifications/channel/" + channel, new GenericType<List<NotificationDTO>>() {});
     }
     
-    @Override
-    protected <T> T getGeneric(String url, GenericType<T> returnObject) {
-        return getResponse(url, null).readEntity(returnObject);
-    }
-    
-    private Response getResponse(String url, Map<String, Object> params) {
-        WebTarget webTarget = getClient().target(getEngineUrl() + url);
-        if (params != null) {
-            for (Entry<String, Object> param : params.entrySet()) {
-                webTarget = webTarget.queryParam(param.getKey(), param.getValue());
-            }
-        }
-        Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
-        Response response = invocationBuilder.get();
-        if (response.getStatus() != 200) {
-            handleError(response);
-        }
-        return response;
-    }
-
 }

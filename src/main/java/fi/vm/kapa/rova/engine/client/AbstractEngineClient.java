@@ -22,19 +22,17 @@
  */
 package fi.vm.kapa.rova.engine.client;
 
-import static fi.vm.kapa.rova.rest.exception.ExceptionType.DUBLICATE_USER_IDENTITY;
-import static fi.vm.kapa.rova.rest.exception.ExceptionType.DUPLICATE_SERVICE_IDENTIFIER;
-import static fi.vm.kapa.rova.rest.exception.ExceptionType.ILLEGAL_RULE_CONFIG;
-import static fi.vm.kapa.rova.rest.exception.ExceptionType.MATCHING_SERVICE_NOT_FOUND;
-import static fi.vm.kapa.rova.rest.exception.ExceptionType.MISSING_PARAMETER;
-import static fi.vm.kapa.rova.rest.exception.ExceptionType.OTHER_EXCEPTION;
+import static fi.vm.kapa.rova.rest.exception.ExceptionType.*;
 import static fi.vm.kapa.rova.rest.exception.SystemException.Key.DESCRIPTION;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
+import fi.vm.kapa.rova.logging.Logger;
+import fi.vm.kapa.rova.logging.LoggingClientRequestFilter;
+import fi.vm.kapa.rova.rest.exception.SystemException;
+import fi.vm.kapa.rova.rest.validation.ValidationClientRequestFilter;
+import org.apache.commons.lang3.Validate;
+import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.jackson.JacksonFeature;
+import org.springframework.stereotype.Component;
 
 import javax.ws.rs.ProcessingException;
 import javax.ws.rs.client.Client;
@@ -45,15 +43,11 @@ import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.apache.commons.lang3.Validate;
-import org.glassfish.jersey.client.ClientConfig;
-import org.glassfish.jersey.jackson.JacksonFeature;
-import org.springframework.stereotype.Component;
-
-import fi.vm.kapa.rova.logging.Logger;
-import fi.vm.kapa.rova.logging.LoggingClientRequestFilter;
-import fi.vm.kapa.rova.rest.exception.SystemException;
-import fi.vm.kapa.rova.rest.validation.ValidationClientRequestFilter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 @Component
 public abstract class AbstractEngineClient  {
@@ -110,7 +104,7 @@ public abstract class AbstractEngineClient  {
         return getResponse(url, null).readEntity(clazz);
     }
 
-    private Response getResponse(String url, Map<String, Object> params) {
+    protected Response getResponse(String url, Map<String, Object> params) {
         WebTarget webTarget = getClient().target(getEngineUrl() + url);
         if (params != null) {
             for (Entry<String, Object> param : params.entrySet()) {
