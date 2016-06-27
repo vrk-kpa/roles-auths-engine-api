@@ -29,7 +29,9 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.function.Predicate;
 
-public class NotificationDTOUtil {
+public final class NotificationDTOUtil {
+    
+    private NotificationDTOUtil()  {}
 
     public static Comparator<NotificationDTO> notificationEndDateComparator() {
         return new Comparator<NotificationDTO>() {
@@ -46,7 +48,11 @@ public class NotificationDTOUtil {
                 && (now.isAfter(getLocalDateTime(p.getStartDate())) || now.isEqual(getLocalDateTime(p.getStartDate())));
     }
     
-    public static LocalDateTime getLocalDateTime(Date date) {
+    public static Predicate<NotificationDTO> isNotificationNew() {
+        return p -> getLocalDateTime(null).isBefore(getLocalDateTime(p.getStartDate()));
+    }
+    
+    private static LocalDateTime getLocalDateTime(Date date) {
         ZoneId zone = ZoneId.systemDefault();
         LocalDateTime time = LocalDateTime.now(zone);
         if (date != null) {
