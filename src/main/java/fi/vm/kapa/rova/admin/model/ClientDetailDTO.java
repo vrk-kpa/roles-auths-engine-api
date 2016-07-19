@@ -22,6 +22,9 @@
  */
 package fi.vm.kapa.rova.admin.model;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.HashSet;
 import java.util.Set;
 
 public class ClientDetailDTO {
@@ -35,10 +38,16 @@ public class ClientDetailDTO {
         // NOP
     }
 
-    public ClientDetailDTO(String clientId, String apiSecret, String oauthSecret) {
+    public ClientDetailDTO(String clientId, String apiSecret, String oauthSecret, String redirectUris) {
         this.clientId = clientId;
         this.apiSecret = apiSecret;
         this.oauthSecret = oauthSecret;
+        this.redirectUris = new HashSet<>();
+        if (StringUtils.isNotBlank(redirectUris)) {
+            for (String uri : redirectUris.split(",")) {
+                this.redirectUris.add(uri);
+            }
+        }
     }
 
     public String getClientId() {
