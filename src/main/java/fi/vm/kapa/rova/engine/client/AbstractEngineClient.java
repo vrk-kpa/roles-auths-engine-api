@@ -22,14 +22,10 @@
  */
 package fi.vm.kapa.rova.engine.client;
 
-import static fi.vm.kapa.rova.rest.exception.ExceptionType.*;
-import static fi.vm.kapa.rova.rest.exception.SystemException.Key.DESCRIPTION;
-
 import fi.vm.kapa.rova.logging.Logger;
 import fi.vm.kapa.rova.logging.LoggingClientRequestFilter;
 import fi.vm.kapa.rova.rest.exception.SystemException;
 import fi.vm.kapa.rova.rest.validation.ValidationClientRequestFilter;
-import org.apache.commons.lang3.Validate;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.springframework.stereotype.Component;
@@ -42,12 +38,14 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import static fi.vm.kapa.rova.rest.exception.ExceptionType.*;
+import static fi.vm.kapa.rova.rest.exception.SystemException.Key.DESCRIPTION;
 
 @Component
 public abstract class AbstractEngineClient  {
@@ -76,16 +74,6 @@ public abstract class AbstractEngineClient  {
             client.register(component);
         }
         return client;
-    }
-
-    protected Map<String, Object> queryParams(String... params) {
-        Validate.noNullElements(params);
-        Validate.isTrue(params.length % 2 == 0, "Params length not even, can't form key-value pairs");
-        Map<String, Object> paramMap = new HashMap<>(params.length / 2);
-        for (int i = 0; i < params.length; i = i + 2) {
-            paramMap.put(params[i], params[i+1]);
-        }
-        return paramMap;
     }
 
     protected <T> T getGeneric(String url, Map<String, Object> params, GenericType<T> returnObject) {
