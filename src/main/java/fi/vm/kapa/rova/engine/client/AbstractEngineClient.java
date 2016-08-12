@@ -127,7 +127,7 @@ public abstract class AbstractEngineClient  {
                         throw new SystemException(ILLEGAL_RULE_CONFIG).set(DESCRIPTION, "viallinen.saantokonfiguraatio");
 
                     case 109:
-                        throw new SystemException(DUBLICATE_USER_IDENTITY).set(DESCRIPTION, "identiteetti.on.jo.lisatty");
+                        throw new SystemException(DUPLICATE_USER_IDENTITY).set(DESCRIPTION, "identiteetti.on.jo.lisatty");
 
                     default:
                         throw new SystemException(OTHER_EXCEPTION).set(DESCRIPTION, "operaatio.epaonnistui");
