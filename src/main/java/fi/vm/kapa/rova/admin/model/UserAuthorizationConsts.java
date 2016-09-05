@@ -35,15 +35,7 @@ public final class UserAuthorizationConsts {
     /**
      * {@value}
      */
-    public static final String ADMIN_USER_MGMT = "SERVICE#ANY#USERMGMT";
-    /**
-     * {@value}
-     */
     public static final String ADMIN_USER_ROLE = "ROLE_SERVICE#ANY#USERMGMT";
-    /**
-     * {@value}
-     */
-    public static final String ADMIN_SERVICE_MGMT = "SERVICE#ANY#SERVICEMGMT";
     /**
      * {@value}
      */
@@ -64,18 +56,6 @@ public final class UserAuthorizationConsts {
      * {@value}
      */
     public static final String ADMIN_NOTIFICATION_ROLE = "ROLE_SERVICE#ANY#NOTIFICATIONMGMT";
-    /**
-     * {@value}
-     */
-    public final static String API_NAME = "ADMIN";
-    /**
-     * {@value}
-     */
-    public final static String API_USER = "ADMIN_API_USER";
-    /**
-     * {@value}
-     */
-    public final static String SERVICE_PREFIX = "SERVICE";
     /**
      * {@value}
      */
