@@ -38,6 +38,8 @@ public interface WebApiSession {
 
     public String getServiceWebApiId();
 
+    public void setServiceWebApiId(String serviceWebApiId);
+
     public String getType();
 
     public void setType(String type);
