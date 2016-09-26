@@ -28,6 +28,7 @@ import java.util.TreeSet;
 public class OrganizationResultDTO {
     private SortedSet<OrganizationResult> organizationResults = new TreeSet<>();
     private int total;
+    boolean incomplete;
 
     public SortedSet<OrganizationResult> getOrganizationResults() {
         return organizationResults;
@@ -43,5 +44,13 @@ public class OrganizationResultDTO {
 
     public void setTotal(int total) {
         this.total = total;
+    }
+
+    public boolean isIncomplete() {
+        return incomplete;
+    }
+
+    public void setIncomplete(boolean incomplete) {
+        this.incomplete = incomplete;
     }
 }
