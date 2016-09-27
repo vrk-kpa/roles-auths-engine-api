@@ -83,7 +83,7 @@ public class OrganizationResult {
 
     @Override
     public String toString() {
-        return "{name=" + name + ", identifier=" + identifier + ", roles=" + roles + "}";
+        return "{name=" + name + ", identifier=" + identifier + ", roles=" + roles + ", complete=" + complete + "}";
     }
 
 }
