@@ -28,16 +28,25 @@ import java.util.Set;
 public class OrganizationResult {
     private String name;
     private String identifier;
+    private boolean complete;
     private Set<ResultRoleType> roles = new HashSet<ResultRoleType>();
 
     public OrganizationResult() {
         // NOP
     }
 
+    public OrganizationResult(String name, String identifier, Set<ResultRoleType> roles, boolean complete) {
+        this.name = name;
+        this.identifier = identifier;
+        this.roles = roles;
+        this.complete = complete;
+    }
+
     public OrganizationResult(String name, String identifier, Set<ResultRoleType> roles) {
         this.name = name;
         this.identifier = identifier;
         this.roles = roles;
+        this.complete = true;
     }
 
     public String getName() {
@@ -62,6 +71,14 @@ public class OrganizationResult {
 
     public void setRoles(Set<ResultRoleType> roles) {
         this.roles = roles;
+    }
+
+    public boolean isComplete() {
+        return complete;
+    }
+
+    public void setComplete(boolean complete) {
+        this.complete = complete;
     }
 
     @Override
