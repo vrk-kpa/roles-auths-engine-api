@@ -42,13 +42,6 @@ public class OrganizationResult {
         this.complete = complete;
     }
 
-    public OrganizationResult(String name, String identifier, Set<ResultRoleType> roles) {
-        this.name = name;
-        this.identifier = identifier;
-        this.roles = roles;
-        this.complete = true;
-    }
-
     public String getName() {
         return name;
     }
