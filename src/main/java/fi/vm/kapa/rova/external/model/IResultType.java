@@ -23,8 +23,25 @@
 
 package fi.vm.kapa.rova.external.model;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+
+import fi.vm.kapa.rova.engine.model.ypa.ResultRoleType;
+import fi.vm.kapa.rova.engine.model.ypa.IssueRoleType;
+
+@JsonTypeInfo(
+    use = Id.CLASS,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "type"
+)
+@JsonSubTypes({
+    @Type(value = IssueRoleType.class),
+    @Type(value = ResultRoleType.class)
+})
 public interface IResultType {
-    default String getResultString() {
+    default String getResult() {
         return this.toString();
     }
 }

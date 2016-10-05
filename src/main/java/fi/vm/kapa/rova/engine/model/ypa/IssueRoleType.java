@@ -20,34 +20,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package fi.vm.kapa.rova.engine.model.ypa;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 
 import fi.vm.kapa.rova.external.model.IResultType;
 
-public class ResultRoleTypeList extends ArrayList<IResultType> implements IResultType {
-    
-    private static final long serialVersionUID = 1L;
-    
-    public ResultRoleTypeList() {
-        super();
+public class IssueRoleType implements IResultType {
+    private String issue;
+
+    public IssueRoleType() {
     }
 
-    public ResultRoleTypeList(int size) {
-        super(size);
+    public IssueRoleType(String issue) {
+        this.issue = issue;
     }
 
-    public ResultRoleTypeList(Collection<ResultRoleType> c) {
-        super(c);
-    }
-    
     @Override
-    public Iterator<IResultType> iterator() {
-        return super.iterator();
+    public String toString() {
+        return issue;
     }
-    
+
+    @Override
+    public String getResult() {
+        return issue;
+    }
+
+    public void setResult(String result) {
+        issue = result;
+    }
 }

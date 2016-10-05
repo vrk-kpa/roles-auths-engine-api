@@ -25,17 +25,19 @@ package fi.vm.kapa.rova.engine.model.ypa;
 import java.util.HashSet;
 import java.util.Set;
 
+import fi.vm.kapa.rova.external.model.IResultType;
+
 public class OrganizationResult {
     private String name;
     private String identifier;
     private boolean complete;
-    private Set<ResultRoleType> roles = new HashSet<ResultRoleType>();
+    private Set<IResultType> roles = new HashSet<>();
 
     public OrganizationResult() {
         // NOP
     }
 
-    public OrganizationResult(String name, String identifier, Set<ResultRoleType> roles, boolean complete) {
+    public OrganizationResult(String name, String identifier, Set<IResultType> roles, boolean complete) {
         this.name = name;
         this.identifier = identifier;
         this.roles = roles;
@@ -58,11 +60,11 @@ public class OrganizationResult {
         this.identifier = identifier;
     }
 
-    public Set<ResultRoleType> getRoles() {
+    public Set<IResultType> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<ResultRoleType> roles) {
+    public void setRoles(Set<IResultType> roles) {
         this.roles = roles;
     }
 
