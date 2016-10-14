@@ -38,7 +38,7 @@ public class ResultTypeSerializer extends JsonSerializer<IResultType> {
     @Override
     public void serialize(IResultType value, JsonGenerator gen,
             SerializerProvider provider) throws IOException, JsonProcessingException {
-        if (value instanceof ResultRoleType) {
+        if (value instanceof ResultRoleType || value instanceof AuthorizationType) {
             gen.writeString(value.toString());
         } else if (value instanceof IssueRoleType) {
             gen.writeString(((IssueRoleType)value).getResult());

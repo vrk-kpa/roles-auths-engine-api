@@ -46,6 +46,8 @@ public class ResultTypeDeserializer extends JsonDeserializer<IResultType> {
         IResultType result = null;
         if (rootNode.asText().startsWith("http")) {
             result = new IssueRoleType(rootNode.asText());
+        } else if (rootNode.asText().indexOf("ALLOWED") > -1) {
+            result = AuthorizationType.valueOf(rootNode.asText());
         } else {
             result = ResultRoleType.valueOf(rootNode.asText());
         }
