@@ -41,7 +41,7 @@ public class ResultRoleTypeList extends ArrayList<IResultType> implements IResul
         super(size);
     }
 
-    public ResultRoleTypeList(Collection<ResultRoleType> c) {
+    public ResultRoleTypeList(Collection<IResultType> c) {
         super(c);
     }
     

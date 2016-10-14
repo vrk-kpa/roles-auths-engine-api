@@ -23,13 +23,34 @@
 
 package fi.vm.kapa.rova.external.model;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import java.io.IOException;
 
-@JsonDeserialize(using=ResultTypeDeserializer.class) 
-@JsonSerialize(using=ResultTypeSerializer.class) 
-public interface IResultType {
-    default String getResult() {
-        return this.toString();
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonNode;
+
+import fi.vm.kapa.rova.engine.model.ypa.IssueRoleType;
+import fi.vm.kapa.rova.engine.model.ypa.ResultRoleType;
+
+public class ResultTypeDeserializer extends JsonDeserializer<IResultType> {
+
+    @Override
+    public IResultType deserialize(JsonParser jp, DeserializationContext ctxt)
+            throws IOException, JsonProcessingException {
+        ObjectCodec oc = jp.getCodec();
+        JsonNode rootNode = oc.readTree(jp);
+
+        IResultType result = null;
+        if (rootNode.asText().startsWith("http")) {
+            result = new IssueRoleType(rootNode.asText());
+        } else {
+            result = ResultRoleType.valueOf(rootNode.asText());
+        }
+
+        return result;
     }
+
 }

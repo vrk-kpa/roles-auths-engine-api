@@ -23,13 +23,28 @@
 
 package fi.vm.kapa.rova.external.model;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import java.io.IOException;
 
-@JsonDeserialize(using=ResultTypeDeserializer.class) 
-@JsonSerialize(using=ResultTypeSerializer.class) 
-public interface IResultType {
-    default String getResult() {
-        return this.toString();
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
+
+import fi.vm.kapa.rova.engine.model.ypa.IssueRoleType;
+import fi.vm.kapa.rova.engine.model.ypa.ResultRoleType;
+
+public class ResultTypeSerializer extends JsonSerializer<IResultType> {
+
+    @Override
+    public void serialize(IResultType value, JsonGenerator gen,
+            SerializerProvider provider) throws IOException, JsonProcessingException {
+        if (value instanceof ResultRoleType) {
+            gen.writeString(value.toString());
+        } else if (value instanceof IssueRoleType) {
+            gen.writeString(((IssueRoleType)value).getResult());
+        } else {
+            throw new IOException("Unknown format of given IResultType");
+        }
     }
+
 }
