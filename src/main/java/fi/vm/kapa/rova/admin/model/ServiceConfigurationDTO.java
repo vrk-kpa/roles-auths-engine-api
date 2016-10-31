@@ -32,7 +32,8 @@ public class ServiceConfigurationDTO {
     private ServiceDTO serviceId;
     private Boolean includeReasons;
     private Boolean allowMultiSelection;
-    private Set<String> issueUris = new HashSet<>();
+    private Set<String> hpaIssueUris = new HashSet<>();
+    private Set<String> ypaIssueUris = new HashSet<>();
 
     public long getId() {
         return id;
@@ -66,11 +67,19 @@ public class ServiceConfigurationDTO {
         this.allowMultiSelection = allowMultiSelection;
     }
 
-	public Set<String> getIssueUris() {
-		return issueUris;
-	}
+    public Set<String> getHpaIssueUris() {
+        return hpaIssueUris;
+    }
 
-	public void setIssueUris(Set<String> issueUris) {
-		this.issueUris = issueUris;
-	}
+    public void setHpaIssueUris(Set<String> issueUris) {
+        this.hpaIssueUris = issueUris;
+    }
+
+    public Set<String> getYpaIssueUris() {
+        return ypaIssueUris;
+    }
+
+    public void setYpaIssueUris(Set<String> issueUris) {
+        this.ypaIssueUris = issueUris;
+    }
 }

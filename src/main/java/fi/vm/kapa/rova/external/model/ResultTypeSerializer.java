@@ -21,33 +21,30 @@
  * THE SOFTWARE.
  */
 
-package fi.vm.kapa.rova.engine.model.ypa;
+package fi.vm.kapa.rova.external.model;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
+import java.io.IOException;
 
-import fi.vm.kapa.rova.external.model.IResultType;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
 
-public class ResultRoleTypeList extends ArrayList<IResultType> implements IResultType {
-    
-    private static final long serialVersionUID = 1L;
-    
-    public ResultRoleTypeList() {
-        super();
-    }
+import fi.vm.kapa.rova.engine.model.ypa.IssueRoleType;
+import fi.vm.kapa.rova.engine.model.ypa.ResultRoleType;
 
-    public ResultRoleTypeList(int size) {
-        super(size);
-    }
+public class ResultTypeSerializer extends JsonSerializer<IResultType> {
 
-    public ResultRoleTypeList(Collection<IResultType> c) {
-        super(c);
-    }
-    
     @Override
-    public Iterator<IResultType> iterator() {
-        return super.iterator();
+    public void serialize(IResultType value, JsonGenerator gen,
+            SerializerProvider provider) throws IOException, JsonProcessingException {
+        if (value instanceof ResultRoleType || value instanceof AuthorizationType) {
+            gen.writeString(value.toString());
+        } else if (value instanceof IssueRoleType) {
+            gen.writeString(((IssueRoleType)value).getResult());
+        } else {
+            throw new IOException("Unknown format of given IResultType");
+        }
     }
-    
+
 }
