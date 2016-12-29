@@ -32,6 +32,10 @@ public class CompanyDTO {
     private List<String> auxiliaryTradeNames;
     private List<String> parallelTradeNames;
     
+    public CompanyDTO() {
+        super();
+    }
+
     public CompanyDTO(String companyId, String tradeName, String status, List<String> auxiliaryTradeNames, List<String> parallelTradeNames) {
         super();
         this.companyId = companyId;
