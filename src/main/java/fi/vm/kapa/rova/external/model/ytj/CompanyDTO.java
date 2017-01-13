@@ -29,6 +29,7 @@ public class CompanyDTO {
     private String companyId;
     private String tradeName;
     private String status;
+    private String companyIdStatus;
     private List<String> auxiliaryTradeNames;
     private List<String> parallelTradeNames;
     
@@ -36,43 +37,63 @@ public class CompanyDTO {
         super();
     }
 
-    public CompanyDTO(String companyId, String tradeName, String status, List<String> auxiliaryTradeNames, List<String> parallelTradeNames) {
+    public CompanyDTO(String companyId, String tradeName, String status, String companyIdStatus,
+            List<String> auxiliaryTradeNames, List<String> parallelTradeNames) {
         super();
         this.companyId = companyId;
         this.tradeName = tradeName;
         this.status = status;
+        this.companyIdStatus = companyIdStatus;
         this.auxiliaryTradeNames = auxiliaryTradeNames;
         this.parallelTradeNames = parallelTradeNames;
     }
-    
+
     public String getCompanyId() {
         return companyId;
     }
+
     public void setCompanyId(String companyId) {
         this.companyId = companyId;
     }
+
     public String getTradeName() {
         return tradeName;
     }
+
     public void setTradeName(String tradeName) {
         this.tradeName = tradeName;
     }
+
     public String getStatus() {
         return status;
     }
+
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public String getCompanyIdStatus() {
+        return companyIdStatus;
+    }
+
+    public void setCompanyIdStatus(String companyIdStatus) {
+        this.companyIdStatus = companyIdStatus;
+    }
+
     public List<String> getAuxiliaryTradeNames() {
         return auxiliaryTradeNames;
     }
+
     public void setAuxiliaryTradeNames(List<String> auxiliaryTradeNames) {
         this.auxiliaryTradeNames = auxiliaryTradeNames;
     }
+
     public List<String> getParallelTradeNames() {
         return parallelTradeNames;
     }
+
     public void setParallelTradeNames(List<String> parallelTradeNames) {
         this.parallelTradeNames = parallelTradeNames;
     }
+
 }
