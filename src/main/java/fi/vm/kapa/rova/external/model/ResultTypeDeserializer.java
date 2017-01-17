@@ -35,6 +35,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import fi.vm.kapa.rova.engine.model.ypa.IssueRoleType;
 import fi.vm.kapa.rova.engine.model.ypa.ResultRoleType;
 
+import static fi.vm.kapa.rova.external.model.AuthorizationType.ALLOWED;
+import static fi.vm.kapa.rova.external.model.AuthorizationType.DISALLOWED;
+import static fi.vm.kapa.rova.external.model.AuthorizationType.UNKNOWN;
+
 public class ResultTypeDeserializer extends JsonDeserializer<IResultType> {
 
     @Override
@@ -44,12 +48,14 @@ public class ResultTypeDeserializer extends JsonDeserializer<IResultType> {
         JsonNode rootNode = oc.readTree(jp);
 
         IResultType result = null;
-        if (rootNode.asText().startsWith("http")) {
-            result = new IssueRoleType(rootNode.asText());
-        } else if (rootNode.asText().indexOf("ALLOWED") > -1) {
-            result = AuthorizationType.valueOf(rootNode.asText());
+        String nodeAsText = rootNode.asText();
+        if (nodeAsText.startsWith("http")) {
+            result = new IssueRoleType(nodeAsText);
+        } else if (nodeAsText.equals(ALLOWED.toString()) || nodeAsText.equals(DISALLOWED.toString())
+                || nodeAsText.equals(UNKNOWN.toString())) {
+            result = AuthorizationType.valueOf(nodeAsText);
         } else {
-            result = ResultRoleType.valueOf(rootNode.asText());
+            result = ResultRoleType.valueOf(nodeAsText);
         }
 
         return result;
