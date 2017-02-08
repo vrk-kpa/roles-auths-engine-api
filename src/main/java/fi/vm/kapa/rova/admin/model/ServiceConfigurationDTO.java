@@ -34,6 +34,7 @@ public class ServiceConfigurationDTO {
     private Boolean allowMultiSelection;
     private Set<String> hpaIssueUris = new HashSet<>();
     private Set<String> ypaIssueUris = new HashSet<>();
+    private Set<ApiType> enabledApis = new HashSet<>();
 
     public long getId() {
         return id;
@@ -81,5 +82,13 @@ public class ServiceConfigurationDTO {
 
     public void setYpaIssueUris(Set<String> issueUris) {
         this.ypaIssueUris = issueUris;
+    }
+
+    public Set<ApiType> getEnabledApis() {
+        return enabledApis;
+    }
+
+    public void setEnabledApis(Set<ApiType> enabledApis) {
+        this.enabledApis = enabledApis;
     }
 }
