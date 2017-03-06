@@ -22,14 +22,17 @@
  */
 package fi.vm.kapa.rova.external.model.ytj;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CompanyDTO {
     
     private String companyId;
     private String tradeName;
-    private String status;
-    private String companyIdStatus;
+    private String primaryStatusCode;
+    private String secondaryStatusCode;
     private List<String> auxiliaryTradeNames;
     private List<String> parallelTradeNames;
     
@@ -37,13 +40,13 @@ public class CompanyDTO {
         super();
     }
 
-    public CompanyDTO(String companyId, String tradeName, String status, String companyIdStatus,
-            List<String> auxiliaryTradeNames, List<String> parallelTradeNames) {
+    public CompanyDTO(String companyId, String tradeName, String primaryStatusCode, String secondaryStatusCode,
+                      List<String> auxiliaryTradeNames, List<String> parallelTradeNames) {
         super();
         this.companyId = companyId;
         this.tradeName = tradeName;
-        this.status = status;
-        this.companyIdStatus = companyIdStatus;
+        this.primaryStatusCode = primaryStatusCode;
+        this.secondaryStatusCode = secondaryStatusCode;
         this.auxiliaryTradeNames = auxiliaryTradeNames;
         this.parallelTradeNames = parallelTradeNames;
     }
@@ -64,20 +67,20 @@ public class CompanyDTO {
         this.tradeName = tradeName;
     }
 
-    public String getStatus() {
-        return status;
+    public String getPrimaryStatusCode() {
+        return primaryStatusCode;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setPrimaryStatusCode(String primaryStatusCode) {
+        this.primaryStatusCode = primaryStatusCode;
     }
 
-    public String getCompanyIdStatus() {
-        return companyIdStatus;
+    public String getSecondaryStatusCode() {
+        return secondaryStatusCode;
     }
 
-    public void setCompanyIdStatus(String companyIdStatus) {
-        this.companyIdStatus = companyIdStatus;
+    public void setSecondaryStatusCode(String secondaryStatusCode) {
+        this.secondaryStatusCode = secondaryStatusCode;
     }
 
     public List<String> getAuxiliaryTradeNames() {
