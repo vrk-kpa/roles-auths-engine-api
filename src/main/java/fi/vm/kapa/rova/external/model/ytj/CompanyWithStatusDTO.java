@@ -24,35 +24,28 @@ package fi.vm.kapa.rova.external.model.ytj;
 
 import java.util.List;
 
-public class CompanyDTO {
-    
+public class CompanyWithStatusDTO {
+
     private String companyId;
     private String tradeName;
-    private boolean active;
+    private String primaryStatusCode;
+    private String secondaryStatusCode;
     private List<String> auxiliaryTradeNames;
     private List<String> parallelTradeNames;
-    
-    public CompanyDTO() {
+
+    public CompanyWithStatusDTO() {
         super();
     }
 
-    public CompanyDTO(String companyId, String tradeName, boolean active,
-                           List<String> auxiliaryTradeNames, List<String> parallelTradeNames) {
+    public CompanyWithStatusDTO(String companyId, String tradeName, String primaryStatusCode, String secondaryStatusCode,
+                                List<String> auxiliaryTradeNames, List<String> parallelTradeNames) {
         super();
         this.companyId = companyId;
         this.tradeName = tradeName;
-        this.active = active;
+        this.primaryStatusCode = primaryStatusCode;
+        this.secondaryStatusCode = secondaryStatusCode;
         this.auxiliaryTradeNames = auxiliaryTradeNames;
         this.parallelTradeNames = parallelTradeNames;
-    }
-
-    public CompanyDTO(CompanyWithStatusDTO dto) {
-        super();
-        this.companyId = dto.getCompanyId();
-        this.tradeName = dto.getTradeName();
-        this.active = "STATUS3".equals(dto.getPrimaryStatusCode()) && "2".equals(dto.getSecondaryStatusCode());
-        this.auxiliaryTradeNames = dto.getAuxiliaryTradeNames();
-        this.parallelTradeNames = dto.getParallelTradeNames();
     }
 
     public String getCompanyId() {
@@ -71,12 +64,20 @@ public class CompanyDTO {
         this.tradeName = tradeName;
     }
 
-    public boolean isActive() {
-        return active;
+    public String getPrimaryStatusCode() {
+        return primaryStatusCode;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setPrimaryStatusCode(String primaryStatusCode) {
+        this.primaryStatusCode = primaryStatusCode;
+    }
+
+    public String getSecondaryStatusCode() {
+        return secondaryStatusCode;
+    }
+
+    public void setSecondaryStatusCode(String secondaryStatusCode) {
+        this.secondaryStatusCode = secondaryStatusCode;
     }
 
     public List<String> getAuxiliaryTradeNames() {
