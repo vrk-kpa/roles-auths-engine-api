@@ -16,7 +16,7 @@ import java.util.List;
  * Created by jkorkala on 08/03/2017.
  */
 
-@RibbonClient(name="vtjClient")
+//@RibbonClient(name="vtjClient")
 public class VTJClient implements VTJ {
 
     @Autowired
