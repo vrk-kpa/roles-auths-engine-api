@@ -22,14 +22,21 @@
  */
 package fi.vm.kapa.rova.vtj;
 
-import fi.vm.kapa.rova.client.ClientException;
-import fi.vm.kapa.rova.external.model.vtj.VTJResponse;
+import org.springframework.context.annotation.Condition;
+import org.springframework.context.annotation.ConditionContext;
+import org.springframework.core.env.Environment;
+import org.springframework.core.type.AnnotatedTypeMetadata;
 
-/**
- * Created by jkorkala on 08/03/2017.
- */
-public interface VTJ {
-    String VTJ_PERSON = "/rest/vtj/person/{schema}/{hetu}";
+public class VtjClientCondition implements Condition {
 
-    public VTJResponse getPerson(String hetu, String schema) throws ClientException;
+    @Override
+    public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
+        Environment env = context.getEnvironment();
+        if (env == null) {
+            return false;
+        }
+        String vtjClientEnabled = env.getProperty("vtj_client_enabled");
+        return vtjClientEnabled != null;
+    }
+
 }

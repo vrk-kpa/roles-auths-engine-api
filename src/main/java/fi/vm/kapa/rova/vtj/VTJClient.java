@@ -22,53 +22,65 @@
  */
 package fi.vm.kapa.rova.vtj;
 
+import fi.vm.kapa.rova.client.ClientException;
 import fi.vm.kapa.rova.external.model.vtj.VTJResponse;
+import fi.vm.kapa.rova.logging.Logger;
 import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
 import fi.vm.kapa.rova.rest.validation.ValidationRequestInterceptor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Conditional;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by jkorkala on 08/03/2017.
  */
-
-//@RibbonClient(name="vtjClient")
+@RibbonClient(name = "vtjClient")
+@Conditional(VtjClientCondition.class)
 public class VTJClient implements VTJ {
 
-    @Autowired
-    RestTemplate restTemplate;
+    private static final Logger LOG = Logger.getLogger(VTJClient.class);
 
+    @Value("${vtj_client_api_key}")
     private String apiKey;
+
+    @Value("${request_alive_seconds}")
     private int requestAliveSeconds;
-    private String pathPrefix;
 
-    public VTJClient(String apiKey, int requestAliveSeconds, String pathPrefix) {
-        this.apiKey = apiKey;
-        this.requestAliveSeconds = requestAliveSeconds;
-        this.pathPrefix = pathPrefix;
+    @Value("${vtj_client_url}")
+    private String vtjEndpointUrl;
+
+
+    private RestTemplate getRestTemplate() {
+        RestTemplate restTemplate = new RestTemplate();
+        List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
+        interceptors.add(new ValidationRequestInterceptor(apiKey, requestAliveSeconds));
+        interceptors.add(new RequestIdentificationInterceptor(
+                RequestIdentificationInterceptor.HeaderTrust.TRUST_REQUEST_HEADERS));
+        restTemplate.setInterceptors(interceptors);
+        return restTemplate;
     }
 
-    @PostConstruct
-    public void init() {
-        List interceptors = new ArrayList();
-        interceptors.add(new ValidationRequestInterceptor(apiKey, requestAliveSeconds, pathPrefix));
-        interceptors.add(new RequestIdentificationInterceptor("reqID", "user", RequestIdentificationInterceptor.HeaderTrust.TRUST_REQUEST_HEADERS));
-        this.restTemplate.setInterceptors(interceptors);
-
-    }
-
-    public VTJResponse getPerson(String hetu, String schema) throws Exception {
-        String requestUrl = VTJ_PERSON;
+    public VTJResponse getPerson(String hetu, String schema) throws ClientException {
+        String requestUrl = vtjEndpointUrl + VTJ_PERSON;
         requestUrl.replace("{schema}", schema);
         requestUrl.replace("{hetu}", hetu);
-        VTJResponse response = this.restTemplate.getForObject(requestUrl, VTJResponse.class);
-        return response;
+        RestTemplate restTemplate = getRestTemplate();
+        VTJResponse response = restTemplate.getForObject(requestUrl, VTJResponse.class);
+        ResponseEntity<VTJResponse> entityResponse = restTemplate.getForEntity(requestUrl, VTJResponse.class);
+        if (entityResponse.getStatusCode() == HttpStatus.OK) {
+            return response;
+        } else {
+            String errorMessage = "Vtj connection error: " + entityResponse.getStatusCode() + " from URL " + requestUrl;
+            LOG.error(errorMessage);
+            throw new ClientException(errorMessage);
+        }
     }
 
 }
