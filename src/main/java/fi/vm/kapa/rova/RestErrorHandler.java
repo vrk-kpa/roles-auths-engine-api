@@ -20,17 +20,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package fi.vm.kapa.rova.vtj;
+package fi.vm.kapa.rova;
 
-import fi.vm.kapa.rova.ClientException;
-import fi.vm.kapa.rova.external.model.vtj.VTJResponse;
-import fi.vm.kapa.rova.rest.exception.WebApplicationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.client.DefaultResponseErrorHandler;
 
-/**
- * Created by jkorkala on 08/03/2017.
- */
-public interface VTJ {
-    String VTJ_PERSON = "/rest/vtj/person/{schema}/{hetu}";
+public class RestErrorHandler extends DefaultResponseErrorHandler {
 
-    VTJResponse getPerson(String hetu, String schema) throws WebApplicationException, ClientException;
+    @Override
+    protected boolean hasError(HttpStatus statusCode) {
+        return (statusCode.series() == HttpStatus.Series.CLIENT_ERROR);
+    }
+
 }

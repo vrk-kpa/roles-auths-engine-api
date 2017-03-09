@@ -22,7 +22,8 @@
  */
 package fi.vm.kapa.rova.vtj;
 
-import fi.vm.kapa.rova.client.ClientException;
+import fi.vm.kapa.rova.ClientException;
+import fi.vm.kapa.rova.RestErrorHandler;
 import fi.vm.kapa.rova.external.model.vtj.VTJResponse;
 import fi.vm.kapa.rova.logging.Logger;
 import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
@@ -36,7 +37,9 @@ import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by jkorkala on 08/03/2017.
@@ -56,7 +59,6 @@ public class VTJClient implements VTJ {
     @Value("${vtj_client_url}")
     private String vtjEndpointUrl;
 
-
     private RestTemplate getRestTemplate() {
         RestTemplate restTemplate = new RestTemplate();
         List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
@@ -64,18 +66,20 @@ public class VTJClient implements VTJ {
         interceptors.add(new RequestIdentificationInterceptor(
                 RequestIdentificationInterceptor.HeaderTrust.TRUST_REQUEST_HEADERS));
         restTemplate.setInterceptors(interceptors);
+        restTemplate.setErrorHandler(new RestErrorHandler());
         return restTemplate;
     }
 
-    public VTJResponse getPerson(String hetu, String schema) throws ClientException {
-        String requestUrl = vtjEndpointUrl + VTJ_PERSON;
-        requestUrl.replace("{schema}", schema);
-        requestUrl.replace("{hetu}", hetu);
+    public VTJResponse getPerson(String hetu, String schema) {
         RestTemplate restTemplate = getRestTemplate();
-        VTJResponse response = restTemplate.getForObject(requestUrl, VTJResponse.class);
-        ResponseEntity<VTJResponse> entityResponse = restTemplate.getForEntity(requestUrl, VTJResponse.class);
+        String requestUrl = vtjEndpointUrl + VTJ_PERSON;
+        Map<String, String> params = new HashMap<>();
+        params.put("schema", schema);
+        params.put("hetu", hetu);
+        ResponseEntity<VTJResponse> entityResponse = restTemplate.getForEntity(requestUrl, VTJResponse.class, params);
+
         if (entityResponse.getStatusCode() == HttpStatus.OK) {
-            return response;
+            return entityResponse.getBody();
         } else {
             String errorMessage = "Vtj connection error: " + entityResponse.getStatusCode() + " from URL " + requestUrl;
             LOG.error(errorMessage);

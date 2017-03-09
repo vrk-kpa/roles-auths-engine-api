@@ -20,9 +20,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package fi.vm.kapa.rova.client;
+package fi.vm.kapa.rova;
 
-public class ClientException extends Exception {
+public class ClientException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
