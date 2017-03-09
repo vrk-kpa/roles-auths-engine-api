@@ -20,17 +20,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package fi.vm.kapa.rova.vtj;
+package fi.vm.kapa.rova;
 
-import fi.vm.kapa.rova.ClientException;
-import fi.vm.kapa.rova.external.model.vtj.VTJResponse;
-import fi.vm.kapa.rova.rest.exception.WebApplicationException;
+public class ClientException extends RuntimeException {
 
-/**
- * Created by jkorkala on 08/03/2017.
- */
-public interface VTJ {
-    String VTJ_PERSON = "/rest/vtj/person/{schema}/{hetu}";
+    private static final long serialVersionUID = 1L;
 
-    VTJResponse getPerson(String hetu, String schema) throws WebApplicationException, ClientException;
+    public ClientException() {
+        super();
+    }
+
+    public ClientException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
+    }
+
+    public ClientException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public ClientException(String message) {
+        super(message);
+    }
+
+    public ClientException(Throwable cause) {
+        super(cause);
+    }
+
 }
