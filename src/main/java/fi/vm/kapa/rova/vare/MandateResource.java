@@ -28,8 +28,8 @@ package fi.vm.kapa.rova.vare;
 public interface MandateResource {
 
     String CHECK_MANDATE = "/rest/vare/checkmandate/{delegateId}/{principalId}/{subject}";
-    String MANDATE_EXISTS = "/rest/vare/checkmandate/{delegateId}/{principalId}/";
-    String BUSINESS_IDS = "/rest/vare/businessids/{delegateId}/";
+    String MANDATE_EXISTS = "/rest/vare/checkmandate/{delegateId}/{principalId}";
+    String BUSINESS_IDS = "/rest/vare/businessids/{delegateId}";
     String GET_MANDATE = "/rest/vare/mandate/{uuid}";
     String MANDATE_STATUS = "/rest/vare/mandates/{status}";
     String MANDATES = "/rest/vare/mandates";
