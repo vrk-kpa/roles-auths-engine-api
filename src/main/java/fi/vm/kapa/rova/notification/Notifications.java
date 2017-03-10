@@ -27,5 +27,5 @@ package fi.vm.kapa.rova.notification;
  */
 public interface Notifications {
 
-    String NOTFICATIONS = "/rest/notifications";
+    String NOTIFICATIONS = "/rest/notifications";
 }
