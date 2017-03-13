@@ -32,4 +32,10 @@ public class CompanyAuthorizationDataRequest {
     public void setSsn(String ssn) {
         this.ssn = ssn;
     }
+
+    @Override
+    public String toString() {
+        return "CompanyAuthorizationDataRequest [ssn=" + ssn + "]";
+    }
+
 }

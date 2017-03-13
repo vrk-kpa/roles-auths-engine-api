@@ -20,15 +20,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package fi.vm.kapa.rova.vtj;
+package fi.vm.kapa.rova;
 
-import fi.vm.kapa.rova.AbstractClientCondition;
+import fi.vm.kapa.rova.logging.Logger;
+import org.springframework.context.annotation.Condition;
+import org.springframework.context.annotation.ConditionContext;
+import org.springframework.core.env.Environment;
+import org.springframework.core.type.AnnotatedTypeMetadata;
 
-public class VtjClientCondition extends AbstractClientCondition {
+public abstract class AbstractClientCondition implements Condition {
 
+    private static final Logger LOG = Logger.getLogger(AbstractClientCondition.class);
+
+    protected abstract String getClientPropertyName();
+    
     @Override
-    protected String getClientPropertyName() {
-        return "vtj_client_enabled";
+    public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
+        Environment env = context.getEnvironment();
+        if (env == null) {
+            return false;
+        }
+        String clientPropertyName = getClientPropertyName();
+        String clientEnabled = env.getProperty(clientPropertyName);
+        boolean enabled = clientEnabled != null && !clientEnabled.toLowerCase().equals("false");
+        LOG.info(clientPropertyName + "=" + clientEnabled);
+        return enabled;
     }
+
 
 }

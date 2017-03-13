@@ -23,22 +23,19 @@
 package fi.vm.kapa.rova.vtj;
 
 import fi.vm.kapa.rova.ClientException;
-import fi.vm.kapa.rova.RestErrorHandler;
+import fi.vm.kapa.rova.ErrorHandlerBuilder;
+import fi.vm.kapa.rova.RovaRestTemplate;
 import fi.vm.kapa.rova.external.model.vtj.VTJResponse;
 import fi.vm.kapa.rova.logging.Logger;
 import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
-import fi.vm.kapa.rova.rest.validation.ValidationRequestInterceptor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -59,20 +56,10 @@ public class VTJClient implements VTJ {
     @Value("${vtj_client_url}")
     private String vtjEndpointUrl;
 
-    private RestTemplate getRestTemplate() {
-        RestTemplate restTemplate = new RestTemplate();
-        List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
-        interceptors.add(new ValidationRequestInterceptor(apiKey, requestAliveSeconds));
-        interceptors.add(new RequestIdentificationInterceptor(
-                RequestIdentificationInterceptor.HeaderTrust.TRUST_REQUEST_HEADERS));
-        restTemplate.setInterceptors(interceptors);
-        restTemplate.setErrorHandler(new RestErrorHandler());
-        return restTemplate;
-    }
 
     public VTJResponse getPerson(String hetu, String schema) {
         RestTemplate restTemplate = getRestTemplate();
-        String requestUrl = vtjEndpointUrl + VTJ_PERSON;
+        String requestUrl = vtjEndpointUrl + VTJ_PERSON_PATH;
         Map<String, String> params = new HashMap<>();
         params.put("schema", schema);
         params.put("hetu", hetu);
@@ -87,4 +74,9 @@ public class VTJClient implements VTJ {
         }
     }
 
+    private RestTemplate getRestTemplate() {
+        return new RovaRestTemplate(apiKey, requestAliveSeconds,
+                RequestIdentificationInterceptor.HeaderTrust.TRUST_REQUEST_HEADERS,
+                ErrorHandlerBuilder.clientErrorsOnly());
+    }
 }
