@@ -30,7 +30,7 @@ import fi.vm.kapa.rova.rest.exception.WebApplicationException;
  * Created by jkorkala on 08/03/2017.
  */
 public interface VTJ {
-    String VTJ_PERSON = "/rest/vtj/person/{schema}/{hetu}";
+    String VTJ_PERSON_PATH = "/rest/vtj/person/{schema}/{hetu}";
 
     VTJResponse getPerson(String hetu, String schema) throws WebApplicationException, ClientException;
 }

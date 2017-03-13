@@ -20,15 +20,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package fi.vm.kapa.rova.vtj;
+package fi.vm.kapa.rova.ytj;
 
 import fi.vm.kapa.rova.AbstractClientCondition;
 
-public class VtjClientCondition extends AbstractClientCondition {
+public class YTJClientCondition extends AbstractClientCondition {
 
     @Override
     protected String getClientPropertyName() {
-        return "vtj_client_enabled";
+        return "ytj_client_enabled";
     }
-
 }

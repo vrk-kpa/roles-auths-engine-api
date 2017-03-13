@@ -20,16 +20,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package fi.vm.kapa.rova;
+package fi.vm.kapa.rova.ytj;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.client.DefaultResponseErrorHandler;
+import fi.vm.kapa.rova.external.model.ytj.CompanyAuthorizationData;
+import fi.vm.kapa.rova.external.model.ytj.CompanyAuthorizationDataRequest;
+import fi.vm.kapa.rova.external.model.ytj.CompanyWithStatusDTO;
+import org.springframework.http.ResponseEntity;
 
-public class RestErrorHandler extends DefaultResponseErrorHandler {
+import java.util.List;
 
-    @Override
-    protected boolean hasError(HttpStatus statusCode) {
-        return (statusCode.series() == HttpStatus.Series.CLIENT_ERROR);
-    }
+public interface YTJ {
+
+    String COMPANY_AUTHORIZATION_PATH = "/rest/ytj";
+    String UPDATED_COMPANIES_PATH = "/rest/ytj/companies/updated/startDate/{startDate}";
+    String COMPANIES_PATH = "/rest/ytj/companies";
+
+    ResponseEntity<CompanyAuthorizationData> getCompanyAuthorizationDataResponse(
+            CompanyAuthorizationDataRequest request)
+            throws Exception;
+
+    ResponseEntity<List<String>> getUpdatedCompaniesResponse(long startDate) throws Exception;
+
+    ResponseEntity<List<CompanyWithStatusDTO>> getCompaniesResponse(List<String> companyIds) throws Exception;
 
 }

@@ -20,15 +20,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package fi.vm.kapa.rova.vtj;
+package fi.vm.kapa.rova;
 
-import fi.vm.kapa.rova.AbstractClientCondition;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.client.DefaultResponseErrorHandler;
+import org.springframework.web.client.ResponseErrorHandler;
 
-public class VtjClientCondition extends AbstractClientCondition {
+public class ErrorHandlerBuilder {
 
-    @Override
-    protected String getClientPropertyName() {
-        return "vtj_client_enabled";
+    public static ResponseErrorHandler clientErrorsOnly() {
+        return new DefaultResponseErrorHandler() {
+            @Override
+            protected boolean hasError(HttpStatus statusCode) {
+                return (statusCode.series() == HttpStatus.Series.CLIENT_ERROR);
+            }
+        };
+    }
+
+    public static ResponseErrorHandler allErrors() {
+        return new DefaultResponseErrorHandler();
+    }
+
+    public static ResponseErrorHandler allExcept404() {
+        return new DefaultResponseErrorHandler() {
+            @Override
+            protected boolean hasError(HttpStatus statusCode) {
+                return (statusCode != HttpStatus.NOT_FOUND && (statusCode.series() == HttpStatus.Series.CLIENT_ERROR
+                        || statusCode.series() == HttpStatus.Series.SERVER_ERROR));
+            }
+        };
     }
 
 }
