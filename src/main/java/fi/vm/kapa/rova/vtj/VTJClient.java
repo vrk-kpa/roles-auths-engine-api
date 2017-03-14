@@ -68,7 +68,8 @@ public class VTJClient implements VTJ {
         if (entityResponse.getStatusCode() == HttpStatus.OK) {
             return entityResponse.getBody();
         } else {
-            String errorMessage = "Vtj connection error: " + entityResponse.getStatusCode() + " from URL " + requestUrl;
+            String errorMessage = "Vtj connection error: " + entityResponse.getStatusCode() + " from URL " + requestUrl
+                    + ". params=" + params;
             LOG.error(errorMessage);
             throw new ClientException(errorMessage);
         }
