@@ -43,7 +43,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 import java.util.Optional;
 
-@RibbonClient(name = "vtjClient")
+@RibbonClient(name = "ytjClient")
 @Conditional(YTJClientCondition.class)
 public class YTJClientImpl implements YTJ, YTJClient {
 
