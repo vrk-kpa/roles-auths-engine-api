@@ -22,14 +22,17 @@
  */
 package fi.vm.kapa.rova.vare;
 
-/**
- * Created by jkorkala on 09/03/2017.
- */
+import fi.vm.kapa.rova.vare.model.*;
+import org.springframework.http.ResponseEntity;
+
+import java.util.List;
+import java.util.Set;
+
 public interface MandateResource {
 
     String CHECK_MANDATE = "/rest/vare/checkmandate/{delegateId}/{principalId}/{subject}";
     String MANDATE_EXISTS = "/rest/vare/checkmandate/{delegateId}/{principalId}";
-    String BUSINESS_IDS = "/rest/vare/businessids/{delegateId}";
+    String COMPANY_PRINCIPALS = "/rest/vare/businessids/{delegateId}";
     String GET_MANDATE = "/rest/vare/mandate/{uuid}";
     String MANDATE_STATUS = "/rest/vare/mandates/{status}";
     String MANDATES = "/rest/vare/mandates";
@@ -47,5 +50,71 @@ public interface MandateResource {
     String MANDATE_PARTIES_PAST = "/rest/vare/mandateparties/past/party/{party}/{type}";
     String MANDATE_REQUEST_PARTIES = "/rest/vare/mandateparties/requests/party/{party}/{type}";
     String MANDATE_PARTY = "/rest/vare/mandateparty/{partyId}";
+
+
+    /**
+     * Resource for checking if there is a mandate for the given parameters.
+     */
+    MandateResponse checkMandate(String delegateId, String principalId, String subject,
+            List<String> issues);
+
+    /**
+     * Resource for checking if there is a mandate for the given parameters.
+     */
+    MandateResponse checkMandate(String delegateId, String principalId,
+            List<String> issues);
+
+    /**
+     * Resource for fetching businessIds of all companies which have authorized the person with the given delegateId
+     */
+    List<String> getCompanyPrincipals(String delegateId);
+
+    MandateDTO getMandate(String uuid);
+
+    List<MandateDTO> getMandates(String status, String includeIdsInResponse);
+
+    ResponseEntity<List<MandateDTO>> getMandates(Set<String> uuids);
+
+    ResponseEntity<String> invalidateMandate(String assertion, String uuid, String partyId);
+
+    ResponseEntity<String> deleteMandates(String assertion, Set<String> uuids);
+
+    List<MandateResult> createMandates(String assertion, List<MandateDTO> mandateDTOs);
+
+    List<MandateResult> mandatesCanBeCreated(String assertion,
+            List<MandateDTO> mandateDTOs);
+
+    List<MandateDTO> updateMandates(String assertion, List<MandateDTO> mandateDTOs);
+
+    /**
+     * Resource for confirming, i.e. signing, a mandate.
+     */
+    List<MandateResult> confirmMandates(String assertion, boolean create,
+            List<MandateDTO> mandates);
+
+    LegalSubjectsDTO validateNameAndId(LegalSubjectsDTO legalSubjects);
+
+    PartiesDTO getDelegates(SearchTypeEnum type, String principalId, int limit, int offset,
+            boolean ascending);
+
+    SimplifiedMandatesDTO getConfirmedMandates(String principalId, String delegateId, String lang, int limit,
+            int offset, SortTypeEnum sortBy, boolean ascending);
+
+    SimplifiedMandatesDTO getConfirmedPastMandates(String representedParty, String otherParty, String lang, int limit,
+            int offset, SortTypeEnum sortBy, boolean ascending);
+
+    SimplifiedMandatesDTO getMandateRequests(String representedParty, String otherParty, String lang, int limit,
+            int offset, SortTypeEnum sortBy, boolean ascending);
+
+    PartiesDTO getPrincipals(SearchTypeEnum type, String delegateId, int limit, int offset,
+            boolean ascending);
+
+    PartiesDTO getPastMandateParties(String partyId, SearchTypeEnum type, int limit,
+            int offset, boolean ascending);
+
+    PartiesDTO getMandateRequestParties(String partyId, SearchTypeEnum type, int limit,
+            int offset, boolean ascending);
+
+    PartyDTO getMandateParty(String partyId);
 
 }
