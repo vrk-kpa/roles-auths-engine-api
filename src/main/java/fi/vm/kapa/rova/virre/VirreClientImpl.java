@@ -56,11 +56,11 @@ public class VirreClientImpl implements Virre, VirreClient {
     private int requestAliveSeconds;
 
     @Value("${virre_client_url}")
-    private String vtjEndpointUrl;
+    private String endpointUrl;
 
     @Override
     public CompanyPerson getCompanyPerson(String socialsec) {
-        String url = vtjEndpointUrl + GET_COMPANY_PERSON_PATH;
+        String url = endpointUrl + GET_COMPANY_PERSON_PATH;
         RestTemplate restTemplate = getRestTemplate();
         Map<String, String> params = new HashMap<>();
         params.put("socialsec", EncodingUtils.encodePathParam(socialsec));
@@ -87,7 +87,7 @@ public class VirreClientImpl implements Virre, VirreClient {
 
     @Override
     public CompanyRepresentations getRepresentations(String businessid) {
-        String url = vtjEndpointUrl + GET_REPRESENTATIONS_PATH;
+        String url = endpointUrl + GET_REPRESENTATIONS_PATH;
         RestTemplate restTemplate = getRestTemplate();
         Map<String, String> params = new HashMap<>();
         params.put("businessid", businessid);
@@ -107,7 +107,7 @@ public class VirreClientImpl implements Virre, VirreClient {
 
     @Override
     public RepresentationRight getRights(String socialSec, String businessId, String rightLevel) {
-        String url = vtjEndpointUrl + GET_RIGHTS_PATH;
+        String url = endpointUrl + GET_RIGHTS_PATH;
         RestTemplate restTemplate = getRestTemplate();
         Map<String, String> params = new HashMap<>();
         params.put("rightlevel", rightLevel);

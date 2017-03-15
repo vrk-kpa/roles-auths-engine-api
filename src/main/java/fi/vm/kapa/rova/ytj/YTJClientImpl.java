@@ -56,7 +56,7 @@ public class YTJClientImpl implements YTJ, YTJClient {
     private int requestAliveSeconds;
 
     @Value("${ytj_client_url}")
-    private String vtjEndpointUrl;
+    private String endpointUrl;
 
     @Override
     public Optional<CompanyAuthorizationData> getCompanyAuthorizationData(String ssn) {
@@ -105,7 +105,7 @@ public class YTJClientImpl implements YTJ, YTJClient {
     public ResponseEntity<CompanyAuthorizationData> getCompanyAuthorizationDataResponse(
             CompanyAuthorizationDataRequest request) {
         RestTemplate restTemplate = getRestTemplate();
-        String requestUrl = vtjEndpointUrl + COMPANY_AUTHORIZATION_PATH;
+        String requestUrl = endpointUrl + COMPANY_AUTHORIZATION_PATH;
         ResponseEntity<CompanyAuthorizationData> responseEntity = restTemplate.postForEntity(requestUrl, request,
                 CompanyAuthorizationData.class);
         return responseEntity;
@@ -114,7 +114,7 @@ public class YTJClientImpl implements YTJ, YTJClient {
     @Override
     public ResponseEntity<List<String>> getUpdatedCompaniesResponse(long startDate) {
         RestTemplate restTemplate = getRestTemplate();
-        String requestUrl = vtjEndpointUrl + UPDATED_COMPANIES_PATH;
+        String requestUrl = endpointUrl + UPDATED_COMPANIES_PATH;
         return restTemplate.exchange(requestUrl, HttpMethod.GET, null, new ParameterizedTypeReference<List<String>>() {
         }, new Long(startDate));
     }
@@ -122,7 +122,7 @@ public class YTJClientImpl implements YTJ, YTJClient {
     @Override
     public ResponseEntity<List<CompanyWithStatusDTO>> getCompaniesResponse(List<String> companyIds) {
         RestTemplate restTemplate = getRestTemplate();
-        String requestUrl = vtjEndpointUrl + COMPANIES_PATH;
+        String requestUrl = endpointUrl + COMPANIES_PATH;
 
         HttpEntity<List<String>> postedEntity = new HttpEntity<>(companyIds);
 
