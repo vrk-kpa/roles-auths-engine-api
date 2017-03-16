@@ -49,13 +49,10 @@ public class VTJClient implements VTJ {
 
     private static final Logger LOG = Logger.getLogger(VTJClient.class);
 
-    @Value("${vtj_client_api_key}")
     private String apiKey;
 
-    @Value("${request_alive_seconds}")
     private int requestAliveSeconds;
 
-    @Value("${vtj_client_url}")
     private String vtjEndpointUrl;
 
     @Autowired
@@ -65,6 +62,15 @@ public class VTJClient implements VTJ {
     @LoadBalanced
     public RestTemplate vtjRestTemplate() {
         return getRestTemplate();
+    }
+
+    public VTJClient(@Value("${vtj_client_api_key}") String apiKey,
+            @Value("${request_alive_seconds}") int requestAliveSeconds,
+            @Value("${vtj_client_url}") String vtjEndpointUrl) {
+        super();
+        this.apiKey = apiKey;
+        this.requestAliveSeconds = requestAliveSeconds;
+        this.vtjEndpointUrl = vtjEndpointUrl;
     }
 
     public VTJResponse getPerson(String hetu, String schema) {

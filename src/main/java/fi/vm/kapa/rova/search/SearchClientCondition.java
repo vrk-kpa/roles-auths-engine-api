@@ -20,12 +20,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package fi.vm.kapa.rova.vtj.model;
+package fi.vm.kapa.rova.search;
 
-public enum MessageIDType {
-    ROV1,
-    ROV3,
-    ROV4,
-    ROV5,
-    ROV21
+import fi.vm.kapa.rova.AbstractClientCondition;
+
+public class SearchClientCondition extends AbstractClientCondition {
+
+    @Override
+    protected String getClientPropertyName() {
+        return "search_client_enabled";
+    }
+
 }

@@ -49,14 +49,20 @@ public class VirreClientImpl implements Virre, VirreClient {
     public static final String CONNECTION_ERROR_MSG = "Virre connection error: ";
     private static final Logger LOG = Logger.getLogger(VirreClientImpl.class);
 
-    @Value("${virre_client_api_key}")
     private String apiKey;
 
-    @Value("${request_alive_seconds}")
     private int requestAliveSeconds;
 
-    @Value("${virre_client_url}")
     private String endpointUrl;
+
+    public VirreClientImpl(@Value("${virre_client_api_key}") String apiKey,
+            @Value("${request_alive_seconds}") int requestAliveSeconds,
+            @Value("${virre_client_url}") String endpointUrl) {
+        super();
+        this.apiKey = apiKey;
+        this.requestAliveSeconds = requestAliveSeconds;
+        this.endpointUrl = endpointUrl;
+    }
 
     @Override
     public CompanyPerson getCompanyPerson(String socialsec) {
