@@ -27,6 +27,7 @@ import fi.vm.kapa.rova.logging.Logger;
 import fi.vm.kapa.rova.notification.model.UINotification;
 import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
 import fi.vm.kapa.rova.ui.Channel;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.core.ParameterizedTypeReference;
@@ -52,24 +53,23 @@ public class UINotificationClientImpl implements UINotifications, UINotification
 
     private static final Logger LOG = Logger.getLogger(UINotificationClientImpl.class);
 
+    @Value("${notification.channel}")
     private String channel;
 
+    @Value("${engine_url}")
     protected String endpointUrl;
 
+    @Value("${engine_api_key}")
     private String apiKey;
 
+    @Value("${request_alive_seconds}")
     private Integer requestAliveSeconds;
 
-    private long cacheExpirationInMinutes;
+    private long cacheExpirationInMinutes = 2;
 
     private final NotificationCache<UINotification> notificationCache;
 
-    public UINotificationClientImpl(String endpoint, int requestAliveSeconds, String apiKey, String channel) {
-        this.endpointUrl = endpoint;
-        this.requestAliveSeconds = requestAliveSeconds;
-        this.apiKey = apiKey;
-        this.channel = channel;
-
+    public UINotificationClientImpl() {
         notificationCache = new NotificationCache<UINotification>(cacheExpirationInMinutes) {
             @Override
             protected List<UINotification> loadNotifications(Channel channel) {
