@@ -22,9 +22,9 @@
  */
 package fi.vm.kapa.rova.client;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class HpaWebApiSessionImpl extends WebApiSessionImpl implements HpaWebApiSession {

@@ -22,8 +22,9 @@
  */
 package fi.vm.kapa.rova.client;
 
-import java.util.List;
 import fi.vm.kapa.rova.engine.model.hpa.Principal;
+
+import java.util.List;
 
 public interface HpaWebApiSession extends WebApiSession {
 

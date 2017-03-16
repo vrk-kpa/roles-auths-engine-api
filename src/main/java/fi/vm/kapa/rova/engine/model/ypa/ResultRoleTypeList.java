@@ -23,11 +23,11 @@
 
 package fi.vm.kapa.rova.engine.model.ypa;
 
+import fi.vm.kapa.rova.external.model.IResultType;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-
-import fi.vm.kapa.rova.external.model.IResultType;
 
 public class ResultRoleTypeList extends ArrayList<IResultType> implements IResultType {
     

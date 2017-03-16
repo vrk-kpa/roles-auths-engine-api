@@ -22,10 +22,10 @@
  */
 package fi.vm.kapa.rova.engine.model.hpa;
 
+import fi.vm.kapa.rova.external.model.AuthorizationType;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import fi.vm.kapa.rova.external.model.AuthorizationType;
 
 public class Authorization {
 

@@ -22,11 +22,10 @@
  */
 package fi.vm.kapa.rova.engine.client;
 
-import fi.vm.kapa.rova.admin.model.NotificationDTO;
+import fi.vm.kapa.rova.notification.model.NotificationDTO;
 import fi.vm.kapa.rova.ui.Channel;
 
 import javax.ws.rs.core.GenericType;
-
 import java.util.List;
 
 public abstract class AbstractNotificationClient extends AbstractEngineClient {

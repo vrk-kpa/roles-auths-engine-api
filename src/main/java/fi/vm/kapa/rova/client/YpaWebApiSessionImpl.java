@@ -22,9 +22,9 @@
  */
 package fi.vm.kapa.rova.client;
 
-import java.util.List;
-
 import fi.vm.kapa.rova.engine.model.ypa.OrganizationResult;
+
+import java.util.List;
 
 public class YpaWebApiSessionImpl extends WebApiSessionImpl implements YpaWebApiSession {
 

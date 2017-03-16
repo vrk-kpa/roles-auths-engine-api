@@ -23,21 +23,18 @@
 
 package fi.vm.kapa.rova.external.model;
 
-import java.io.IOException;
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
-
 import fi.vm.kapa.rova.engine.model.ypa.IssueRoleType;
 import fi.vm.kapa.rova.engine.model.ypa.ResultRoleType;
 
-import static fi.vm.kapa.rova.external.model.AuthorizationType.ALLOWED;
-import static fi.vm.kapa.rova.external.model.AuthorizationType.DISALLOWED;
-import static fi.vm.kapa.rova.external.model.AuthorizationType.UNKNOWN;
+import java.io.IOException;
+
+import static fi.vm.kapa.rova.external.model.AuthorizationType.*;
 
 public class ResultTypeDeserializer extends JsonDeserializer<IResultType> {
 

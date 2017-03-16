@@ -34,18 +34,26 @@ import java.util.List;
 
 public class RovaRestTemplate extends RestTemplate {
 
-    public RovaRestTemplate(String apiKey, int requestAliveSeconds, HeaderTrust trustHeader) {
+    public RovaRestTemplate(String endUser, String apiKey, int requestAliveSeconds, HeaderTrust trustHeader) {
         super();
         List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
         interceptors.add(new ValidationRequestInterceptor(apiKey, requestAliveSeconds));
-        interceptors.add(new RequestIdentificationInterceptor(trustHeader));
+        interceptors.add(new RequestIdentificationInterceptor(null, endUser, trustHeader));
         setInterceptors(interceptors);
     }
 
-    public RovaRestTemplate(String apiKey, int requestAliveSeconds, HeaderTrust trustHeader,
+    public RovaRestTemplate(String endUser, String apiKey, int requestAliveSeconds, HeaderTrust trustHeader,
             ResponseErrorHandler errorHandler) {
-        this(apiKey, requestAliveSeconds, trustHeader);
+        this(endUser, apiKey, requestAliveSeconds, trustHeader);
         setErrorHandler(errorHandler);
     }
 
+    public RovaRestTemplate(String apiKey, int requestAliveSeconds, HeaderTrust trustHeader,
+                            ResponseErrorHandler errorHandler) {
+        this(null, apiKey, requestAliveSeconds, trustHeader, errorHandler);
+    }
+
+    public RovaRestTemplate(String apiKey, int requestAliveSeconds, HeaderTrust trustHeader) {
+        this(apiKey, requestAliveSeconds, trustHeader, null);
+    }
 }

@@ -22,13 +22,13 @@
  */
 package fi.vm.kapa.rova.engine.model.ypa;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import fi.vm.kapa.rova.engine.evaluation.Evaluable;
 import fi.vm.kapa.rova.external.model.virre.Company;
 import fi.vm.kapa.rova.external.model.virre.CompanyRoleType;
 import fi.vm.kapa.rova.external.model.virre.RoleNameType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class YpaPerson implements Evaluable {
 

@@ -22,7 +22,7 @@
  */
 package fi.vm.kapa.rova.admin.model;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class ServiceDTO {
 

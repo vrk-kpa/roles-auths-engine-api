@@ -20,37 +20,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package fi.vm.kapa.rova.admin.model;
+package fi.vm.kapa.rova.notification;
 
-import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.context.annotation.Condition;
+import org.springframework.context.annotation.ConditionContext;
+import org.springframework.core.env.Environment;
+import org.springframework.core.type.AnnotatedTypeMetadata;
 
-public class RestrictedNotificationDto {
+public class NotificationClientCondition implements Condition {
 
-    private final String text;
-    private final Date startDate;
-
-    private RestrictedNotificationDto(NotificationDTO notificationDTO) {
-        this.text = notificationDTO.getText();
-        this.startDate = notificationDTO.getStartDate();
-    }
-
-    public static RestrictedNotificationDto getInstance(NotificationDTO notificationDTO) {
-        return notificationDTO != null ? new RestrictedNotificationDto(notificationDTO) : null;
-    }
-    
-    public static List<RestrictedNotificationDto> getInstances(List<NotificationDTO> notificationDTOs) {
-       return notificationDTOs.stream().map(e -> RestrictedNotificationDto.getInstance(e))
-        .collect(Collectors.toList());
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public Date getStartDate() {
-        return startDate;
+    @Override
+    public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
+        System.out.println("NOTIFICATION CHANNEL");
+        Environment env = context.getEnvironment();
+        if (env == null) {
+            return false;
+        }
+        String notificationChannel = env.getProperty("notification.channel");
+        System.out.println("NOTIFICATION CHANNEL");
+        return notificationChannel != null;
     }
 
 }

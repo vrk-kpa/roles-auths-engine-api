@@ -20,34 +20,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package fi.vm.kapa.rova.notification;
+package fi.vm.kapa.rova.notification.model;
 
-import fi.vm.kapa.rova.notification.model.NotificationDTO;
-
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
-/**
- * Created by jkorkala on 09/03/2017.
- */
-public interface Notifications {
+public class UINotification {
 
-    String PARAM_ID = "id";
-    String ADMIN_NOTIFICATIONS = "/rest/admin/notifications/";
-    String ADMIN_NOTIFICATION_BY_ID = "/rest/admin/notifications/notification/{id}";
-    String ADMIN_NOTIFICATION = "/rest/admin/notifications/notification";
+    private final String text;
+    private final Date startDate;
 
-    public List<NotificationDTO> getAllNotifications();
+    public UINotification(String text, Date startDate) {
+        this.text = text;
+        this.startDate = startDate;
+    }
 
-    /**
-     * Return single notification from db.
-     *
-     * @return notification from db.
-     */
-    public NotificationDTO getNotification(long id);
+    private UINotification(NotificationDTO notificationDTO) {
+        this.text = notificationDTO.getText();
+        this.startDate = notificationDTO.getStartDate();
+    }
 
-    public NotificationDTO save(String endUser, NotificationDTO notification);
+    public static UINotification getInstance(NotificationDTO notificationDTO) {
+        return notificationDTO != null ? new UINotification(notificationDTO) : null;
+    }
 
-    public NotificationDTO update(String endUser, NotificationDTO notification);
+    public static List<UINotification> getInstances(List<NotificationDTO> notificationDTOs) {
+       return notificationDTOs.stream().map(e -> UINotification.getInstance(e))
+        .collect(Collectors.toList());
+    }
 
-    public void delete(String endUser, long id);
+    public String getText() {
+        return text;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
 }

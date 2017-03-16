@@ -24,7 +24,6 @@
 package fi.vm.kapa.rova.vare.model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class LegalSubjectsDTO {

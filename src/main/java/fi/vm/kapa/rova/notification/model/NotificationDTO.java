@@ -20,12 +20,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package fi.vm.kapa.rova.admin.model;
+package fi.vm.kapa.rova.notification.model;
+
+import fi.vm.kapa.rova.ui.Channel;
 
 import java.util.Date;
 import java.util.Set;
-
-import fi.vm.kapa.rova.ui.Channel;
 
 public class NotificationDTO {
     

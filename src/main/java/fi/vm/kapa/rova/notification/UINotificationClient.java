@@ -22,32 +22,15 @@
  */
 package fi.vm.kapa.rova.notification;
 
-import fi.vm.kapa.rova.notification.model.NotificationDTO;
+import fi.vm.kapa.rova.notification.model.UINotification;
 
 import java.util.List;
 
 /**
- * Created by jkorkala on 09/03/2017.
+ * Created by jkorkala on 13/03/2017.
  */
-public interface Notifications {
+public interface UINotificationClient {
+    String NOTIFICATION_CACHE_EXPIRATION_IN_MINUTES = "${notification_cache_expiration_in_minutes:5}";
 
-    String PARAM_ID = "id";
-    String ADMIN_NOTIFICATIONS = "/rest/admin/notifications/";
-    String ADMIN_NOTIFICATION_BY_ID = "/rest/admin/notifications/notification/{id}";
-    String ADMIN_NOTIFICATION = "/rest/admin/notifications/notification";
-
-    public List<NotificationDTO> getAllNotifications();
-
-    /**
-     * Return single notification from db.
-     *
-     * @return notification from db.
-     */
-    public NotificationDTO getNotification(long id);
-
-    public NotificationDTO save(String endUser, NotificationDTO notification);
-
-    public NotificationDTO update(String endUser, NotificationDTO notification);
-
-    public void delete(String endUser, long id);
+    public List<UINotification> getChannelUINotifications();
 }

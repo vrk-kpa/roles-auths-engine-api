@@ -22,10 +22,10 @@
  */
 package fi.vm.kapa.rova.engine.model.ypa;
 
+import fi.vm.kapa.rova.external.model.IResultType;
+
 import java.util.HashSet;
 import java.util.Set;
-
-import fi.vm.kapa.rova.external.model.IResultType;
 
 public class OrganizationResult {
     private String name;

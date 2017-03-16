@@ -23,15 +23,14 @@
 
 package fi.vm.kapa.rova.external.model;
 
-import java.io.IOException;
-
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-
 import fi.vm.kapa.rova.engine.model.ypa.IssueRoleType;
 import fi.vm.kapa.rova.engine.model.ypa.ResultRoleType;
+
+import java.io.IOException;
 
 public class ResultTypeSerializer extends JsonSerializer<IResultType> {
 
