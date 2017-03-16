@@ -20,19 +20,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package fi.vm.kapa.rova.vtj;
+package fi.vm.kapa.rova.vtj.model;
 
-import fi.vm.kapa.rova.ClientException;
-import fi.vm.kapa.rova.rest.exception.WebApplicationException;
-import fi.vm.kapa.rova.vtj.model.VTJResponse;
+public class VTJResponse {
+    private Person person;
+    
+    private boolean success;
+    
+    private String error;
 
-/**
- * Created by jkorkala on 08/03/2017.
- */
-public interface VTJ {
-    /* If you change api paths remember to change api version too */
-    String API_VERSION = "1.0";
-    String VTJ_PERSON_PATH = "/rest/vtj/person/{schema}/{hetu}";
+    public Person getPerson() {
+        return person;
+    }
 
-    VTJResponse getPerson(String hetu, String schema) throws WebApplicationException, ClientException;
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
 }
