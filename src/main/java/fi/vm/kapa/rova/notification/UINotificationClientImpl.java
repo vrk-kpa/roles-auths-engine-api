@@ -65,7 +65,8 @@ public class UINotificationClientImpl implements UINotifications, UINotification
     @Value("${request_alive_seconds}")
     private Integer requestAliveSeconds;
 
-    private long cacheExpirationInMinutes = 2;
+    @Value("${notification_cache_expiration_in_minutes:5}")
+    private long cacheExpirationInMinutes;
 
     private final NotificationCache<UINotification> notificationCache;
 
@@ -102,6 +103,11 @@ public class UINotificationClientImpl implements UINotifications, UINotification
             LOG.error("Failed to get active notifications for channel " + channel, ee);
             return Collections.emptyList();
         }
+    }
+
+    @Override
+    public void invalidateCache() {
+        notificationCache.invalidateAll();
     }
 
     private RestTemplate getRestTemplate() {

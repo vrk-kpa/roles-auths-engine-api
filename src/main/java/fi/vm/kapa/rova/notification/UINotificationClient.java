@@ -33,4 +33,6 @@ public interface UINotificationClient {
     String NOTIFICATION_CACHE_EXPIRATION_IN_MINUTES = "${notification_cache_expiration_in_minutes:5}";
 
     public List<UINotification> getChannelUINotifications();
+
+    public void invalidateCache();
 }
