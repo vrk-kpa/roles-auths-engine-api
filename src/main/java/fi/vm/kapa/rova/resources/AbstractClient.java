@@ -30,6 +30,7 @@ import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -51,13 +52,13 @@ public abstract class AbstractClient {
     @Value("${resources_url}")
     protected String serviceUrl;
 
-    protected RequestIdentificationInterceptor.HeaderTrust getHeaderTrust() {
-        return RequestIdentificationInterceptor.HeaderTrust.TRUST_REQUEST_HEADERS;
-    }
-
-    protected RestTemplate getRestTemplate(String endUser) {
-        return new RovaRestTemplate(endUser, null, requestAliveSeconds, getHeaderTrust(),
-                ErrorHandlerBuilder.clientErrorsOnly());
+    protected RestTemplate getRestTemplate() {
+        RestTemplate template = new RestTemplate();
+        List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
+        interceptors.add(new RequestIdentificationInterceptor(RequestIdentificationInterceptor.HeaderTrust.TRUST_REQUEST_HEADERS));
+        template.setInterceptors(interceptors);
+        template.setErrorHandler(ErrorHandlerBuilder.clientErrorsOnly());
+        return template;
     }
 
     protected void checkStatus(String uri, ResponseEntity<?> entityResponse, HttpStatus ... allowed) {

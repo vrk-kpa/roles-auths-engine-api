@@ -41,7 +41,7 @@ public class HelpClientImpl extends AbstractClient implements HelpClient {
 
     @Override
     public ResponseEntity<HelpDocument> getHelpResource(String lang, String chanName, String docName) {
-        RestTemplate restTemplate = getRestTemplate(null);
+        RestTemplate restTemplate = getRestTemplate();
         String requestUrl = serviceUrl + GET_HELP_RESOURCE;
 
         Map<String, String> params = new HashMap<>();
