@@ -20,18 +20,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package fi.vm.kapa.rova.engine.client;
+package fi.vm.kapa.rova.resources;
 
-import fi.vm.kapa.rova.notification.model.NotificationDTO;
-import fi.vm.kapa.rova.ui.Channel;
-
-import javax.ws.rs.core.GenericType;
-import java.util.List;
-
-public abstract class AbstractNotificationClient extends AbstractEngineClient {
-    
-    public List<NotificationDTO> getNotificationsForChannel(Channel channel) {
-        return getGeneric("notifications/channel/" + channel, new GenericType<List<NotificationDTO>>() {});
-    }
-    
+/**
+ * Created by mtom on 17/03/2017.
+ */
+public interface LocalizationClient extends Localization {
 }
