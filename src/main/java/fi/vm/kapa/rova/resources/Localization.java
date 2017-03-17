@@ -31,6 +31,6 @@ public interface Localization {
     String GET_ALL_LOCALIZATIONS = "/rest/localization/all/{lang}";
     String GET_LOCALIZATION = "/rest/localization/{lang}/{key}";
 
-    Collection<Localization> getAllLocalizations(String lang);
+    Collection<fi.vm.kapa.rova.localization.Localization> getAllLocalizations(String lang);
     String getLocalization(String lang, String key);
 }

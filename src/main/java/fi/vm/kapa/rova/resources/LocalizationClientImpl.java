@@ -41,15 +41,15 @@ import java.util.Map;
 @Conditional(LocalizationClientCondition.class)
 public class LocalizationClientImpl extends AbstractClient implements LocalizationClient {
 
-    public Collection<Localization> getAllLocalizations(String lang) {
+    public Collection<fi.vm.kapa.rova.localization.Localization> getAllLocalizations(String lang) {
         RestTemplate restTemplate = getRestTemplate(null);
         String requestUrl = serviceUrl + GET_ALL_LOCALIZATIONS;
 
         Map<String, String> params = new HashMap<>();
         params.put("lang", lang);
 
-        ResponseEntity<Collection<Localization>> entityResponse = restTemplate.exchange(requestUrl, HttpMethod.GET,
-                null, new ParameterizedTypeReference<Collection<Localization>>() {}, params);
+        ResponseEntity<Collection<fi.vm.kapa.rova.localization.Localization>> entityResponse = restTemplate.exchange(requestUrl,
+                HttpMethod.GET, null, new ParameterizedTypeReference<Collection<fi.vm.kapa.rova.localization.Localization>>() {}, params);
         checkStatus(requestUrl, entityResponse);
         return entityResponse.getBody();
     }
