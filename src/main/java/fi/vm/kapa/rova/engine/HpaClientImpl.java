@@ -69,6 +69,7 @@ public class HpaClientImpl extends AbstractClient implements HpaClient {
         params.put("serviceIdType", serviceIdType);
         params.put("service", service);
         params.put("delegateId", delegateId);
+        params.put("principalId", principalId);
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(requestUrl);
         if (issues != null && !issues.isEmpty()) {
