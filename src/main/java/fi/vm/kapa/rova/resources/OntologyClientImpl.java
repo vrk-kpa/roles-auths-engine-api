@@ -54,6 +54,16 @@ public class OntologyClientImpl extends AbstractClient implements Ontology, Onto
         return getNarrowerConceptsResponse(uri).getBody();
     }
 
+    @Override
+    public List<Concept> getConcepts() {
+        return getConceptsResponse().getBody();
+    }
+
+    @Override
+    public List<Concept> getConcepts(List<String> uriList) {
+        return getConceptsResponse(uriList).getBody();
+    }
+
     public ResponseEntity<Concept> getConceptResponse(String uri) {
         RestTemplate restTemplate = getRestTemplate();
         String requestUrl = serviceUrl + GET_CONCEPT;

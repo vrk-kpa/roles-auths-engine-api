@@ -25,6 +25,7 @@ package fi.vm.kapa.rova.resources;
 import fi.vm.kapa.rova.ontology.Concept;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -38,5 +39,9 @@ public interface OntologyClient {
     public boolean isBroaderConcept(String broaderUri, String narrowerUri);
 
     public Set<Concept> getNarrowerConcepts(String uri);
+
+    public List<Concept> getConcepts();
+
+    public List<Concept> getConcepts(List<String> uriList);
 
 }
