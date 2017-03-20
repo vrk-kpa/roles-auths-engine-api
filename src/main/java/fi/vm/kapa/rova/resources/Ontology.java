@@ -38,9 +38,9 @@ public interface Ontology {
     String IS_BROADER_CONCEPT = "/rest/ontology/concept/is-broader-concept";
     String GET_NARROWER_CONCEPTS = "/rest/ontology/concept/narrower";
 
-    ResponseEntity<Concept> getConcept(String uri);
-    ResponseEntity<List<Concept>> getConcepts(List<String> uris);
-    ResponseEntity<List<Concept>> getConcepts();
-    ResponseEntity<Boolean> isBroaderConcept(String broaderUri, String narrowerUri);
-    ResponseEntity<Set<Concept>> getNarrowerConcepts(String uri);
+    ResponseEntity<Concept> getConceptResponse(String uri);
+    ResponseEntity<List<Concept>> getConceptsResponse(List<String> uris);
+    ResponseEntity<List<Concept>> getConceptsResponse();
+    ResponseEntity<Boolean> isBroaderConceptResponse(String broaderUri, String narrowerUri);
+    ResponseEntity<Set<Concept>> getNarrowerConceptsResponse(String uri);
 }

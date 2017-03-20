@@ -22,8 +22,21 @@
  */
 package fi.vm.kapa.rova.resources;
 
+import fi.vm.kapa.rova.ontology.Concept;
+
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by mtom on 17/03/2017.
  */
-public interface OntologyClient extends Ontology {
+public interface OntologyClient {
+
+
+    public Concept getConcept(String uri);
+
+    public boolean isBroaderConcept(String broaderUri, String narrowerUri);
+
+    public Set<Concept> getNarrowerConcepts(String uri);
+
 }

@@ -31,6 +31,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -39,9 +40,21 @@ import java.util.Set;
  */
 @RibbonClient(name = "ontologyClient")
 @Conditional(OntologyClientCondition.class)
-public class OntologyClientImpl extends AbstractClient implements OntologyClient {
+public class OntologyClientImpl extends AbstractClient implements Ontology, OntologyClient {
 
-    public ResponseEntity<Concept> getConcept(String uri) {
+    public Concept getConcept(String uri) {
+        return getConceptResponse(uri).getBody();
+    }
+
+    public boolean isBroaderConcept(String broaderUri, String narrowerUri) {
+        return isBroaderConceptResponse(broaderUri, narrowerUri).getBody();
+    }
+
+    public Set<Concept> getNarrowerConcepts(String uri) {
+        return getNarrowerConceptsResponse(uri).getBody();
+    }
+
+    public ResponseEntity<Concept> getConceptResponse(String uri) {
         RestTemplate restTemplate = getRestTemplate();
         String requestUrl = serviceUrl + GET_CONCEPT;
 
@@ -53,7 +66,7 @@ public class OntologyClientImpl extends AbstractClient implements OntologyClient
         return entityResponse;
     }
 
-    public ResponseEntity<List<Concept>> getConcepts(List<String> uris) {
+    public ResponseEntity<List<Concept>> getConceptsResponse(List<String> uris) {
         RestTemplate restTemplate = getRestTemplate();
         String requestUrl = serviceUrl + GET_CONCEPTS;
 
@@ -66,7 +79,7 @@ public class OntologyClientImpl extends AbstractClient implements OntologyClient
         return entityResponse;
     }
 
-    public ResponseEntity<List<Concept>> getConcepts() {
+    public ResponseEntity<List<Concept>> getConceptsResponse() {
         RestTemplate restTemplate = getRestTemplate();
         String requestUrl = serviceUrl + GET_ALL_CONCEPTS;
 
@@ -76,7 +89,7 @@ public class OntologyClientImpl extends AbstractClient implements OntologyClient
         return entityResponse;
     }
 
-    public ResponseEntity<Boolean> isBroaderConcept(String broaderUri, String narrowerUri) {
+    public ResponseEntity<Boolean> isBroaderConceptResponse(String broaderUri, String narrowerUri) {
         RestTemplate restTemplate = getRestTemplate();
         String requestUrl = serviceUrl + IS_BROADER_CONCEPT;
 
@@ -89,7 +102,7 @@ public class OntologyClientImpl extends AbstractClient implements OntologyClient
         return entityResponse;
     }
 
-    public ResponseEntity<Set<Concept>> getNarrowerConcepts(String uri) {
+    public ResponseEntity<Set<Concept>> getNarrowerConceptsResponse(String uri) {
         RestTemplate restTemplate = getRestTemplate();
         String requestUrl = serviceUrl + GET_NARROWER_CONCEPTS;
 
