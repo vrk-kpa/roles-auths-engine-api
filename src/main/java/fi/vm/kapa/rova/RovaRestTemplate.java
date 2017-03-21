@@ -54,6 +54,6 @@ public class RovaRestTemplate extends RestTemplate {
     }
 
     public RovaRestTemplate(String apiKey, int requestAliveSeconds, HeaderTrust trustHeader) {
-        this(apiKey, requestAliveSeconds, trustHeader, null);
+        this(apiKey, requestAliveSeconds, trustHeader, ErrorHandlerBuilder.clientErrorsOnly());
     }
 }
