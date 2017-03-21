@@ -23,11 +23,13 @@
 
 package fi.vm.kapa.rova.engine.model.hpa;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import fi.vm.kapa.rova.external.model.AuthorizationType;
 
 import java.util.List;
 
+@JsonDeserialize(as=Delegate.class)
 @JsonSerialize(as=HpaDelegate.class)
 public interface HpaDelegate {
 
