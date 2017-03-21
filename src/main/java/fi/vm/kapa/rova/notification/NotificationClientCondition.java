@@ -31,13 +31,11 @@ public class NotificationClientCondition implements Condition {
 
     @Override
     public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
-        System.out.println("NOTIFICATION CHANNEL");
         Environment env = context.getEnvironment();
         if (env == null) {
             return false;
         }
         String notificationChannel = env.getProperty("notification.channel");
-        System.out.println("NOTIFICATION CHANNEL");
         return notificationChannel != null;
     }
 

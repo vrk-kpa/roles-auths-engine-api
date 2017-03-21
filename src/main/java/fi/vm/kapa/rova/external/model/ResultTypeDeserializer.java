@@ -40,7 +40,7 @@ public class ResultTypeDeserializer extends JsonDeserializer<IResultType> {
 
     @Override
     public IResultType deserialize(JsonParser jp, DeserializationContext ctxt)
-            throws IOException, JsonProcessingException {
+            throws IOException {
         ObjectCodec oc = jp.getCodec();
         JsonNode rootNode = oc.readTree(jp);
 

@@ -35,7 +35,7 @@ DBMigration {
     String INFO = "/rest/db/info";
     String MIGRATE = "/rest/db/migrate/{dataset}";
 
-    public String info();
+    String info();
 
-    public ResponseEntity<String> migrate(String noValidate, String dataset) throws URISyntaxException ;
+    ResponseEntity<String> migrate(String noValidate, String dataset);
 }

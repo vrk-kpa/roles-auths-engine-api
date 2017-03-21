@@ -89,7 +89,6 @@ public class UINotificationClientImpl implements UINotifications, UINotification
         ResponseEntity<List<UINotification>> response = restTemplate.exchange(requestUrl, HttpMethod.GET, null,
                 new ParameterizedTypeReference<List<UINotification>>() {
                 }, params);
-        System.out.println(response.getBody());
         return response.getBody();
     }
 

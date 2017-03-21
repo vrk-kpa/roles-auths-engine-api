@@ -37,8 +37,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-;
-
 /**
  * Created by mtom on 13/03/2017.
  */
