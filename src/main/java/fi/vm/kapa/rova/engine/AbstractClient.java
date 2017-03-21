@@ -53,7 +53,7 @@ public abstract class AbstractClient {
     @Value("${engine_url}")
     protected String engineUrl;
 
-    abstract RequestIdentificationInterceptor.HeaderTrust getHeaderTrust();
+    protected abstract RequestIdentificationInterceptor.HeaderTrust getHeaderTrust();
 
     protected RestTemplate getRestTemplate(String endUser) {
         return new RovaRestTemplate(endUser, apiKey, requestAliveSeconds, getHeaderTrust(),
