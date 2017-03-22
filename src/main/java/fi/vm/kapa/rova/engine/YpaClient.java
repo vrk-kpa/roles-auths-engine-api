@@ -22,8 +22,8 @@
  */
 package fi.vm.kapa.rova.engine;
 
-import fi.vm.kapa.rova.engine.model.ypa.OrganizationResult;
-import fi.vm.kapa.rova.rest.exception.HttpStatusException;
+import fi.vm.kapa.rova.engine.model.ypa.YpaResult;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 
 import java.util.List;
@@ -33,7 +33,7 @@ import java.util.List;
  */
 public interface YpaClient {
 
-    List<OrganizationResult> getRoles(String personId, String serviceIdType, String service, List<String> organizationIds)
+    YpaResult getRoles(String personId, String serviceIdType, String service, List<String> organizationIds)
             throws RestClientException;
 
 }

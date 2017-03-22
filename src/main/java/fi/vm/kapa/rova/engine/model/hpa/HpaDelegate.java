@@ -37,4 +37,5 @@ public interface HpaDelegate {
     AuthorizationType getAuthorizationType();
     List<Principal> getPrincipal();
     List<DecisionReason> getReasons();
+    String getServiceUuid();
 }
