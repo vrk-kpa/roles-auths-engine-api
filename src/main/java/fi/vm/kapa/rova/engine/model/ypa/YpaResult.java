@@ -20,20 +20,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package fi.vm.kapa.rova.engine;
+package fi.vm.kapa.rova.engine.model.ypa;
 
-import fi.vm.kapa.rova.engine.model.ypa.YpaResult;
-import org.springframework.http.ResponseEntity;
-
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by mtom on 14/03/2017.
- */
-public interface Ypa extends Engine {
+public class YpaResult {
+    private List<OrganizationResult> organizationResults = new ArrayList<>();
+    private String serviceUuid;
 
-    String GET_ROLES = "/rest/ypa/roles/{serviceIdType}/{service}/{personId}";
+    public List<OrganizationResult> getOrganizationResults() {
+        return organizationResults;
+    }
 
-    ResponseEntity<YpaResult> getRoles(String personId, String serviceIdType, String service, List<String> organizationIds);
+    public void setOrganizationResults(List<OrganizationResult> organizationResults) {
+        this.organizationResults = organizationResults;
+    }
+
+    public String getServiceUuid() {
+        return serviceUuid;
+    }
+
+    public void setServiceUuid(String serviceUuid) {
+        this.serviceUuid = serviceUuid;
+    }
 
 }

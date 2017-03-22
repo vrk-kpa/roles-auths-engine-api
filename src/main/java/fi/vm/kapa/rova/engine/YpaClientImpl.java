@@ -23,6 +23,7 @@
 package fi.vm.kapa.rova.engine;
 
 import fi.vm.kapa.rova.engine.model.ypa.OrganizationResult;
+import fi.vm.kapa.rova.engine.model.ypa.YpaResult;
 import fi.vm.kapa.rova.logging.Logger;
 import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,12 +64,12 @@ public class YpaClientImpl extends AbstractClient implements Ypa, YpaClient {
 
     protected static final Logger LOG = Logger.getLogger(YpaClientImpl.class);
 
-    public List<OrganizationResult> getRoles(String personId, String serviceIdType, String service, List<String> organizationIds)
+    public YpaResult getRoles(String personId, String serviceIdType, String service, List<String> organizationIds)
             throws RestClientException {
         return getRolesResponse(personId, serviceIdType, service, organizationIds).getBody();
     }
 
-    public ResponseEntity<List<OrganizationResult>> getRolesResponse(String personId, String serviceIdType, String service, List<String> organizationIds) {
+    public ResponseEntity<YpaResult> getRolesResponse(String personId, String serviceIdType, String service, List<String> organizationIds) {
         RestTemplate restTemplate = ypaRestTemplate;
         String requestUrl = "http://" + YpaClient.CLIENT_NAME + Ypa.GET_ROLES;
 
@@ -85,7 +86,7 @@ public class YpaClientImpl extends AbstractClient implements Ypa, YpaClient {
         }
 
         return restTemplate.exchange(builder.buildAndExpand(params).toUri(),
-                HttpMethod.GET, null, new ParameterizedTypeReference<List<OrganizationResult>>() {});
+                HttpMethod.GET, null, new ParameterizedTypeReference<YpaResult>() {});
     }
 
     protected RequestIdentificationInterceptor.HeaderTrust getHeaderTrust() {

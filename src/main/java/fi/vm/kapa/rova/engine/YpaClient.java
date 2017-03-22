@@ -22,7 +22,7 @@
  */
 package fi.vm.kapa.rova.engine;
 
-import fi.vm.kapa.rova.engine.model.ypa.OrganizationResult;
+import fi.vm.kapa.rova.engine.model.ypa.YpaResult;
 import org.springframework.web.client.RestClientException;
 
 import java.util.List;
@@ -34,7 +34,7 @@ public interface YpaClient {
 
     static final String CLIENT_NAME = "roles-auths-engine-ypa";
 
-    List<OrganizationResult> getRoles(String personId, String serviceIdType, String service, List<String> organizationIds)
+    YpaResult getRoles(String personId, String serviceIdType, String service, List<String> organizationIds)
             throws RestClientException;
 
 }

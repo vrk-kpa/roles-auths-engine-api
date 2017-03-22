@@ -36,6 +36,7 @@ public class Delegate implements HpaDelegate {
     private boolean hetuValid;
     private boolean deceased;
     private AuthorizationType authorizationType;
+    private String serviceUuid;
 
     private List<DecisionReason> reasons;
 
@@ -120,6 +121,15 @@ public class Delegate implements HpaDelegate {
 
     public void setReasons(List<DecisionReason> reasons) {
         this.reasons = reasons;
+    }
+
+    @Override
+    public String getServiceUuid() {
+        return serviceUuid;
+    }
+
+    public void setServiceUuid(String serviceUuid) {
+        this.serviceUuid = serviceUuid;
     }
 
 }
