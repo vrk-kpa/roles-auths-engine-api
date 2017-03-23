@@ -31,6 +31,10 @@ import java.util.List;
  * Created by mtom on 14/03/2017.
  */
 public interface Ypa extends Engine {
+    public String ACTION_ROLES_BY_ID = "rolesById";
+    public String ACTION_ROLES_FROM_CHOICE = "rolesFromChoice";
+    public String ACTION_ROLES = "roles";
+
 
     String GET_ROLES = "/rest/ypa/roles/{serviceIdType}/{service}/{personId}";
 
