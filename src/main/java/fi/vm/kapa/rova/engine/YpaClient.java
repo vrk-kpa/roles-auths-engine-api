@@ -23,7 +23,6 @@
 package fi.vm.kapa.rova.engine;
 
 import fi.vm.kapa.rova.engine.model.ypa.YpaResult;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 
 import java.util.List;
