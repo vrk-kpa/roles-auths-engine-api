@@ -22,9 +22,18 @@
  */
 package fi.vm.kapa.rova.engine;
 
+import fi.vm.kapa.rova.engine.model.hpa.Authorization;
+import fi.vm.kapa.rova.engine.model.hpa.HpaDelegate;
+import org.springframework.web.client.RestClientException;
+
+import java.util.Set;
+
 /**
  * Created by mtom on 13/03/2017.
  */
-public interface HpaClient extends Hpa {
+public interface HpaClient {
 
+    HpaDelegate getDelegate(String serviceIdType, String personId, String service) throws RestClientException;
+    Authorization getAuthorization(String serviceIdType, String service, String delegateId, String principalId, Set<String> issues)
+            throws RestClientException;
 }

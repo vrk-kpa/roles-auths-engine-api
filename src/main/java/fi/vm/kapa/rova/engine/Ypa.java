@@ -34,6 +34,6 @@ public interface Ypa {
 
     String GET_ROLES = "/rest/ypa/roles/{serviceIdType}/{service}/{personId}";
 
-    ResponseEntity<List<OrganizationResult>> getRoles(String personId, String serviceIdType, String service, List<String> organizationIds);
+    ResponseEntity<List<OrganizationResult>> getRolesResponse(String personId, String serviceIdType, String service, List<String> organizationIds);
 
 }

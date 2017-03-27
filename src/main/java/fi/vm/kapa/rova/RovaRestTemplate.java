@@ -22,6 +22,7 @@
  */
 package fi.vm.kapa.rova;
 
+import fi.vm.kapa.rova.rest.exception.ClientExceptionInterceptor;
 import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
 import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor.HeaderTrust;
 import fi.vm.kapa.rova.rest.validation.ValidationRequestInterceptor;
@@ -39,6 +40,7 @@ public class RovaRestTemplate extends RestTemplate {
         List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
         interceptors.add(new ValidationRequestInterceptor(apiKey, requestAliveSeconds));
         interceptors.add(new RequestIdentificationInterceptor(null, endUser, trustHeader));
+        interceptors.add(new ClientExceptionInterceptor());
         setInterceptors(interceptors);
     }
 

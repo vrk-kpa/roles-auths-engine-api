@@ -31,6 +31,7 @@ import org.springframework.context.annotation.Conditional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -44,13 +45,22 @@ import java.util.Set;
  */
 @RibbonClient(name = "hpaClient")
 @Conditional(HpaClientCondition.class)
-public class HpaClientImpl extends AbstractClient implements HpaClient {
+public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient {
 
     private static final Logger LOG = Logger.getLogger(HpaClientImpl.class);
 
-    public ResponseEntity<HpaDelegate> getDelegate(String serviceIdType, String personId, String service) {
+    public HpaDelegate getDelegate(String serviceIdType, String personId, String service) throws RestClientException {
+        return getDelegateResponse(serviceIdType,  personId,  service).getBody();
+    }
+
+    public Authorization getAuthorization(String serviceIdType, String service, String delegateId,
+                                                                  String principalId, Set<String> issues) throws RestClientException {
+        return getAuthorizationResponse(serviceIdType, service, delegateId, principalId, issues).getBody();
+    }
+
+    public ResponseEntity<HpaDelegate> getDelegateResponse(String serviceIdType, String personId, String service) {
         RestTemplate restTemplate = getRestTemplate(null);
-        String requestUrl = engineUrl + GET_DELEGATE;
+        String requestUrl = engineUrl + Hpa.GET_DELEGATE;
 
         Map<String, String> params = new HashMap<>();
         params.put("serviceIdType", serviceIdType);
@@ -60,10 +70,10 @@ public class HpaClientImpl extends AbstractClient implements HpaClient {
         return restTemplate.getForEntity(requestUrl, HpaDelegate.class, params);
     }
 
-    public ResponseEntity<Authorization> getAuthorization(String serviceIdType, String service, String delegateId,
+    public ResponseEntity<Authorization> getAuthorizationResponse(String serviceIdType, String service, String delegateId,
                                                           String principalId, Set<String> issues) {
         RestTemplate restTemplate = getRestTemplate(null);
-        String requestUrl = engineUrl + GET_AUTHORIZATION;
+        String requestUrl = engineUrl + Hpa.GET_AUTHORIZATION;
 
         Map<String, String> params = new HashMap<>();
         params.put("serviceIdType", serviceIdType);

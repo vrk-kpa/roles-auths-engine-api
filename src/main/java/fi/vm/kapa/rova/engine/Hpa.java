@@ -36,7 +36,7 @@ public interface Hpa {
     String GET_DELEGATE = "/rest/hpa/delegate/{serviceIdType}/{service}/{personId}";
     String GET_AUTHORIZATION = "/rest/hpa/authorization/{serviceIdType}/{service}/{delegateId}/{principalId}";
 
-    ResponseEntity<HpaDelegate> getDelegate(String serviceIdType, String personId, String service);
-    ResponseEntity<Authorization> getAuthorization(String serviceIdType, String service, String delegateId, String principalId, Set<String> issues);
+    ResponseEntity<HpaDelegate> getDelegateResponse(String serviceIdType, String personId, String service);
+    ResponseEntity<Authorization> getAuthorizationResponse(String serviceIdType, String service, String delegateId, String principalId, Set<String> issues);
 
 }
