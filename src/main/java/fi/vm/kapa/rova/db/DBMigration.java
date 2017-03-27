@@ -37,5 +37,5 @@ DBMigration {
 
     String info();
 
-    ResponseEntity<String> migrate(String noValidate, String dataset);
+    ResponseEntity<String> migrate(String noValidate, String dataset) throws URISyntaxException;
 }

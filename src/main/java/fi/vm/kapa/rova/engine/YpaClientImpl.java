@@ -22,19 +22,25 @@
  */
 package fi.vm.kapa.rova.engine;
 
+import fi.vm.kapa.rova.ClientException;
+import fi.vm.kapa.rova.ServiceException;
 import fi.vm.kapa.rova.engine.model.ypa.OrganizationResult;
 import fi.vm.kapa.rova.logging.Logger;
+import fi.vm.kapa.rova.rest.exception.HttpStatusException;
 import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,13 +50,18 @@ import java.util.Map;
  */
 @RibbonClient(name = "ypaClient")
 @Conditional(YpaClientCondition.class)
-public class YpaClientImpl extends AbstractClient implements YpaClient {
+public class YpaClientImpl extends AbstractClient implements Ypa, YpaClient {
 
     protected static final Logger LOG = Logger.getLogger(YpaClientImpl.class);
 
-    public ResponseEntity<List<OrganizationResult>> getRoles(String personId, String serviceIdType, String service, List<String> organizationIds) {
+    public List<OrganizationResult> getRoles(String personId, String serviceIdType, String service, List<String> organizationIds)
+            throws RestClientException {
+        return getRolesResponse(personId, serviceIdType, service, organizationIds).getBody();
+    }
+
+    public ResponseEntity<List<OrganizationResult>> getRolesResponse(String personId, String serviceIdType, String service, List<String> organizationIds) {
         RestTemplate restTemplate = getRestTemplate(null);
-        String requestUrl = engineUrl + GET_ROLES;
+        String requestUrl = engineUrl + Ypa.GET_ROLES;
 
         Map<String, String> params = new HashMap<>();
         params.put("personId", personId);
