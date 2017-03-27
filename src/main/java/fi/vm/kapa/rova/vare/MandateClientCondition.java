@@ -22,12 +22,13 @@
  */
 package fi.vm.kapa.rova.vare;
 
-import fi.vm.kapa.rova.vare.model.*;
-import org.springframework.http.ResponseEntity;
+import fi.vm.kapa.rova.AbstractClientCondition;
 
-import java.util.List;
-import java.util.Set;
+public class MandateClientCondition extends AbstractClientCondition {
 
-public interface MandateResource extends CheckMandateClient, MandateClient {
+    @Override
+    protected String getClientPropertyName() {
+        return "mandate_client_enabled";
+    }
 
 }
