@@ -20,19 +20,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package fi.vm.kapa.rova.vtj;
+package fi.vm.kapa.rova.ribbon;
 
-import fi.vm.kapa.rova.ClientException;
-import fi.vm.kapa.rova.external.model.vtj.VTJResponse;
-import fi.vm.kapa.rova.rest.exception.WebApplicationException;
+import com.netflix.loadbalancer.AbstractServerPredicate;
+import com.netflix.loadbalancer.PredicateKey;
+import com.netflix.niws.loadbalancer.DiscoveryEnabledServer;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.Nullable;
+import java.util.Map;
 
 /**
- * Created by jkorkala on 08/03/2017.
+ * Created by jkorkala on 26/03/2017.
  */
-public interface VTJ {
-    /* If you change api paths remember to change api version too */
-    String API_VERSION = "1.0";
-    String VTJ_PERSON_PATH = "/rest/vtj/person/{schema}/{hetu}";
+public class MetadataAwarePredicate extends AbstractServerPredicate {
 
-    VTJResponse getPerson(String hetu, String schema) throws WebApplicationException, ClientException;
+    public static final String API_VERSION_METADATA_FIELD = "api-version";
+
+    String apiVersion;
+
+    public MetadataAwarePredicate(String apiVersion) {
+        this.apiVersion = apiVersion;
+    }
+
+    @Override
+    public boolean apply(@Nullable PredicateKey predicateKey) {
+        return predicateKey != null
+                && predicateKey.getServer() instanceof DiscoveryEnabledServer
+                && apply((DiscoveryEnabledServer) predicateKey.getServer());
+    }
+
+    protected boolean apply(DiscoveryEnabledServer server) {
+        Map<String, String> metadata = server.getInstanceInfo().getMetadata();
+        return metadata.get(API_VERSION_METADATA_FIELD) != null && metadata.get(API_VERSION_METADATA_FIELD).equals(apiVersion);
+    }
+
 }

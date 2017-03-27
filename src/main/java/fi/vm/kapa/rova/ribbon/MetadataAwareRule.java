@@ -20,19 +20,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package fi.vm.kapa.rova.vtj;
+package fi.vm.kapa.rova.ribbon;
 
-import fi.vm.kapa.rova.ClientException;
-import fi.vm.kapa.rova.external.model.vtj.VTJResponse;
-import fi.vm.kapa.rova.rest.exception.WebApplicationException;
+import com.netflix.loadbalancer.AbstractServerPredicate;
+import com.netflix.loadbalancer.PredicateBasedRule;
+import org.springframework.stereotype.Component;
 
 /**
- * Created by jkorkala on 08/03/2017.
+ * Created by jkorkala on 27/03/2017.
  */
-public interface VTJ {
-    /* If you change api paths remember to change api version too */
-    String API_VERSION = "1.0";
-    String VTJ_PERSON_PATH = "/rest/vtj/person/{schema}/{hetu}";
+public abstract class MetadataAwareRule extends PredicateBasedRule {
 
-    VTJResponse getPerson(String hetu, String schema) throws WebApplicationException, ClientException;
+    MetadataAwarePredicate predicate;
+
+    public MetadataAwareRule(String apiVersion) {
+        this.predicate = new MetadataAwarePredicate(apiVersion);
+    }
+
+
+    @Override
+    public AbstractServerPredicate getPredicate() {
+        return predicate;
+    }
+
 }

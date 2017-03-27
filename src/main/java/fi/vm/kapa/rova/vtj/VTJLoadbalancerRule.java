@@ -22,17 +22,14 @@
  */
 package fi.vm.kapa.rova.vtj;
 
-import fi.vm.kapa.rova.ClientException;
-import fi.vm.kapa.rova.external.model.vtj.VTJResponse;
-import fi.vm.kapa.rova.rest.exception.WebApplicationException;
+import fi.vm.kapa.rova.ribbon.MetadataAwareRule;
 
 /**
- * Created by jkorkala on 08/03/2017.
+ * Created by jkorkala on 27/03/2017.
  */
-public interface VTJ {
-    /* If you change api paths remember to change api version too */
-    String API_VERSION = "1.0";
-    String VTJ_PERSON_PATH = "/rest/vtj/person/{schema}/{hetu}";
+public class VTJLoadbalancerRule extends MetadataAwareRule {
 
-    VTJResponse getPerson(String hetu, String schema) throws WebApplicationException, ClientException;
+    public VTJLoadbalancerRule() {
+        super(VTJ.API_VERSION);
+    }
 }
