@@ -28,8 +28,11 @@ import fi.vm.kapa.rova.RovaRestTemplate;
 import fi.vm.kapa.rova.external.model.vtj.VTJResponse;
 import fi.vm.kapa.rova.logging.Logger;
 import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +44,7 @@ import java.util.Map;
 /**
  * Created by jkorkala on 08/03/2017.
  */
-@RibbonClient(name = "vtjClient")
+@RibbonClient(name = "roles-auths-vtj-client")
 @Conditional(VtjClientCondition.class)
 public class VTJClient implements VTJ {
 
@@ -56,9 +59,17 @@ public class VTJClient implements VTJ {
     @Value("${vtj_client_url}")
     private String vtjEndpointUrl;
 
+    @Autowired
+    private RestTemplate vtjRestTemplate;
+
+    @Bean
+    @LoadBalanced
+    public RestTemplate vtjRestTemplate() {
+        return getRestTemplate();
+    }
 
     public VTJResponse getPerson(String hetu, String schema) {
-        RestTemplate restTemplate = getRestTemplate();
+        RestTemplate restTemplate = vtjRestTemplate;
         String requestUrl = vtjEndpointUrl + VTJ_PERSON_PATH;
         Map<String, String> params = new HashMap<>();
         params.put("schema", schema);
