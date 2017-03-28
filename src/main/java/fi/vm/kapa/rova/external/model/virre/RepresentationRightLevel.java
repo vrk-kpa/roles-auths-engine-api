@@ -27,6 +27,18 @@ package fi.vm.kapa.rova.external.model.virre;
  * @author mtom
  */
 public enum RepresentationRightLevel {
-    OI, // oikeutettu
-    P  // prokuristi
+
+    OI("OI"), // oikeutettu
+    P("PR") // prokuristi
+    ;
+
+    private String virreCode;
+
+    RepresentationRightLevel(String virreCode) {
+        this.virreCode = virreCode;
+    }
+
+    public String toVirreCode() {
+        return virreCode;
+    }
 }
