@@ -63,7 +63,7 @@ public class VTJClient implements VTJ {
     private RestTemplate vtjRestTemplate;
 
     @Bean
-    @LoadBalanced
+    //@LoadBalanced
     public RestTemplate vtjRestTemplate() {
         return getRestTemplate();
     }
