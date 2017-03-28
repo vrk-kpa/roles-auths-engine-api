@@ -22,15 +22,9 @@
  */
 package fi.vm.kapa.rova.resources;
 
-import java.util.Collection;
-
 /**
- * Created by mtom on 17/03/2017.
+ * Created by jkorkala on 28/03/2017.
  */
-public interface Localization extends Resources {
-    String GET_ALL_LOCALIZATIONS = "/rest/localization/all/{lang}";
-    String GET_LOCALIZATION = "/rest/localization/{lang}/{key}";
-
-    Collection<fi.vm.kapa.rova.localization.Localization> getAllLocalizations(String lang);
-    String getLocalization(String lang, String key);
+public interface Resources {
+    String RESOURCES_API_VERSION = "1.0";
 }

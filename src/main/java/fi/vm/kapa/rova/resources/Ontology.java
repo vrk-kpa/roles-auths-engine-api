@@ -31,7 +31,7 @@ import java.util.Set;
 /**
  * Created by mtom on 17/03/2017.
  */
-public interface Ontology {
+public interface Ontology extends Resources {
     String GET_CONCEPT = "/rest/ontology/concept";
     String GET_CONCEPTS = "/rest/ontology/concepts";
     String GET_ALL_CONCEPTS = "/rest/ontology/concept/all";

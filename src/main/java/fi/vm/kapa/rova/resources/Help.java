@@ -29,7 +29,7 @@ import org.springframework.http.ResponseEntity;
 /**
  * Created by mtom on 17/03/2017.
  */
-public interface Help {
+public interface Help extends Resources {
 
     String GET_HELP_RESOURCE = "/rest/help/{lang}/{channel}/{docName}";
 
