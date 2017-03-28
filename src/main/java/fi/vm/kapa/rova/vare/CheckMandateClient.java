@@ -28,10 +28,26 @@ import java.util.List;
 
 public interface CheckMandateClient {
 
-    MandateResponse checkMandate(String delegateId, String principalId, String subject, List<String> issues);
 
-    MandateResponse checkMandate(String delegateId, String principalId, List<String> issues);
+    String CHECK_MANDATE = "/rest/vare/checkmandate/{delegateId}/{principalId}/{subject}";
+    String MANDATE_EXISTS = "/rest/vare/checkmandate/{delegateId}/{principalId}";
+    String COMPANY_PRINCIPALS = "/rest/vare/businessids/{delegateId}";
 
+    /**
+     * Resource for checking if there is a mandate for the given parameters.
+     */
+    MandateResponse checkMandate(String delegateId, String principalId, String subject,
+                                 List<String> issues);
+
+    /**
+     * Resource for checking if there is a mandate for the given parameters.
+     */
+    MandateResponse checkMandate(String delegateId, String principalId,
+                                 List<String> issues);
+
+    /**
+     * Resource for fetching businessIds of all companies which have authorized the person with the given delegateId
+     */
     List<String> getCompanyPrincipals(String delegateId);
 
 }
