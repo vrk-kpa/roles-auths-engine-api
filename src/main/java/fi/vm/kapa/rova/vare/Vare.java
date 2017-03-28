@@ -22,12 +22,10 @@
  */
 package fi.vm.kapa.rova.vare;
 
-import fi.vm.kapa.rova.vare.model.*;
-import org.springframework.http.ResponseEntity;
-
-import java.util.List;
-import java.util.Set;
-
-public interface MandateResource extends CheckMandateClient, MandateClient, Vare {
+/**
+ * Created by jkorkala on 28/03/2017.
+ */
+public interface Vare {
+    String API_VERSION = "1.0";
 
 }
