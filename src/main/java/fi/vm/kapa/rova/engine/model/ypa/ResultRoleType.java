@@ -33,5 +33,6 @@ public enum ResultRoleType implements IResultType {
     TIL,
     ELI,
     S,
+    YHM,
     CLEAR
 }
