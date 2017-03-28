@@ -25,12 +25,11 @@ package fi.vm.kapa.rova.vtj;
 import fi.vm.kapa.rova.ClientException;
 import fi.vm.kapa.rova.ErrorHandlerBuilder;
 import fi.vm.kapa.rova.RovaRestTemplate;
-import fi.vm.kapa.rova.external.model.vtj.VTJResponse;
 import fi.vm.kapa.rova.logging.Logger;
 import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
+import fi.vm.kapa.rova.vtj.model.VTJResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
@@ -50,13 +49,10 @@ public class VTJClient implements VTJ {
 
     private static final Logger LOG = Logger.getLogger(VTJClient.class);
 
-    @Value("${vtj_client_api_key}")
     private String apiKey;
 
-    @Value("${request_alive_seconds}")
     private int requestAliveSeconds;
 
-    @Value("${vtj_client_url}")
     private String vtjEndpointUrl;
 
     @Autowired
@@ -66,6 +62,15 @@ public class VTJClient implements VTJ {
     @LoadBalanced
     public RestTemplate vtjRestTemplate() {
         return getRestTemplate();
+    }
+
+    public VTJClient(@Value("${vtj_client_api_key}") String apiKey,
+            @Value("${request_alive_seconds}") int requestAliveSeconds,
+            @Value("${vtj_client_url}") String vtjEndpointUrl) {
+        super();
+        this.apiKey = apiKey;
+        this.requestAliveSeconds = requestAliveSeconds;
+        this.vtjEndpointUrl = vtjEndpointUrl;
     }
 
     public VTJResponse getPerson(String hetu, String schema) {

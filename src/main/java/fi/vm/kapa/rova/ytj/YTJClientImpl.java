@@ -49,14 +49,20 @@ public class YTJClientImpl implements YTJ, YTJClient {
 
     private static final Logger LOG = Logger.getLogger(YTJClientImpl.class);
 
-    @Value("${ytj_client_api_key}")
     private String apiKey;
 
-    @Value("${request_alive_seconds}")
     private int requestAliveSeconds;
 
-    @Value("${ytj_client_url}")
     private String endpointUrl;
+
+    public YTJClientImpl(@Value("${ytj_client_api_key}") String apiKey,
+            @Value("${request_alive_seconds}") int requestAliveSeconds,
+            @Value("${ytj_client_url}") String endpointUrl) {
+        super();
+        this.apiKey = apiKey;
+        this.requestAliveSeconds = requestAliveSeconds;
+        this.endpointUrl = endpointUrl;
+    }
 
     @Override
     public Optional<CompanyAuthorizationData> getCompanyAuthorizationData(String ssn) {
