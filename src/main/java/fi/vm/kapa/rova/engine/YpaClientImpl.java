@@ -22,12 +22,8 @@
  */
 package fi.vm.kapa.rova.engine;
 
-import fi.vm.kapa.rova.ClientException;
-import fi.vm.kapa.rova.ServiceException;
-import fi.vm.kapa.rova.engine.model.ypa.OrganizationResult;
 import fi.vm.kapa.rova.engine.model.ypa.YpaResult;
 import fi.vm.kapa.rova.logging.Logger;
-import fi.vm.kapa.rova.rest.exception.HttpStatusException;
 import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -36,7 +32,6 @@ import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
@@ -45,7 +40,6 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

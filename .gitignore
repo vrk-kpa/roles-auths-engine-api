@@ -1,7 +1,7 @@
 /target/
-
+/bin
 /.settings/
-.classpath
-.project
-roles-auths-engine-api.iml
+/.classpath
+/.project
+/roles-auths-engine-api.iml
 
