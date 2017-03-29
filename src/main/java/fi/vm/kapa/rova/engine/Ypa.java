@@ -23,7 +23,6 @@
 package fi.vm.kapa.rova.engine;
 
 import fi.vm.kapa.rova.engine.model.ypa.YpaResult;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -38,6 +37,6 @@ public interface Ypa extends Engine {
 
     String GET_ROLES = "/rest/ypa/roles/{serviceIdType}/{service}/{personId}";
 
-    ResponseEntity<YpaResult> getRoles(String personId, String serviceIdType, String service, List<String> organizationIds);
+    YpaResult getRoles(String personId, String serviceIdType, String service, List<String> organizationIds);
 
 }
