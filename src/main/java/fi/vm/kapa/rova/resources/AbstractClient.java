@@ -28,6 +28,8 @@ import fi.vm.kapa.rova.RovaRestTemplate;
 import fi.vm.kapa.rova.logging.Logger;
 import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
@@ -50,7 +52,9 @@ public abstract class AbstractClient {
     @Value("${resources_url}")
     protected String serviceUrl;
 
-    protected RestTemplate getRestTemplate() {
+    @Bean
+    @LoadBalanced
+    public RestTemplate getRestTemplate() {
         RestTemplate template = new RestTemplate();
         List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
         interceptors.add(new RequestIdentificationInterceptor(RequestIdentificationInterceptor.HeaderTrust.TRUST_REQUEST_HEADERS));

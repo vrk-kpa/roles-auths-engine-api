@@ -22,35 +22,15 @@
  */
 package fi.vm.kapa.rova.resources;
 
-
-import fi.vm.kapa.rova.help.HelpDocument;
-import org.springframework.cloud.netflix.ribbon.RibbonClient;
-import org.springframework.context.annotation.Conditional;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
-
-import java.util.HashMap;
-import java.util.Map;
+import fi.vm.kapa.rova.ribbon.MetadataAwareRule;
+import fi.vm.kapa.rova.vtj.VTJ;
 
 /**
- * Created by mtom on 17/03/2017.
+ * Created by jkorkala on 27/03/2017.
  */
-@RibbonClient(name = "roles-auths-resources-help")
-@Conditional(HelpClientCondition.class)
-public class HelpClientImpl extends AbstractClient implements HelpClient {
+public class ResourcesLoadbalancerRule extends MetadataAwareRule {
 
-    @Override
-    public ResponseEntity<HelpDocument> getHelpResource(String lang, String chanName, String docName) {
-        RestTemplate restTemplate = getRestTemplate();
-        String requestUrl = serviceUrl + GET_HELP_RESOURCE;
-
-        Map<String, String> params = new HashMap<>();
-        params.put("lang", lang);
-        params.put("channel", chanName);
-        params.put("docName", docName);
-
-        ResponseEntity<HelpDocument> entityResponse = restTemplate.getForEntity(requestUrl, HelpDocument.class, params);
-        checkStatus(requestUrl, entityResponse);
-        return entityResponse;
+    public ResourcesLoadbalancerRule() {
+        super(Resources.RESOURCES_API_VERSION);
     }
 }

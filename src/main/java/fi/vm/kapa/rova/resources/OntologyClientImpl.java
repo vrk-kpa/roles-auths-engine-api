@@ -38,7 +38,7 @@ import java.util.Set;
 /**
  * Created by mtom on 17/03/2017.
  */
-@RibbonClient(name = "ontologyClient")
+@RibbonClient(name = "roles-auths-resources-ontology")
 @Conditional(OntologyClientCondition.class)
 public class OntologyClientImpl extends AbstractClient implements Ontology, OntologyClient {
 

@@ -37,7 +37,7 @@ import java.util.Map;
 /**
  * Created by mtom on 17/03/2017.
  */
-@RibbonClient(name = "localizationClient")
+@RibbonClient(name = "roles-auths-resources-localization")
 @Conditional(LocalizationClientCondition.class)
 public class LocalizationClientImpl extends AbstractClient implements LocalizationClient {
 
