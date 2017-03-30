@@ -45,9 +45,15 @@ public class MetadataAwarePredicate extends AbstractServerPredicate {
 
     @Override
     public boolean apply(@Nullable PredicateKey predicateKey) {
-        return predicateKey != null
-                && predicateKey.getServer() instanceof DiscoveryEnabledServer
-                && apply((DiscoveryEnabledServer) predicateKey.getServer());
+        if (predicateKey == null) {
+            return false;
+        }
+        if (!(predicateKey.getServer() instanceof DiscoveryEnabledServer)) {
+            // Allow all servers when not running with Eureka
+            return true;
+        }
+
+        return apply((DiscoveryEnabledServer) predicateKey.getServer());
     }
 
     protected boolean apply(DiscoveryEnabledServer server) {

@@ -30,8 +30,11 @@ import fi.vm.kapa.rova.external.model.virre.RepresentationRight;
 import fi.vm.kapa.rova.logging.Logger;
 import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
 import fi.vm.kapa.rova.utils.EncodingUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +44,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-@RibbonClient(name = "virreClient")
+@RibbonClient(name = "roles-auths-virre-client")
 @Conditional(VirreClientCondition.class)
 public class VirreClientImpl implements Virre, VirreClient {
 
@@ -55,6 +58,15 @@ public class VirreClientImpl implements Virre, VirreClient {
 
     private String endpointUrl;
 
+    @Autowired
+    private RestTemplate virreRestTemplate;
+
+    @Bean
+    @LoadBalanced
+    public RestTemplate virreRestTemplate() {
+        return getRestTemplate();
+    }
+
     public VirreClientImpl(@Value("${virre_client_api_key}") String apiKey,
             @Value("${request_alive_seconds}") int requestAliveSeconds,
             @Value("${virre_client_url}") String endpointUrl) {
@@ -67,11 +79,10 @@ public class VirreClientImpl implements Virre, VirreClient {
     @Override
     public CompanyPerson getCompanyPerson(String socialsec) {
         String url = endpointUrl + GET_COMPANY_PERSON_PATH;
-        RestTemplate restTemplate = getRestTemplate();
         Map<String, String> params = new HashMap<>();
         params.put("socialsec", EncodingUtils.encodePathParam(socialsec));
         CompanyPerson person = null;
-        ResponseEntity<CompanyPerson> entity = restTemplate.getForEntity(url, CompanyPerson.class, params);
+        ResponseEntity<CompanyPerson> entity = virreRestTemplate.getForEntity(url, CompanyPerson.class, params);
         if (entity.getStatusCode() == HttpStatus.OK) {
             person = entity.getBody();
             if (person == null) {
@@ -94,10 +105,9 @@ public class VirreClientImpl implements Virre, VirreClient {
     @Override
     public CompanyRepresentations getRepresentations(String businessid) {
         String url = endpointUrl + GET_REPRESENTATIONS_PATH;
-        RestTemplate restTemplate = getRestTemplate();
         Map<String, String> params = new HashMap<>();
         params.put("businessid", businessid);
-        ResponseEntity<CompanyRepresentations> response = restTemplate.getForEntity(url, CompanyRepresentations.class,
+        ResponseEntity<CompanyRepresentations> response = virreRestTemplate.getForEntity(url, CompanyRepresentations.class,
                 params);
         if (response.getStatusCode() == HttpStatus.OK) {
             CompanyRepresentations reps = response.getBody();
@@ -114,12 +124,11 @@ public class VirreClientImpl implements Virre, VirreClient {
     @Override
     public RepresentationRight getRights(String socialSec, String businessId, String rightLevel) {
         String url = endpointUrl + GET_RIGHTS_PATH;
-        RestTemplate restTemplate = getRestTemplate();
         Map<String, String> params = new HashMap<>();
         params.put("rightlevel", rightLevel);
         params.put("socialsec", EncodingUtils.encodePathParam(socialSec));
         params.put("businessid", businessId);
-        ResponseEntity<RepresentationRight> response = restTemplate.getForEntity(url, RepresentationRight.class,
+        ResponseEntity<RepresentationRight> response = virreRestTemplate.getForEntity(url, RepresentationRight.class,
                 params);
         RepresentationRight rights = null;
         if (response.getStatusCode() == HttpStatus.OK) {

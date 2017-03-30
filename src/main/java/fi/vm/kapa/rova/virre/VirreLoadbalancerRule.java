@@ -22,27 +22,10 @@
  */
 package fi.vm.kapa.rova.virre;
 
-import fi.vm.kapa.rova.external.model.virre.CompanyPerson;
-import fi.vm.kapa.rova.external.model.virre.CompanyRepresentations;
-import fi.vm.kapa.rova.external.model.virre.RepresentationRight;
-import fi.vm.kapa.rova.rest.exception.WebApplicationException;
+import fi.vm.kapa.rova.ribbon.MetadataAwareRule;
 
-public interface Virre {
-
-    /**
-     * Increment the API version if you make modifications to the REST interface.
-     * The version is used to discover a compatible service from Eureka.
-     */
-    String API_VERSION = "1.0";
-
-    String GET_COMPANY_PERSON_PATH = "/rest/prh/companies/{socialsec}";
-    String GET_REPRESENTATIONS_PATH = "/rest/prh/representations/{businessid}";
-    String GET_RIGHTS_PATH = "/rest/prh/rights/{rightlevel}/{socialsec}/{businessid}";
-
-    CompanyPerson getCompanyPerson(String socialsec) throws WebApplicationException;
-
-    CompanyRepresentations getRepresentations(String businessid) throws WebApplicationException;
-
-    RepresentationRight getRights(String socialSec, String businessId, String rightLevel);
-
+public class VirreLoadbalancerRule extends MetadataAwareRule {
+    public VirreLoadbalancerRule() {
+        super(Virre.API_VERSION);
+    }
 }
