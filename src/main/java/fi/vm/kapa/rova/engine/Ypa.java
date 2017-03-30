@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * Created by mtom on 14/03/2017.
  */
-public interface Ypa {
+public interface Ypa extends Engine {
 
     String GET_ROLES = "/rest/ypa/roles/{serviceIdType}/{service}/{personId}";
 

@@ -22,12 +22,17 @@
  */
 package fi.vm.kapa.rova.engine;
 
+import com.netflix.discovery.converters.Auto;
 import fi.vm.kapa.rova.ClientException;
 import fi.vm.kapa.rova.ErrorHandlerBuilder;
 import fi.vm.kapa.rova.RovaRestTemplate;
 import fi.vm.kapa.rova.logging.Logger;
 import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -55,8 +60,8 @@ public abstract class AbstractClient {
 
     protected abstract RequestIdentificationInterceptor.HeaderTrust getHeaderTrust();
 
-    protected RestTemplate getRestTemplate(String endUser) {
-        return new RovaRestTemplate(endUser, apiKey, requestAliveSeconds, getHeaderTrust(),
+    public RestTemplate getRestTemplate() {
+        return new RovaRestTemplate(null, apiKey, requestAliveSeconds, getHeaderTrust(),
                 ErrorHandlerBuilder.clientErrorsOnly());
     }
 

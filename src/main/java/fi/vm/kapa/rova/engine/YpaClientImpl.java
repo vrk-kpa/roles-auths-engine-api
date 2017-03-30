@@ -28,7 +28,11 @@ import fi.vm.kapa.rova.engine.model.ypa.OrganizationResult;
 import fi.vm.kapa.rova.logging.Logger;
 import fi.vm.kapa.rova.rest.exception.HttpStatusException;
 import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
@@ -48,9 +52,19 @@ import java.util.Map;
 /**
  * Created by mtom on 13/03/2017.
  */
-@RibbonClient(name = "ypaClient")
+@RibbonClient(name = "roles-auths-engine-ypa")
 @Conditional(YpaClientCondition.class)
 public class YpaClientImpl extends AbstractClient implements Ypa, YpaClient {
+
+    @Autowired
+    @Qualifier("engine-ypa")
+    RestTemplate ypaRestTemplate;
+
+    @Bean("engine-ypa")
+    @LoadBalanced
+    public RestTemplate ypaRestTemplate() {
+        return getRestTemplate();
+    }
 
     protected static final Logger LOG = Logger.getLogger(YpaClientImpl.class);
 
@@ -60,8 +74,8 @@ public class YpaClientImpl extends AbstractClient implements Ypa, YpaClient {
     }
 
     public ResponseEntity<List<OrganizationResult>> getRolesResponse(String personId, String serviceIdType, String service, List<String> organizationIds) {
-        RestTemplate restTemplate = getRestTemplate(null);
-        String requestUrl = engineUrl + Ypa.GET_ROLES;
+        RestTemplate restTemplate = ypaRestTemplate;
+        String requestUrl = "http://roles-auths-engine-ypa" + Ypa.GET_ROLES;
 
         Map<String, String> params = new HashMap<>();
         params.put("personId", personId);

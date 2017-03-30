@@ -22,21 +22,9 @@
  */
 package fi.vm.kapa.rova.engine;
 
-import fi.vm.kapa.rova.engine.model.hpa.Authorization;
-import fi.vm.kapa.rova.engine.model.hpa.HpaDelegate;
-import org.springframework.http.ResponseEntity;
-
-import java.util.Set;
-
 /**
- * Created by mtom on 14/03/2017.
+ * Created by jkorkala on 30/03/2017.
  */
-public interface Hpa extends Engine {
-
-    String GET_DELEGATE = "/rest/hpa/delegate/{serviceIdType}/{service}/{personId}";
-    String GET_AUTHORIZATION = "/rest/hpa/authorization/{serviceIdType}/{service}/{delegateId}/{principalId}";
-
-    ResponseEntity<HpaDelegate> getDelegateResponse(String serviceIdType, String personId, String service);
-    ResponseEntity<Authorization> getAuthorizationResponse(String serviceIdType, String service, String delegateId, String principalId, Set<String> issues);
-
+public interface Engine {
+    String API_VERSION = "1.0";
 }

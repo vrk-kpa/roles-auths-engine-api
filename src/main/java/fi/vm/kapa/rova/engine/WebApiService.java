@@ -32,7 +32,7 @@ import java.util.Map;
 /**
  * Created by mtom on 14/03/2017.
  */
-public interface WebApiService {
+public interface WebApiService extends Engine {
 
     String GET_SERVICES = "/rest/admin/services/service";
     String GET_CLIENT_DETAILS = "/rest/admin/services/webApiClients/{since}";

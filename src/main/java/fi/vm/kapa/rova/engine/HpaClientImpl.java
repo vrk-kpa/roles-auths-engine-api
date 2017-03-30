@@ -26,7 +26,11 @@ import fi.vm.kapa.rova.engine.model.hpa.Authorization;
 import fi.vm.kapa.rova.engine.model.hpa.HpaDelegate;
 import fi.vm.kapa.rova.logging.Logger;
 import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
@@ -43,11 +47,21 @@ import java.util.Set;
 /**
  * Created by mtom on 13/03/2017.
  */
-@RibbonClient(name = "hpaClient")
+@RibbonClient(name = "roles-auths-engine-hpa")
 @Conditional(HpaClientCondition.class)
 public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient {
 
     private static final Logger LOG = Logger.getLogger(HpaClientImpl.class);
+
+    @Autowired
+    @Qualifier("engine-hpa")
+    RestTemplate hpaRestTemplate;
+
+    @Bean("engine-hpa")
+    @LoadBalanced
+    public RestTemplate hpaRestTemplate() {
+        return getRestTemplate();
+    }
 
     public HpaDelegate getDelegate(String serviceIdType, String personId, String service) throws RestClientException {
         return getDelegateResponse(serviceIdType,  personId,  service).getBody();
@@ -59,8 +73,8 @@ public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient {
     }
 
     public ResponseEntity<HpaDelegate> getDelegateResponse(String serviceIdType, String personId, String service) {
-        RestTemplate restTemplate = getRestTemplate(null);
-        String requestUrl = engineUrl + Hpa.GET_DELEGATE;
+        RestTemplate restTemplate = hpaRestTemplate;
+        String requestUrl = "http://roles-auths-engine-hpa" + Hpa.GET_DELEGATE;
 
         Map<String, String> params = new HashMap<>();
         params.put("serviceIdType", serviceIdType);
@@ -72,8 +86,8 @@ public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient {
 
     public ResponseEntity<Authorization> getAuthorizationResponse(String serviceIdType, String service, String delegateId,
                                                           String principalId, Set<String> issues) {
-        RestTemplate restTemplate = getRestTemplate(null);
-        String requestUrl = engineUrl + Hpa.GET_AUTHORIZATION;
+        RestTemplate restTemplate = hpaRestTemplate;
+        String requestUrl = "http://roles-auths-engine-hpa" + Hpa.GET_AUTHORIZATION;
 
         Map<String, String> params = new HashMap<>();
         params.put("serviceIdType", serviceIdType);

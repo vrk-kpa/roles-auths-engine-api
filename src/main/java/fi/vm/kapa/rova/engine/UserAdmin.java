@@ -31,7 +31,7 @@ import java.util.List;
 /**
  * Created by mtom on 14/03/2017.
  */
-public interface UserAdmin {
+public interface UserAdmin extends Engine {
 
     String GET_AUTHORIZATION = "/rest/admin/authorization/{userId}/{userIdType}";
     String GET_ALL_USERS = "/rest/admin/users/user/";
