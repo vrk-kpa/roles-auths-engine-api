@@ -30,8 +30,12 @@ import fi.vm.kapa.rova.external.model.ytj.CompanyAuthorizationDataRequest;
 import fi.vm.kapa.rova.external.model.ytj.CompanyWithStatusDTO;
 import fi.vm.kapa.rova.logging.Logger;
 import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -43,7 +47,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 import java.util.Optional;
 
-@RibbonClient(name = "ytjClient")
+@RibbonClient(name = "roles-auths-ytj-client")
 @Conditional(YTJClientCondition.class)
 public class YTJClientImpl implements YTJ, YTJClient {
 
@@ -54,6 +58,16 @@ public class YTJClientImpl implements YTJ, YTJClient {
     private int requestAliveSeconds;
 
     private String endpointUrl;
+
+    @Autowired
+    @Qualifier("ytjRestTemplate")
+    private RestTemplate ytjRestTemplate;
+
+    @Bean("ytjRestTemplate")
+    @LoadBalanced
+    public RestTemplate ytjRestTemplate() {
+        return getRestTemplate();
+    }
 
     public YTJClientImpl(@Value("${ytj_client_api_key}") String apiKey,
             @Value("${request_alive_seconds}") int requestAliveSeconds,
@@ -71,7 +85,7 @@ public class YTJClientImpl implements YTJ, YTJClient {
         ResponseEntity<CompanyAuthorizationData> entityResponse = getCompanyAuthorizationDataResponse(request);
         if (entityResponse.getStatusCode() == HttpStatus.OK) {
             return Optional.of(entityResponse.getBody());
-        } else if (entityResponse.getStatusCode() == HttpStatus.NOT_FOUND) {
+        } else if (entityResponse.getStatusCode() == HttpStatus.NO_CONTENT) {
             return Optional.empty();
         } else {
             String errorMessage = "YTJ connection error; " + entityResponse.getStatusCode()
@@ -110,36 +124,33 @@ public class YTJClientImpl implements YTJ, YTJClient {
     @Override
     public ResponseEntity<CompanyAuthorizationData> getCompanyAuthorizationDataResponse(
             CompanyAuthorizationDataRequest request) {
-        RestTemplate restTemplate = getRestTemplate();
         String requestUrl = endpointUrl + COMPANY_AUTHORIZATION_PATH;
-        ResponseEntity<CompanyAuthorizationData> responseEntity = restTemplate.postForEntity(requestUrl, request,
+        ResponseEntity<CompanyAuthorizationData> responseEntity = ytjRestTemplate.postForEntity(requestUrl, request,
                 CompanyAuthorizationData.class);
         return responseEntity;
     }
 
     @Override
     public ResponseEntity<List<String>> getUpdatedCompaniesResponse(long startDate) {
-        RestTemplate restTemplate = getRestTemplate();
         String requestUrl = endpointUrl + UPDATED_COMPANIES_PATH;
-        return restTemplate.exchange(requestUrl, HttpMethod.GET, null, new ParameterizedTypeReference<List<String>>() {
+        return ytjRestTemplate.exchange(requestUrl, HttpMethod.GET, null, new ParameterizedTypeReference<List<String>>() {
         }, new Long(startDate));
     }
 
     @Override
     public ResponseEntity<List<CompanyWithStatusDTO>> getCompaniesResponse(List<String> companyIds) {
-        RestTemplate restTemplate = getRestTemplate();
         String requestUrl = endpointUrl + COMPANIES_PATH;
 
         HttpEntity<List<String>> postedEntity = new HttpEntity<>(companyIds);
 
-        return restTemplate.exchange(requestUrl, HttpMethod.POST,
+        return ytjRestTemplate.exchange(requestUrl, HttpMethod.POST,
                 postedEntity, new ParameterizedTypeReference<List<CompanyWithStatusDTO>>() {
                 });
     }
 
     private RestTemplate getRestTemplate() {
         RestTemplate restTemplate = new RovaRestTemplate(apiKey, requestAliveSeconds,
-                RequestIdentificationInterceptor.HeaderTrust.TRUST_REQUEST_HEADERS, ErrorHandlerBuilder.allExcept404());
+                RequestIdentificationInterceptor.HeaderTrust.TRUST_REQUEST_HEADERS, ErrorHandlerBuilder.allErrors());
         return restTemplate;
     }
 
