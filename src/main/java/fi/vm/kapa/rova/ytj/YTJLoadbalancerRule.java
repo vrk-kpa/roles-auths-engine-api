@@ -22,26 +22,14 @@
  */
 package fi.vm.kapa.rova.ytj;
 
-import fi.vm.kapa.rova.external.model.ytj.CompanyAuthorizationData;
-import fi.vm.kapa.rova.external.model.ytj.CompanyAuthorizationDataRequest;
-import fi.vm.kapa.rova.external.model.ytj.CompanyWithStatusDTO;
-import org.springframework.http.ResponseEntity;
+import fi.vm.kapa.rova.ribbon.MetadataAwareRule;
 
-import java.util.List;
+/**
+ * Created by jkorkala on 27/03/2017.
+ */
+public class YTJLoadbalancerRule extends MetadataAwareRule {
 
-public interface YTJ {
-    /* If you change api paths remember to change api version too */
-    String API_VERSION = "1.0";
-    String COMPANY_AUTHORIZATION_PATH = "/rest/ytj";
-    String UPDATED_COMPANIES_PATH = "/rest/ytj/companies/updated/startDate/{startDate}";
-    String COMPANIES_PATH = "/rest/ytj/companies";
-
-    ResponseEntity<CompanyAuthorizationData> getCompanyAuthorizationDataResponse(
-            CompanyAuthorizationDataRequest request)
-            throws Exception;
-
-    ResponseEntity<List<String>> getUpdatedCompaniesResponse(long startDate) throws Exception;
-
-    ResponseEntity<List<CompanyWithStatusDTO>> getCompaniesResponse(List<String> companyIds) throws Exception;
-
+    public YTJLoadbalancerRule() {
+        super(YTJ.API_VERSION);
+    }
 }
