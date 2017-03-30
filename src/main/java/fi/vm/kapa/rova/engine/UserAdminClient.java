@@ -27,4 +27,6 @@ package fi.vm.kapa.rova.engine;
  */
 public interface UserAdminClient extends UserAdmin {
 
+    String CLIENT_NAME = "roles-auths-engine-admin";
+
 }
