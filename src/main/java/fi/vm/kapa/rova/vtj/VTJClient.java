@@ -29,6 +29,7 @@ import fi.vm.kapa.rova.logging.Logger;
 import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
 import fi.vm.kapa.rova.vtj.model.VTJResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
@@ -57,9 +58,10 @@ public class VTJClient implements VTJ {
     private String vtjEndpointUrl;
 
     @Autowired
+    @Qualifier("vtjRestTemplate")
     private RestTemplate vtjRestTemplate;
 
-    @Bean
+    @Bean(name = "vtjRestTemplate")
     @LoadBalanced
     public RestTemplate vtjRestTemplate() {
         return getRestTemplate();

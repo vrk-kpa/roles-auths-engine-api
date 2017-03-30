@@ -31,6 +31,7 @@ import fi.vm.kapa.rova.logging.Logger;
 import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
 import fi.vm.kapa.rova.utils.EncodingUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
@@ -59,9 +60,10 @@ public class VirreClientImpl implements Virre, VirreClient {
     private String endpointUrl;
 
     @Autowired
+    @Qualifier("virreRestTemplate")
     private RestTemplate virreRestTemplate;
 
-    @Bean
+    @Bean(name="virreRestTemplate")
     @LoadBalanced
     public RestTemplate virreRestTemplate() {
         return getRestTemplate();
