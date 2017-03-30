@@ -65,7 +65,7 @@ public class OntologyClientImpl extends AbstractClient implements Ontology, Onto
     }
 
     public ResponseEntity<Concept> getConceptResponse(String uri) {
-        RestTemplate restTemplate = getRestTemplate();
+        RestTemplate restTemplate = resourcesRestTemplate;
         String requestUrl = serviceUrl + GET_CONCEPT;
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(requestUrl);
@@ -77,7 +77,7 @@ public class OntologyClientImpl extends AbstractClient implements Ontology, Onto
     }
 
     public ResponseEntity<List<Concept>> getConceptsResponse(List<String> uris) {
-        RestTemplate restTemplate = getRestTemplate();
+        RestTemplate restTemplate = resourcesRestTemplate;
         String requestUrl = serviceUrl + GET_CONCEPTS;
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(requestUrl);
@@ -90,7 +90,7 @@ public class OntologyClientImpl extends AbstractClient implements Ontology, Onto
     }
 
     public ResponseEntity<List<Concept>> getConceptsResponse() {
-        RestTemplate restTemplate = getRestTemplate();
+        RestTemplate restTemplate = resourcesRestTemplate;
         String requestUrl = serviceUrl + GET_ALL_CONCEPTS;
 
         ResponseEntity<List<Concept>> entityResponse = restTemplate.exchange(requestUrl, HttpMethod.GET, null,
@@ -100,7 +100,7 @@ public class OntologyClientImpl extends AbstractClient implements Ontology, Onto
     }
 
     public ResponseEntity<Boolean> isBroaderConceptResponse(String broaderUri, String narrowerUri) {
-        RestTemplate restTemplate = getRestTemplate();
+        RestTemplate restTemplate = resourcesRestTemplate;
         String requestUrl = serviceUrl + IS_BROADER_CONCEPT;
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(requestUrl);
@@ -113,7 +113,7 @@ public class OntologyClientImpl extends AbstractClient implements Ontology, Onto
     }
 
     public ResponseEntity<Set<Concept>> getNarrowerConceptsResponse(String uri) {
-        RestTemplate restTemplate = getRestTemplate();
+        RestTemplate restTemplate = resourcesRestTemplate;
         String requestUrl = serviceUrl + GET_NARROWER_CONCEPTS;
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(requestUrl);

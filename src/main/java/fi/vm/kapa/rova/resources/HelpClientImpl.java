@@ -24,7 +24,11 @@ package fi.vm.kapa.rova.resources;
 
 
 import fi.vm.kapa.rova.help.HelpDocument;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -41,7 +45,7 @@ public class HelpClientImpl extends AbstractClient implements HelpClient {
 
     @Override
     public ResponseEntity<HelpDocument> getHelpResource(String lang, String chanName, String docName) {
-        RestTemplate restTemplate = getRestTemplate();
+        RestTemplate restTemplate = resourcesRestTemplate;
         String requestUrl = serviceUrl + GET_HELP_RESOURCE;
 
         Map<String, String> params = new HashMap<>();

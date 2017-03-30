@@ -42,7 +42,7 @@ import java.util.Map;
 public class LocalizationClientImpl extends AbstractClient implements LocalizationClient {
 
     public Collection<fi.vm.kapa.rova.localization.Localization> getAllLocalizations(String lang) {
-        RestTemplate restTemplate = getRestTemplate();
+        RestTemplate restTemplate = resourcesRestTemplate;
         String requestUrl = serviceUrl + GET_ALL_LOCALIZATIONS;
 
         Map<String, String> params = new HashMap<>();
@@ -55,7 +55,7 @@ public class LocalizationClientImpl extends AbstractClient implements Localizati
     }
 
     public String getLocalization(String lang, String key) {
-        RestTemplate restTemplate = getRestTemplate();
+        RestTemplate restTemplate = resourcesRestTemplate;
         String requestUrl = serviceUrl + GET_LOCALIZATION;
 
         Map<String, String> params = new HashMap<>();
