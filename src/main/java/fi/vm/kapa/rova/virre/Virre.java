@@ -34,6 +34,7 @@ public interface Virre {
      * The version is used to discover a compatible service from Eureka.
      */
     String API_VERSION = "1.0";
+    String CLIENT = "roles-auths-virre-client";
 
     String GET_COMPANY_PERSON_PATH = "/rest/prh/companies/{socialsec}";
     String GET_REPRESENTATIONS_PATH = "/rest/prh/representations/{businessid}";

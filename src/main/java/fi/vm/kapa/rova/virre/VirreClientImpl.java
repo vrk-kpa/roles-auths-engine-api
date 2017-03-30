@@ -45,19 +45,18 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-@RibbonClient(name = "roles-auths-virre-client")
+@RibbonClient(name = Virre.CLIENT)
 @Conditional(VirreClientCondition.class)
 public class VirreClientImpl implements Virre, VirreClient {
 
     public static final String NO_DATA_ERROR_MSG = "No data from Virre client.";
     public static final String CONNECTION_ERROR_MSG = "Virre connection error: ";
     private static final Logger LOG = Logger.getLogger(VirreClientImpl.class);
+    private static final String ENDPOINT_URL = "http://" + Virre.CLIENT;
 
     private String apiKey;
 
     private int requestAliveSeconds;
-
-    private String endpointUrl;
 
     @Autowired
     @Qualifier("virreRestTemplate")
@@ -70,17 +69,15 @@ public class VirreClientImpl implements Virre, VirreClient {
     }
 
     public VirreClientImpl(@Value("${virre_client_api_key}") String apiKey,
-            @Value("${request_alive_seconds}") int requestAliveSeconds,
-            @Value("${virre_client_url}") String endpointUrl) {
+            @Value("${request_alive_seconds}") int requestAliveSeconds) {
         super();
         this.apiKey = apiKey;
         this.requestAliveSeconds = requestAliveSeconds;
-        this.endpointUrl = endpointUrl;
     }
 
     @Override
     public CompanyPerson getCompanyPerson(String socialsec) {
-        String url = endpointUrl + GET_COMPANY_PERSON_PATH;
+        String url = ENDPOINT_URL + GET_COMPANY_PERSON_PATH;
         Map<String, String> params = new HashMap<>();
         params.put("socialsec", EncodingUtils.encodePathParam(socialsec));
         CompanyPerson person = null;
@@ -106,7 +103,7 @@ public class VirreClientImpl implements Virre, VirreClient {
 
     @Override
     public CompanyRepresentations getRepresentations(String businessid) {
-        String url = endpointUrl + GET_REPRESENTATIONS_PATH;
+        String url = ENDPOINT_URL + GET_REPRESENTATIONS_PATH;
         Map<String, String> params = new HashMap<>();
         params.put("businessid", businessid);
         ResponseEntity<CompanyRepresentations> response = virreRestTemplate.getForEntity(url, CompanyRepresentations.class,
@@ -125,7 +122,7 @@ public class VirreClientImpl implements Virre, VirreClient {
 
     @Override
     public RepresentationRight getRights(String socialSec, String businessId, String rightLevel) {
-        String url = endpointUrl + GET_RIGHTS_PATH;
+        String url = ENDPOINT_URL + GET_RIGHTS_PATH;
         Map<String, String> params = new HashMap<>();
         params.put("rightlevel", rightLevel);
         params.put("socialsec", EncodingUtils.encodePathParam(socialSec));

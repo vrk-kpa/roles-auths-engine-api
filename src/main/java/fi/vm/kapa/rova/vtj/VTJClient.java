@@ -50,12 +50,12 @@ import java.util.Map;
 public class VTJClient implements VTJ {
 
     private static final Logger LOG = Logger.getLogger(VTJClient.class);
+    private static final String VTJ_ENDPOINT_URL = "http://" + VTJ.CLIENT;
 
     private String apiKey;
 
     private int requestAliveSeconds;
 
-    private String vtjEndpointUrl;
 
     @Autowired
     @Qualifier("vtjRestTemplate")
@@ -68,17 +68,15 @@ public class VTJClient implements VTJ {
     }
 
     public VTJClient(@Value("${vtj_client_api_key}") String apiKey,
-            @Value("${request_alive_seconds}") int requestAliveSeconds,
-            @Value("${vtj_client_url}") String vtjEndpointUrl) {
+            @Value("${request_alive_seconds}") int requestAliveSeconds) {
         super();
         this.apiKey = apiKey;
         this.requestAliveSeconds = requestAliveSeconds;
-        this.vtjEndpointUrl = vtjEndpointUrl;
     }
 
     public VTJResponse getPerson(String hetu, String schema) {
         RestTemplate restTemplate = vtjRestTemplate;
-        String requestUrl = vtjEndpointUrl + VTJ_PERSON_PATH;
+        String requestUrl = VTJ_ENDPOINT_URL + VTJ_PERSON_PATH;
         Map<String, String> params = new HashMap<>();
         params.put("schema", schema);
         params.put("hetu", hetu);

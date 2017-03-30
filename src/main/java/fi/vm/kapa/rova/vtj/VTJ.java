@@ -32,6 +32,8 @@ import fi.vm.kapa.rova.vtj.model.VTJResponse;
 public interface VTJ {
     /* If you change api paths remember to change api version too */
     String API_VERSION = "1.0";
+    String CLIENT = "roles-auths-vtj-client";
+
     String VTJ_PERSON_PATH = "/rest/vtj/person/{schema}/{hetu}";
 
     VTJResponse getPerson(String hetu, String schema) throws WebApplicationException, ClientException;
