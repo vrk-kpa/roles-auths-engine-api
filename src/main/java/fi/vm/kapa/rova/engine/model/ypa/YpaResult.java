@@ -20,26 +20,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package fi.vm.kapa.rova.engine;
+package fi.vm.kapa.rova.engine.model.ypa;
 
-import fi.vm.kapa.rova.engine.model.hpa.Authorization;
-import fi.vm.kapa.rova.engine.model.hpa.HpaDelegate;
-import org.springframework.http.ResponseEntity;
+import java.util.ArrayList;
+import java.util.List;
 
-import java.util.Set;
+public class YpaResult {
+    private List<OrganizationResult> organizationResults = new ArrayList<>();
+    private String serviceUuid;
 
-/**
- * Created by mtom on 14/03/2017.
- */
-public interface Hpa extends Engine {
-    public String ACTION_AUTHORIZATION = "authorization";
-    public String ACTION_DELEGATE = "delegate";
-    public String ACTION_PRINCIPAL_CHOICE = "principalFromChoice";
+    public List<OrganizationResult> getOrganizationResults() {
+        return organizationResults;
+    }
 
-    String GET_DELEGATE = "/rest/hpa/delegate/{serviceIdType}/{service}/{personId}";
-    String GET_AUTHORIZATION = "/rest/hpa/authorization/{serviceIdType}/{service}/{delegateId}/{principalId}";
+    public void setOrganizationResults(List<OrganizationResult> organizationResults) {
+        this.organizationResults = organizationResults;
+    }
 
-    ResponseEntity<HpaDelegate> getDelegateResponse(String serviceIdType, String personId, String service);
-    ResponseEntity<Authorization> getAuthorizationResponse(String serviceIdType, String service, String delegateId, String principalId, Set<String> issues);
+    public String getServiceUuid() {
+        return serviceUuid;
+    }
+
+    public void setServiceUuid(String serviceUuid) {
+        this.serviceUuid = serviceUuid;
+    }
 
 }
