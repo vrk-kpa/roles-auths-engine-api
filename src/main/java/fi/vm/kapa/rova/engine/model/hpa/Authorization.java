@@ -29,8 +29,9 @@ import java.util.List;
 
 public class Authorization {
 
-	private AuthorizationType result;
+    private AuthorizationType result;
     private List<DecisionReason> reasons = new ArrayList<DecisionReason>();
+    private String serviceUuid;
 
     public AuthorizationType getResult() {
         return result;
@@ -46,5 +47,13 @@ public class Authorization {
 
     public void setReasons(List<DecisionReason> reasons) {
         this.reasons = reasons;
+    }
+
+    public String getServiceUuid() {
+        return serviceUuid;
+    }
+
+    public void setServiceUuid(String serviceUuid) {
+        this.serviceUuid = serviceUuid;
     }
 }

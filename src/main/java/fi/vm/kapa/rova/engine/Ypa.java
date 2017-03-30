@@ -22,8 +22,7 @@
  */
 package fi.vm.kapa.rova.engine;
 
-import fi.vm.kapa.rova.engine.model.ypa.OrganizationResult;
-import org.springframework.http.ResponseEntity;
+import fi.vm.kapa.rova.engine.model.ypa.YpaResult;
 
 import java.util.List;
 
@@ -31,9 +30,13 @@ import java.util.List;
  * Created by mtom on 14/03/2017.
  */
 public interface Ypa extends Engine {
+    public String ACTION_ROLES_BY_ID = "rolesById";
+    public String ACTION_ROLES_FROM_CHOICE = "rolesFromChoice";
+    public String ACTION_ROLES = "roles";
+
 
     String GET_ROLES = "/rest/ypa/roles/{serviceIdType}/{service}/{personId}";
 
-    ResponseEntity<List<OrganizationResult>> getRolesResponse(String personId, String serviceIdType, String service, List<String> organizationIds);
+    YpaResult getRoles(String personId, String serviceIdType, String service, List<String> organizationIds);
 
 }
