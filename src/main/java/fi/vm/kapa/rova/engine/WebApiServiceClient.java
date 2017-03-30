@@ -27,4 +27,5 @@ package fi.vm.kapa.rova.engine;
  */
 public interface WebApiServiceClient extends WebApiService {
 
+    String CLIENT = "roles-auths-engine-services";
 }
