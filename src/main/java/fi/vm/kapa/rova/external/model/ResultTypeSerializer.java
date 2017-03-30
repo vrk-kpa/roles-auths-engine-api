@@ -24,7 +24,6 @@
 package fi.vm.kapa.rova.external.model;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import fi.vm.kapa.rova.engine.model.ypa.IssueRoleType;

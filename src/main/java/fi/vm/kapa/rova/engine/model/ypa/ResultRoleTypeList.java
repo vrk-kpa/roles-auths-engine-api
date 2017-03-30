@@ -45,9 +45,4 @@ public class ResultRoleTypeList extends ArrayList<IResultType> implements IResul
         super(c);
     }
     
-    @Override
-    public Iterator<IResultType> iterator() {
-        return super.iterator();
-    }
-    
 }

@@ -96,27 +96,27 @@ public class YTJClientImpl implements YTJ, YTJClient {
     @Override
     public List<String> getUpdatedCompanies(long startDate) {
         ResponseEntity<List<String>> responseEntity = getUpdatedCompaniesResponse(startDate);
-        if (responseEntity.getStatusCode() == HttpStatus.OK) {
-            return responseEntity.getBody();
-        } else {
+        if (responseEntity.getStatusCode() != HttpStatus.OK) {
             String errorMessage = "YTJ connection error; " + responseEntity.getStatusCode()
                     + " for UpdatedCompanies. startDate=" + startDate;
             LOG.error(errorMessage);
             throw new ClientException(errorMessage);
         }
+
+        return responseEntity.getBody();
     }
 
     @Override
     public List<CompanyWithStatusDTO> getCompanies(List<String> companyIds) {
         ResponseEntity<List<CompanyWithStatusDTO>> responseEntity = getCompaniesResponse(companyIds);
 
-        if (responseEntity.getStatusCode() == HttpStatus.OK) {
-            return responseEntity.getBody();
-        } else {
+        if (responseEntity.getStatusCode() != HttpStatus.OK) {
             String errorMessage = "YTJ connection error; " + responseEntity.getStatusCode() + " for getCompanies";
             LOG.error(errorMessage);
             throw new ClientException(errorMessage);
         }
+
+        return responseEntity.getBody();
     }
 
     @Override

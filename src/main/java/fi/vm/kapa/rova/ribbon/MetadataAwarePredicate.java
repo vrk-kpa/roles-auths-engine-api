@@ -25,7 +25,6 @@ package fi.vm.kapa.rova.ribbon;
 import com.netflix.loadbalancer.AbstractServerPredicate;
 import com.netflix.loadbalancer.PredicateKey;
 import com.netflix.niws.loadbalancer.DiscoveryEnabledServer;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.Nullable;
 import java.util.Map;

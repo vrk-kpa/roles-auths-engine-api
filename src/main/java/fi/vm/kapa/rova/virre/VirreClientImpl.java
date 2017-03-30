@@ -81,18 +81,12 @@ public class VirreClientImpl implements Virre, VirreClient {
         params.put("socialsec", EncodingUtils.encodePathParam(socialsec));
         CompanyPerson person = null;
         ResponseEntity<CompanyPerson> entity = virreRestTemplate.getForEntity(url, CompanyPerson.class, params);
-        if (entity.getStatusCode() == HttpStatus.OK) {
-            person = entity.getBody();
-            if (person == null) {
-                LOG.error(NO_DATA_ERROR_MSG);
-            }
-        } else if (entity.getStatusCode() == HttpStatus.NOT_FOUND) {
+        if (entity.getStatusCode() == HttpStatus.NOT_FOUND) {
             LOG.debug("No data (404) from Virre for " + socialsec);
-        } else {
-            LOG.error("Got error response from Virre during companies query");
-            throw new ClientException(CONNECTION_ERROR_MSG + entity.getStatusCode());
+            return null;
         }
-        return person;
+
+        return handleResponse(entity, "Got error response from Virre during companies query");
     }
 
     @Override
@@ -105,18 +99,9 @@ public class VirreClientImpl implements Virre, VirreClient {
         String url = ENDPOINT_URL + GET_REPRESENTATIONS_PATH;
         Map<String, String> params = new HashMap<>();
         params.put("businessid", businessid);
-        ResponseEntity<CompanyRepresentations> response = virreRestTemplate.getForEntity(url, CompanyRepresentations.class,
-                params);
-        if (response.getStatusCode() == HttpStatus.OK) {
-            CompanyRepresentations reps = response.getBody();
-            if (reps == null) {
-                LOG.error(NO_DATA_ERROR_MSG);
-            }
-            return reps;
-        } else {
-            LOG.error("Got error response from Virre during representations query");
-            throw new ClientException(CONNECTION_ERROR_MSG + response.getStatusCode());
-        }
+
+        return handleResponse(virreRestTemplate.getForEntity(url, CompanyRepresentations.class, params),
+                "Got error response from Virre during representations query");
     }
 
     @Override
@@ -126,19 +111,21 @@ public class VirreClientImpl implements Virre, VirreClient {
         params.put("rightlevel", rightLevel);
         params.put("socialsec", EncodingUtils.encodePathParam(socialSec));
         params.put("businessid", businessId);
-        ResponseEntity<RepresentationRight> response = virreRestTemplate.getForEntity(url, RepresentationRight.class,
-                params);
-        RepresentationRight rights = null;
-        if (response.getStatusCode() == HttpStatus.OK) {
-            rights = response.getBody();
-            if (rights == null) {
-                LOG.error(NO_DATA_ERROR_MSG);
-            }
-        } else {
-            LOG.error("Got error response from Virre during rights query");
-            throw new ClientException(CONNECTION_ERROR_MSG + response.getStatusCode());
-        }
-        return rights;
+
+        return handleResponse(
+                virreRestTemplate.getForEntity(url, RepresentationRight.class, params),
+                "Got error response from Virre during rights query");
     }
 
+     private <T> T handleResponse(ResponseEntity<T> response, String errorMsg) {
+        if (response.getStatusCode() != HttpStatus.OK) {
+            LOG.error(errorMsg);
+            throw new ClientException(CONNECTION_ERROR_MSG + response.getStatusCode());
+        }
+        T val = response.getBody();
+        if (val == null) {
+            LOG.error(NO_DATA_ERROR_MSG);
+        }
+        return val;
+     }
 }

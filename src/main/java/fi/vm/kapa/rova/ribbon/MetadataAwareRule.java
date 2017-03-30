@@ -24,7 +24,6 @@ package fi.vm.kapa.rova.ribbon;
 
 import com.netflix.loadbalancer.AbstractServerPredicate;
 import com.netflix.loadbalancer.PredicateBasedRule;
-import org.springframework.stereotype.Component;
 
 /**
  * Created by jkorkala on 27/03/2017.

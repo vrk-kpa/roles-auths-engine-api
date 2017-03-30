@@ -25,7 +25,6 @@ package fi.vm.kapa.rova.engine;
 import fi.vm.kapa.rova.admin.model.RuleSetDTO;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by mtom on 14/03/2017.
