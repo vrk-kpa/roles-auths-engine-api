@@ -33,6 +33,8 @@ import java.util.Set;
  */
 public interface HpaClient {
 
+    final static String CLIENT_NAME = "roles-auths-engine-hpa";
+
     HpaDelegate getDelegate(String serviceIdType, String personId, String service) throws RestClientException;
     Authorization getAuthorization(String serviceIdType, String service, String delegateId, String principalId, Set<String> issues)
             throws RestClientException;

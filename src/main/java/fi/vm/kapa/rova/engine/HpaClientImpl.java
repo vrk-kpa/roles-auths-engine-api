@@ -47,11 +47,13 @@ import java.util.Set;
 /**
  * Created by mtom on 13/03/2017.
  */
-@RibbonClient(name = "roles-auths-engine-hpa")
+@RibbonClient(name = HpaClient.CLIENT_NAME)
 @Conditional(HpaClientCondition.class)
 public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient {
 
     private static final Logger LOG = Logger.getLogger(HpaClientImpl.class);
+
+    private static final String RIBBON_ENGINE_URL = "http://" + HpaClient.CLIENT_NAME;
 
     @Autowired
     @Qualifier("engine-hpa")
@@ -74,7 +76,7 @@ public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient {
 
     public ResponseEntity<HpaDelegate> getDelegateResponse(String serviceIdType, String personId, String service) {
         RestTemplate restTemplate = hpaRestTemplate;
-        String requestUrl = "http://roles-auths-engine-hpa" + Hpa.GET_DELEGATE;
+        String requestUrl = RIBBON_ENGINE_URL + Hpa.GET_DELEGATE;
 
         Map<String, String> params = new HashMap<>();
         params.put("serviceIdType", serviceIdType);
@@ -87,7 +89,7 @@ public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient {
     public ResponseEntity<Authorization> getAuthorizationResponse(String serviceIdType, String service, String delegateId,
                                                           String principalId, Set<String> issues) {
         RestTemplate restTemplate = hpaRestTemplate;
-        String requestUrl = "http://roles-auths-engine-hpa" + Hpa.GET_AUTHORIZATION;
+        String requestUrl = RIBBON_ENGINE_URL + Hpa.GET_AUTHORIZATION;
 
         Map<String, String> params = new HashMap<>();
         params.put("serviceIdType", serviceIdType);

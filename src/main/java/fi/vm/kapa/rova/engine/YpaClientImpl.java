@@ -22,11 +22,8 @@
  */
 package fi.vm.kapa.rova.engine;
 
-import fi.vm.kapa.rova.ClientException;
-import fi.vm.kapa.rova.ServiceException;
 import fi.vm.kapa.rova.engine.model.ypa.OrganizationResult;
 import fi.vm.kapa.rova.logging.Logger;
-import fi.vm.kapa.rova.rest.exception.HttpStatusException;
 import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -35,7 +32,6 @@ import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
@@ -44,7 +40,6 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +47,7 @@ import java.util.Map;
 /**
  * Created by mtom on 13/03/2017.
  */
-@RibbonClient(name = "roles-auths-engine-ypa")
+@RibbonClient(name = YpaClient.CLIENT_NAME)
 @Conditional(YpaClientCondition.class)
 public class YpaClientImpl extends AbstractClient implements Ypa, YpaClient {
 
@@ -75,7 +70,7 @@ public class YpaClientImpl extends AbstractClient implements Ypa, YpaClient {
 
     public ResponseEntity<List<OrganizationResult>> getRolesResponse(String personId, String serviceIdType, String service, List<String> organizationIds) {
         RestTemplate restTemplate = ypaRestTemplate;
-        String requestUrl = "http://roles-auths-engine-ypa" + Ypa.GET_ROLES;
+        String requestUrl = "http://" + YpaClient.CLIENT_NAME + Ypa.GET_ROLES;
 
         Map<String, String> params = new HashMap<>();
         params.put("personId", personId);
