@@ -23,7 +23,11 @@
 package fi.vm.kapa.rova.resources;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -40,6 +44,16 @@ import java.util.Map;
 @RibbonClient(name = "roles-auths-resources-localization")
 @Conditional(LocalizationClientCondition.class)
 public class LocalizationClientImpl extends AbstractClient implements LocalizationClient {
+
+    @Autowired
+    @Qualifier("localizationRestTemplate")
+    private RestTemplate resourcesRestTemplate;
+
+    @Bean("localizationRestTemplate")
+    @LoadBalanced
+    public RestTemplate getResourcesRestTemplate() {
+        return getRestTemplate();
+    }
 
     public Collection<fi.vm.kapa.rova.localization.Localization> getAllLocalizations(String lang) {
         RestTemplate restTemplate = resourcesRestTemplate;

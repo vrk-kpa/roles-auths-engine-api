@@ -43,6 +43,16 @@ import java.util.Map;
 @Conditional(HelpClientCondition.class)
 public class HelpClientImpl extends AbstractClient implements HelpClient {
 
+    @Autowired
+    @Qualifier("helpRestTemplate")
+    private RestTemplate resourcesRestTemplate;
+
+    @Bean("helpRestTemplate")
+    @LoadBalanced
+    public RestTemplate getResourcesRestTemplate() {
+        return getRestTemplate();
+    }
+
     @Override
     public ResponseEntity<HelpDocument> getHelpResource(String lang, String chanName, String docName) {
         RestTemplate restTemplate = resourcesRestTemplate;

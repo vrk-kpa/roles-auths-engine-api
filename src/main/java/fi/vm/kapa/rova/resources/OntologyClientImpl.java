@@ -23,7 +23,11 @@
 package fi.vm.kapa.rova.resources;
 
 import fi.vm.kapa.rova.ontology.Concept;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -41,6 +45,16 @@ import java.util.Set;
 @RibbonClient(name = "roles-auths-resources-ontology")
 @Conditional(OntologyClientCondition.class)
 public class OntologyClientImpl extends AbstractClient implements Ontology, OntologyClient {
+
+    @Autowired
+    @Qualifier("ontologyRestTemplate")
+    private RestTemplate resourcesRestTemplate;
+
+    @Bean("ontologyRestTemplate")
+    @LoadBalanced
+    public RestTemplate getResourcesRestTemplate() {
+        return getRestTemplate();
+    }
 
     public Concept getConcept(String uri) {
         return getConceptResponse(uri).getBody();

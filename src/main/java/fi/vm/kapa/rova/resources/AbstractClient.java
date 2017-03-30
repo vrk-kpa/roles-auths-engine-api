@@ -54,12 +54,6 @@ public abstract class AbstractClient {
     @Value("${resources_url}")
     protected String serviceUrl;
 
-    @Autowired
-    @Qualifier("resourcesRestTemplate")
-    protected RestTemplate resourcesRestTemplate;
-
-    @Bean("resourcesRestTemplate")
-    @LoadBalanced
     public RestTemplate getRestTemplate() {
         RestTemplate template = new RestTemplate();
         List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
