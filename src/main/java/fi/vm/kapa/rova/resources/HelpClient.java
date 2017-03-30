@@ -26,4 +26,5 @@ package fi.vm.kapa.rova.resources;
  * Created by mtom on 17/03/2017.
  */
 public interface HelpClient extends Help {
+    String CLIENT = "roles-auths-resources-help";
 }

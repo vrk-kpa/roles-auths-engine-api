@@ -42,7 +42,7 @@ import java.util.Set;
 /**
  * Created by mtom on 17/03/2017.
  */
-@RibbonClient(name = "roles-auths-resources-ontology")
+@RibbonClient(name = OntologyClient.CLIENT)
 @Conditional(OntologyClientCondition.class)
 public class OntologyClientImpl extends AbstractClient implements Ontology, OntologyClient {
 
@@ -80,7 +80,7 @@ public class OntologyClientImpl extends AbstractClient implements Ontology, Onto
 
     public ResponseEntity<Concept> getConceptResponse(String uri) {
         RestTemplate restTemplate = resourcesRestTemplate;
-        String requestUrl = serviceUrl + GET_CONCEPT;
+        String requestUrl = "http://" + CLIENT + GET_CONCEPT;
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(requestUrl);
         builder.queryParam("uri", uri);
@@ -92,7 +92,7 @@ public class OntologyClientImpl extends AbstractClient implements Ontology, Onto
 
     public ResponseEntity<List<Concept>> getConceptsResponse(List<String> uris) {
         RestTemplate restTemplate = resourcesRestTemplate;
-        String requestUrl = serviceUrl + GET_CONCEPTS;
+        String requestUrl = "http://" + CLIENT + GET_CONCEPTS;
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(requestUrl);
         builder.queryParam("uris", uris.toArray());
@@ -105,7 +105,7 @@ public class OntologyClientImpl extends AbstractClient implements Ontology, Onto
 
     public ResponseEntity<List<Concept>> getConceptsResponse() {
         RestTemplate restTemplate = resourcesRestTemplate;
-        String requestUrl = serviceUrl + GET_ALL_CONCEPTS;
+        String requestUrl = "http://" + CLIENT + GET_ALL_CONCEPTS;
 
         ResponseEntity<List<Concept>> entityResponse = restTemplate.exchange(requestUrl, HttpMethod.GET, null,
                 new ParameterizedTypeReference<List<Concept>>() {});
@@ -115,7 +115,7 @@ public class OntologyClientImpl extends AbstractClient implements Ontology, Onto
 
     public ResponseEntity<Boolean> isBroaderConceptResponse(String broaderUri, String narrowerUri) {
         RestTemplate restTemplate = resourcesRestTemplate;
-        String requestUrl = serviceUrl + IS_BROADER_CONCEPT;
+        String requestUrl = "http://" + CLIENT + IS_BROADER_CONCEPT;
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(requestUrl);
         builder.queryParam("broader-uri", broaderUri);
@@ -128,7 +128,7 @@ public class OntologyClientImpl extends AbstractClient implements Ontology, Onto
 
     public ResponseEntity<Set<Concept>> getNarrowerConceptsResponse(String uri) {
         RestTemplate restTemplate = resourcesRestTemplate;
-        String requestUrl = serviceUrl + GET_NARROWER_CONCEPTS;
+        String requestUrl = "http://" + CLIENT + GET_NARROWER_CONCEPTS;
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(requestUrl);
         builder.queryParam("uri", uri);

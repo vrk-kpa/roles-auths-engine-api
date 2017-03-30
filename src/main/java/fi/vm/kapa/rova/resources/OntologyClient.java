@@ -33,6 +33,7 @@ import java.util.Set;
  */
 public interface OntologyClient {
 
+    String CLIENT = "roles-auths-resources-ontology";
 
     public Concept getConcept(String uri);
 

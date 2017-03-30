@@ -26,4 +26,5 @@ package fi.vm.kapa.rova.resources;
  * Created by mtom on 17/03/2017.
  */
 public interface LocalizationClient extends Localization {
+    String CLIENT = "roles-auths-resources-localization";
 }

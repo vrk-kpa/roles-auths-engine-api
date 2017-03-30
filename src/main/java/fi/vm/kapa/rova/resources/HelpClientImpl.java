@@ -39,7 +39,7 @@ import java.util.Map;
 /**
  * Created by mtom on 17/03/2017.
  */
-@RibbonClient(name = "roles-auths-resources-help")
+@RibbonClient(name = HelpClient.CLIENT)
 @Conditional(HelpClientCondition.class)
 public class HelpClientImpl extends AbstractClient implements HelpClient {
 
@@ -56,7 +56,7 @@ public class HelpClientImpl extends AbstractClient implements HelpClient {
     @Override
     public ResponseEntity<HelpDocument> getHelpResource(String lang, String chanName, String docName) {
         RestTemplate restTemplate = resourcesRestTemplate;
-        String requestUrl = serviceUrl + GET_HELP_RESOURCE;
+        String requestUrl = "http://"+ CLIENT + GET_HELP_RESOURCE;
 
         Map<String, String> params = new HashMap<>();
         params.put("lang", lang);

@@ -41,7 +41,7 @@ import java.util.Map;
 /**
  * Created by mtom on 17/03/2017.
  */
-@RibbonClient(name = "roles-auths-resources-localization")
+@RibbonClient(name = LocalizationClient.CLIENT)
 @Conditional(LocalizationClientCondition.class)
 public class LocalizationClientImpl extends AbstractClient implements LocalizationClient {
 
@@ -57,7 +57,7 @@ public class LocalizationClientImpl extends AbstractClient implements Localizati
 
     public Collection<fi.vm.kapa.rova.localization.Localization> getAllLocalizations(String lang) {
         RestTemplate restTemplate = resourcesRestTemplate;
-        String requestUrl = serviceUrl + GET_ALL_LOCALIZATIONS;
+        String requestUrl = "http://"+ LocalizationClient.CLIENT + GET_ALL_LOCALIZATIONS;
 
         Map<String, String> params = new HashMap<>();
         params.put("lang", lang);
@@ -70,7 +70,7 @@ public class LocalizationClientImpl extends AbstractClient implements Localizati
 
     public String getLocalization(String lang, String key) {
         RestTemplate restTemplate = resourcesRestTemplate;
-        String requestUrl = serviceUrl + GET_LOCALIZATION;
+        String requestUrl = "http://"+ LocalizationClient.CLIENT + GET_LOCALIZATION;
 
         Map<String, String> params = new HashMap<>();
         params.put("lang", lang);
