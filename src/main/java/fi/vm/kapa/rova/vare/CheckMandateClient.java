@@ -28,6 +28,7 @@ import java.util.List;
 
 public interface CheckMandateClient {
 
+    String CHECK_MANDATE_CLIENT = "roles-auths-vare-check-mandate";
 
     String CHECK_MANDATE = "/rest/vare/checkmandate/{delegateId}/{principalId}/{subject}";
     String MANDATE_EXISTS = "/rest/vare/checkmandate/{delegateId}/{principalId}";

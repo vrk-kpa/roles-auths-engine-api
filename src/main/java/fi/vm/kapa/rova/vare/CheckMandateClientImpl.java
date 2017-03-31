@@ -22,18 +22,17 @@
  */
 package fi.vm.kapa.rova.vare;
 
-import fi.vm.kapa.rova.ClientException;
-import fi.vm.kapa.rova.RovaRestTemplate;
 import fi.vm.kapa.rova.logging.Logger;
-import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
-import fi.vm.kapa.rova.vare.model.*;
+import fi.vm.kapa.rova.vare.model.MandateResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -41,19 +40,27 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-@RibbonClient(name = "checkMandateClient")
+@RibbonClient(name = CheckMandateClient.CHECK_MANDATE_CLIENT)
 @Conditional(CheckMandateClientCondition.class)
 public class CheckMandateClientImpl extends AbstractMandateClient implements CheckMandateClient {
 
     private static final Logger LOG = Logger.getLogger(CheckMandateClientImpl.class);
 
     @Autowired
+    @Qualifier("vareCheckMandateRestTemplate")
+    private RestTemplate restTemplate;
+
+    @LoadBalanced
+    @Bean("vareCheckMandateRestTemplate")
+    public RestTemplate getVareCheckMandateRestTemplate() {
+        return getRestTemplate();
+    }
+
+    @Autowired
     public CheckMandateClientImpl(@Value("${mandate_api_key}") String apiKey,
-                              @Value("${request_alive_seconds}") int requestAliveSeconds,
-                              @Value("${mandate_url}") String endpointUrl) {
-        super(apiKey, requestAliveSeconds, endpointUrl);
+                              @Value("${request_alive_seconds}") int requestAliveSeconds) {
+        super(apiKey, requestAliveSeconds, "http://" + CHECK_MANDATE_CLIENT);
     }
 
     @Override
@@ -87,7 +94,7 @@ public class CheckMandateClientImpl extends AbstractMandateClient implements Che
         Map<String, String> params = new HashMap<>();
         params.put("delegateId", delegateId);
         String expandedUrl = builder.buildAndExpand(params).encode().toUriString();
-        ResponseEntity<List<String>> response = getRestTemplate().exchange(expandedUrl, HttpMethod.GET, null,
+        ResponseEntity<List<String>> response = restTemplate.exchange(expandedUrl, HttpMethod.GET, null,
                 new ParameterizedTypeReference<List<String>>() {
                 });
         return handleResponse(response, expandedUrl);
@@ -95,7 +102,7 @@ public class CheckMandateClientImpl extends AbstractMandateClient implements Che
 
     private <T> T handleSimple(UriComponentsBuilder builder, Map<String, String> params, Class<T> returnType) {
         String expandedUrl = builder.buildAndExpand(params).encode().toUriString();
-        ResponseEntity<T> response = getRestTemplate().getForEntity(expandedUrl, returnType);
+        ResponseEntity<T> response = restTemplate.getForEntity(expandedUrl, returnType);
         return handleResponse(response, expandedUrl);
     }
 }
