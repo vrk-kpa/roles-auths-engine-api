@@ -51,9 +51,6 @@ public abstract class AbstractClient {
     @Value("${request_alive_seconds}")
     protected int requestAliveSeconds;
 
-    @Value("${resources_url}")
-    protected String serviceUrl;
-
     public RestTemplate getRestTemplate() {
         RestTemplate template = new RestTemplate();
         List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
