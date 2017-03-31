@@ -30,6 +30,8 @@ import java.util.Set;
 
 public interface MandateClient {
 
+    String MANDATE_CLIENT = "roles-auths-vare-mandate";
+
     String GET_MANDATE = "/rest/vare/mandate/{uuid}";
     String MANDATE_STATUS = "/rest/vare/mandates/{status}";
     String MANDATES = "/rest/vare/mandates";
