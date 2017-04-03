@@ -47,17 +47,16 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 import java.util.Optional;
 
-@RibbonClient(name = "roles-auths-ytj-client")
+@RibbonClient(name = YTJ.CLIENT)
 @Conditional(YTJClientCondition.class)
 public class YTJClientImpl implements YTJ, YTJClient {
 
     private static final Logger LOG = Logger.getLogger(YTJClientImpl.class);
+    private static final String YTJ_ENDPOINT_URL = "http://" + YTJ.CLIENT;
 
     private String apiKey;
 
     private int requestAliveSeconds;
-
-    private String endpointUrl;
 
     @Autowired
     @Qualifier("ytjRestTemplate")
@@ -70,12 +69,10 @@ public class YTJClientImpl implements YTJ, YTJClient {
     }
 
     public YTJClientImpl(@Value("${ytj_client_api_key}") String apiKey,
-            @Value("${request_alive_seconds}") int requestAliveSeconds,
-            @Value("${ytj_client_url}") String endpointUrl) {
+            @Value("${request_alive_seconds}") int requestAliveSeconds) {
         super();
         this.apiKey = apiKey;
         this.requestAliveSeconds = requestAliveSeconds;
-        this.endpointUrl = endpointUrl;
     }
 
     @Override
@@ -124,7 +121,7 @@ public class YTJClientImpl implements YTJ, YTJClient {
     @Override
     public ResponseEntity<CompanyAuthorizationData> getCompanyAuthorizationDataResponse(
             CompanyAuthorizationDataRequest request) {
-        String requestUrl = endpointUrl + COMPANY_AUTHORIZATION_PATH;
+        String requestUrl = YTJ_ENDPOINT_URL + COMPANY_AUTHORIZATION_PATH;
         ResponseEntity<CompanyAuthorizationData> responseEntity = ytjRestTemplate.postForEntity(requestUrl, request,
                 CompanyAuthorizationData.class);
         return responseEntity;
@@ -132,14 +129,14 @@ public class YTJClientImpl implements YTJ, YTJClient {
 
     @Override
     public ResponseEntity<List<String>> getUpdatedCompaniesResponse(long startDate) {
-        String requestUrl = endpointUrl + UPDATED_COMPANIES_PATH;
+        String requestUrl = YTJ_ENDPOINT_URL + UPDATED_COMPANIES_PATH;
         return ytjRestTemplate.exchange(requestUrl, HttpMethod.GET, null, new ParameterizedTypeReference<List<String>>() {
         }, new Long(startDate));
     }
 
     @Override
     public ResponseEntity<List<CompanyWithStatusDTO>> getCompaniesResponse(List<String> companyIds) {
-        String requestUrl = endpointUrl + COMPANIES_PATH;
+        String requestUrl = YTJ_ENDPOINT_URL + COMPANIES_PATH;
 
         HttpEntity<List<String>> postedEntity = new HttpEntity<>(companyIds);
 

@@ -32,6 +32,7 @@ import java.util.List;
 public interface YTJ {
     /* If you change api paths remember to change api version too */
     String API_VERSION = "1.0";
+    String CLIENT = "roles-auths-ytj-client";
     String COMPANY_AUTHORIZATION_PATH = "/rest/ytj";
     String UPDATED_COMPANIES_PATH = "/rest/ytj/companies/updated/startDate/{startDate}";
     String COMPANIES_PATH = "/rest/ytj/companies";
