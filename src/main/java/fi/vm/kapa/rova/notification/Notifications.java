@@ -32,6 +32,7 @@ import java.util.List;
 public interface Notifications {
 
     String PARAM_ID = "id";
+    String PARAM_ENDUSER = "enduser";
     String ADMIN_NOTIFICATIONS = "/rest/admin/notifications/";
     String ADMIN_NOTIFICATION_BY_ID = "/rest/admin/notifications/notification/{id}";
     String ADMIN_NOTIFICATION = "/rest/admin/notifications/notification";
