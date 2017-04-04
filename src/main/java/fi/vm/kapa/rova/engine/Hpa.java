@@ -22,7 +22,7 @@
  */
 package fi.vm.kapa.rova.engine;
 
-import fi.vm.kapa.rova.engine.model.hpa.Authorization;
+import fi.vm.kapa.rova.engine.model.hpa.AuthorizationInternal;
 import fi.vm.kapa.rova.engine.model.hpa.HpaDelegate;
 import org.springframework.http.ResponseEntity;
 
@@ -40,6 +40,6 @@ public interface Hpa extends Engine {
     String GET_AUTHORIZATION = "/rest/hpa/authorization/{serviceIdType}/{service}/{delegateId}/{principalId}";
 
     ResponseEntity<HpaDelegate> getDelegateResponse(String serviceIdType, String personId, String service);
-    ResponseEntity<Authorization> getAuthorizationResponse(String serviceIdType, String service, String delegateId, String principalId, Set<String> issues);
+    ResponseEntity<AuthorizationInternal> getAuthorizationResponse(String serviceIdType, String service, String delegateId, String principalId, Set<String> issues);
 
 }

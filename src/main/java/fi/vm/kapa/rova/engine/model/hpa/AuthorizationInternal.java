@@ -20,22 +20,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package fi.vm.kapa.rova.engine;
+package fi.vm.kapa.rova.engine.model.hpa;
 
-import fi.vm.kapa.rova.engine.model.hpa.AuthorizationInternal;
-import fi.vm.kapa.rova.engine.model.hpa.HpaDelegate;
-import org.springframework.web.client.RestClientException;
+public class AuthorizationInternal extends Authorization {
+    private String serviceUuid;
 
-import java.util.Set;
+    public String getServiceUuid() {
+        return serviceUuid;
+    }
 
-/**
- * Created by mtom on 13/03/2017.
- */
-public interface HpaClient {
+    public void setServiceUuid(String serviceUuid) {
+        this.serviceUuid = serviceUuid;
+    }
 
-    final static String CLIENT_NAME = "roles-auths-engine-hpa";
-
-    HpaDelegate getDelegate(String serviceIdType, String personId, String service) throws RestClientException;
-    AuthorizationInternal getAuthorization(String serviceIdType, String service, String delegateId, String principalId, Set<String> issues)
-            throws RestClientException;
 }

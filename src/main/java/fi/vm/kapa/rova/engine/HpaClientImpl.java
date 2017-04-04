@@ -23,6 +23,7 @@
 package fi.vm.kapa.rova.engine;
 
 import fi.vm.kapa.rova.engine.model.hpa.Authorization;
+import fi.vm.kapa.rova.engine.model.hpa.AuthorizationInternal;
 import fi.vm.kapa.rova.engine.model.hpa.HpaDelegate;
 import fi.vm.kapa.rova.logging.Logger;
 import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
@@ -69,7 +70,7 @@ public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient {
         return getDelegateResponse(serviceIdType,  personId,  service).getBody();
     }
 
-    public Authorization getAuthorization(String serviceIdType, String service, String delegateId,
+    public AuthorizationInternal getAuthorization(String serviceIdType, String service, String delegateId,
                                                                   String principalId, Set<String> issues) throws RestClientException {
         return getAuthorizationResponse(serviceIdType, service, delegateId, principalId, issues).getBody();
     }
@@ -86,7 +87,7 @@ public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient {
         return restTemplate.getForEntity(requestUrl, HpaDelegate.class, params);
     }
 
-    public ResponseEntity<Authorization> getAuthorizationResponse(String serviceIdType, String service, String delegateId,
+    public ResponseEntity<AuthorizationInternal> getAuthorizationResponse(String serviceIdType, String service, String delegateId,
                                                           String principalId, Set<String> issues) {
         RestTemplate restTemplate = hpaRestTemplate;
         String requestUrl = RIBBON_ENGINE_URL + Hpa.GET_AUTHORIZATION;
@@ -104,7 +105,7 @@ public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient {
             builder.queryParams(queryParams);
         }
 
-        return restTemplate.getForEntity(builder.buildAndExpand(params).toUri(), Authorization.class);
+        return restTemplate.getForEntity(builder.buildAndExpand(params).toUri(), AuthorizationInternal.class);
     }
 
     protected RequestIdentificationInterceptor.HeaderTrust getHeaderTrust() {
