@@ -30,7 +30,10 @@ import java.util.List;
  * Created by jkorkala on 13/03/2017.
  */
 public interface UINotificationClient {
-    String NOTIFICATION_CACHE_EXPIRATION_IN_MINUTES = "${notification_cache_expiration_in_minutes:5}";
+
+    static final String CLIENT_NAME = "roles-auths-notification-ui";
+
+    static final String NOTIFICATION_CACHE_EXPIRATION_IN_MINUTES = "${notification_cache_expiration_in_minutes:5}";
 
     public List<UINotification> getChannelUINotifications();
 

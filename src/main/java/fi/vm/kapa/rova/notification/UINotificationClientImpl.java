@@ -27,8 +27,12 @@ import fi.vm.kapa.rova.logging.Logger;
 import fi.vm.kapa.rova.notification.model.UINotification;
 import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
 import fi.vm.kapa.rova.ui.Channel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -47,17 +51,16 @@ import static fi.vm.kapa.rova.logging.Logger.Field.ACTION;
  * Created by jkorkala on 13/03/2017.
  */
 
-@RibbonClient(name = "uiNotificationClient")
+@RibbonClient(name = UINotificationClient.CLIENT_NAME)
 @Conditional(NotificationClientCondition.class)
 public class UINotificationClientImpl implements UINotifications, UINotificationClient {
 
     private static final Logger LOG = Logger.getLogger(UINotificationClientImpl.class);
 
+    protected static final String RIBBON_ENDPOINT = "http://" + UINotificationClient.CLIENT_NAME;
+
     @Value("${notification.channel}")
     private String channel;
-
-    @Value("${engine_url}")
-    protected String endpointUrl;
 
     @Value("${engine_api_key}")
     private String apiKey;
@@ -69,6 +72,17 @@ public class UINotificationClientImpl implements UINotifications, UINotification
     private long cacheExpirationInMinutes;
 
     private final NotificationCache<UINotification> notificationCache;
+
+    @Autowired
+    @Qualifier("engine-notification-ui")
+    private RestTemplate restTemplate;
+
+    @Bean("engine-notification-ui")
+    @LoadBalanced
+    public RestTemplate getRestTemplate() {
+        return new RovaRestTemplate(apiKey, requestAliveSeconds,
+                RequestIdentificationInterceptor.HeaderTrust.TRUST_REQUEST_HEADERS);
+    }
 
     public UINotificationClientImpl() {
         notificationCache = new NotificationCache<UINotification>(cacheExpirationInMinutes) {
@@ -82,8 +96,7 @@ public class UINotificationClientImpl implements UINotifications, UINotification
 
     @Override
     public List<UINotification> getChannelUINotifications(String channel) {
-        RestTemplate restTemplate = getRestTemplate();
-        String requestUrl = endpointUrl + CHANNEL_NOTIFICATIONS;
+        String requestUrl = RIBBON_ENDPOINT + CHANNEL_NOTIFICATIONS;
         Map<String, String> params = new HashMap<>();
         params.put(CHANNEL_VARIABLE, channel);
         ResponseEntity<List<UINotification>> response = restTemplate.exchange(requestUrl, HttpMethod.GET, null,
@@ -109,12 +122,7 @@ public class UINotificationClientImpl implements UINotifications, UINotification
         notificationCache.invalidateAll();
     }
 
-    private RestTemplate getRestTemplate() {
-        return new RovaRestTemplate(apiKey, requestAliveSeconds,
-                RequestIdentificationInterceptor.HeaderTrust.TRUST_REQUEST_HEADERS);
-    }
-
-     private void logNotificationRequest(String action) {
+    private void logNotificationRequest(String action) {
         Logger.LogMap logmap = LOG.infoMap();
         logmap.set(ACTION, action);
         logmap.log();
