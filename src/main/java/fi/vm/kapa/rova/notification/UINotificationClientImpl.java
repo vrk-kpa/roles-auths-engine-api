@@ -22,6 +22,7 @@
  */
 package fi.vm.kapa.rova.notification;
 
+import fi.vm.kapa.rova.ErrorHandlerBuilder;
 import fi.vm.kapa.rova.RovaRestTemplate;
 import fi.vm.kapa.rova.logging.Logger;
 import fi.vm.kapa.rova.notification.model.UINotification;
@@ -81,7 +82,8 @@ public class UINotificationClientImpl implements UINotifications, UINotification
     @LoadBalanced
     public RestTemplate getRestTemplate() {
         return new RovaRestTemplate(apiKey, requestAliveSeconds,
-                RequestIdentificationInterceptor.HeaderTrust.TRUST_REQUEST_HEADERS);
+                RequestIdentificationInterceptor.HeaderTrust.TRUST_REQUEST_HEADERS,
+                ErrorHandlerBuilder.clientErrorsOnly());
     }
 
     public UINotificationClientImpl() {

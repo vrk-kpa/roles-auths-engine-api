@@ -23,6 +23,7 @@
 package fi.vm.kapa.rova.search;
 
 import fi.vm.kapa.rova.ClientException;
+import fi.vm.kapa.rova.ErrorHandlerBuilder;
 import fi.vm.kapa.rova.RovaRestTemplate;
 import fi.vm.kapa.rova.external.model.ytj.CompanyDTO;
 import fi.vm.kapa.rova.logging.Logger;
@@ -80,7 +81,8 @@ public class SearchClient {
     }
 
     private RestTemplate getRestTemplate() {
-        return new RovaRestTemplate(apiKey, requestAliveSeconds, HeaderTrust.TRUST_REQUEST_HEADERS);
+        return new RovaRestTemplate(apiKey, requestAliveSeconds, HeaderTrust.TRUST_REQUEST_HEADERS,
+                ErrorHandlerBuilder.clientErrorsOnly());
     }
 
 }

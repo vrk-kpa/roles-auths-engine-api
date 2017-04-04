@@ -23,6 +23,7 @@
 package fi.vm.kapa.rova.virre;
 
 import fi.vm.kapa.rova.ClientException;
+import fi.vm.kapa.rova.ErrorHandlerBuilder;
 import fi.vm.kapa.rova.RovaRestTemplate;
 import fi.vm.kapa.rova.external.model.virre.CompanyPerson;
 import fi.vm.kapa.rova.external.model.virre.CompanyRepresentations;
@@ -144,7 +145,8 @@ public class VirreClientImpl implements Virre, VirreClient {
 
     private RestTemplate getRestTemplate() {
         return new RovaRestTemplate(apiKey, requestAliveSeconds,
-                RequestIdentificationInterceptor.HeaderTrust.TRUST_REQUEST_HEADERS);
+                RequestIdentificationInterceptor.HeaderTrust.TRUST_REQUEST_HEADERS,
+                ErrorHandlerBuilder.clientErrorsOnly());
     }
 
 }

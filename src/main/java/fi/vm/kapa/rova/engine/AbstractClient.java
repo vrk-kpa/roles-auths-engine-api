@@ -53,7 +53,7 @@ public abstract class AbstractClient {
     protected abstract RequestIdentificationInterceptor.HeaderTrust getHeaderTrust();
 
     public RestTemplate getRestTemplate() {
-        return new RovaRestTemplate(null, apiKey, requestAliveSeconds, getHeaderTrust(),
+        return new RovaRestTemplate(apiKey, requestAliveSeconds, getHeaderTrust(),
                 ErrorHandlerBuilder.clientErrorsOnly());
     }
 
