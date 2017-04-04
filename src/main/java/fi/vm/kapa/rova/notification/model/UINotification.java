@@ -28,8 +28,11 @@ import java.util.stream.Collectors;
 
 public class UINotification {
 
-    private final String text;
-    private final Date startDate;
+    private String text;
+    private Date startDate;
+
+    public UINotification() {
+    }
 
     public UINotification(String text, Date startDate) {
         this.text = text;
@@ -58,4 +61,11 @@ public class UINotification {
         return startDate;
     }
 
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
 }
