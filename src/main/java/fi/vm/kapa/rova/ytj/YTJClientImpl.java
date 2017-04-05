@@ -130,8 +130,8 @@ public class YTJClientImpl implements YTJ, YTJClient {
     @Override
     public ResponseEntity<List<String>> getUpdatedCompaniesResponse(long startDate) {
         String requestUrl = YTJ_ENDPOINT_URL + UPDATED_COMPANIES_PATH;
-        return ytjRestTemplate.exchange(requestUrl, HttpMethod.GET, null, new ParameterizedTypeReference<List<String>>() {
-        }, new Long(startDate));
+        return ytjRestTemplate.exchange(requestUrl, HttpMethod.GET, null,
+                new ParameterizedTypeReference<List<String>>() {}, new Long(startDate));
     }
 
     @Override
@@ -140,15 +140,18 @@ public class YTJClientImpl implements YTJ, YTJClient {
 
         HttpEntity<List<String>> postedEntity = new HttpEntity<>(companyIds);
 
-        return ytjRestTemplate.exchange(requestUrl, HttpMethod.POST,
-                postedEntity, new ParameterizedTypeReference<List<CompanyWithStatusDTO>>() {
-                });
+        return ytjRestTemplate.exchange(requestUrl, HttpMethod.POST, postedEntity,
+                new ParameterizedTypeReference<List<CompanyWithStatusDTO>>() {});
     }
 
     private RestTemplate getRestTemplate() {
         RestTemplate restTemplate = new RovaRestTemplate(apiKey, requestAliveSeconds,
                 RequestIdentificationInterceptor.HeaderTrust.TRUST_REQUEST_HEADERS, ErrorHandlerBuilder.allErrors());
         return restTemplate;
+    }
+
+    public RestTemplate getYtjRestTemplate() {
+        return ytjRestTemplate;
     }
 
 }
