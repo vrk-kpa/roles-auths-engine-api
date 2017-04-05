@@ -23,13 +23,11 @@
 package fi.vm.kapa.rova.virre;
 
 import fi.vm.kapa.rova.ClientException;
-import fi.vm.kapa.rova.ErrorHandlerBuilder;
-import fi.vm.kapa.rova.RovaRestTemplate;
+import fi.vm.kapa.rova.RestTemplateFactory;
 import fi.vm.kapa.rova.external.model.virre.CompanyPerson;
 import fi.vm.kapa.rova.external.model.virre.CompanyRepresentations;
 import fi.vm.kapa.rova.external.model.virre.RepresentationRight;
 import fi.vm.kapa.rova.logging.Logger;
-import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
 import fi.vm.kapa.rova.utils.EncodingUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -66,7 +64,7 @@ public class VirreClientImpl implements Virre, VirreClient {
     @Bean(name="virreRestTemplate")
     @LoadBalanced
     public RestTemplate virreRestTemplate() {
-        return getRestTemplate();
+        return RestTemplateFactory.forBackendService(apiKey, requestAliveSeconds);
     }
 
     public VirreClientImpl(@Value("${virre_client_api_key}") String apiKey,
@@ -141,12 +139,6 @@ public class VirreClientImpl implements Virre, VirreClient {
             throw new ClientException(CONNECTION_ERROR_MSG + response.getStatusCode());
         }
         return rights;
-    }
-
-    private RestTemplate getRestTemplate() {
-        return new RovaRestTemplate(apiKey, requestAliveSeconds,
-                RequestIdentificationInterceptor.HeaderTrust.TRUST_REQUEST_HEADERS,
-                ErrorHandlerBuilder.clientErrorsOnly());
     }
 
 }

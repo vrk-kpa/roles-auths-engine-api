@@ -33,22 +33,34 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RovaRestTemplate extends RestTemplate {
+public final class RestTemplateFactory {
 
-    public RovaRestTemplate(String apiKey, int requestAliveSeconds,
-            HeaderTrust trustHeader) {
-        super();
+    /**
+     * RestTemplate for web front services.
+     */
+    public static RestTemplate forWebFront(String apiKey, int requestAliveSeconds) {
+        return restTemplate(apiKey, requestAliveSeconds, HeaderTrust.DONT_TRUST_REQUEST_HEADERS,
+                ErrorHandlerBuilder.clientErrorsOnly());
+    }
+
+    /**
+     * RestTemplate for internal backend services.
+     */
+    public static RestTemplate forBackendService(String apiKey, int requestAliveSeconds) {
+        return restTemplate(apiKey, requestAliveSeconds, HeaderTrust.TRUST_REQUEST_HEADERS,
+                ErrorHandlerBuilder.clientErrorsOnly());
+    }
+
+    public static RestTemplate restTemplate(String apiKey, int requestAliveSeconds, HeaderTrust trustHeader,
+            ResponseErrorHandler errorHandler) {
+        RestTemplate restTemplate = new RestTemplate();
         List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
         interceptors.add(new ValidationRequestInterceptor(apiKey, requestAliveSeconds));
         interceptors.add(new RequestIdentificationInterceptor(trustHeader));
         interceptors.add(new ClientExceptionInterceptor());
-        setInterceptors(interceptors);
-    }
-
-    public RovaRestTemplate(String apiKey, int requestAliveSeconds, HeaderTrust trustHeader,
-                            ResponseErrorHandler errorHandler) {
-        this(apiKey, requestAliveSeconds, trustHeader);
-        setErrorHandler(errorHandler);
+        restTemplate.setInterceptors(interceptors);
+        restTemplate.setErrorHandler(errorHandler);
+        return restTemplate;
     }
 
 }

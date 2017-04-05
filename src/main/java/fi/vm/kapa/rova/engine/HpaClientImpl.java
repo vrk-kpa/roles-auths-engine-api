@@ -22,11 +22,10 @@
  */
 package fi.vm.kapa.rova.engine;
 
-import fi.vm.kapa.rova.engine.model.hpa.Authorization;
+import fi.vm.kapa.rova.RestTemplateFactory;
 import fi.vm.kapa.rova.engine.model.hpa.AuthorizationInternal;
 import fi.vm.kapa.rova.engine.model.hpa.HpaDelegate;
 import fi.vm.kapa.rova.logging.Logger;
-import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -58,7 +57,7 @@ public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient {
 
     @Autowired
     @Qualifier("engine-hpa")
-    RestTemplate hpaRestTemplate;
+    private RestTemplate hpaRestTemplate;
 
     @Bean("engine-hpa")
     @LoadBalanced
@@ -108,8 +107,9 @@ public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient {
         return restTemplate.getForEntity(builder.buildAndExpand(params).toUri(), AuthorizationInternal.class);
     }
 
-    protected RequestIdentificationInterceptor.HeaderTrust getHeaderTrust() {
-        return RequestIdentificationInterceptor.HeaderTrust.TRUST_REQUEST_HEADERS;
+    @Override
+    protected RestTemplate getRestTemplate() {
+        return RestTemplateFactory.forBackendService(apiKey, requestAliveSeconds);
     }
 
 }

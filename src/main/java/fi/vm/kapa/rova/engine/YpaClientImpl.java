@@ -22,9 +22,9 @@
  */
 package fi.vm.kapa.rova.engine;
 
+import fi.vm.kapa.rova.RestTemplateFactory;
 import fi.vm.kapa.rova.engine.model.ypa.YpaResult;
 import fi.vm.kapa.rova.logging.Logger;
-import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -53,7 +53,7 @@ public class YpaClientImpl extends AbstractClient implements Ypa, YpaClient {
 
     @Autowired
     @Qualifier("engine-ypa")
-    RestTemplate ypaRestTemplate;
+    private RestTemplate ypaRestTemplate;
 
     @Bean("engine-ypa")
     @LoadBalanced
@@ -88,8 +88,9 @@ public class YpaClientImpl extends AbstractClient implements Ypa, YpaClient {
                 HttpMethod.GET, null, new ParameterizedTypeReference<YpaResult>() {});
     }
 
-    protected RequestIdentificationInterceptor.HeaderTrust getHeaderTrust() {
-        return RequestIdentificationInterceptor.HeaderTrust.TRUST_REQUEST_HEADERS;
+    @Override
+    protected RestTemplate getRestTemplate() {
+        return RestTemplateFactory.forBackendService(apiKey, requestAliveSeconds);
     }
 
 }

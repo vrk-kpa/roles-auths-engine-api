@@ -23,10 +23,7 @@
 package fi.vm.kapa.rova.engine;
 
 import fi.vm.kapa.rova.ClientException;
-import fi.vm.kapa.rova.ErrorHandlerBuilder;
-import fi.vm.kapa.rova.RovaRestTemplate;
 import fi.vm.kapa.rova.logging.Logger;
-import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,12 +47,7 @@ public abstract class AbstractClient {
     @Value("${request_alive_seconds}")
     protected int requestAliveSeconds;
 
-    protected abstract RequestIdentificationInterceptor.HeaderTrust getHeaderTrust();
-
-    public RestTemplate getRestTemplate() {
-        return new RovaRestTemplate(apiKey, requestAliveSeconds, getHeaderTrust(),
-                ErrorHandlerBuilder.clientErrorsOnly());
-    }
+    protected abstract RestTemplate getRestTemplate();
 
     protected void checkStatus(String uri, ResponseEntity<?> entityResponse, HttpStatus ... allowed) {
         List<HttpStatus> statuses = new ArrayList<>(Arrays.asList(new HttpStatus [] { HttpStatus.OK } ));

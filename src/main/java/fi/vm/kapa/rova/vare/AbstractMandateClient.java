@@ -23,27 +23,18 @@
 package fi.vm.kapa.rova.vare;
 
 import fi.vm.kapa.rova.ClientException;
-import fi.vm.kapa.rova.ErrorHandlerBuilder;
-import fi.vm.kapa.rova.RovaRestTemplate;
 import fi.vm.kapa.rova.logging.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import static fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor.HeaderTrust.TRUST_REQUEST_HEADERS;
 
 public abstract class AbstractMandateClient {
 
     private static final Logger LOG = Logger.getLogger(AbstractMandateClient.class);
 
-    private String apiKey;
-    private int requestAliveSeconds;
     private String endpointUrl;
 
-    public AbstractMandateClient(String apiKey, int requestAliveSeconds, String endpointUrl) {
-        this.apiKey = apiKey;
-        this.requestAliveSeconds = requestAliveSeconds;
+    public AbstractMandateClient(String endpointUrl) {
         this.endpointUrl = endpointUrl;
     }
 
@@ -65,16 +56,6 @@ public abstract class AbstractMandateClient {
             LOG.error(errorMessage);
             throw new ClientException(errorMessage);
         }
-    }
-
-    protected RestTemplate getRestTemplate() {
-        return new RovaRestTemplate(apiKey, requestAliveSeconds,
-                TRUST_REQUEST_HEADERS, ErrorHandlerBuilder.clientErrorsOnly());
-    }
-
-    protected RestTemplate getRestTemplate(String endUser) {
-        return new RovaRestTemplate(apiKey, requestAliveSeconds, TRUST_REQUEST_HEADERS,
-                ErrorHandlerBuilder.clientErrorsOnly());
     }
 
 }

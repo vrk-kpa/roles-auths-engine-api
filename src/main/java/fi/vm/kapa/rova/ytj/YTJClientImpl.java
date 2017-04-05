@@ -24,12 +24,11 @@ package fi.vm.kapa.rova.ytj;
 
 import fi.vm.kapa.rova.ClientException;
 import fi.vm.kapa.rova.ErrorHandlerBuilder;
-import fi.vm.kapa.rova.RovaRestTemplate;
+import fi.vm.kapa.rova.RestTemplateFactory;
 import fi.vm.kapa.rova.external.model.ytj.CompanyAuthorizationData;
 import fi.vm.kapa.rova.external.model.ytj.CompanyAuthorizationDataRequest;
 import fi.vm.kapa.rova.external.model.ytj.CompanyWithStatusDTO;
 import fi.vm.kapa.rova.logging.Logger;
-import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -65,7 +64,9 @@ public class YTJClientImpl implements YTJ, YTJClient {
     @Bean("ytjRestTemplate")
     @LoadBalanced
     public RestTemplate ytjRestTemplate() {
-        return getRestTemplate();
+        RestTemplate restTemplate = RestTemplateFactory.forBackendService(apiKey, requestAliveSeconds);
+        restTemplate.setErrorHandler(ErrorHandlerBuilder.allErrors());
+        return restTemplate;
     }
 
     public YTJClientImpl(@Value("${ytj_client_api_key}") String apiKey,
@@ -142,12 +143,6 @@ public class YTJClientImpl implements YTJ, YTJClient {
 
         return ytjRestTemplate.exchange(requestUrl, HttpMethod.POST, postedEntity,
                 new ParameterizedTypeReference<List<CompanyWithStatusDTO>>() {});
-    }
-
-    private RestTemplate getRestTemplate() {
-        RestTemplate restTemplate = new RovaRestTemplate(apiKey, requestAliveSeconds,
-                RequestIdentificationInterceptor.HeaderTrust.TRUST_REQUEST_HEADERS, ErrorHandlerBuilder.allErrors());
-        return restTemplate;
     }
 
     public RestTemplate getYtjRestTemplate() {

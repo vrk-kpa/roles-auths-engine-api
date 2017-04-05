@@ -23,11 +23,9 @@
 package fi.vm.kapa.rova.search;
 
 import fi.vm.kapa.rova.ClientException;
-import fi.vm.kapa.rova.ErrorHandlerBuilder;
-import fi.vm.kapa.rova.RovaRestTemplate;
+import fi.vm.kapa.rova.RestTemplateFactory;
 import fi.vm.kapa.rova.external.model.ytj.CompanyDTO;
 import fi.vm.kapa.rova.logging.Logger;
-import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor.HeaderTrust;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.context.annotation.Conditional;
@@ -63,7 +61,7 @@ public class SearchClient implements Search {
         if (companyIds == null || companyIds.isEmpty()) {
             return Collections.emptyList();
         }
-        RestTemplate restTemplate = getRestTemplate();
+        RestTemplate restTemplate = RestTemplateFactory.forBackendService(apiKey, requestAliveSeconds);
 
         String url = ENDPOINT_URL + NAMES_FOR_COMPANIES;
         ResponseEntity<List<CompanyDTO>> response = restTemplate.exchange(url, HttpMethod.POST,
@@ -77,10 +75,4 @@ public class SearchClient implements Search {
             throw new ClientException(errorMsq);
         }
     }
-
-    private RestTemplate getRestTemplate() {
-        return new RovaRestTemplate(apiKey, requestAliveSeconds, HeaderTrust.TRUST_REQUEST_HEADERS,
-                ErrorHandlerBuilder.clientErrorsOnly());
-    }
-
 }

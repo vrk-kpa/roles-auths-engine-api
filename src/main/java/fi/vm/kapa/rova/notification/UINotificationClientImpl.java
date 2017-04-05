@@ -22,11 +22,9 @@
  */
 package fi.vm.kapa.rova.notification;
 
-import fi.vm.kapa.rova.ErrorHandlerBuilder;
-import fi.vm.kapa.rova.RovaRestTemplate;
+import fi.vm.kapa.rova.RestTemplateFactory;
 import fi.vm.kapa.rova.logging.Logger;
 import fi.vm.kapa.rova.notification.model.UINotification;
-import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
 import fi.vm.kapa.rova.ui.Channel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -81,9 +79,7 @@ public class UINotificationClientImpl implements UINotifications, UINotification
     @Bean("engine-notification-ui")
     @LoadBalanced
     public RestTemplate getRestTemplate() {
-        return new RovaRestTemplate(apiKey, requestAliveSeconds,
-                RequestIdentificationInterceptor.HeaderTrust.TRUST_REQUEST_HEADERS,
-                ErrorHandlerBuilder.clientErrorsOnly());
+        return RestTemplateFactory.forWebFront(apiKey, requestAliveSeconds);
     }
 
     public UINotificationClientImpl() {

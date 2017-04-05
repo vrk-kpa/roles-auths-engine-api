@@ -22,6 +22,7 @@
  */
 package fi.vm.kapa.rova.vare;
 
+import fi.vm.kapa.rova.RestTemplateFactory;
 import fi.vm.kapa.rova.logging.Logger;
 import fi.vm.kapa.rova.vare.model.MandateResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,14 +54,14 @@ public class CheckMandateClientImpl extends AbstractMandateClient implements Che
 
     @LoadBalanced
     @Bean("vareCheckMandateRestTemplate")
-    public RestTemplate getVareCheckMandateRestTemplate() {
-        return getRestTemplate();
+    public RestTemplate getVareCheckMandateRestTemplate(@Value("${mandate_api_key}") String apiKey,
+            @Value("${request_alive_seconds}") int requestAliveSeconds) {
+        return RestTemplateFactory.forBackendService(apiKey, requestAliveSeconds);
     }
 
     @Autowired
-    public CheckMandateClientImpl(@Value("${mandate_api_key}") String apiKey,
-                              @Value("${request_alive_seconds}") int requestAliveSeconds) {
-        super(apiKey, requestAliveSeconds, "http://" + CHECK_MANDATE_CLIENT);
+    public CheckMandateClientImpl() {
+        super("http://" + CHECK_MANDATE_CLIENT);
     }
 
     @Override

@@ -23,10 +23,8 @@
 package fi.vm.kapa.rova.vtj;
 
 import fi.vm.kapa.rova.ClientException;
-import fi.vm.kapa.rova.ErrorHandlerBuilder;
-import fi.vm.kapa.rova.RovaRestTemplate;
+import fi.vm.kapa.rova.RestTemplateFactory;
 import fi.vm.kapa.rova.logging.Logger;
-import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
 import fi.vm.kapa.rova.vtj.model.VTJResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -64,7 +62,7 @@ public class VTJClient implements VTJ {
     @Bean(name = "vtjRestTemplate")
     @LoadBalanced
     public RestTemplate vtjRestTemplate() {
-        return getRestTemplate();
+        return RestTemplateFactory.forBackendService(apiKey, requestAliveSeconds);
     }
 
     public VTJClient(@Value("${vtj_client_api_key}") String apiKey,
@@ -96,11 +94,5 @@ public class VTJClient implements VTJ {
             LOG.error(errorMessage);
             throw new ClientException(errorMessage);
         }
-    }
-
-    private RestTemplate getRestTemplate() {
-        return new RovaRestTemplate(apiKey, requestAliveSeconds,
-                RequestIdentificationInterceptor.HeaderTrust.TRUST_REQUEST_HEADERS,
-                ErrorHandlerBuilder.clientErrorsOnly());
     }
 }
