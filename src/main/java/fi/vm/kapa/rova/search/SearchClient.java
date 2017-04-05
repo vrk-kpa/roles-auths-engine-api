@@ -40,25 +40,23 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Collections;
 import java.util.List;
 
-@RibbonClient(name = "searchClient")
+@RibbonClient(name = Search.CLIENT)
 @Conditional(SearchClientCondition.class)
-public class SearchClient {
+public class SearchClient implements Search {
 
     private static final Logger LOG = Logger.getLogger(SearchClient.class);
+
+    private static final String ENDPOINT_URL = "http://" + CLIENT;
 
     private String apiKey;
 
     private int requestAliveSeconds;
 
-    private String endpointUrl;
-
     public SearchClient(@Value("${search_service_search_key}") String apiKey,
-            @Value("${request_alive_seconds}") int requestAliveSeconds,
-            @Value("${search_service_url}") String endpointUrl) {
+            @Value("${request_alive_seconds}") int requestAliveSeconds) {
         super();
         this.apiKey = apiKey;
         this.requestAliveSeconds = requestAliveSeconds;
-        this.endpointUrl = endpointUrl;
     }
 
     public List<CompanyDTO> getNamesForCompanies(List<String> companyIds) {
@@ -67,7 +65,7 @@ public class SearchClient {
         }
         RestTemplate restTemplate = getRestTemplate();
 
-        String url = endpointUrl + "/search/companies/byId";
+        String url = ENDPOINT_URL + NAMES_FOR_COMPANIES;
         ResponseEntity<List<CompanyDTO>> response = restTemplate.exchange(url, HttpMethod.POST,
                 null, new ParameterizedTypeReference<List<CompanyDTO>>() {
         }, companyIds);
