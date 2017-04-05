@@ -26,20 +26,10 @@ import fi.vm.kapa.rova.ClientException;
 import fi.vm.kapa.rova.ErrorHandlerBuilder;
 import fi.vm.kapa.rova.RovaRestTemplate;
 import fi.vm.kapa.rova.logging.Logger;
-import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import java.util.Map;
 
 import static fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor.HeaderTrust.TRUST_REQUEST_HEADERS;
 
@@ -79,18 +69,12 @@ public abstract class AbstractMandateClient {
 
     protected RestTemplate getRestTemplate() {
         return new RovaRestTemplate(apiKey, requestAliveSeconds,
-                TRUST_REQUEST_HEADERS);
+                TRUST_REQUEST_HEADERS, ErrorHandlerBuilder.clientErrorsOnly());
     }
 
     protected RestTemplate getRestTemplate(String endUser) {
-        return new RovaRestTemplate(endUser, null, apiKey, requestAliveSeconds, TRUST_REQUEST_HEADERS,
+        return new RovaRestTemplate(apiKey, requestAliveSeconds, TRUST_REQUEST_HEADERS,
                 ErrorHandlerBuilder.clientErrorsOnly());
     }
-
-    protected RestTemplate getRestTemplate(String endUser, String requestId) {
-        return new RovaRestTemplate(endUser, requestId, apiKey, requestAliveSeconds, TRUST_REQUEST_HEADERS,
-                ErrorHandlerBuilder.clientErrorsOnly());
-    }
-
 
 }
