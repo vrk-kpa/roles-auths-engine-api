@@ -23,12 +23,15 @@
 package fi.vm.kapa.rova.engine.model.ypa;
 
 import fi.vm.kapa.rova.engine.evaluation.Evaluable;
+import fi.vm.kapa.rova.external.model.virre.BodyType;
 import fi.vm.kapa.rova.external.model.virre.Company;
 import fi.vm.kapa.rova.external.model.virre.CompanyRoleType;
 import fi.vm.kapa.rova.external.model.virre.RoleNameType;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class YpaPerson implements Evaluable {
 
@@ -72,14 +75,13 @@ public class YpaPerson implements Evaluable {
         this.status = status;
     }
 
-    public List<RoleNameType> getRoles() {
-        List<RoleNameType> roles = new ArrayList<>();
+    public Map<BodyType, RoleNameType> getRoles() {
+        Map<BodyType, RoleNameType> roles = new HashMap<>();
         if (company != null && company.getRoles() != null) {
             for (CompanyRoleType crt : company.getRoles()) {
-                roles.add(crt.getType());
+                roles.put(crt.getBodyType(), crt.getType());
             }
         }
-
         return roles;
     }
 

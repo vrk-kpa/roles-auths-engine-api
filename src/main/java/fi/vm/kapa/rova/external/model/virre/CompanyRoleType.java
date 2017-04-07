@@ -26,6 +26,7 @@ package fi.vm.kapa.rova.external.model.virre;
 public class CompanyRoleType {
 
     private RoleNameType type;
+    private BodyType bodyType;
 
     public RoleNameType getType() {
         return type;
@@ -35,9 +36,17 @@ public class CompanyRoleType {
         this.type = type;
     }
 
+    public BodyType getBodyType() {
+        return bodyType;
+    }
+
+    public void setBodyType(BodyType bodyType) {
+        this.bodyType = bodyType;
+    }
+
     @Override
     public String toString() {
-        return "CompanyRoleType [type=" + type + "]";
+        return "CompanyRoleType [bodyType=" + bodyType + ",type=" + type + "]";
     }
 
 }
