@@ -34,6 +34,7 @@ import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -78,8 +79,7 @@ public class SearchClient implements Search {
 
         String url = ENDPOINT_URL + NAMES_FOR_COMPANIES;
         ResponseEntity<List<CompanyDTO>> response = restTemplate.exchange(url, HttpMethod.POST,
-                null, new ParameterizedTypeReference<List<CompanyDTO>>() {
-        }, companyIds);
+                new HttpEntity<>(companyIds), new ParameterizedTypeReference<List<CompanyDTO>>() {});
         if (response.getStatusCode() == HttpStatus.OK) {
             return response.getBody();
         } else {
