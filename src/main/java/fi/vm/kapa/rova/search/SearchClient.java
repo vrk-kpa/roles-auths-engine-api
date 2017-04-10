@@ -26,8 +26,12 @@ import fi.vm.kapa.rova.ClientException;
 import fi.vm.kapa.rova.RestTemplateFactory;
 import fi.vm.kapa.rova.external.model.ytj.CompanyDTO;
 import fi.vm.kapa.rova.logging.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -50,6 +54,16 @@ public class SearchClient implements Search {
 
     private int requestAliveSeconds;
 
+    @Autowired
+    @Qualifier("searchRestTemplate")
+    private RestTemplate restTemplate;
+
+    @Bean(name = "searchRestTemplate")
+    @LoadBalanced
+    public RestTemplate searchRestTemplate() {
+        return RestTemplateFactory.forBackendService(apiKey, requestAliveSeconds);
+    }
+
     public SearchClient(@Value("${search_service_search_key}") String apiKey,
             @Value("${request_alive_seconds}") int requestAliveSeconds) {
         super();
@@ -61,7 +75,6 @@ public class SearchClient implements Search {
         if (companyIds == null || companyIds.isEmpty()) {
             return Collections.emptyList();
         }
-        RestTemplate restTemplate = RestTemplateFactory.forBackendService(apiKey, requestAliveSeconds);
 
         String url = ENDPOINT_URL + NAMES_FOR_COMPANIES;
         ResponseEntity<List<CompanyDTO>> response = restTemplate.exchange(url, HttpMethod.POST,
