@@ -22,6 +22,7 @@
  */
 package fi.vm.kapa.rova;
 
+import fi.vm.kapa.rova.logging.MDCInterceptor;
 import fi.vm.kapa.rova.rest.exception.ClientExceptionInterceptor;
 import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
 import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor.HeaderTrust;
@@ -55,8 +56,13 @@ public final class RestTemplateFactory {
             ResponseErrorHandler errorHandler) {
         RestTemplate restTemplate = new RestTemplate();
         List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
+        // Api-key authentication
         interceptors.add(new ValidationRequestInterceptor(apiKey, requestAliveSeconds));
+        // Request grouping for logging
+        interceptors.add(new MDCInterceptor());
+        // End user and request identification
         interceptors.add(new RequestIdentificationInterceptor(trustHeader));
+        // Exception handling
         interceptors.add(new ClientExceptionInterceptor());
         restTemplate.setInterceptors(interceptors);
         restTemplate.setErrorHandler(errorHandler);
