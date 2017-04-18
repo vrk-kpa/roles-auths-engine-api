@@ -20,33 +20,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package fi.vm.kapa.rova.external.model.virre;
 
-public class CompanyRoleType {
-
-    private RoleNameType type;
-    private BodyType bodyType;
-
-    public RoleNameType getType() {
-        return type;
-    }
-
-    public void setType(RoleNameType type) {
-        this.type = type;
-    }
-
-    public BodyType getBodyType() {
-        return bodyType;
-    }
-
-    public void setBodyType(BodyType bodyType) {
-        this.bodyType = bodyType;
-    }
-
-    @Override
-    public String toString() {
-        return "CompanyRoleType [bodyType=" + bodyType + ",type=" + type + "]";
-    }
-
+public enum BodyType {
+    HAL,
+    IS,
+    PIS,
+    PR,
+    SELM,
+    TIL,
+    TJS,
+    YHM
 }

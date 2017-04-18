@@ -34,5 +34,7 @@ public enum ResultRoleType implements IResultType {
     ELI,
     S,
     YHM,
+    PJ,
+    J,
     CLEAR
 }
