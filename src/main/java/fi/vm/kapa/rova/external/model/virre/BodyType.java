@@ -20,21 +20,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package fi.vm.kapa.rova.engine.model.ypa;
+package fi.vm.kapa.rova.external.model.virre;
 
-import fi.vm.kapa.rova.external.model.IResultType;
-
-public enum ResultRoleType implements IResultType {
-    NONE,
-    ALL,
-    NIMKO,
-    TJ,
+public enum BodyType {
+    HAL,
     IS,
+    PIS,
+    PR,
+    SELM,
     TIL,
-    ELI,
-    S,
-    YHM,
-    PJ,
-    J,
-    CLEAR
+    TJS,
+    YHM
 }
