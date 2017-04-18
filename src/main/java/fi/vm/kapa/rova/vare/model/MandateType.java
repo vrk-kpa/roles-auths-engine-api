@@ -26,7 +26,5 @@ package fi.vm.kapa.rova.vare.model;
  * Created by mtom on 23/02/2017.
  */
 public enum MandateType {
-    MANDATE,
-    PROXY
+    MANDATE, PROXY, ASSIGNMENT, ASSIGNMENT_PROXY
 }
-

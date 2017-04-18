@@ -31,6 +31,7 @@ public class MandateResult {
     public static final String REASON_DELEGATE_CANNOT_RECEIVE_MANDATE = "DELEGATE_CANNOT_RECEIVE_MANDATE";
     public static final String REASON_PRINCIPAL_NOT_COMPETENT = "PRINCIPAL_NOT_COMPETENT";
     public static final String REASON_DELEGATE_NOT_COMPETENT = "DELEGATE_NOT_COMPETENT";
+    public static final String REASON_END_USER_NOT_UNAUTHORIZED_REPRESENT_PRINCIPAL = "END_USER_NOT_UNAUTHORIZED_REPRESENT_PRINCIPAL";
 
     private boolean success;
     private String reason;

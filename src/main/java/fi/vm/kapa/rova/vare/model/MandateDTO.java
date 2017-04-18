@@ -157,15 +157,6 @@ public class MandateDTO {
         this.groupId = groupId;
     }
 
-    @Override
-    public String toString() {
-        return "MandateDTO [uuid=" + uuid + ", delegate=" + delegate + ", principal=" + principal + ", subject="
-                + subject + ", startDate=" + startDate + ", endDate=" + endDate + ", issues=" + issues
-                + ", additionalInfo=" + additionalInfo + ", groupId=" + groupId + ", delegateBirth=" + delegateBirth
-                + ", principalBirth=" + principalBirth + ", valid=" + valid + ", principalRepresented="
-                + principalRepresented + ", periodOk=" + periodOk + ", type=" + type + "]";
-    }
-
     public boolean isRequest() {
         return request;
     }
@@ -182,4 +173,14 @@ public class MandateDTO {
         this.type = type;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "MandateDTO [uuid=" + uuid + ", delegate=" + delegate + ", principal=" + principal + ", subject="
+                + subject + ", startDate=" + startDate + ", endDate=" + endDate + ", issues=" + issues
+                + ", additionalInfo=" + additionalInfo + ", groupId=" + groupId + ", delegateBirth=" + delegateBirth
+                + ", principalBirth=" + principalBirth + ", valid=" + valid + ", principalRepresented="
+                + principalRepresented + ", periodOk=" + periodOk + ", request=" + request + ", type=" + type + "]";
+    }
+
 }
