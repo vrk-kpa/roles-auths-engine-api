@@ -81,8 +81,8 @@ public class VirreClientImpl implements Virre, VirreClient {
         params.put("socialsec", EncodingUtils.encodePathParam(socialsec));
         CompanyPerson person = null;
         ResponseEntity<CompanyPerson> entity = virreRestTemplate.getForEntity(url, CompanyPerson.class, params);
-        if (entity.getStatusCode() == HttpStatus.NOT_FOUND) {
-            LOG.debug("No data (404) from Virre for " + socialsec);
+        if (entity.getStatusCode() == HttpStatus.NO_CONTENT) {
+            LOG.debug("No data (204) from Virre for " + socialsec);
             return null;
         }
 
