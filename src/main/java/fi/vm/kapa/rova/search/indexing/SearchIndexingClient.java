@@ -26,6 +26,7 @@ import fi.vm.kapa.rova.ErrorHandlerBuilder;
 import fi.vm.kapa.rova.RestTemplateFactory;
 import fi.vm.kapa.rova.external.model.ytj.CompanyDTO;
 import fi.vm.kapa.rova.logging.Logger;
+import fi.vm.kapa.rova.ontology.Concept;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -43,6 +44,20 @@ import java.util.List;
 @RibbonClient(name = SearchIndexing.CLIENT)
 @Conditional(SearchIndexingClientCondition.class)
 public class SearchIndexingClient implements SearchIndexing {
+
+    public enum INDEX {
+        COMPANY("companies"), CONCEPT("concepts");
+        private String indexName;
+
+        private INDEX(String indexName) {
+            this.indexName = indexName;
+        }
+
+        @Override
+        public String toString() {
+            return indexName;
+        }
+    }
 
     private static final Logger LOG = Logger.getLogger(SearchIndexingClient.class);
     protected static final String RIBBON_ENDPOINT = "http://" + SearchIndexing.CLIENT;
@@ -68,9 +83,9 @@ public class SearchIndexingClient implements SearchIndexing {
         this.requestAliveSeconds = requestAliveSeconds;
     }
 
-    public boolean companyIndexExists() throws SearchServiceException {
+    public boolean indexExists(INDEX index) throws SearchServiceException {
 
-        String resourceUrl = RIBBON_ENDPOINT + "/index/companies";
+        String resourceUrl = RIBBON_ENDPOINT + "/index/" + index;
         ResponseEntity<String> response = indexClientRestTemplate.exchange(resourceUrl, HttpMethod.HEAD, null, String.class);
 
         if (response.getStatusCode() == HttpStatus.OK) {
@@ -78,22 +93,29 @@ public class SearchIndexingClient implements SearchIndexing {
         } else if (response.getStatusCode() == HttpStatus.NO_CONTENT) {
             return false;
         } else {
-            LOG.error("Failed to check if company is indexed (HEAD for " + resourceUrl
+            LOG.error("Failed to check if " + index + " index exists (HEAD for " + resourceUrl
                     + " returned HTTP status " + response.getStatusCode().value() + ").");
-            throw new SearchServiceException("Failed to check if company can be found from index.");
+            throw new SearchServiceException("Failed to check if" + index + "index exists.");
         }
     }
 
-    public void index(List<CompanyDTO> companies) throws SearchServiceException {
+    public void indexCompanies(List<CompanyDTO> companies) throws SearchServiceException {
+        index(companies, INDEX.COMPANY);
+    }
 
-        String resourceUrl = RIBBON_ENDPOINT + "/index/companies";
+    public void indexConcepts(List<Concept> concepts) throws SearchServiceException {
+        index(concepts, INDEX.CONCEPT);
+    }
 
-        ResponseEntity<String> response = indexClientRestTemplate.postForEntity(resourceUrl, companies, String.class);
+    private void index(List<? extends Object> documents, INDEX index) throws SearchServiceException {
+        String resourceUrl = RIBBON_ENDPOINT + "/index/" + index;
+
+        ResponseEntity<String> response = indexClientRestTemplate.postForEntity(resourceUrl, documents, String.class);
 
         if (response.getStatusCode() != HttpStatus.OK) {
-            LOG.error("Failed to index company data (POST for " + resourceUrl
-                    + " returned HTTP status " + response.getStatusCode().value() + ").");
-            throw new SearchServiceException("Failed to index companies.");
+            LOG.error("Failed to index data to " + index + " index. (POST for " + resourceUrl + " returned HTTP status "
+                    + response.getStatusCode().value() + ").");
+            throw new SearchServiceException("Failed to index " + index + ".");
         }
     }
 
