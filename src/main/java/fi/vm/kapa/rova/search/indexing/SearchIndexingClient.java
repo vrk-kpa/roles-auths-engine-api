@@ -45,11 +45,11 @@ import java.util.List;
 @Conditional(SearchIndexingClientCondition.class)
 public class SearchIndexingClient implements SearchIndexing {
 
-    public enum INDEX {
+    public enum Index {
         COMPANY("companies"), CONCEPT("concepts");
         private String indexName;
 
-        private INDEX(String indexName) {
+        private Index(String indexName) {
             this.indexName = indexName;
         }
 
@@ -83,7 +83,7 @@ public class SearchIndexingClient implements SearchIndexing {
         this.requestAliveSeconds = requestAliveSeconds;
     }
 
-    public boolean indexExists(INDEX index) throws SearchServiceException {
+    public boolean indexExists(Index index) throws SearchServiceException {
 
         String resourceUrl = RIBBON_ENDPOINT + "/index/" + index;
         ResponseEntity<String> response = indexClientRestTemplate.exchange(resourceUrl, HttpMethod.HEAD, null, String.class);
@@ -100,14 +100,14 @@ public class SearchIndexingClient implements SearchIndexing {
     }
 
     public void indexCompanies(List<CompanyDTO> companies) throws SearchServiceException {
-        index(companies, INDEX.COMPANY);
+        index(companies, Index.COMPANY);
     }
 
     public void indexConcepts(List<Concept> concepts) throws SearchServiceException {
-        index(concepts, INDEX.CONCEPT);
+        index(concepts, Index.CONCEPT);
     }
 
-    private void index(List<? extends Object> documents, INDEX index) throws SearchServiceException {
+    private void index(List<? extends Object> documents, Index index) throws SearchServiceException {
         String resourceUrl = RIBBON_ENDPOINT + "/index/" + index;
 
         ResponseEntity<String> response = indexClientRestTemplate.postForEntity(resourceUrl, documents, String.class);
