@@ -63,7 +63,6 @@ public class SearchIndexingClient implements SearchIndexing {
     protected static final String RIBBON_ENDPOINT = "http://" + SearchIndexing.CLIENT;
 
     private String apiKey;
-    private int requestAliveSeconds;
 
     @Autowired
     @Qualifier("indexClientRestTemplate")
@@ -72,15 +71,13 @@ public class SearchIndexingClient implements SearchIndexing {
     @Bean("indexClientRestTemplate")
     @LoadBalanced
     public RestTemplate indexClientRestTemplate() {
-        RestTemplate template = RestTemplateFactory.forBackendService(apiKey, requestAliveSeconds);
+        RestTemplate template = RestTemplateFactory.forBackendService(apiKey, -1);
         template.setErrorHandler(ErrorHandlerBuilder.allErrors());
         return template;
     }
 
-    public SearchIndexingClient(@Value("${search_service_indexing_api_key}") String apiKey,
-                                @Value("${request_alive_seconds}") int requestAliveSeconds) {
+    public SearchIndexingClient(@Value("${search_service_indexing_api_key}") String apiKey) {
         this.apiKey = apiKey;
-        this.requestAliveSeconds = requestAliveSeconds;
     }
 
     public boolean indexExists(Index index) throws SearchServiceException {
