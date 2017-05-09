@@ -31,6 +31,7 @@ public class PtvService {
     private List<Label> names = new ArrayList<>();
     private List<Label> descriptions = new ArrayList<>();
     private Organization responsibleOrganization;
+    private Organization providingOrganization;
     private List<Channel> channels = new ArrayList<>();
     private List<LifeEvent> lifeEvents = new ArrayList<>();
 

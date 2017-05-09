@@ -26,34 +26,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Channel {
-
-    private List<Label> descriptions = new ArrayList<>();
-    private List<Label> names = new ArrayList<>();
-    private String channelType;
+    private Address addresses;
+    private String areaType;
+    private String id;
     private List<String> issues = new ArrayList<>();
+    private List<String> languages;
+    private String organizationId;
+    private String publishingStatus;
+    private List<Label> serviceChannelDescriptions;
+    private List<Label> serviceChannelNames;
+    private String serviceChannelType;
+    private List<ServiceHours> serviceHours;
+    private List<WebPage> webPages;
 
-    public List<Label> getDescriptions() {
-        return descriptions;
+    public Address getAddresses() {
+        return addresses;
     }
 
-    public void setDescriptions(List<Label> descriptions) {
-        this.descriptions = descriptions;
+    public void setAddresses(Address addresses) {
+        this.addresses = addresses;
     }
 
-    public List<Label> getNames() {
-        return names;
+    public String getAreaType() {
+        return areaType;
     }
 
-    public void setNames(List<Label> names) {
-        this.names = names;
+    public void setAreaType(String areaType) {
+        this.areaType = areaType;
     }
 
-    public String getChannelType() {
-        return channelType;
+    public String getId() {
+        return id;
     }
 
-    public void setChannelType(String channelType) {
-        this.channelType = channelType;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public List<String> getIssues() {
@@ -62,6 +69,70 @@ public class Channel {
 
     public void setIssues(List<String> issues) {
         this.issues = issues;
+    }
+
+    public List<String> getLanguages() {
+        return languages;
+    }
+
+    public void setLanguages(List<String> languages) {
+        this.languages = languages;
+    }
+
+    public String getOrganizationId() {
+        return organizationId;
+    }
+
+    public void setOrganizationId(String organizationId) {
+        this.organizationId = organizationId;
+    }
+
+    public String getPublishingStatus() {
+        return publishingStatus;
+    }
+
+    public void setPublishingStatus(String publishingStatus) {
+        this.publishingStatus = publishingStatus;
+    }
+
+    public List<Label> getServiceChannelDescriptions() {
+        return serviceChannelDescriptions;
+    }
+
+    public void setServiceChannelDescriptions(List<Label> serviceChannelDescriptions) {
+        this.serviceChannelDescriptions = serviceChannelDescriptions;
+    }
+
+    public List<Label> getServiceChannelNames() {
+        return serviceChannelNames;
+    }
+
+    public void setServiceChannelNames(List<Label> serviceChannelNames) {
+        this.serviceChannelNames = serviceChannelNames;
+    }
+
+    public String getServiceChannelType() {
+        return serviceChannelType;
+    }
+
+    public void setServiceChannelType(String serviceChannelType) {
+        this.serviceChannelType = serviceChannelType;
+    }
+
+    public List<ServiceHours> getServiceHours() {
+        return serviceHours;
+    }
+
+    public void setServiceHours(List<ServiceHours> serviceHours) {
+        this.serviceHours = serviceHours;
+    }
+
+    public List<WebPage> getWebPages() {
+        return webPages;
+    }
+
+    public void setWebPages(List<WebPage> webPages) {
+        this.webPages = webPages;
     }
 
 }
