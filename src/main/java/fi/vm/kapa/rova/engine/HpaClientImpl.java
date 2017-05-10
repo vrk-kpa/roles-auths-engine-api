@@ -22,6 +22,7 @@
  */
 package fi.vm.kapa.rova.engine;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import fi.vm.kapa.rova.RestTemplateFactory;
 import fi.vm.kapa.rova.engine.model.hpa.AuthorizationInternal;
 import fi.vm.kapa.rova.engine.model.hpa.HpaDelegate;
@@ -65,10 +66,12 @@ public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient {
         return getRestTemplate();
     }
 
+    @HystrixCommand(commandKey = "HpaClientGetDelegate")
     public HpaDelegate getDelegate(String serviceIdType, String personId, String service) throws RestClientException {
         return getDelegateResponse(serviceIdType,  personId,  service).getBody();
     }
 
+    @HystrixCommand(commandKey = "HpaClientGetAuthorization")
     public AuthorizationInternal getAuthorization(String serviceIdType, String service, String delegateId,
                                                                   String principalId, Set<String> issues) throws RestClientException {
         return getAuthorizationResponse(serviceIdType, service, delegateId, principalId, issues).getBody();

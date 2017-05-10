@@ -22,6 +22,7 @@
  */
 package fi.vm.kapa.rova.engine;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import fi.vm.kapa.rova.RestTemplateFactory;
 import fi.vm.kapa.rova.engine.model.ypa.YpaResult;
 import fi.vm.kapa.rova.logging.Logger;
@@ -63,6 +64,7 @@ public class YpaClientImpl extends AbstractClient implements Ypa, YpaClient {
 
     protected static final Logger LOG = Logger.getLogger(YpaClientImpl.class);
 
+    @HystrixCommand(commandKey = "YpaClientGetRoles")
     public YpaResult getRoles(String personId, String serviceIdType, String service, List<String> organizationIds)
             throws RestClientException {
         return getRolesResponse(personId, serviceIdType, service, organizationIds).getBody();

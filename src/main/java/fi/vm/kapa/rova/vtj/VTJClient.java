@@ -22,6 +22,7 @@
  */
 package fi.vm.kapa.rova.vtj;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import fi.vm.kapa.rova.ClientException;
 import fi.vm.kapa.rova.RestTemplateFactory;
 import fi.vm.kapa.rova.logging.Logger;
@@ -66,12 +67,13 @@ public class VTJClient implements VTJ {
     }
 
     public VTJClient(@Value("${vtj_client_api_key}") String apiKey,
-            @Value("${request_alive_seconds}") int requestAliveSeconds) {
+                     @Value("${request_alive_seconds}") int requestAliveSeconds) {
         super();
         this.apiKey = apiKey;
         this.requestAliveSeconds = requestAliveSeconds;
     }
 
+    @HystrixCommand(commandKey = "VTJClientGetPerson", fallbackMethod = "getPersonFallback")
     public VTJResponse getPerson(String hetu, String schema) {
         RestTemplate restTemplate = vtjRestTemplate;
         String requestUrl = VTJ_ENDPOINT_URL + VTJ_PERSON_PATH;
@@ -97,4 +99,13 @@ public class VTJClient implements VTJ {
         LOG.error(errorMessage);
         throw new ClientException(errorMessage);
     }
+
+    @HystrixCommand(commandKey = "VTJClientGetPersonFallback")
+    public VTJResponse getPersonFallback(String hetu, String schema) {
+        LOG.error("Falling back to unsuccessful response.");
+        VTJResponse response = new VTJResponse();
+        response.setSuccess(false);
+        return response;
+    }
+
 }
