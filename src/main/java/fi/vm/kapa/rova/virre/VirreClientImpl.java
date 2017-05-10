@@ -22,6 +22,7 @@
  */
 package fi.vm.kapa.rova.virre;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import fi.vm.kapa.rova.ClientException;
 import fi.vm.kapa.rova.RestTemplateFactory;
 import fi.vm.kapa.rova.external.model.virre.CompanyPerson;
@@ -75,6 +76,7 @@ public class VirreClientImpl implements Virre, VirreClient {
     }
 
     @Override
+    @HystrixCommand(commandKey = "VirreClientGetCompanyPerson")
     public CompanyPerson getCompanyPerson(String socialsec) {
         String url = ENDPOINT_URL + GET_COMPANY_PERSON_PATH;
         Map<String, String> params = new HashMap<>();
@@ -95,6 +97,7 @@ public class VirreClientImpl implements Virre, VirreClient {
     }
 
     @Override
+    @HystrixCommand(commandKey = "VirreClientGetRepresentations")
     public CompanyRepresentations getRepresentations(String businessid) {
         String url = ENDPOINT_URL + GET_REPRESENTATIONS_PATH;
         Map<String, String> params = new HashMap<>();
@@ -105,6 +108,7 @@ public class VirreClientImpl implements Virre, VirreClient {
     }
 
     @Override
+    @HystrixCommand(commandKey = "VirreClientGetRights")
     public RepresentationRight getRights(String socialSec, String businessId, String rightLevel) {
         String url = ENDPOINT_URL + GET_RIGHTS_PATH;
         Map<String, String> params = new HashMap<>();

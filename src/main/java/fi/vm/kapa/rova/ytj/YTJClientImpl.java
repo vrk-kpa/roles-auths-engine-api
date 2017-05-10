@@ -22,6 +22,7 @@
  */
 package fi.vm.kapa.rova.ytj;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import fi.vm.kapa.rova.ClientException;
 import fi.vm.kapa.rova.ErrorHandlerBuilder;
 import fi.vm.kapa.rova.RestTemplateFactory;
@@ -77,6 +78,7 @@ public class YTJClientImpl implements YTJ, YTJClient {
     }
 
     @Override
+    @HystrixCommand(commandKey = "YTJClientImplGetCompanyAuthorizationData")
     public Optional<CompanyAuthorizationData> getCompanyAuthorizationData(String ssn) {
         CompanyAuthorizationDataRequest request = new CompanyAuthorizationDataRequest();
         request.setSsn(ssn);
@@ -94,6 +96,7 @@ public class YTJClientImpl implements YTJ, YTJClient {
     }
 
     @Override
+    @HystrixCommand(commandKey = "YTJClientImplGetCompanyAuthorizationData")
     public List<String> getUpdatedCompanies(long startDate) {
         ResponseEntity<List<String>> responseEntity = getUpdatedCompaniesResponse(startDate);
         if (responseEntity.getStatusCode() != HttpStatus.OK) {
@@ -107,6 +110,7 @@ public class YTJClientImpl implements YTJ, YTJClient {
     }
 
     @Override
+    @HystrixCommand(commandKey = "YTJClientImplGetCompanyAuthorizationData")
     public List<CompanyWithStatusDTO> getCompanies(List<String> companyIds) {
         ResponseEntity<List<CompanyWithStatusDTO>> responseEntity = getCompaniesResponse(companyIds);
 
