@@ -26,6 +26,8 @@ import fi.vm.kapa.rova.ClientException;
 import fi.vm.kapa.rova.RestTemplateFactory;
 import fi.vm.kapa.rova.external.model.ytj.CompanyDTO;
 import fi.vm.kapa.rova.logging.Logger;
+import fi.vm.kapa.rova.search.model.CompanySearchResult;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,6 +40,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
@@ -88,4 +91,16 @@ public class SearchClient implements Search {
             throw new ClientException(errorMsq);
         }
     }
+
+    public List<CompanyDTO> getCompaniesForName(String nameQuery) {
+        if (StringUtils.isBlank(nameQuery)) {
+            return Collections.emptyList();
+        }
+
+        ResponseEntity<CompanySearchResult> result = restTemplate.getForEntity(ENDPOINT_URL + COMPANIES_FOR_NAME + "/" + nameQuery,
+                CompanySearchResult.class, Collections.emptyMap());
+
+        return result.getBody().getCompanies();
+    }
+
 }
