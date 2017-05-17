@@ -27,6 +27,7 @@ import fi.vm.kapa.rova.RestTemplateFactory;
 import fi.vm.kapa.rova.external.model.ytj.CompanyDTO;
 import fi.vm.kapa.rova.logging.Logger;
 import fi.vm.kapa.rova.ontology.Concept;
+import fi.vm.kapa.rova.ptv.model.PtvService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -46,7 +47,7 @@ import java.util.List;
 public class SearchIndexingClient implements SearchIndexing {
 
     public enum Index {
-        COMPANY("companies"), CONCEPT("concepts");
+        COMPANY("companies"), CONCEPT("concepts"), PTV_SERVICE("ptvservices");
         private String indexName;
 
         private Index(String indexName) {
@@ -102,6 +103,26 @@ public class SearchIndexingClient implements SearchIndexing {
 
     public void indexConcepts(List<Concept> concepts) throws SearchServiceException {
         index(concepts, Index.CONCEPT);
+    }
+
+    public void indexPtvServicesToTmpIndex(List<PtvService> ptvServices) throws SearchServiceException {
+        String resourceUrl = RIBBON_ENDPOINT + "/index/ptvservices/tmp/index";
+        ResponseEntity<String> response = indexClientRestTemplate.postForEntity(resourceUrl, ptvServices, String.class);
+        if (response.getStatusCode() != HttpStatus.OK) {
+            LOG.error("Failed to index PTV services to index. (POST for " + resourceUrl + " returned HTTP status "
+                    + response.getStatusCode().value() + ").");
+            throw new SearchServiceException("Failed to index to PTV tmp index.");
+        }
+    }
+
+    public void promotePtvServiceTmpIndex() throws SearchServiceException {
+        String resourceUrl = RIBBON_ENDPOINT + "/index/ptvservices/tmp/promote";
+        ResponseEntity<String> response = indexClientRestTemplate.postForEntity(resourceUrl, null, String.class);
+        if (response.getStatusCode() != HttpStatus.OK) {
+            LOG.error("Failed to promote PTV tmp index. (POST for " + resourceUrl + " returned HTTP status "
+                    + response.getStatusCode().value() + ").");
+            throw new SearchServiceException("Failed to index promote PTV tmp index.");
+        }
     }
 
     private void index(List<? extends Object> documents, Index index) throws SearchServiceException {
