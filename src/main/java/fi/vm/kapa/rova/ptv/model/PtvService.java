@@ -83,5 +83,11 @@ public class PtvService {
         this.lifeEvents = lifeEvents;
     }
 
+    public Organization getProvidingOrganization() {
+        return providingOrganization;
+    }
 
+    public void setProvidingOrganization(Organization providingOrganization) {
+        this.providingOrganization = providingOrganization;
+    }
 }

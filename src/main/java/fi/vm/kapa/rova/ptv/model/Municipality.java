@@ -22,14 +22,28 @@
  */
 package fi.vm.kapa.rova.ptv.model;
 
-public class Location {
+import java.util.List;
 
-    private Double latitude;
-    private Double longitude;
-    private Label streetAddress;
-    private String streetNumber;
-    private String postalCode;
-    private Label postOffice;
-    private String country;
+/**
+ * Created by riku on 18.5.2017.
+ */
+public class Municipality {
+    private String code;
+    private List<Label> name;
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public List<Label> getName() {
+        return name;
+    }
+
+    public void setName(List<Label> name) {
+        this.name = name;
+    }
 }

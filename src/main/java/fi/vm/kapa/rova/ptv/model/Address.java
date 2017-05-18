@@ -34,7 +34,7 @@ public class Address {
     private List<Label> postOffice;
     private List<Label> streetAddress;
     private String streetNumber;
-    private Label municipality;
+    private Municipality municipality;
     private String country;
     private List<Label> additionalInformation;
 
@@ -102,11 +102,11 @@ public class Address {
         this.streetNumber = streetNumber;
     }
 
-    public Label getMunicipality() {
+    public Municipality getMunicipality() {
         return municipality;
     }
 
-    public void setMunicipality(Label municipality) {
+    public void setMunicipality(Municipality municipality) {
         this.municipality = municipality;
     }
 

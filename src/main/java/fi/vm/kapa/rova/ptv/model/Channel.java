@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Channel {
-    private Address addresses;
+    private List<Address> addresses = new ArrayList<>();
     private String areaType;
     private String id;
     private List<String> issues = new ArrayList<>();
@@ -39,11 +39,11 @@ public class Channel {
     private List<ServiceHours> serviceHours;
     private List<WebPage> webPages;
 
-    public Address getAddresses() {
+    public List<Address> getAddresses() {
         return addresses;
     }
 
-    public void setAddresses(Address addresses) {
+    public void setAddresses(List<Address> addresses) {
         this.addresses = addresses;
     }
 
