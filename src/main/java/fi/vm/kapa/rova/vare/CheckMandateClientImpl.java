@@ -24,6 +24,7 @@ package fi.vm.kapa.rova.vare;
 
 import fi.vm.kapa.rova.RestTemplateFactory;
 import fi.vm.kapa.rova.logging.Logger;
+import fi.vm.kapa.rova.vare.model.MandateDTO;
 import fi.vm.kapa.rova.vare.model.MandateResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -41,6 +42,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RibbonClient(name = CheckMandateClient.CHECK_MANDATE_CLIENT)
 @Conditional(CheckMandateClientCondition.class)
@@ -97,6 +99,22 @@ public class CheckMandateClientImpl extends AbstractMandateClient implements Che
         String expandedUrl = builder.buildAndExpand(params).encode().toUriString();
         ResponseEntity<List<String>> response = restTemplate.exchange(expandedUrl, HttpMethod.GET, null,
                 new ParameterizedTypeReference<List<String>>() {
+                });
+        return handleResponse(response, expandedUrl);
+    }
+
+    @Override
+    public List<MandateDTO> getAssignmentMandates(String delegateId, Optional<String> principalId) {
+        String path = (principalId.isPresent()) ? COMPANY_ASSIGNMENT_MANDATES : ASSIGNMENT_MANDATES;
+        UriComponentsBuilder builder = getUriComponentsBuilder(path);
+        Map<String, String> params = new HashMap<>();
+        params.put("delegateId", delegateId);
+        if (principalId.isPresent()) {
+            params.put("principalId", principalId.get());
+        }
+        String expandedUrl = builder.buildAndExpand(params).encode().toUriString();
+        ResponseEntity<List<MandateDTO>> response = restTemplate.exchange(expandedUrl, HttpMethod.GET, null,
+                new ParameterizedTypeReference<List<MandateDTO>>() {
                 });
         return handleResponse(response, expandedUrl);
     }
