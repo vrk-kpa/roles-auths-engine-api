@@ -26,6 +26,6 @@ package fi.vm.kapa.rova.vare;
  * Created by jkorkala on 28/03/2017.
  */
 public interface Vare {
-    String API_VERSION = "1.0";
+    String API_VERSION = "1.1";
 
 }

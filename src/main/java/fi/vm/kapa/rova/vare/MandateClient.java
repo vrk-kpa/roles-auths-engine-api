@@ -74,25 +74,25 @@ public interface MandateClient {
 
     LegalSubjectsDTO validateNameAndId(LegalSubjectsDTO legalSubjects);
 
-    PartiesDTO getDelegates(SearchTypeEnum type, String principalId, int limit, int offset,
+    PartiesDTO getDelegates(SearchTypeEnum type, String principalId, List<MandateType> mandateTypes, int limit, int offset,
                             boolean ascending);
 
-    SimplifiedMandatesDTO getConfirmedMandates(String principalId, String delegateId, String lang, int limit,
+    SimplifiedMandatesDTO getConfirmedMandates(String principalId, String delegateId, List<MandateType> mandateTypes, String lang, int limit,
                                                int offset, SortTypeEnum sortBy, boolean ascending);
 
-    SimplifiedMandatesDTO getConfirmedPastMandates(String representedParty, String otherParty, String lang, int limit,
+    SimplifiedMandatesDTO getConfirmedPastMandates(String representedParty, String otherParty, List<MandateType> mandateTypes, String lang, int limit,
                                                    int offset, SortTypeEnum sortBy, boolean ascending);
 
-    SimplifiedMandatesDTO getMandateRequests(String representedParty, String otherParty, String lang, int limit,
+    SimplifiedMandatesDTO getMandateRequests(String representedParty, String otherParty, List<MandateType> mandateTypes, String lang, int limit,
                                              int offset, SortTypeEnum sortBy, boolean ascending);
 
-    PartiesDTO getPrincipals(SearchTypeEnum type, String delegateId, int limit, int offset,
+    PartiesDTO getPrincipals(SearchTypeEnum type, String delegateId, List<MandateType> mandateTypes, int limit, int offset,
                              boolean ascending);
 
-    PartiesDTO getPastMandateParties(String partyId, SearchTypeEnum type, int limit,
+    PartiesDTO getPastMandateParties(String partyId, SearchTypeEnum type, List<MandateType> mandateTypes, int limit,
                                      int offset, boolean ascending);
 
-    PartiesDTO getMandateRequestParties(String partyId, SearchTypeEnum type, int limit,
+    PartiesDTO getMandateRequestParties(String partyId, SearchTypeEnum type, List<MandateType> mandateTypes, int limit,
                                         int offset, boolean ascending);
 
     PartyDTO getMandateParty(String partyId);
