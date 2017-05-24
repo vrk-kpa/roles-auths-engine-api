@@ -23,6 +23,7 @@
 package fi.vm.kapa.rova.vare;
 
 import fi.vm.kapa.rova.vare.model.MandateDTO;
+import fi.vm.kapa.rova.engine.model.hpa.Principal;
 import fi.vm.kapa.rova.vare.model.MandateResponse;
 
 import java.util.List;
@@ -37,6 +38,7 @@ public interface CheckMandateClient {
     String COMPANY_PRINCIPALS = "/rest/vare/businessids/{delegateId}";
     String ASSIGNMENT_MANDATES = "/rest/vare/assignmentmandates/{delegateId}";
     String COMPANY_ASSIGNMENT_MANDATES = "/rest/vare/assignmentmandates/{delegateId}/{principalId}";
+    String MANDATE_PRINCIPALS = "/rest/vare/principals/{delegateId}";
 
     /**
      * Resource for checking if there is a mandate for the given parameters.
@@ -59,4 +61,10 @@ public interface CheckMandateClient {
      * Resource for fetching assignment mandates for given user and company
      */
     List<MandateDTO> getAssignmentMandates(String delegateId, Optional<String> principalId);
+
+    /**
+     * Resource for fetching all principals which have given a mandate (of MANDATE type) to the given delegateId
+     */
+    List<Principal> getMandatePrincipals(String delegateId);
+
 }

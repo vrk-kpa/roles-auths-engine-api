@@ -23,6 +23,7 @@
 package fi.vm.kapa.rova.vare;
 
 import fi.vm.kapa.rova.RestTemplateFactory;
+import fi.vm.kapa.rova.engine.model.hpa.Principal;
 import fi.vm.kapa.rova.logging.Logger;
 import fi.vm.kapa.rova.vare.model.MandateDTO;
 import fi.vm.kapa.rova.vare.model.MandateResponse;
@@ -115,6 +116,17 @@ public class CheckMandateClientImpl extends AbstractMandateClient implements Che
         String expandedUrl = builder.buildAndExpand(params).encode().toUriString();
         ResponseEntity<List<MandateDTO>> response = restTemplate.exchange(expandedUrl, HttpMethod.GET, null,
                 new ParameterizedTypeReference<List<MandateDTO>>() {
+                });
+        return handleResponse(response, expandedUrl);
+    }
+
+    public List<Principal> getMandatePrincipals(String delegateId) {
+        UriComponentsBuilder builder = getUriComponentsBuilder(MANDATE_PRINCIPALS);
+        Map<String, String> params = new HashMap<>();
+        params.put("delegateId", delegateId);
+        String expandedUrl = builder.buildAndExpand(params).encode().toUriString();
+        ResponseEntity<List<Principal>> response = restTemplate.exchange(expandedUrl, HttpMethod.GET, null,
+                new ParameterizedTypeReference<List<Principal>>() {
                 });
         return handleResponse(response, expandedUrl);
     }
