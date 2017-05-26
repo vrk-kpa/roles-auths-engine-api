@@ -46,7 +46,6 @@ public enum RoleNameType {
     UE,
     VAH,
     VED,
-    VIS,
     VJ,
     VS,
     VT,
