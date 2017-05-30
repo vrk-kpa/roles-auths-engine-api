@@ -20,15 +20,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package fi.vm.kapa.rova.search;
+package fi.vm.kapa.rova.search.model;
 
-/**
- * Created by mtom on 04/04/2017.
- */
-public interface Search {
-    /* If you change api paths remember to change api version too */
-    String API_VERSION = "1.1";
-    String CLIENT = "roles-auths-search";
-    String NAMES_FOR_COMPANIES = "/search/companies/byId";
-    String COMPANIES_FOR_NAME = "/search/companies";
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import fi.vm.kapa.rova.external.model.ytj.CompanyDTO;
+
+import java.util.Collections;
+import java.util.List;
+
+public class CompanySearchResult {
+
+    private List<CompanyDTO> companies = Collections.emptyList();
+    private boolean hasMore;
+
+    public CompanySearchResult() {
+        this.companies = Collections.emptyList();
+        this.hasMore = false;
+    }
+
+    @JsonCreator
+    public CompanySearchResult(@JsonProperty("companies") List<CompanyDTO> companies, @JsonProperty("hasMore") boolean hasMore) {
+        this.companies = companies;
+        this.hasMore = hasMore;
+    }
+
+    public List<CompanyDTO> getCompanies() {
+        return companies;
+    }
+
+    public void setCompanies(List<CompanyDTO> companies) {
+        this.companies = companies;
+    }
+
+    public boolean isHasMore() {
+        return hasMore;
+    }
+
+    public void setHasMore(boolean hasMore) {
+        this.hasMore = hasMore;
+    }
 }
