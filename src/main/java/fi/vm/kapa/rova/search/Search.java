@@ -27,7 +27,7 @@ package fi.vm.kapa.rova.search;
  */
 public interface Search {
     /* If you change api paths remember to change api version too */
-    String API_VERSION = "1.0";
+    String API_VERSION = "1.1";
     String CLIENT = "roles-auths-search";
     String NAMES_FOR_COMPANIES = "/search/companies/byId";
     String COMPANIES_FOR_NAME = "/search/companies";
