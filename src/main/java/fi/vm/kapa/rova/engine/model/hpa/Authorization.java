@@ -27,10 +27,9 @@ import fi.vm.kapa.rova.external.model.AuthorizationType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Authorization {
+public class Authorization extends AbstractAuthorization {
 
     private AuthorizationType result;
-    private List<DecisionReason> reasons = new ArrayList<DecisionReason>();
 
     public AuthorizationType getResult() {
         return result;
@@ -40,11 +39,4 @@ public class Authorization {
         this.result = result;
     }
 
-    public List<DecisionReason> getReasons() {
-        return reasons;
-    }
-
-    public void setReasons(List<DecisionReason> reasons) {
-        this.reasons = reasons;
-    }
 }
