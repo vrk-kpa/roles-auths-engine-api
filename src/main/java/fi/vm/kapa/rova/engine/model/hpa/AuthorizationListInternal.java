@@ -22,21 +22,19 @@
  */
 package fi.vm.kapa.rova.engine.model.hpa;
 
-import fi.vm.kapa.rova.external.model.AuthorizationType;
+/**
+ * Created by jkorkala on 06/06/2017.
+ */
+public class AuthorizationListInternal extends AuthorizationList {
 
-import java.util.ArrayList;
-import java.util.List;
+    private String serviceUuid;
 
-public class Authorization extends AbstractAuthorization {
-
-    private AuthorizationType result;
-
-    public AuthorizationType getResult() {
-        return result;
+    public String getServiceUuid() {
+        return serviceUuid;
     }
 
-    public void setResult(AuthorizationType result) {
-        this.result = result;
+    public void setServiceUuid(String serviceUuid) {
+        this.serviceUuid = serviceUuid;
     }
 
 }
