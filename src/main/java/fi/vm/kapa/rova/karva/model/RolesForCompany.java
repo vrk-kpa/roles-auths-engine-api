@@ -20,17 +20,54 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package fi.vm.kapa.rova.karva;
+package fi.vm.kapa.rova.karva.model;
 
-import fi.vm.kapa.rova.ClientException;
-import fi.vm.kapa.rova.karva.model.KarvaResponse;
-import fi.vm.kapa.rova.rest.exception.WebApplicationException;
+import java.util.List;
 
-public interface Karva {
-    String API_VERSION = "1.0";
-    String CLIENT = "roles-auths-karva-client";
+public class RolesForCompany
+{
+    public static final String TYPE_FINNISH_COMPANY = "Finnish_company";
 
-    String KARVA_ROLES_PATH = "/rest/karva/roles/{entityId}/{personId}";
+    private String idType;
+    private String companyId;
+    private List<String> roles;
 
-    KarvaResponse getRoles(String entityId, String personId) throws WebApplicationException, ClientException;
+    public static RolesForCompany createForFinnishCompany(String companyId, List<String> roles)
+    {
+        RolesForCompany result = new RolesForCompany();
+        result.idType = TYPE_FINNISH_COMPANY;
+        result.companyId = companyId;
+        result.roles = roles;
+        return result;
+    }
+
+    public String getIdType()
+    {
+        return idType;
+    }
+
+    public void setIdType(String idType)
+    {
+        this.idType = idType;
+    }
+
+    public String getCompanyId()
+    {
+        return companyId;
+    }
+
+    public void setCompanyId(String companyId)
+    {
+        this.companyId = companyId;
+    }
+
+    public List<String> getRoles()
+    {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles)
+    {
+        this.roles = roles;
+    }
 }
