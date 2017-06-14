@@ -25,12 +25,28 @@ package fi.vm.kapa.rova.karva;
 import fi.vm.kapa.rova.ClientException;
 import fi.vm.kapa.rova.karva.model.KarvaResponse;
 import fi.vm.kapa.rova.rest.exception.WebApplicationException;
+import org.xml.sax.SAXException;
 
-public interface Karva {
+import javax.xml.crypto.MarshalException;
+import javax.xml.crypto.dsig.XMLSignatureException;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.soap.SOAPException;
+import java.io.IOException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.UnrecoverableKeyException;
+import java.security.cert.CertificateException;
+
+public interface Karva
+{
     String API_VERSION = "1.0";
     String CLIENT = "roles-auths-karva-client";
 
-    String KARVA_ROLES_PATH = "/rest/karva/roles/{entityId}/{personId}";
+    String KARVA_ROLES_PATH = "/rest/karva/roles/{personId}?entityId={entityId}";
 
-    KarvaResponse getRoles(String entityId, String personId) throws WebApplicationException, ClientException;
+    KarvaResponse getRoles(String entityId, String personId) throws WebApplicationException, ClientException,
+            SAXException, IllegalAccessException, XMLSignatureException, ClassNotFoundException, NoSuchAlgorithmException,
+            CertificateException, KeyStoreException, InstantiationException, MarshalException, ParserConfigurationException,
+            InvalidAlgorithmParameterException, UnrecoverableKeyException, IOException, SOAPException;
 }
