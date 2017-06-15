@@ -24,52 +24,43 @@ package fi.vm.kapa.rova.karva.model;
 
 import java.util.List;
 
-public class KarvaResponse
-{
+public class KarvaResponse {
     private String entityId;
 
     private String personId;
 
     private List<RolesForCompany> roles;
 
-    public KarvaResponse()
-    {
+    public KarvaResponse() {
     }
 
-    public KarvaResponse(String entityId, String personId, List<RolesForCompany> roles)
-    {
+    public KarvaResponse(String entityId, String personId, List<RolesForCompany> roles) {
         this.entityId = entityId;
         this.personId = personId;
         this.roles = roles;
     }
 
-    public String getEntityId()
-    {
+    public String getEntityId() {
         return entityId;
     }
 
-    public void setEntityId(String entityId)
-    {
+    public void setEntityId(String entityId) {
         this.entityId = entityId;
     }
 
-    public String getPersonId()
-    {
+    public String getPersonId() {
         return personId;
     }
 
-    public void setPersonId(String personId)
-    {
+    public void setPersonId(String personId) {
         this.personId = personId;
     }
 
-    public List<RolesForCompany> getRoles()
-    {
+    public List<RolesForCompany> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<RolesForCompany> roles)
-    {
+    public void setRoles(List<RolesForCompany> roles) {
         this.roles = roles;
     }
 }

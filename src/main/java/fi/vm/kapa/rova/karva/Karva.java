@@ -38,8 +38,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
 
-public interface Karva
-{
+public interface Karva {
     String API_VERSION = "1.0";
     String CLIENT = "roles-auths-karva-client";
 

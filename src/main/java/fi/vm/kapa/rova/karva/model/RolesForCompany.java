@@ -24,50 +24,28 @@ package fi.vm.kapa.rova.karva.model;
 
 import java.util.List;
 
-public class RolesForCompany
-{
-    public static final String TYPE_FINNISH_COMPANY = "Finnish_company";
-
-    private String idType;
-    private String companyId;
+public class RolesForCompany {
+    private String companyOid;
     private List<String> roles;
 
-    public static RolesForCompany createForFinnishCompany(String companyId, List<String> roles)
-    {
-        RolesForCompany result = new RolesForCompany();
-        result.idType = TYPE_FINNISH_COMPANY;
-        result.companyId = companyId;
-        result.roles = roles;
-        return result;
+    public RolesForCompany(String companyOid, List<String> roles) {
+        this.companyOid = companyOid;
+        this.roles = roles;
     }
 
-    public String getIdType()
-    {
-        return idType;
+    public String getCompanyOid() {
+        return companyOid;
     }
 
-    public void setIdType(String idType)
-    {
-        this.idType = idType;
+    public void setCompanyOid(String companyOid) {
+        this.companyOid = companyOid;
     }
 
-    public String getCompanyId()
-    {
-        return companyId;
-    }
-
-    public void setCompanyId(String companyId)
-    {
-        this.companyId = companyId;
-    }
-
-    public List<String> getRoles()
-    {
+    public List<String> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<String> roles)
-    {
+    public void setRoles(List<String> roles) {
         this.roles = roles;
     }
 }
