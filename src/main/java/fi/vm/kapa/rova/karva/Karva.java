@@ -42,7 +42,9 @@ public interface Karva {
     String API_VERSION = "1.0";
     String CLIENT = "roles-auths-karva-client";
 
-    String KARVA_ROLES_PATH = "/rest/karva/roles/{personId}?entityId={entityId}";
+    // NOTE: the actual request needs to be of the form /rest/karva/roles/{personId}?entityId={entityId}
+    // EntityId is passed in as parameter, because it is formatted like a URL
+    String KARVA_ROLES_PATH = "/rest/karva/roles/{personId}";
 
     KarvaResponse getRoles(String entityId, String personId) throws WebApplicationException, ClientException,
             SAXException, IllegalAccessException, XMLSignatureException, ClassNotFoundException, NoSuchAlgorithmException,
