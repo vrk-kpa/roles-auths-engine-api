@@ -56,7 +56,7 @@ public class KarvaResponse {
         this.personId = personId;
     }
 
-    public List<RolesForCompany> getRoles() {
+    public List<RolesForCompany> getRolesForCompanies() {
         return roles;
     }
 
