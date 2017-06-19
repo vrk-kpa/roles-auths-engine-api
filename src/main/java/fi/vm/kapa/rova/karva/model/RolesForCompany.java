@@ -26,10 +26,12 @@ import java.util.List;
 
 public class RolesForCompany {
     private String companyOid;
+    private String bic;  // business identity code, in Finland Y-tunnus
     private List<String> roles;
 
-    public RolesForCompany(String companyOid, List<String> roles) {
+    public RolesForCompany(String companyOid, String bic, List<String> roles) {
         this.companyOid = companyOid;
+        this.bic = bic;
         this.roles = roles;
     }
 
@@ -41,7 +43,15 @@ public class RolesForCompany {
         this.companyOid = companyOid;
     }
 
-    public List<String> getRoles() {
+    public String getBic() {
+		return bic;
+	}
+
+	public void setBic(String bic) {
+		this.bic = bic;
+	}
+
+	public List<String> getRoles() {
         return roles;
     }
 
