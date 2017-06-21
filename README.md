@@ -6,4 +6,3 @@ The license headers in source code files have been generated using the maven-lic
 
 If the build fails due to missing license headers they can be updated easily using `mvn license:format`.
 
-
