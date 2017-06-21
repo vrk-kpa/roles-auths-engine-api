@@ -36,7 +36,7 @@ public class Person implements Evaluable {
     private String firstNames;
 
     private String lastName;
-    
+
     private String callingName;
 
     private String birthdate;
@@ -48,6 +48,8 @@ public class Person implements Evaluable {
     private List<Person> edunvalvontaValtuutetut = new ArrayList<Person>(); //henkilöedunvalvontavaltuutetut
 
     private List<Person> huoltajat = new ArrayList<Person>(); // huoltajat
+
+    private Integer huoltajaCount; // Huoltajien lukumäärä vtj:ssä, sisältää myös hetuttomat
 
     private boolean deceased; // kuollut
 
@@ -100,11 +102,11 @@ public class Person implements Evaluable {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    
+
     public String getCallingName() {
         return callingName;
     }
-    
+
     public void setCallingName(String callingName) {
         this.callingName = callingName;
     }
@@ -230,6 +232,14 @@ public class Person implements Evaluable {
         this.huollonjakoVainAsumisenOsalta = huollonjakoVainAsumisenOsalta;
     }
 
+    public Integer getHuoltajatCount() {
+        return huoltajaCount;
+    }
+
+    public void setHuoltajatCount(Integer huoltajatCount) {
+        this.huoltajaCount = huoltajatCount;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
@@ -243,6 +253,7 @@ public class Person implements Evaluable {
                 ", edunvalvojat=" + edunvalvojat +
                 ", edunvalvontaValtuutetut=" + edunvalvontaValtuutetut +
                 ", huoltajat=" + huoltajat +
+                ", huoltajaCount=" + huoltajaCount +
                 ", deceased=" + deceased +
                 ", turvakielto=" + turvakielto +
                 ", huostaanotettu=" + huostaanotettu +
