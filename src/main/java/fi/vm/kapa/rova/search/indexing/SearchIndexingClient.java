@@ -50,7 +50,7 @@ public class SearchIndexingClient implements SearchIndexing {
         COMPANY("companies"), CONCEPT("concepts"), PTV_SERVICE("ptvservices");
         private String indexName;
 
-        private Index(String indexName) {
+        Index(String indexName) {
             this.indexName = indexName;
         }
 
@@ -125,7 +125,7 @@ public class SearchIndexingClient implements SearchIndexing {
         }
     }
 
-    private void index(List<? extends Object> documents, Index index) throws SearchServiceException {
+    private void index(List<?> documents, Index index) throws SearchServiceException {
         String resourceUrl = RIBBON_ENDPOINT + "/index/" + index;
 
         ResponseEntity<String> response = indexClientRestTemplate.postForEntity(resourceUrl, documents, String.class);

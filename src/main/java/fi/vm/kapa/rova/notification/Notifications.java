@@ -37,18 +37,18 @@ public interface Notifications {
     String ADMIN_NOTIFICATION_BY_ID = "/rest/admin/notifications/notification/{id}";
     String ADMIN_NOTIFICATION = "/rest/admin/notifications/notification";
 
-    public List<NotificationDTO> getAllNotifications();
+    List<NotificationDTO> getAllNotifications();
 
     /**
      * Return single notification from db.
      *
      * @return notification from db.
      */
-    public NotificationDTO getNotification(long id);
+    NotificationDTO getNotification(long id);
 
-    public NotificationDTO save(String endUser, NotificationDTO notification);
+    NotificationDTO save(String endUser, NotificationDTO notification);
 
-    public NotificationDTO update(String endUser, NotificationDTO notification);
+    NotificationDTO update(String endUser, NotificationDTO notification);
 
-    public void delete(String endUser, long id);
+    void delete(String endUser, long id);
 }

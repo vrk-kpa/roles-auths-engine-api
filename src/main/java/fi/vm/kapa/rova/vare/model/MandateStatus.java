@@ -32,7 +32,7 @@ public enum MandateStatus {
 	
 	private String status;
 	
-	private MandateStatus(String status) {
+	MandateStatus(String status) {
 		this.status = status;
 	}
 

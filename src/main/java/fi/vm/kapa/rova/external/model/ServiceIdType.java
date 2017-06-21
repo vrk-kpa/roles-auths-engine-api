@@ -27,7 +27,7 @@ public enum ServiceIdType {
     
     private String text;
     
-    private ServiceIdType(String text) {
+    ServiceIdType(String text) {
         this.text = text;
     }
     

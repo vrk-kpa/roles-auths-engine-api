@@ -29,7 +29,7 @@ public enum SearchTypeEnum {
 
     private String typeString;
 
-    private SearchTypeEnum(String typeString) {
+    SearchTypeEnum(String typeString) {
         this.typeString = typeString;
     }
 

@@ -32,9 +32,9 @@ import java.util.Set;
  * Created by mtom on 14/03/2017.
  */
 public interface Hpa extends Engine {
-    public String ACTION_AUTHORIZATION = "authorization";
-    public String ACTION_DELEGATE = "delegate";
-    public String ACTION_PRINCIPAL_CHOICE = "principalFromChoice";
+    String ACTION_AUTHORIZATION = "authorization";
+    String ACTION_DELEGATE = "delegate";
+    String ACTION_PRINCIPAL_CHOICE = "principalFromChoice";
 
     String GET_DELEGATE = "/rest/hpa/delegate/{serviceIdType}/{service}/{personId}";
     String GET_AUTHORIZATION = "/rest/hpa/authorization/{serviceIdType}/{service}/{delegateId}/{principalId}";

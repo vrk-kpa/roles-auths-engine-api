@@ -34,14 +34,14 @@ public interface OntologyClient {
 
     String CLIENT = "roles-auths-resources-ontology";
 
-    public Concept getConcept(String uri);
+    Concept getConcept(String uri);
 
-    public boolean isBroaderConcept(String broaderUri, String narrowerUri);
+    boolean isBroaderConcept(String broaderUri, String narrowerUri);
 
-    public Set<Concept> getNarrowerConcepts(String uri);
+    Set<Concept> getNarrowerConcepts(String uri);
 
-    public List<Concept> getConcepts();
+    List<Concept> getConcepts();
 
-    public List<Concept> getConcepts(List<String> uriList);
+    List<Concept> getConcepts(List<String> uriList);
 
 }

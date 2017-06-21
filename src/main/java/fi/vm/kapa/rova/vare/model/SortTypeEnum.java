@@ -29,7 +29,7 @@ public enum SortTypeEnum {
 
     private String typeString;
 
-    private SortTypeEnum(String typeString) {
+    SortTypeEnum(String typeString) {
         this.typeString = typeString;
     }
 

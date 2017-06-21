@@ -35,7 +35,7 @@ public enum IdentifierType {
 
     private final String id;
 
-    private IdentifierType(String id) {
+    IdentifierType(String id) {
         this.id = id;
     }
 

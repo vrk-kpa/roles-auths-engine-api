@@ -29,7 +29,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @JsonDeserialize(using=ResultTypeDeserializer.class) 
 @JsonSerialize(using=ResultTypeSerializer.class) 
 public interface IResultType {
-    default public String getResult() {
+    default String getResult() {
         return this.toString();
     }
 }
