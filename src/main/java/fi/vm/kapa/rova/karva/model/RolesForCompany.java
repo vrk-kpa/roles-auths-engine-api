@@ -25,37 +25,56 @@ package fi.vm.kapa.rova.karva.model;
 import java.util.List;
 
 public class RolesForCompany {
-    private String companyOid;
-    private String bic;  // business identity code, in Finland Y-tunnus
-    private List<String> roles;
 
-    public RolesForCompany(String companyOid, String bic, List<String> roles) {
+    private static final String FINNISH_BUSINESSID_PREFIX = "1.2.246.10";
+
+    private String companyOid;
+    private String finnishBusinessId;  // business identity code (Y-tunnus in Finland)
+    private List<String> roles;
+    private boolean mainOrganization;
+
+    @SuppressWarnings("unused")
+    public RolesForCompany() {
+    }
+
+    public RolesForCompany(String companyOid, List<String> roles) {
         this.companyOid = companyOid;
-        this.bic = bic;
+        if (companyOid.startsWith(FINNISH_BUSINESSID_PREFIX)) {
+            String str = companyOid.split("\\.")[4];
+            finnishBusinessId = str.substring(0, 7) + "-" + str.substring(7, str.length());
+
+            mainOrganization = companyOid.endsWith(".0");
+        }
         this.roles = roles;
+    }
+
+    public boolean isMainOrganization() {
+        return mainOrganization;
     }
 
     public String getCompanyOid() {
         return companyOid;
     }
 
-    public void setCompanyOid(String companyOid) {
-        this.companyOid = companyOid;
+    public String getFinnishBusinessId() {
+        return finnishBusinessId;
     }
 
-    public String getBic() {
-		return bic;
-	}
-
-	public void setBic(String bic) {
-		this.bic = bic;
-	}
-
-	public List<String> getRoles() {
+    public List<String> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder(250);
+        sb.append("companyOid=").append(companyOid).append(", finnishBusinessId=").append(finnishBusinessId).append(", roles=[");
+        for (int i = 0; i < roles.size(); i++) {
+            if (i > 0) {
+                sb.append(", ");
+            }
+            sb.append(roles.get(i));
+        }
+        sb.append("]");
+        return sb.toString();
     }
 }
