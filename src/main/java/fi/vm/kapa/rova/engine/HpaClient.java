@@ -23,6 +23,7 @@
 package fi.vm.kapa.rova.engine;
 
 import fi.vm.kapa.rova.engine.model.hpa.AuthorizationInternal;
+import fi.vm.kapa.rova.engine.model.hpa.AuthorizationListInternal;
 import fi.vm.kapa.rova.engine.model.hpa.HpaDelegate;
 import org.springframework.web.client.RestClientException;
 
@@ -38,4 +39,7 @@ public interface HpaClient {
     HpaDelegate getDelegate(String serviceIdType, String personId, String service) throws RestClientException;
     AuthorizationInternal getAuthorization(String serviceIdType, String service, String delegateId, String principalId, Set<String> issues)
             throws RestClientException;
+    AuthorizationListInternal getAuthorizationList(String serviceIdType, String service, String delegateId, String principalId)
+            throws RestClientException;
+
 }
