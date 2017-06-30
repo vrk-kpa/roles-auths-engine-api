@@ -22,10 +22,13 @@
  */
 package fi.vm.kapa.rova.search;
 
+import static org.apache.commons.lang3.StringUtils.isBlank;
+
 import fi.vm.kapa.rova.ClientException;
 import fi.vm.kapa.rova.RestTemplateFactory;
 import fi.vm.kapa.rova.external.model.ytj.CompanyDTO;
 import fi.vm.kapa.rova.logging.Logger;
+import fi.vm.kapa.rova.ptv.model.PtvService;
 import fi.vm.kapa.rova.search.model.CompanySearchResult;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,9 +43,10 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -101,6 +105,23 @@ public class SearchClient implements Search {
                 CompanySearchResult.class, Collections.emptyMap());
 
         return result.getBody().getCompanies();
+    }
+
+    public List<PtvService> getServicesForIssue(String issueUri) {
+        if (isBlank(issueUri)) {
+            return Collections.emptyList();
+        }
+
+        String url = ENDPOINT_URL + SERVICES_FOR_ISSUE;
+        ResponseEntity<List<PtvService>> response = restTemplate.exchange(url, HttpMethod.POST,
+                new HttpEntity<>(new ArrayList<>(Arrays.asList(issueUri))), new ParameterizedTypeReference<List<PtvService>>() {});
+        if (response.getStatusCode() == HttpStatus.OK) {
+            return response.getBody();
+        } else {
+            String errorMsq = "Got not OK for POST: " + url + " issueUri=" + issueUri;
+            LOG.error(errorMsq);
+            throw new ClientException(errorMsq);
+        }
     }
 
 }

@@ -31,4 +31,5 @@ public interface Search {
     String CLIENT = "roles-auths-search";
     String NAMES_FOR_COMPANIES = "/search/companies/byId";
     String COMPANIES_FOR_NAME = "/search/companies";
+    String SERVICES_FOR_ISSUE = "/search/ptvservices/byissue";
 }
