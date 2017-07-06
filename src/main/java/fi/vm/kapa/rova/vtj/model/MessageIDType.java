@@ -23,9 +23,9 @@
 package fi.vm.kapa.rova.vtj.model;
 
 public enum MessageIDType {
+	PerusLT19,
     ROV1,
     ROV3,
     ROV4,
-    ROV5,
     ROV21
 }
