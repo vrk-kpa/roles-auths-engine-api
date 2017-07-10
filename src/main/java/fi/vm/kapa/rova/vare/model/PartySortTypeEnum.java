@@ -22,7 +22,6 @@
  */
 package fi.vm.kapa.rova.vare.model;
 
-
-public enum SearchTypeEnum {
-    ALL, PERSONS, ORGANIZATIONS;
+public enum PartySortTypeEnum {
+	NAME, NUMBER_OF_MANDATES
 }

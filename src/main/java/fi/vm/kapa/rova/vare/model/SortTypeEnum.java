@@ -22,37 +22,7 @@
  */
 package fi.vm.kapa.rova.vare.model;
 
-import javax.ws.rs.WebApplicationException;
 
 public enum SortTypeEnum {
-    DATE("date"), NAME("name"), SIDE("side");
-
-    private String typeString;
-
-    SortTypeEnum(String typeString) {
-        this.typeString = typeString;
-    }
-
-    public String getTypeString() {
-        return typeString;
-    }
-
-    public static SortTypeEnum fromString(String param) {
-        SortTypeEnum result = null;
-        switch (param.toLowerCase()) {
-        case ("date"):
-            result = SortTypeEnum.DATE;
-            break;
-        case ("name"):
-            result = SortTypeEnum.NAME;
-            break;
-        case ("side"):
-            result = SortTypeEnum.SIDE;
-            break;
-        default:
-            throw new WebApplicationException("Valid values for sort type are date and name", 400);
-        }
-        return result;
-
-    }
+    DATE, NAME, SIDE;
 }
