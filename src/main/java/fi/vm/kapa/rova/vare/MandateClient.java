@@ -92,7 +92,7 @@ public interface MandateClient {
     PartiesDTO getPastMandateParties(String partyId, SearchTypeEnum type, List<MandateType> mandateTypes, int limit,
                                      int offset, boolean ascending, PartySortTypeEnum sortBy);
 
-    PartiesDTO getMandateRequestParties(String partyId, SearchTypeEnum type, List<MandateType> mandateTypes, int limit,
+    RequestPartiesDTO getMandateRequestParties(String partyId, SearchTypeEnum type, List<MandateType> mandateTypes, int limit,
                                         int offset, boolean ascending, PartySortTypeEnum sortBy);
 
     PartyDTO getMandateParty(String partyId);
