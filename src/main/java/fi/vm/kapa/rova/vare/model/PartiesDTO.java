@@ -31,6 +31,7 @@ public class PartiesDTO {
     private int offset;
     private long totalParties;
     private long totalMandates;
+    private long totalReceivedRequests;
 
     public List<PartyDTO> getParties() {
         return parties;
@@ -71,4 +72,13 @@ public class PartiesDTO {
     public void setTotalMandates(long totalMandates) {
         this.totalMandates = totalMandates;
     }
+
+	public long getTotalReceivedRequests() {
+		return totalReceivedRequests;
+	}
+
+	public void setTotalReceivedRequests(long totalReceivedRequests) {
+		this.totalReceivedRequests = totalReceivedRequests;
+	}
+    
 }

@@ -31,7 +31,8 @@ public class PartyDTO {
     private String companyName;
     private String displayName;
     private long numberOfMandates;
-
+	private long receivedRequests;
+    
     public PartyDTO() {
         this.company = false;
     }
@@ -102,36 +103,71 @@ public class PartyDTO {
     public void setNumberOfMandates(long numberOfMandates) {
         this.numberOfMandates = numberOfMandates;
     }
+    
+    public long getReceivedRequests() {
+		return receivedRequests;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+	public void setReceivedRequests(long receivedRequests) {
+		this.receivedRequests = receivedRequests;
+	}
 
-        PartyDTO partyDTO = (PartyDTO) o;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PartyDTO other = (PartyDTO) obj;
+		if (company != other.company)
+			return false;
+		if (companyName == null) {
+			if (other.companyName != null)
+				return false;
+		} else if (!companyName.equals(other.companyName))
+			return false;
+		if (displayName == null) {
+			if (other.displayName != null)
+				return false;
+		} else if (!displayName.equals(other.displayName))
+			return false;
+		if (firstNames == null) {
+			if (other.firstNames != null)
+				return false;
+		} else if (!firstNames.equals(other.firstNames))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (lastName == null) {
+			if (other.lastName != null)
+				return false;
+		} else if (!lastName.equals(other.lastName))
+			return false;
+		if (numberOfMandates != other.numberOfMandates)
+			return false;
+		if (receivedRequests != other.receivedRequests)
+			return false;
+		return true;
+	}
 
-        if (!getId().equals(partyDTO.getId())) return false;
-        if (isCompany() != partyDTO.isCompany()) return false;
-        if (getNumberOfMandates() != partyDTO.getNumberOfMandates()) return false;
-        if (getFirstNames() != null ? !getFirstNames().equals(partyDTO.getFirstNames()) : partyDTO.getFirstNames() != null)
-            return false;
-        if (getLastName() != null ? !getLastName().equals(partyDTO.getLastName()) : partyDTO.getLastName() != null)
-            return false;
-        if (getCompanyName() != null ? !getCompanyName().equals(partyDTO.getCompanyName()) : partyDTO.getCompanyName() != null)
-            return false;
-        return getDisplayName() != null ? getDisplayName().equals(partyDTO.getDisplayName()) : partyDTO.getDisplayName() == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = getId().hashCode();
-        result = 31 * result + (getFirstNames() != null ? getFirstNames().hashCode() : 0);
-        result = 31 * result + (getLastName() != null ? getLastName().hashCode() : 0);
-        result = 31 * result + (isCompany() ? 1 : 0);
-        result = 31 * result + (getCompanyName() != null ? getCompanyName().hashCode() : 0);
-        result = 31 * result + (getDisplayName() != null ? getDisplayName().hashCode() : 0);
-        result = 31 * result + (int) (getNumberOfMandates() ^ (getNumberOfMandates() >>> 32));
-        return result;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (company ? 1231 : 1237);
+		result = prime * result + ((companyName == null) ? 0 : companyName.hashCode());
+		result = prime * result + ((displayName == null) ? 0 : displayName.hashCode());
+		result = prime * result + ((firstNames == null) ? 0 : firstNames.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + (int) (numberOfMandates ^ (numberOfMandates >>> 32));
+		result = prime * result + (int) (receivedRequests ^ (receivedRequests >>> 32));
+		return result;
+	}
+	
 }
