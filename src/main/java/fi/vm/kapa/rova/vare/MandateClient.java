@@ -32,7 +32,7 @@ public interface MandateClient {
     String MANDATE_CLIENT = "roles-auths-vare-mandate";
 
     String GET_MANDATE = "/rest/vare/mandate/{uuid}";
-    String MANDATE_STATUS = "/rest/vare/mandates/{status}";
+    String MANDATE_STATUS = "/rest/vare/mandates/{status}/{partyId}";
     String MANDATES = "/rest/vare/mandates";
     String INVALIDATE_MANDATES = "/rest/vare/mandate/invalidate/{partyId}";
     String DELETE_MANDATES = "/rest/vare/mandates/delete";
@@ -51,7 +51,7 @@ public interface MandateClient {
 
     MandateDTO getMandate(String uuid);
 
-    List<MandateDTO> getMandates(String status, String includeIdsInResponse);
+    List<MandateDTO> getMandates(String status, String partyId, String includeIdsInResponse);
 
     List<MandateDTO> getMandates(Set<String> uuids);
 
