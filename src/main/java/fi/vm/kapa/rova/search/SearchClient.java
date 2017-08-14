@@ -118,7 +118,7 @@ public class SearchClient implements Search {
         }
 
         try {
-            ResponseEntity<PtvService[]> response = restTemplate.getForEntity(ENDPOINT_URL + SERVICES_FOR_ISSUE + "/" + issueUri,
+            ResponseEntity<PtvService[]> response = restTemplate.getForEntity(ENDPOINT_URL + SERVICES_FOR_ISSUE + "/" + URLEncoder.encode(issueUri, "UTF-8"),
                     PtvService[].class, Collections.emptyMap());
             if (response != null && response.getBody() != null) {
                 return Arrays.asList(response.getBody());
