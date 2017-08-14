@@ -22,12 +22,11 @@
  */
 package fi.vm.kapa.rova.search;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
-
 import fi.vm.kapa.rova.ClientException;
 import fi.vm.kapa.rova.RestTemplateFactory;
 import fi.vm.kapa.rova.external.model.ytj.CompanyDTO;
 import fi.vm.kapa.rova.logging.Logger;
+import fi.vm.kapa.rova.ptv.model.Channel;
 import fi.vm.kapa.rova.ptv.model.PtvService;
 import fi.vm.kapa.rova.search.model.CompanySearchResult;
 import org.apache.commons.lang3.StringUtils;
@@ -43,12 +42,18 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 @RibbonClient(name = Search.CLIENT)
 @Conditional(SearchClientCondition.class)
@@ -112,15 +117,18 @@ public class SearchClient implements Search {
             return Collections.emptyList();
         }
 
-        String url = ENDPOINT_URL + SERVICES_FOR_ISSUE;
-        ResponseEntity<List<PtvService>> response = restTemplate.exchange(url, HttpMethod.POST,
-                new HttpEntity<>(new ArrayList<>(Arrays.asList(issueUri))), new ParameterizedTypeReference<List<PtvService>>() {});
-        if (response.getStatusCode() == HttpStatus.OK) {
-            return response.getBody();
-        } else {
-            String errorMsq = "Got not OK for POST: " + url + " issueUri=" + issueUri;
-            LOG.error(errorMsq);
-            throw new ClientException(errorMsq);
+        try {
+            ResponseEntity<PtvService[]> response = restTemplate.getForEntity(ENDPOINT_URL + SERVICES_FOR_ISSUE + "/" + issueUri,
+                    PtvService[].class, Collections.emptyMap());
+            if (response != null && response.getBody() != null) {
+                return Arrays.asList(response.getBody());
+            } else {
+                LOG.error(ENDPOINT_URL + SERVICES_FOR_ISSUE + "/" + URLEncoder.encode(issueUri, "UTF-8") +" got null/empty response.");
+                return Collections.emptyList();
+            }
+        } catch (UnsupportedEncodingException e) {
+            LOG.error("Exception while calling "+ ENDPOINT_URL + SERVICES_FOR_ISSUE + "/" + issueUri +": "+ e.getMessage());
+            return Collections.emptyList();
         }
     }
 
