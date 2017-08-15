@@ -32,12 +32,13 @@ public class SimplifiedMandateDTO {
     private String issueUri;
     private String issue;
     private Boolean isRepresentedPartyPrincipal;
+    private MandateType type;
 
 
     public SimplifiedMandateDTO() {
     }
 
-    public SimplifiedMandateDTO(String uuid, Date startDate, Date endDate, String issueUri, String issue, Boolean isRepresentedPartyPrincipal) {
+    public SimplifiedMandateDTO(String uuid, Date startDate, Date endDate, String issueUri, String issue, Boolean isRepresentedPartyPrincipal, MandateType type) {
         super();
         this.uuid = uuid;
         this.startDate = startDate;
@@ -45,6 +46,7 @@ public class SimplifiedMandateDTO {
         this.issueUri = issueUri;
         this.issue = issue;
         this.isRepresentedPartyPrincipal = isRepresentedPartyPrincipal;
+        this.type = type;
     }
 
     public String getUuid() {
@@ -94,5 +96,12 @@ public class SimplifiedMandateDTO {
     public void setIsRepresentedPartyPrincipal(Boolean isRepresentedPartyPrincipal) {
         this.isRepresentedPartyPrincipal = isRepresentedPartyPrincipal;
     }
-    
+
+    public MandateType getType() {
+        return type;
+    }
+
+    public void setType(MandateType type) {
+        this.type = type;
+    }
 }

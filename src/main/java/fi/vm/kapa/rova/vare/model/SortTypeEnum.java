@@ -24,5 +24,5 @@ package fi.vm.kapa.rova.vare.model;
 
 
 public enum SortTypeEnum {
-    DATE, NAME, SIDE;
+    DATE, NAME, SIDE, TYPE;
 }
