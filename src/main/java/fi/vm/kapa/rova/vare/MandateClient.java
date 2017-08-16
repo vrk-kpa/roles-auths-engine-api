@@ -75,8 +75,11 @@ public interface MandateClient {
 
     LegalSubjectsDTO validateNameAndId(LegalSubjectsDTO legalSubjects);
 
-    PartiesDTO getDelegates(SearchTypeEnum type, String principalId, List<MandateType> mandateTypes, int limit, int offset,
-                            boolean ascending, PartySortTypeEnum sortBy);
+//    PartiesDTO getDelegates(SearchTypeEnum type, String principalId, List<MandateType> mandateTypes, int limit, int offset,
+//                            boolean ascending, PartySortTypeEnum sortBy);
+
+    PartiesDTO getDelegates(SearchTypeEnum type, String principalId, int limit, int offset,
+            boolean ascending, PartySortTypeEnum sortBy, ConfirmationRights confirmationRights);
 
     SimplifiedMandatesDTO getConfirmedMandates(String principalId, String delegateId, List<MandateType> mandateTypes, String lang, int limit,
                                                int offset, SortTypeEnum sortBy, boolean ascending);
