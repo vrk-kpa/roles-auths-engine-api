@@ -25,6 +25,7 @@ package fi.vm.kapa.rova.engine;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import fi.vm.kapa.rova.RestTemplateFactory;
 import fi.vm.kapa.rova.engine.model.hpa.AuthorizationInternal;
+import fi.vm.kapa.rova.engine.model.hpa.AuthorizationListInternal;
 import fi.vm.kapa.rova.engine.model.hpa.HpaDelegate;
 import fi.vm.kapa.rova.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,6 +78,12 @@ public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient {
         return getAuthorizationResponse(serviceIdType, service, delegateId, principalId, issues).getBody();
     }
 
+    @HystrixCommand(commandKey = "HpaClientGetAuthorizationList")
+    public AuthorizationListInternal getAuthorizationList(String serviceIdType, String service, String delegateId,
+                                                  String principalId) throws RestClientException {
+        return getAuthorizationListResponse(serviceIdType, service, delegateId, principalId).getBody();
+    }
+
     public ResponseEntity<HpaDelegate> getDelegateResponse(String serviceIdType, String personId, String service) {
         RestTemplate restTemplate = hpaRestTemplate;
         String requestUrl = RIBBON_ENGINE_URL + Hpa.GET_DELEGATE;
@@ -108,6 +115,22 @@ public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient {
         }
 
         return restTemplate.getForEntity(builder.buildAndExpand(params).toUri(), AuthorizationInternal.class);
+    }
+
+    public ResponseEntity<AuthorizationListInternal> getAuthorizationListResponse(String serviceIdType, String service,
+                                                                                  String delegateId, String principalId) {
+        RestTemplate restTemplate = hpaRestTemplate;
+        String requestUrl = RIBBON_ENGINE_URL + Hpa.GET_AUTHORIZATION_LIST;
+
+        Map<String, String> params = new HashMap<>();
+        params.put("serviceIdType", serviceIdType);
+        params.put("service", service);
+        params.put("delegateId", delegateId);
+        params.put("principalId", principalId);
+
+        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(requestUrl);
+
+        return restTemplate.getForEntity(builder.buildAndExpand(params).toUri(), AuthorizationListInternal.class);
     }
 
     @Override
