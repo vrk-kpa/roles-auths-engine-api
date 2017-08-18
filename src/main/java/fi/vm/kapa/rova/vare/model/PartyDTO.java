@@ -31,7 +31,8 @@ public class PartyDTO {
     private String companyName;
     private String displayName;
     private long numberOfMandates;
-
+	private long receivedRequests;
+    
     public PartyDTO() {
         this.company = false;
     }
@@ -102,6 +103,14 @@ public class PartyDTO {
     public void setNumberOfMandates(long numberOfMandates) {
         this.numberOfMandates = numberOfMandates;
     }
+    
+    public long getReceivedRequests() {
+		return receivedRequests;
+	}
+
+	public void setReceivedRequests(long receivedRequests) {
+		this.receivedRequests = receivedRequests;
+	}
 
     @Override
     public boolean equals(Object o) {

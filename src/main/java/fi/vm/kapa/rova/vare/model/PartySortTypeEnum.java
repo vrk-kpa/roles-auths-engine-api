@@ -23,5 +23,5 @@
 package fi.vm.kapa.rova.vare.model;
 
 public enum PartySortTypeEnum {
-	NAME, NUMBER_OF_MANDATES
+	NAME, NUMBER_OF_MANDATES, NUMBER_OF_RECEIVED_REQUESTS
 }
