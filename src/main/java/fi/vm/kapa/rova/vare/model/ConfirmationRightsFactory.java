@@ -45,7 +45,6 @@ public class ConfirmationRightsFactory {
             boolean restrictedAssigmentRight = false;
             boolean restrictedAssigmentProxyRight = false;
             for (String role : roles) {
-                System.out.println("ZZZZZZZZZZZZ role: "+ role);
                 if (role.contains(ASSIGNMENT_SUB_DOMAIN)) {
                     String mandateUri = role.replace(ASSIGNMENT_SUB_DOMAIN, "");
                     rights.getAllowedMandateIssues().add(mandateUri);

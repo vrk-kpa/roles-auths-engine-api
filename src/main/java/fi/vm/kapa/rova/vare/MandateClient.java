@@ -75,33 +75,27 @@ public interface MandateClient {
 
     LegalSubjectsDTO validateNameAndId(LegalSubjectsDTO legalSubjects);
 
-//    PartiesDTO getDelegates(SearchTypeEnum type, String principalId, List<MandateType> mandateTypes, int limit, int offset,
-//                            boolean ascending, PartySortTypeEnum sortBy);
-
     PartiesDTO getDelegates(SearchTypeEnum type, String principalId, int limit, int offset,
             boolean ascending, PartySortTypeEnum sortBy, ConfirmationRights confirmationRights);
-
-//    SimplifiedMandatesDTO getConfirmedMandates(String principalId, String delegateId, List<MandateType> mandateTypes, String lang, int limit,
-//                                               int offset, SortTypeEnum sortBy, boolean ascending);
 
     SimplifiedMandatesDTO getConfirmedMandates(String principalId, String delegateId, String lang, int limit,
             int offset, SortTypeEnum sortBy, boolean ascending, ConfirmationRights confirmationRights);
 
-    SimplifiedMandatesDTO getConfirmedPastMandates(String representedParty, String otherParty, List<MandateType> mandateTypes, String lang, int limit,
-                                                   int offset, SortTypeEnum sortBy, boolean ascending);
+    SimplifiedMandatesDTO getConfirmedPastMandates(String representedParty, String otherParty, String lang, 
+           int limit, int offset, SortTypeEnum sortBy, boolean ascending, ConfirmationRights confirmationRights);
 
-    SimplifiedMandatesDTO getMandateRequests(String representedParty, String otherParty, List<MandateType> mandateTypes, String lang, int limit,
-                                             int offset, SortTypeEnum sortBy, boolean ascending);
+    SimplifiedMandatesDTO getMandateRequests(String representedParty, String otherParty, String lang, int limit,
+            int offset, SortTypeEnum sortBy, boolean ascending, ConfirmationRights confirmationRights);
 
-    PartiesDTO getPrincipals(SearchTypeEnum type, String delegateId, List<MandateType> mandateTypes, int limit, int offset,
-                             boolean ascending, PartySortTypeEnum sortBy);
+    PartiesDTO getPrincipals(SearchTypeEnum type, String delegateId, List<MandateType> mandateTypes, 
+            int limit, int offset, boolean ascending, PartySortTypeEnum sortBy);
 
-    PartiesDTO getPastMandateParties(String partyId, SearchTypeEnum type, List<MandateType> mandateTypes, int limit,
-                                     int offset, boolean ascending, PartySortTypeEnum sortBy);
+    PartiesDTO getPastMandateParties(String partyId, SearchTypeEnum type, int limit, int offset,
+            boolean ascending, PartySortTypeEnum sortBy, ConfirmationRights confirmationRights);
 
-    PartiesDTO getMandateRequestParties(String partyId, SearchTypeEnum type, List<MandateType> mandateTypes, int limit,
-                                        int offset, boolean ascending, PartySortTypeEnum sortBy);
-    
+    PartiesDTO getMandateRequestParties(String partyId, SearchTypeEnum type, int limit, int offset,
+            boolean ascending, PartySortTypeEnum sortBy, ConfirmationRights confirmationRights);
+
     /**
      * Number of received mandate requests.
      * 
