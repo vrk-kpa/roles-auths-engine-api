@@ -71,4 +71,38 @@ public class DecisionReason {
         EXCEPTION
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((reasonRule == null) ? 0 : reasonRule.hashCode());
+        result = prime * result + ((reasonValue == null) ? 0 : reasonValue.hashCode());
+        result = prime * result + ((valueType == null) ? 0 : valueType.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        DecisionReason other = (DecisionReason) obj;
+        if (reasonRule == null) {
+            if (other.reasonRule != null)
+                return false;
+        } else if (!reasonRule.equals(other.reasonRule))
+            return false;
+        if (reasonValue == null) {
+            if (other.reasonValue != null)
+                return false;
+        } else if (!reasonValue.equals(other.reasonValue))
+            return false;
+        if (valueType != other.valueType)
+            return false;
+        return true;
+    }
+
 }
