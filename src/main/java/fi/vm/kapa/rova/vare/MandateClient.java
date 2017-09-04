@@ -101,7 +101,9 @@ public interface MandateClient {
      * 
      * @param partyId Party to whom the requests are sent.
      */
-    Long getTotalReceivedRequests(String partyId);
+//    Long getTotalReceivedRequests(String partyId);
+
+    Long getTotalReceivedRequests(String representedId, ConfirmationRights confirmationRights);
 
     PartyDTO getMandateParty(String representedPartyId,String mandatePartyId,ConfirmationRights confirmationRights);
 

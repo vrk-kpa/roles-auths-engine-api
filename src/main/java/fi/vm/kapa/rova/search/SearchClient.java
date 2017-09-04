@@ -129,6 +129,9 @@ public class SearchClient implements Search {
         } catch (UnsupportedEncodingException e) {
             LOG.error("Exception while calling "+ ENDPOINT_URL + SERVICES_FOR_ISSUE + "/" + issueUri +": "+ e.getMessage());
             return Collections.emptyList();
+        } catch (Exception e) {
+            LOG.error("Exception while calling "+ ENDPOINT_URL + SERVICES_FOR_ISSUE + "/" + issueUri +": "+ e.getMessage());
+            return Collections.emptyList();
         }
     }
 
