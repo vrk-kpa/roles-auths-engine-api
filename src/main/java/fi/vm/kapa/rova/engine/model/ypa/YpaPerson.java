@@ -28,9 +28,7 @@ import fi.vm.kapa.rova.external.model.virre.Company;
 import fi.vm.kapa.rova.external.model.virre.CompanyRoleType;
 import fi.vm.kapa.rova.external.model.virre.RoleNameType;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class YpaPerson implements Evaluable {
@@ -39,6 +37,14 @@ public class YpaPerson implements Evaluable {
     private String businessId;
     private Company company;
     private String status;
+
+    public YpaPerson() {
+    }
+
+    public YpaPerson(String hetu, String businessId) {
+        this.hetu = hetu;
+        this.businessId = businessId;
+    }
 
     public String getHetu() {
         return hetu;
