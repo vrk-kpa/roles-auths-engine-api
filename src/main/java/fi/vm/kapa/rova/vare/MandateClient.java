@@ -48,7 +48,7 @@ public interface MandateClient {
     String MANDATE_PARTIES_PAST = "/rest/vare/mandateparties/past/party/{party}/{type}";
     String MANDATE_REQUEST_PARTIES = "/rest/vare/mandateparties/requests/party/{party}/{type}";
     String TOTAL_RECEIVED_REQUESTS = "/rest/vare/mandateparties/requests/totalreceived/{partyId}";
-    String MANDATE_PARTY = "/rest/vare/mandateparty/{partyId}";
+    String MANDATE_PARTY = "/rest/vare/mandateparty/{partyId}/representedParty/{representedParty}";
 
     MandateDTO getMandate(String uuid);
 
@@ -103,6 +103,6 @@ public interface MandateClient {
      */
     Long getTotalReceivedRequests(String partyId);
 
-    PartyDTO getMandateParty(String partyId);
+    PartyDTO getMandateParty(String representedPartyId,String mandatePartyId,ConfirmationRights confirmationRights);
 
 }
