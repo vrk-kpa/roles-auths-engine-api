@@ -103,6 +103,6 @@ public interface MandateClient {
      */
     Long getTotalReceivedRequests(String representedId, ConfirmationRights confirmationRights);
 
-    PartyDTO getMandateParty(String representedPartyId,String mandatePartyId,ConfirmationRights confirmationRights);
+    PartyDTO getMandateParty(String representedPartyId, String mandatePartyId, ConfirmationRights confirmationRights);
 
 }

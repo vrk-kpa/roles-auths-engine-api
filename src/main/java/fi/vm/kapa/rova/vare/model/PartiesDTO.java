@@ -73,12 +73,12 @@ public class PartiesDTO {
         this.totalMandates = totalMandates;
     }
 
-	public long getTotalReceivedRequests() {
-		return totalReceivedRequests;
-	}
+    public long getTotalReceivedRequests() {
+        return totalReceivedRequests;
+    }
 
-	public void setTotalReceivedRequests(long totalReceivedRequests) {
-		this.totalReceivedRequests = totalReceivedRequests;
-	}
-    
+    public void setTotalReceivedRequests(long totalReceivedRequests) {
+        this.totalReceivedRequests = totalReceivedRequests;
+    }
+
 }
