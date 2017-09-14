@@ -31,8 +31,9 @@ public class PartyDTO {
     private String companyName;
     private String displayName;
     private long numberOfMandates;
-	private long receivedRequests;
-    
+    private long receivedRequests;
+    private boolean restricted;
+
     public PartyDTO() {
         this.company = false;
     }
@@ -105,12 +106,20 @@ public class PartyDTO {
     }
     
     public long getReceivedRequests() {
-		return receivedRequests;
-	}
+        return receivedRequests;
+    }
 
-	public void setReceivedRequests(long receivedRequests) {
-		this.receivedRequests = receivedRequests;
-	}
+    public void setReceivedRequests(long receivedRequests) {
+        this.receivedRequests = receivedRequests;
+    }
+
+    public boolean isRestricted() {
+        return restricted;
+    }
+
+    public void setRestricted(boolean restricted) {
+        this.restricted = restricted;
+    }
 
     @Override
     public boolean equals(Object o) {
