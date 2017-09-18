@@ -65,6 +65,6 @@ public interface CheckMandateClient {
     /**
      * Resource for fetching all principals which have given a mandate (of MANDATE type) to the given delegateId
      */
-    List<Principal> getMandatePrincipals(String delegateId);
+    List<Principal> getMandatePrincipals(String delegateId, List<String> issues);
 
 }
