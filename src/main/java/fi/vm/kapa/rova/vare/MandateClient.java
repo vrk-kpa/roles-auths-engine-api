@@ -65,7 +65,7 @@ public interface MandateClient {
     List<MandateResult> mandatesCanBeCreated(String assertion,
                                              List<MandateDTO> mandateDTOs);
 
-    List<MandateDTO> updateMandates(String assertion, List<MandateDTO> mandateDTOs);
+    List<MandateResult> updateMandates(String assertion, List<MandateDTO> mandateDTOs);
 
     /**
      * Resource for confirming, i.e. signing, a mandate.
