@@ -22,16 +22,25 @@
  */
 package fi.vm.kapa.rova.karva.model;
 
+import java.util.Collections;
 import java.util.List;
 
 public class KarvaResponse {
+
     private String entityId;
 
     private String personId;
 
     private List<RolesForCompany> roles;
 
+    @SuppressWarnings("unused")
     public KarvaResponse() {
+    }
+
+    public KarvaResponse(String entityId, String personId) {
+        this.entityId = entityId;
+        this.personId = personId;
+        this.roles = Collections.emptyList();
     }
 
     public KarvaResponse(String entityId, String personId, List<RolesForCompany> roles) {
@@ -44,23 +53,16 @@ public class KarvaResponse {
         return entityId;
     }
 
-    public void setEntityId(String entityId) {
-        this.entityId = entityId;
-    }
-
     public String getPersonId() {
         return personId;
     }
 
-    public void setPersonId(String personId) {
-        this.personId = personId;
-    }
-
-    public List<RolesForCompany> getRolesForCompanies() {
+    public List<RolesForCompany> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<RolesForCompany> roles) {
-        this.roles = roles;
+    @Override
+    public String toString() {
+        return "KarvaResponse [entityId=" + entityId + ", personId=" + personId + ", roles=" + roles + "]";
     }
 }

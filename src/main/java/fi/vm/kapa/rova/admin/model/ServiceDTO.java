@@ -44,6 +44,7 @@ public class ServiceDTO {
     private String memberClass;
     private String memberCode;
     private String subsystemCode;
+    private String katsoEntityId;
     private String description;
     private Map<String, RuleSetDTO> ruleSets;
     private ServiceConfigurationDTO serviceConfig;
@@ -164,6 +165,10 @@ public class ServiceDTO {
     public void setSubsystemCode(String subsystemCode) {
         this.subsystemCode = subsystemCode;
     }
+
+    public String getKatsoEntityId() { return katsoEntityId; }
+
+    public void setKatsoEntityId(String katsoEntityId) { this.katsoEntityId = katsoEntityId; }
 
     public String getApiServiceIdentifier() {
         return apiServiceIdentifier;

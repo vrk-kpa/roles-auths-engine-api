@@ -22,15 +22,12 @@
  */
 package fi.vm.kapa.rova.karva;
 
-import fi.vm.kapa.rova.karva.model.KarvaResponse;
+import fi.vm.kapa.rova.ribbon.MetadataAwareRule;
 
-public interface Karva {
-    String API_VERSION = "1.0";
-    String CLIENT = "roles-auths-karva-client";
+public class KarvaLoadbalancerRule extends MetadataAwareRule {
 
-    // NOTE: the actual request needs to be of the form /rest/karva/roles/{personId}?entityId={entityId}
-    // EntityId is passed in as parameter, because it is formatted like a URL
-    String KARVA_ROLES_PATH = "/rest/karva/roles/{personId}";
+    public KarvaLoadbalancerRule() {
+        super(Karva.API_VERSION);
+    }
 
-    KarvaResponse getRoles(String entityId, String personId, boolean includeForeignCompanies, boolean includeSubOrganizations);
 }
