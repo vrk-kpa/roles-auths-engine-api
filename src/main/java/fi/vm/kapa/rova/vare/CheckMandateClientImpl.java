@@ -22,11 +22,15 @@
  */
 package fi.vm.kapa.rova.vare;
 
+import static fi.vm.kapa.rova.rest.model.RestIdentifier.AUTHENTICATION_ASSERTION;
+import static org.springframework.http.HttpMethod.POST;
+
 import fi.vm.kapa.rova.RestTemplateFactory;
 import fi.vm.kapa.rova.engine.model.hpa.Principal;
 import fi.vm.kapa.rova.logging.Logger;
 import fi.vm.kapa.rova.vare.model.MandateDTO;
 import fi.vm.kapa.rova.vare.model.MandateResponse;
+import fi.vm.kapa.rova.vare.model.MandateResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,6 +39,7 @@ import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -120,13 +125,14 @@ public class CheckMandateClientImpl extends AbstractMandateClient implements Che
         return handleResponse(response, expandedUrl);
     }
 
-    public List<Principal> getMandatePrincipals(String delegateId) {
+    @Override
+    public List<Principal> getMandatePrincipals(String delegateId, List<String> issues) {
         UriComponentsBuilder builder = getUriComponentsBuilder(MANDATE_PRINCIPALS);
         Map<String, String> params = new HashMap<>();
         params.put("delegateId", delegateId);
         String expandedUrl = builder.buildAndExpand(params).encode().toUriString();
-        ResponseEntity<List<Principal>> response = restTemplate.exchange(expandedUrl, HttpMethod.GET, null,
-                new ParameterizedTypeReference<List<Principal>>() {
+        ResponseEntity<List<Principal>> response = restTemplate.exchange(expandedUrl, HttpMethod.POST,
+                new HttpEntity<>(issues), new ParameterizedTypeReference<List<Principal>>() {
                 });
         return handleResponse(response, expandedUrl);
     }
@@ -136,4 +142,5 @@ public class CheckMandateClientImpl extends AbstractMandateClient implements Che
         ResponseEntity<T> response = restTemplate.getForEntity(expandedUrl, returnType);
         return handleResponse(response, expandedUrl);
     }
+
 }
