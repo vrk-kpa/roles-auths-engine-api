@@ -23,7 +23,6 @@
 package fi.vm.kapa.rova.search;
 
 import fi.vm.kapa.rova.ribbon.MetadataAwareRule;
-import fi.vm.kapa.rova.ytj.YTJ;
 
 /**
  * Created by jkorkala on 27/03/2017.

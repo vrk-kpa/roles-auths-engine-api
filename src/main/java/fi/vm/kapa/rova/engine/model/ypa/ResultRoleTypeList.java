@@ -27,7 +27,6 @@ import fi.vm.kapa.rova.external.model.IResultType;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 
 public class ResultRoleTypeList extends ArrayList<IResultType> implements IResultType {
     

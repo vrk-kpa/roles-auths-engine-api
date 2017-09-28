@@ -24,9 +24,6 @@ package fi.vm.kapa.rova.engine.model.hpa;
 
 import fi.vm.kapa.rova.external.model.AuthorizationType;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Authorization extends AbstractAuthorization {
 
     private AuthorizationType result;

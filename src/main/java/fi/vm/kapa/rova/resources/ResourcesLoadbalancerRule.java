@@ -23,7 +23,6 @@
 package fi.vm.kapa.rova.resources;
 
 import fi.vm.kapa.rova.ribbon.MetadataAwareRule;
-import fi.vm.kapa.rova.vtj.VTJ;
 
 /**
  * Created by jkorkala on 27/03/2017.

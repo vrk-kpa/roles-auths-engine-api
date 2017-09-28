@@ -22,15 +22,11 @@
  */
 package fi.vm.kapa.rova.vare;
 
-import static fi.vm.kapa.rova.rest.model.RestIdentifier.AUTHENTICATION_ASSERTION;
-import static org.springframework.http.HttpMethod.POST;
-
 import fi.vm.kapa.rova.RestTemplateFactory;
 import fi.vm.kapa.rova.engine.model.hpa.Principal;
 import fi.vm.kapa.rova.logging.Logger;
 import fi.vm.kapa.rova.vare.model.MandateDTO;
 import fi.vm.kapa.rova.vare.model.MandateResponse;
-import fi.vm.kapa.rova.vare.model.MandateResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
