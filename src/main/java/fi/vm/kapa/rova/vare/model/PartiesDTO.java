@@ -23,6 +23,7 @@
 package fi.vm.kapa.rova.vare.model;
 
 import java.util.List;
+import java.util.Set;
 
 public class PartiesDTO {
 
@@ -32,6 +33,7 @@ public class PartiesDTO {
     private long totalParties;
     private long totalMandates;
     private long totalReceivedRequests;
+    private Set<MandateType> mandateTypes;
 
     public List<PartyDTO> getParties() {
         return parties;
@@ -79,6 +81,14 @@ public class PartiesDTO {
 
     public void setTotalReceivedRequests(long totalReceivedRequests) {
         this.totalReceivedRequests = totalReceivedRequests;
+    }
+
+    public Set<MandateType> getMandateTypes() {
+        return mandateTypes;
+    }
+
+    public void setMandateTypes(Set<MandateType> mandateTypes) {
+        this.mandateTypes = mandateTypes;
     }
 
 }
