@@ -23,6 +23,7 @@
 package fi.vm.kapa.rova.vare.model;
 
 import java.util.List;
+import java.util.Set;
 
 public class SimplifiedMandatesDTO {
     private String id;
@@ -30,6 +31,7 @@ public class SimplifiedMandatesDTO {
     private int limit;
     private int offset;
     private long total;
+    private Set<MandateType> mandateTypes;
 
     public String getId() {
         return id;
@@ -69,5 +71,13 @@ public class SimplifiedMandatesDTO {
 
     public void setTotal(long total) {
         this.total = total;
+    }
+
+    public Set<MandateType> getMandateTypes() {
+        return mandateTypes;
+    }
+
+    public void setMandateTypes(Set<MandateType> mandateTypes) {
+        this.mandateTypes = mandateTypes;
     }
 }

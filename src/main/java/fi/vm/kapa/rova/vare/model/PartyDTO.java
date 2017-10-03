@@ -22,6 +22,8 @@
  */
 package fi.vm.kapa.rova.vare.model;
 
+import java.util.Set;
+
 public class PartyDTO {
 
     private String id;
@@ -33,12 +35,13 @@ public class PartyDTO {
     private long numberOfMandates;
     private long receivedRequests;
     private boolean restricted;
+    private Set<MandateType> mandateTypes;
 
     public PartyDTO() {
         this.company = false;
     }
 
-    public PartyDTO(String id, String firstNames, String lastName, boolean company, String companyName, String displayName, long numberOfMandates) {
+    public PartyDTO(String id, String firstNames, String lastName, boolean company, String companyName, String displayName, long numberOfMandates, Set<MandateType> mandateTypes) {
         super();
         this.id = id;
         this.firstNames = firstNames;
@@ -47,6 +50,7 @@ public class PartyDTO {
         this.companyName = companyName;
         this.displayName = displayName;
         this.numberOfMandates = numberOfMandates;
+        this.mandateTypes = mandateTypes;
     }
 
     public String getId() {
@@ -121,6 +125,14 @@ public class PartyDTO {
         this.restricted = restricted;
     }
 
+    public Set<MandateType> getMandateTypes() {
+        return mandateTypes;
+    }
+
+    public void setMandateTypes(Set<MandateType> mandateTypes) {
+        this.mandateTypes = mandateTypes;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -128,28 +140,32 @@ public class PartyDTO {
 
         PartyDTO partyDTO = (PartyDTO) o;
 
-        if (!getId().equals(partyDTO.getId())) return false;
-        if (isCompany() != partyDTO.isCompany()) return false;
-        if (getNumberOfMandates() != partyDTO.getNumberOfMandates()) return false;
-        if (getFirstNames() != null ? !getFirstNames().equals(partyDTO.getFirstNames()) : partyDTO.getFirstNames() != null)
+        if (company != partyDTO.company) return false;
+        if (numberOfMandates != partyDTO.numberOfMandates) return false;
+        if (receivedRequests != partyDTO.receivedRequests) return false;
+        if (restricted != partyDTO.restricted) return false;
+        if (id != null ? !id.equals(partyDTO.id) : partyDTO.id != null) return false;
+        if (firstNames != null ? !firstNames.equals(partyDTO.firstNames) : partyDTO.firstNames != null) return false;
+        if (lastName != null ? !lastName.equals(partyDTO.lastName) : partyDTO.lastName != null) return false;
+        if (companyName != null ? !companyName.equals(partyDTO.companyName) : partyDTO.companyName != null)
             return false;
-        if (getLastName() != null ? !getLastName().equals(partyDTO.getLastName()) : partyDTO.getLastName() != null)
+        if (displayName != null ? !displayName.equals(partyDTO.displayName) : partyDTO.displayName != null)
             return false;
-        if (getCompanyName() != null ? !getCompanyName().equals(partyDTO.getCompanyName()) : partyDTO.getCompanyName() != null)
-            return false;
-        return getDisplayName() != null ? getDisplayName().equals(partyDTO.getDisplayName()) : partyDTO.getDisplayName() == null;
-
+        return mandateTypes != null ? mandateTypes.equals(partyDTO.mandateTypes) : partyDTO.mandateTypes == null;
     }
 
     @Override
     public int hashCode() {
-        int result = getId().hashCode();
-        result = 31 * result + (getFirstNames() != null ? getFirstNames().hashCode() : 0);
-        result = 31 * result + (getLastName() != null ? getLastName().hashCode() : 0);
-        result = 31 * result + (isCompany() ? 1 : 0);
-        result = 31 * result + (getCompanyName() != null ? getCompanyName().hashCode() : 0);
-        result = 31 * result + (getDisplayName() != null ? getDisplayName().hashCode() : 0);
-        result = 31 * result + (int) (getNumberOfMandates() ^ (getNumberOfMandates() >>> 32));
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (firstNames != null ? firstNames.hashCode() : 0);
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (company ? 1 : 0);
+        result = 31 * result + (companyName != null ? companyName.hashCode() : 0);
+        result = 31 * result + (displayName != null ? displayName.hashCode() : 0);
+        result = 31 * result + (int) (numberOfMandates ^ (numberOfMandates >>> 32));
+        result = 31 * result + (int) (receivedRequests ^ (receivedRequests >>> 32));
+        result = 31 * result + (restricted ? 1 : 0);
+        result = 31 * result + (mandateTypes != null ? mandateTypes.hashCode() : 0);
         return result;
     }
 }
