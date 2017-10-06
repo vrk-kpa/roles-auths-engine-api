@@ -28,13 +28,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
 
-public abstract class AbstractMandateClient {
+public abstract class AbstractVareClient {
 
-    private static final Logger LOG = Logger.getLogger(AbstractMandateClient.class);
+    private static final Logger LOG = Logger.getLogger(AbstractVareClient.class);
 
     private String endpointUrl;
 
-    public AbstractMandateClient(String endpointUrl) {
+    public AbstractVareClient(String endpointUrl) {
         this.endpointUrl = endpointUrl;
     }
 
