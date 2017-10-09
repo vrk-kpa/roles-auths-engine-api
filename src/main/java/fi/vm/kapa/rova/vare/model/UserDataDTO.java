@@ -22,6 +22,8 @@
  */
 package fi.vm.kapa.rova.vare.model;
 
+import fi.vm.kapa.rova.utils.DateUtils;
+
 import java.util.Date;
 
 /**
@@ -63,6 +65,12 @@ public class UserDataDTO {
         this.authUserId = authUserId;
     }
     
-    
-    
+    public static UserDataDTO generateDefault() {
+        UserDataDTO dto = new UserDataDTO();
+        dto.setFirstLogin(false);
+        Date currTime = DateUtils.getCurrentFinnishDate();
+        dto.setLastSeen(currTime);
+        dto.setCurrLogin(currTime);
+        return dto;
+    }
 }
