@@ -48,7 +48,7 @@ import java.util.Optional;
 
 @RibbonClient(name = CheckMandateClient.CHECK_MANDATE_CLIENT)
 @Conditional(CheckMandateClientCondition.class)
-public class CheckMandateClientImpl extends AbstractMandateClient implements CheckMandateClient {
+public class CheckMandateClientImpl extends AbstractVareClient implements CheckMandateClient {
 
     private static final Logger LOG = Logger.getLogger(CheckMandateClientImpl.class);
 
