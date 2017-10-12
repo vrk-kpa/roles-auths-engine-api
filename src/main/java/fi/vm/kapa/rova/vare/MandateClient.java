@@ -52,7 +52,7 @@ public interface MandateClient {
 
     MandateDTO getMandate(String uuid);
 
-    List<MandateDTO> getMandates(String status, String partyId, String includeIdsInResponse);
+    List<MandateDTO> getMandates(String status, String partyId, ConfirmationRights confirmationRights);
 
     List<MandateDTO> getMandates(Set<String> uuids);
 
@@ -99,7 +99,7 @@ public interface MandateClient {
     /**
      * Number of received mandate requests.
      * 
-     * @param partyId Party to whom the requests are sent.
+     * @param representedId Party to whom the requests are sent.
      */
     Long getTotalReceivedRequests(String representedId, ConfirmationRights confirmationRights);
 
