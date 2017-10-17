@@ -23,15 +23,37 @@
 
 package fi.vm.kapa.rova.vare.model;
 
+import java.util.Set;
+
 public class LegalSubjectDTO {
 
     private String id;
     private String firstNames;
     private String lastName;
     private boolean company;
+    private String callingName;
+
+    public String getCallingName() {
+        return callingName;
+    }
+
+    public void setCallingName(String callingName) {
+        this.callingName = callingName;
+    }
+
+    public Set<String> getChecksums() {
+        return checksums;
+    }
+
+    public void setChecksums(Set<String> checksums) {
+        this.checksums = checksums;
+    }
+
     private String companyName;
     private boolean valid;
 
+    private Set<String> checksums;
+    
     public String getId() {
         return id;
     }

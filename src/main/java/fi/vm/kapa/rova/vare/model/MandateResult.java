@@ -39,8 +39,11 @@ public class MandateResult {
     private String reason;
     private String uuid;
     private String uri;
+    
+    private MandateDTO targetMandate;
+    
     private List<MandateDTO> mandatesThatWillBeReplaced = Collections.emptyList();
-
+    
     public MandateResult() {
         // NOP
     }
@@ -102,5 +105,13 @@ public class MandateResult {
     public String toString() {
         return "MandateResult [success=" + success + ", reason=" + reason
                 + ", uuid=" + uuid + ", uri=" + uri + "]";
+    }
+
+    public MandateDTO getTargetMandate() {
+        return targetMandate;
+    }
+
+    public void setTargetMandate(MandateDTO targetMandate) {
+        this.targetMandate = targetMandate;
     }
 }
