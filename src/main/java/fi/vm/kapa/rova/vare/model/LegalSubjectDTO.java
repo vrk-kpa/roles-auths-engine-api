@@ -31,29 +31,12 @@ public class LegalSubjectDTO {
     private String firstNames;
     private String lastName;
     private boolean company;
-    private String callingName;
-
-    public String getCallingName() {
-        return callingName;
-    }
-
-    public void setCallingName(String callingName) {
-        this.callingName = callingName;
-    }
-
-    public Set<String> getChecksums() {
-        return checksums;
-    }
-
-    public void setChecksums(Set<String> checksums) {
-        this.checksums = checksums;
-    }
 
     private String companyName;
     private boolean valid;
 
     private Set<String> checksums;
-    
+   
     public String getId() {
         return id;
     }
@@ -107,5 +90,13 @@ public class LegalSubjectDTO {
         return "LegalSubjectDTO [id=" + id + ", firstNames=" + firstNames
                 + ", lastName=" + lastName + ", company=" + company
                 + ", companyName=" + companyName + ", valid=" + valid + "]";
+    }
+
+    public Set<String> getChecksums() {
+        return checksums;
+    }
+
+    public void setChecksums(Set<String> checksums) {
+        this.checksums = checksums;
     }
 }

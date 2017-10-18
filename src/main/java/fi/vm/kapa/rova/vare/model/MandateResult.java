@@ -104,7 +104,7 @@ public class MandateResult {
     @Override
     public String toString() {
         return "MandateResult [success=" + success + ", reason=" + reason
-                + ", uuid=" + uuid + ", uri=" + uri + "]";
+                + ", uuid=" + uuid + ", uri=" + uri + ", targetMandate="+targetMandate+"]";
     }
 
     public MandateDTO getTargetMandate() {
