@@ -41,7 +41,13 @@ public class RolesForCompany {
         this.companyOid = companyOid;
         if (companyOid.startsWith(FINNISH_BUSINESSID_PREFIX)) {
             String str = companyOid.split("\\.")[4];
-            finnishBusinessId = str.substring(0, 7) + "-" + str.substring(7, str.length());
+            if (str.length() == 8) {
+                finnishBusinessId = str.substring(0, 7) + "-" + str.substring(7, 8);
+            } else if (str.length() == 7) {
+                finnishBusinessId = "0" + str.substring(0, 6) + "-" + str.substring(6, 7);
+            } else {
+                throw new IllegalArgumentException("Business Id part length is incorrect");
+            }
 
             mainOrganization = companyOid.endsWith(".0");
         }
