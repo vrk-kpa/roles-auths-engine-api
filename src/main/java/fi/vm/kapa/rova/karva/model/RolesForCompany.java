@@ -39,6 +39,9 @@ public class RolesForCompany {
 
     public RolesForCompany(String companyOid, List<String> roles) {
         this.companyOid = companyOid;
+
+        // Karva-rajapinnan OID noudattaa JHS 159 -suositusta: http://docs.jhs-suositukset.fi/jhs-suositukset/JHS159_liite1/JHS159_liite1.html#H2
+        // eli OIDissa Y-tunnus saattaa esiintyä ilman (yhtä) etunollaa
         if (companyOid.startsWith(FINNISH_BUSINESSID_PREFIX)) {
             String str = companyOid.split("\\.")[4];
             if (str.length() == 8) {
