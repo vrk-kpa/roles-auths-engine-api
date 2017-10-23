@@ -41,6 +41,8 @@ public interface OntologyClient {
     Set<Concept> getNarrowerConcepts(String uri);
 
     List<Concept> getConcepts();
+    
+    List<Concept> getConcepts(String principalId);
 
     List<Concept> getConcepts(List<String> uriList);
 

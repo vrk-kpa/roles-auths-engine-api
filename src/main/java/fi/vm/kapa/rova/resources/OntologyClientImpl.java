@@ -32,6 +32,7 @@ import org.springframework.context.annotation.Conditional;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -71,6 +72,11 @@ public class OntologyClientImpl extends AbstractClient implements Ontology, Onto
     public List<Concept> getConcepts() {
         return getConceptsResponse().getBody();
     }
+    
+    @Override
+    public List<Concept> getConcepts(String principalId) {
+        return getConceptsResponse(principalId).getBody();
+    }
 
     @Override
     public List<Concept> getConcepts(List<String> uriList) {
@@ -107,6 +113,19 @@ public class OntologyClientImpl extends AbstractClient implements Ontology, Onto
         String requestUrl = "http://" + CLIENT + GET_ALL_CONCEPTS;
 
         ResponseEntity<List<Concept>> entityResponse = restTemplate.exchange(requestUrl, HttpMethod.GET, null,
+                new ParameterizedTypeReference<List<Concept>>() {});
+        checkStatus(requestUrl, entityResponse);
+        return entityResponse;
+    }
+    
+    public ResponseEntity<List<Concept>> getConceptsResponse(String principalId) {
+        RestTemplate restTemplate = resourcesRestTemplate;
+        String requestUrl = "http://" + CLIENT + GET_CONCEPTS_BY_PRINCIPAL_TYPE;
+        
+        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(requestUrl);
+        builder.queryParam("principalId", principalId);
+
+        ResponseEntity<List<Concept>> entityResponse = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, null,
                 new ParameterizedTypeReference<List<Concept>>() {});
         checkStatus(requestUrl, entityResponse);
         return entityResponse;
