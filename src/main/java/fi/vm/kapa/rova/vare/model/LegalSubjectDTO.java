@@ -23,15 +23,29 @@
 
 package fi.vm.kapa.rova.vare.model;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import java.util.Set;
+
 public class LegalSubjectDTO {
 
     private String id;
     private String firstNames;
     private String lastName;
     private boolean company;
+
     private String companyName;
     private boolean valid;
 
+    private Set<String> checksums;
+
+    //View definitions to ensure, that vtjData, if set, is sent to caller from vare endpoints only(and for instance not from vare-ui to browser)
+    @JsonView(RESTEndpointContext.Vare.class)
+    private String vtjFirstNames;
+    
+    @JsonView(RESTEndpointContext.Vare.class)
+    private String vtjLastName;
+    
     public String getId() {
         return id;
     }
@@ -85,5 +99,29 @@ public class LegalSubjectDTO {
         return "LegalSubjectDTO [id=" + id + ", firstNames=" + firstNames
                 + ", lastName=" + lastName + ", company=" + company
                 + ", companyName=" + companyName + ", valid=" + valid + "]";
+    }
+
+    public Set<String> getChecksums() {
+        return checksums;
+    }
+
+    public void setChecksums(Set<String> checksums) {
+        this.checksums = checksums;
+    }
+
+    public String getVtjFirstNames() {
+        return vtjFirstNames;
+    }
+
+    public void setVtjFirstNames(String vtjFirstNames) {
+        this.vtjFirstNames = vtjFirstNames;
+    }
+
+    public String getVtjLastName() {
+        return vtjLastName;
+    }
+
+    public void setVtjLastName(String vtjLastName) {
+        this.vtjLastName = vtjLastName;
     }
 }
