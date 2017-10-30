@@ -27,6 +27,14 @@ public class Principal {
     private String personId;
     private String name;
 
+    public Principal() {
+    }
+
+    public Principal(String personId, String name) {
+        this.personId = personId;
+        this.name = name;
+    }
+
     public String getPersonId() {
         return personId;
     }
