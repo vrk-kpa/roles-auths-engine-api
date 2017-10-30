@@ -91,4 +91,11 @@ public class PartiesDTO {
         this.mandateTypes = mandateTypes;
     }
 
+	@Override
+	public String toString() {
+		return "PartiesDTO [parties=" + parties + ", limit=" + limit + ", offset=" + offset + ", totalParties="
+				+ totalParties + ", totalMandates=" + totalMandates + ", totalReceivedRequests=" + totalReceivedRequests
+				+ ", mandateTypes=" + mandateTypes + "]";
+	}
+
 }
