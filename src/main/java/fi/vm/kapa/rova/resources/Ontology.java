@@ -35,12 +35,14 @@ public interface Ontology extends Resources {
     String GET_CONCEPT = "/rest/ontology/concept";
     String GET_CONCEPTS = "/rest/ontology/concepts";
     String GET_ALL_CONCEPTS = "/rest/ontology/concept/all";
+    String GET_CONCEPTS_BY_PRINCIPAL_TYPE = "/rest/ontology/concept/principalType";
     String IS_BROADER_CONCEPT = "/rest/ontology/concept/is-broader-concept";
     String GET_NARROWER_CONCEPTS = "/rest/ontology/concept/narrower";
 
     ResponseEntity<Concept> getConceptResponse(String uri);
     ResponseEntity<List<Concept>> getConceptsResponse(List<String> uris);
     ResponseEntity<List<Concept>> getConceptsResponse();
+    ResponseEntity<List<Concept>> getConceptsResponse(String principalId);
     ResponseEntity<Boolean> isBroaderConceptResponse(String broaderUri, String narrowerUri);
     ResponseEntity<Set<Concept>> getNarrowerConceptsResponse(String uri);
 }
