@@ -22,6 +22,9 @@
  */
 package fi.vm.kapa.rova.vare.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import fi.vm.kapa.rova.external.model.ReasonSerializer;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -31,11 +34,13 @@ public class MandateResult {
     public static final String REASON_DELEGATE_CANNOT_RECEIVE_MANDATE = "DELEGATE_CANNOT_RECEIVE_MANDATE";
     public static final String REASON_PRINCIPAL_NOT_COMPETENT = "PRINCIPAL_NOT_COMPETENT";
     public static final String REASON_DELEGATE_NOT_COMPETENT = "DELEGATE_NOT_COMPETENT";
+    public static final String REASON_GENERIC = "MANDATE_NOT_ALLOWED";
     public static final String REASON_END_USER_NOT_AUTHORIZED_REPRESENT_PRINCIPAL = "END_USER_NOT_AUTHORIZED_REPRESENT_PRINCIPAL";
     public static final String REASON_MANDATE_ALREADY_CONFIRMED = "MANDATE_ALREADY_CONFIRMED";
     public static final String REASON_BAD_REQUEST = "BAD_REQUEST";
 
     private boolean success;
+    @JsonSerialize(using=ReasonSerializer.class)
     private String reason;
     private String uuid;
     private String uri;
