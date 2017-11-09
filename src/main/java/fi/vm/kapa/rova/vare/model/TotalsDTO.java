@@ -59,4 +59,10 @@ public class TotalsDTO {
     public void setRestricted(boolean restricted) {
         this.restricted = restricted;
     }
+
+    @Override
+    public String toString() {
+        return "TotalsDTO [totalReceived=" + totalReceived + ", totalGiven=" + totalGiven + ", totalFrom=" + totalFrom
+                + ", restricted=" + restricted + "]";
+    }
 }
