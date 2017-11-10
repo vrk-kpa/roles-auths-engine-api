@@ -26,6 +26,8 @@ import fi.vm.kapa.rova.ClientException;
 import fi.vm.kapa.rova.RestTemplateFactory;
 import fi.vm.kapa.rova.external.model.ytj.CompanyDTO;
 import fi.vm.kapa.rova.logging.Logger;
+import fi.vm.kapa.rova.ptv.model.Channel;
+import fi.vm.kapa.rova.ptv.model.PtvSearchResult;
 import fi.vm.kapa.rova.ptv.model.PtvService;
 import fi.vm.kapa.rova.search.model.CompanySearchResult;
 import org.apache.commons.lang3.StringUtils;
@@ -45,9 +47,11 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
@@ -114,10 +118,11 @@ public class SearchClient implements Search {
         }
 
         try {
-            ResponseEntity<PtvService[]> response = restTemplate.getForEntity(ENDPOINT_URL + SERVICES_FOR_ISSUE + "/" + URLEncoder.encode(issueUri, "UTF-8"),
-                    PtvService[].class, Collections.emptyMap());
+            ResponseEntity<PtvSearchResult[]> response = restTemplate.getForEntity(ENDPOINT_URL + SERVICES_FOR_ISSUE + "/" + URLEncoder.encode(issueUri, "UTF-8"),
+                    PtvSearchResult[].class, Collections.emptyMap());
             if (response != null && response.getBody() != null) {
-                return Arrays.asList(response.getBody());
+                List<PtvService> services = Arrays.stream(response.getBody()).map(o -> o.get_source()).collect(Collectors.toList());
+                return services;
             } else {
                 LOG.error(ENDPOINT_URL + SERVICES_FOR_ISSUE + "/" + URLEncoder.encode(issueUri, "UTF-8") +" got null/empty response.");
                 return Collections.emptyList();
