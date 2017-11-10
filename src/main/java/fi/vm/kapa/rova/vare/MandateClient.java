@@ -47,8 +47,6 @@ public interface MandateClient {
     String PRINCIPALS = "/rest/vare/principals/{type}/delegate/{delegate}";
     String MANDATE_PARTIES_PAST = "/rest/vare/mandateparties/past/party/{party}/{type}";
     String MANDATE_REQUEST_PARTIES = "/rest/vare/mandateparties/requests/party/{party}/{type}";
-//    String TOTAL_RECEIVED_REQUESTS = "/rest/vare/mandateparties/requests/totalreceived/{partyId}";
-//    String TOTAL_NEW_MANDATES = "/rest/vare/mandateparties/mandates/totalnew/{partyId}";
     String TOTAL_COUNTS = "/rest/vare/mandateparties/totals/{partyId}";
     String MANDATE_PARTY = "/rest/vare/mandateparty/{partyId}/representedParty/{representedParty}";
 
