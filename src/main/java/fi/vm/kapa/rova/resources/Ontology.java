@@ -35,7 +35,10 @@ public interface Ontology extends Resources {
     String GET_CONCEPT = "/rest/ontology/concept";
     String GET_CONCEPTS = "/rest/ontology/concepts";
     String GET_ALL_CONCEPTS = "/rest/ontology/concept/all";
+
+    // actually the passed parameter is principal id (person id or company id), not the type
     String GET_CONCEPTS_BY_PRINCIPAL_TYPE = "/rest/ontology/concept/principalType";
+
     String IS_BROADER_CONCEPT = "/rest/ontology/concept/is-broader-concept";
     String GET_NARROWER_CONCEPTS = "/rest/ontology/concept/narrower";
 
