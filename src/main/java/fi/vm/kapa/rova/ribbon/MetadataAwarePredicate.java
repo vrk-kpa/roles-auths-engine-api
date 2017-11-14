@@ -25,6 +25,7 @@ package fi.vm.kapa.rova.ribbon;
 import com.netflix.loadbalancer.AbstractServerPredicate;
 import com.netflix.loadbalancer.PredicateKey;
 import com.netflix.niws.loadbalancer.DiscoveryEnabledServer;
+import fi.vm.kapa.rova.logging.Logger;
 
 import javax.annotation.Nullable;
 import java.util.Map;
@@ -34,12 +35,17 @@ import java.util.Map;
  */
 public class MetadataAwarePredicate extends AbstractServerPredicate {
 
+    /**
+     * {@value}
+     */
     public static final String API_VERSION_METADATA_FIELD = "api-version";
 
-    String apiVersion;
+    private static final Logger LOG = Logger.getLogger(MetadataAwarePredicate.class);
 
-    public MetadataAwarePredicate(String apiVersion) {
-        this.apiVersion = apiVersion;
+    String clientApiVersion;
+
+    public MetadataAwarePredicate(String clientApiVersion) {
+        this.clientApiVersion = clientApiVersion;
     }
 
     @Override
@@ -57,7 +63,16 @@ public class MetadataAwarePredicate extends AbstractServerPredicate {
 
     protected boolean apply(DiscoveryEnabledServer server) {
         Map<String, String> metadata = server.getInstanceInfo().getMetadata();
-        return metadata.get(API_VERSION_METADATA_FIELD) != null && metadata.get(API_VERSION_METADATA_FIELD).equals(apiVersion);
+        String serverVersionMetadata = metadata.get(API_VERSION_METADATA_FIELD);
+        try {
+            LOG.debug("Discovering service endpoint: " + server.getInstanceInfo().getAppName()
+                    + ", compatible with client version: " + clientApiVersion + ".");
+            return ApiVersion.parseApiVersion(clientApiVersion)
+                    .isCompatibleWith(ApiVersion.parseApiVersion(serverVersionMetadata));
+        } catch (IllegalArgumentException e) {
+            LOG.warning("Checking for direct match because API version could not be parsed: " + e.getMessage());
+            return clientApiVersion != null && clientApiVersion.equals(serverVersionMetadata);
+        }
     }
 
 }
