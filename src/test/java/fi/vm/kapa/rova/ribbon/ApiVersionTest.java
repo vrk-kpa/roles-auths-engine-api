@@ -31,17 +31,16 @@ import static org.junit.Assert.assertTrue;
 public class ApiVersionTest {
 
     @Test
-    public void testGetVersionNumbers() {
-        ApiVersion version = ApiVersion.parseApiVersion("1.23");
-        assertEquals(1, version.getMajorVersion());
-        assertEquals(23, version.getMinorVersion());
-    }
-
-    @Test
     public void testValidApiVersions() {
-        ApiVersion.parseApiVersion("1.23");
-        ApiVersion.parseApiVersion("1.23.4");
-        ApiVersion.parseApiVersion("1.23.4-RC1");
+        ApiVersion version1 = ApiVersion.parseApiVersion("1.23");
+        assertEquals(1, version1.getMajorVersion());
+        assertEquals(23, version1.getMinorVersion());
+        ApiVersion version2 = ApiVersion.parseApiVersion("1.24.5");
+        assertEquals(1, version2.getMajorVersion());
+        assertEquals(24, version2.getMinorVersion());
+        ApiVersion version3 = ApiVersion.parseApiVersion("2.34.5-RC1");
+        assertEquals(2, version3.getMajorVersion());
+        assertEquals(34, version3.getMinorVersion());
     }
 
     @Test

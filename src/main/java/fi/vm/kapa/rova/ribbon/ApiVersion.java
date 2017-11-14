@@ -24,6 +24,12 @@ package fi.vm.kapa.rova.ribbon;
 
 import fi.vm.kapa.rova.logging.Logger;
 
+
+/**
+ * Class for checking client and server API version compatibility.
+ * Compatibility is checked using major and minor version numbers.
+ * Possibly given patch number is ignored.
+ */
 public class ApiVersion {
 
     private static final Logger LOG = Logger.getLogger(ApiVersion.class);
@@ -44,6 +50,12 @@ public class ApiVersion {
         return minorVersion;
     }
 
+    /**
+     * Creates ApiVersion instance from given String.
+     * @param versionString Version number, e.g. 1.23 or 1.23.4-RC1.
+     * @return Parsed api version consisting of major and minor version numbers.
+     * @throws IllegalArgumentException If given versionString does not represent valid version number.
+     */
     public static ApiVersion parseApiVersion(String versionString) throws IllegalArgumentException {
         ApiVersion version = null;
         if (versionString.matches("\\d+\\.\\d+(\\.\\d[^.]*)?")) {
@@ -58,6 +70,11 @@ public class ApiVersion {
         return version;
     }
 
+    /**
+     * Checks if API version represented by this object is compatible with given server API version.
+     * @param serverVersion Server side API version.
+     * @return true when server API version is compatible with this object.
+     */
     public boolean isCompatibleWith(ApiVersion serverVersion) {
         LOG.debug("Client API version: " + this.toString() + ", server API version: " + serverVersion + ".");
         return serverVersion != null
