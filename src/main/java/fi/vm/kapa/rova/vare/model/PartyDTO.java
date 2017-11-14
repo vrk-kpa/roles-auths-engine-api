@@ -34,6 +34,8 @@ public class PartyDTO {
     private String displayName;
     private long numberOfMandates;
     private long receivedRequests;
+    private long newGiven;
+    private long newReceived;
     private boolean restricted;
     private Set<MandateType> mandateTypes;
 
@@ -133,6 +135,22 @@ public class PartyDTO {
         this.mandateTypes = mandateTypes;
     }
 
+    public long getNewGiven() {
+        return newGiven;
+    }
+
+    public void setNewGiven(long newGiven) {
+        this.newGiven = newGiven;
+    }
+
+    public long getNewReceived() {
+        return newReceived;
+    }
+
+    public void setNewReceived(long newReceived) {
+        this.newReceived = newReceived;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -143,6 +161,8 @@ public class PartyDTO {
         if (company != partyDTO.company) return false;
         if (numberOfMandates != partyDTO.numberOfMandates) return false;
         if (receivedRequests != partyDTO.receivedRequests) return false;
+        if (newGiven != partyDTO.newGiven) return false;
+        if (newReceived != partyDTO.newReceived) return false;
         if (restricted != partyDTO.restricted) return false;
         if (id != null ? !id.equals(partyDTO.id) : partyDTO.id != null) return false;
         if (firstNames != null ? !firstNames.equals(partyDTO.firstNames) : partyDTO.firstNames != null) return false;
@@ -164,8 +184,19 @@ public class PartyDTO {
         result = 31 * result + (displayName != null ? displayName.hashCode() : 0);
         result = 31 * result + (int) (numberOfMandates ^ (numberOfMandates >>> 32));
         result = 31 * result + (int) (receivedRequests ^ (receivedRequests >>> 32));
+        result = 31 * result + (int) (newGiven ^ (newGiven >>> 32));
+        result = 31 * result + (int) (newReceived ^ (newReceived >>> 32));
         result = 31 * result + (restricted ? 1 : 0);
         result = 31 * result + (mandateTypes != null ? mandateTypes.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "PartyDTO [id=" + id + ", firstNames=" + firstNames + ", lastName=" + lastName + ", company=" + company
+                + ", companyName=" + companyName + ", displayName=" + displayName + ", numberOfMandates="
+                + numberOfMandates + ", receivedRequests=" + receivedRequests + ", newGiven=" + newGiven
+                + ", newReceived=" + newReceived + ", restricted=" + restricted + ", mandateTypes=" + mandateTypes + "]";
+    }
+
 }

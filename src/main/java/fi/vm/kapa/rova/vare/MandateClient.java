@@ -47,7 +47,7 @@ public interface MandateClient {
     String PRINCIPALS = "/rest/vare/principals/{type}/delegate/{delegate}";
     String MANDATE_PARTIES_PAST = "/rest/vare/mandateparties/past/party/{party}/{type}";
     String MANDATE_REQUEST_PARTIES = "/rest/vare/mandateparties/requests/party/{party}/{type}";
-    String TOTAL_RECEIVED_REQUESTS = "/rest/vare/mandateparties/requests/totalreceived/{partyId}";
+    String TOTAL_COUNTS = "/rest/vare/mandateparties/totals/{partyId}";
     String MANDATE_PARTY = "/rest/vare/mandateparty/{partyId}/representedParty/{representedParty}";
 
     MandateDTO getMandate(String uuid);
@@ -96,13 +96,7 @@ public interface MandateClient {
     PartiesDTO getMandateRequestParties(String partyId, SearchTypeEnum type, int limit, int offset,
             boolean ascending, PartySortTypeEnum sortBy, ConfirmationRights confirmationRights);
 
-    /**
-     * Number of received mandate requests.
-     * 
-     * @param representedId Party to whom the requests are sent.
-     */
-    Long getTotalReceivedRequests(String representedId, ConfirmationRights confirmationRights);
-
     PartyDTO getMandateParty(String representedPartyId, String mandatePartyId, ConfirmationRights confirmationRights);
 
+    TotalsDTO getTotals(String partyId, ConfirmationRights confirmationRights);
 }

@@ -32,13 +32,14 @@ public class SimplifiedMandateDTO {
     private String issueUri;
     private String issue;
     private Boolean isRepresentedPartyPrincipal;
+    private Boolean isNew;
     private MandateType type;
 
 
     public SimplifiedMandateDTO() {
     }
 
-    public SimplifiedMandateDTO(String uuid, Date startDate, Date endDate, String issueUri, String issue, Boolean isRepresentedPartyPrincipal, MandateType type) {
+    public SimplifiedMandateDTO(String uuid, Date startDate, Date endDate, String issueUri, String issue, Boolean isRepresentedPartyPrincipal, Boolean isNew, MandateType type) {
         super();
         this.uuid = uuid;
         this.startDate = startDate;
@@ -46,6 +47,7 @@ public class SimplifiedMandateDTO {
         this.issueUri = issueUri;
         this.issue = issue;
         this.isRepresentedPartyPrincipal = isRepresentedPartyPrincipal;
+        this.isNew = isNew;
         this.type = type;
     }
 
@@ -103,5 +105,13 @@ public class SimplifiedMandateDTO {
 
     public void setType(MandateType type) {
         this.type = type;
+    }
+
+    public Boolean getIsNew() {
+        return isNew;
+    }
+
+    public void setIsNew(Boolean isNew) {
+        this.isNew = isNew;
     }
 }

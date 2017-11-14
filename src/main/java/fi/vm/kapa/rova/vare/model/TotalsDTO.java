@@ -22,6 +22,47 @@
  */
 package fi.vm.kapa.rova.vare.model;
 
-public enum PartySortTypeEnum {
-    NAME, NUMBER_OF_MANDATES, NUMBER_OF_NEW_GIVEN, NUMBER_OF_NEW_RECEIVED, NUMBER_OF_RECEIVED_REQUESTS
+public class TotalsDTO {
+    private long totalReceived;
+    private long totalGiven;
+    private long totalFrom;
+    private boolean restricted;
+    
+    public long getTotalReceived() {
+        return totalReceived;
+    }
+
+    public void setTotalReceived(long totalReceived) {
+        this.totalReceived = totalReceived;
+    }
+
+    public long getTotalGiven() {
+        return totalGiven;
+    }
+
+    public void setTotalGiven(long totalGiven) {
+        this.totalGiven = totalGiven;
+    }
+
+    public long getTotalFrom() {
+        return totalFrom;
+    }
+
+    public void setTotalFrom(long totalFrom) {
+        this.totalFrom = totalFrom;
+    }
+
+    public boolean isRestricted() {
+        return restricted;
+    }
+
+    public void setRestricted(boolean restricted) {
+        this.restricted = restricted;
+    }
+
+    @Override
+    public String toString() {
+        return "TotalsDTO [totalReceived=" + totalReceived + ", totalGiven=" + totalGiven + ", totalFrom=" + totalFrom
+                + ", restricted=" + restricted + "]";
+    }
 }
