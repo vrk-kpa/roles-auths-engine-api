@@ -36,5 +36,6 @@ public enum ResultRoleType implements IResultType {
     YHM,
     PJ,
     J,
-    CLEAR
+    CLEAR,
+    CLEAR_ALL
 }
