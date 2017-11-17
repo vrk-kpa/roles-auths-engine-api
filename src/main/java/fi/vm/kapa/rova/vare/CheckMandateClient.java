@@ -43,14 +43,12 @@ public interface CheckMandateClient {
     /**
      * Resource for checking if there is a mandate for the given parameters.
      */
-    MandateResponse checkMandate(String delegateId, String principalId, String subject,
-                                 List<String> issues);
+    MandateResponse checkMandate(String delegateId, String principalId, String subject, List<String> issues);
 
     /**
      * Resource for checking if there is a mandate for the given parameters.
      */
-    MandateResponse checkMandate(String delegateId, String principalId,
-                                 List<String> issues);
+    MandateResponse checkMandate(String delegateId, String principalId, List<String> issues);
 
     /**
      * Resource for fetching businessIds of all companies which have authorized the person with the given delegateId
