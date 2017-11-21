@@ -22,6 +22,7 @@
  */
 package fi.vm.kapa.rova.engine;
 
+import fi.vm.kapa.rova.client.ApiSessionType;
 import fi.vm.kapa.rova.engine.model.ypa.YpaResult;
 
 import java.util.List;
@@ -32,8 +33,8 @@ import java.util.List;
 public interface YpaProxy extends Proxy {
     public String ACTION_ROLES = "proxyRoles";
 
-    String GET_PROXY_ROLES = "/rest/ypa/roles/{serviceIdType}/{service}/{personId}/{reprCompanyId}";
+    String GET_PROXY_ROLES = "/rest/ypa/proxy/roles/{serviceIdType}/{apiType}/{service}/{userId}/{companyId}";
 
-    YpaResult getRoles(String userId, String reprCompanyId, String serviceIdType, String service, List<String> organizationIds);
+    YpaResult getProxyRoles(String userId, String companyId, String serviceIdType, ApiSessionType apiType, String service, List<String> organizationIds);
 
 }

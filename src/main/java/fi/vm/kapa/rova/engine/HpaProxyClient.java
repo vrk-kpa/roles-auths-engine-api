@@ -23,15 +23,25 @@
 package fi.vm.kapa.rova.engine;
 
 import fi.vm.kapa.rova.client.ApiSessionType;
-import fi.vm.kapa.rova.external.model.virre.Company;
-import org.springframework.http.ResponseEntity;
+import fi.vm.kapa.rova.engine.model.hpa.AuthorizationInternal;
+import fi.vm.kapa.rova.engine.model.hpa.AuthorizationListInternal;
+import fi.vm.kapa.rova.engine.model.hpa.HpaDelegate;
+import org.springframework.web.client.RestClientException;
 
-import java.util.List;
+import java.util.Set;
 
-public interface Proxy extends Engine {
-    String ACTION_PROXY_COMPANIES = "proxyCompanies";
+/**
+ * Created by tkar on 20/11/2017.
+ */
+public interface HpaProxyClient {
 
-    String GET_PROXY_COMPANIES = "/rest/proxy/companies/{serviceIdType}/{apiType}/{service}/{userId}";
+    final static String CLIENT_NAME = "roles-auths-engine-hpa";
 
-    ResponseEntity<List<Company>> getProxyCompanies(String serviceIdType, ApiSessionType apiType, String service, String userId);
+    HpaDelegate getProxyDelegate(String serviceIdType, ApiSessionType apiType, String service, String userId, 
+            String companyId) throws RestClientException;
+    AuthorizationInternal getProxyAuthorization(String serviceIdType, ApiSessionType apiType, String service, 
+            String userId, String companyId, String principalId, Set<String> issues) throws RestClientException;
+    AuthorizationListInternal getProxyAuthorizationList(String serviceIdType, ApiSessionType apiType, String service, 
+            String userId, String companyId, String principalId) throws RestClientException;
+
 }
