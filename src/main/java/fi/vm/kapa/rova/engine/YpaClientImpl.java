@@ -52,7 +52,9 @@ import java.util.Map;
  */
 @RibbonClient(name = YpaClient.CLIENT_NAME)
 @Conditional(YpaClientCondition.class)
-public class YpaClientImpl extends AbstractClient implements Ypa, YpaClient, YpaProxy, YpaProxyClient {
+public class YpaClientImpl extends AbstractProxyClient implements Ypa, YpaClient, YpaProxy, YpaProxyClient {
+
+    private static String RIBBON_CLIENT_ENGINE_URL = "http://" + YpaClient.CLIENT_NAME;
 
     @Autowired
     @Qualifier("engine-ypa")
@@ -82,7 +84,7 @@ public class YpaClientImpl extends AbstractClient implements Ypa, YpaClient, Ypa
 
     public ResponseEntity<YpaResult> getRolesResponse(String personId, String serviceIdType, String service, List<String> organizationIds) {
         RestTemplate restTemplate = ypaRestTemplate;
-        String requestUrl = "http://" + YpaClient.CLIENT_NAME + Ypa.GET_ROLES;
+        String requestUrl = getRequestUrlBase() + Ypa.GET_ROLES;
 
         Map<String, String> params = new HashMap<>();
         params.put("personId", personId);
@@ -100,14 +102,6 @@ public class YpaClientImpl extends AbstractClient implements Ypa, YpaClient, Ypa
                 HttpMethod.GET, null, new ParameterizedTypeReference<YpaResult>() {});
     }
 
-    // Proxy
-
-    @Override
-    public ResponseEntity<List<Company>> getProxyCompanies(String serviceIdType, ApiSessionType apiType, String service,
-            String userId) {
-        return hpaClient.getProxyCompanies(serviceIdType, apiType, service, userId);
-    }
-
     // YpaProxyClient & YpaProxy
 
     @Override
@@ -121,7 +115,7 @@ public class YpaClientImpl extends AbstractClient implements Ypa, YpaClient, Ypa
     public ResponseEntity<YpaResult> getProxyRolesResponse(String userId, String companyId, String serviceIdType, 
             ApiSessionType apiType, String service, List<String> organizationIds) {
         RestTemplate restTemplate = ypaRestTemplate;
-        String requestUrl = "http://" + YpaClient.CLIENT_NAME + Ypa.GET_ROLES;
+        String requestUrl = getRequestUrlBase() + Ypa.GET_ROLES;
 
         Map<String, String> params = new HashMap<>();
         params.put("userId", userId);
@@ -148,4 +142,8 @@ public class YpaClientImpl extends AbstractClient implements Ypa, YpaClient, Ypa
         return RestTemplateFactory.forBackendService(apiKey, requestAliveSeconds);
     }
 
+    @Override
+    protected String getRequestUrlBase() {
+        return RIBBON_CLIENT_ENGINE_URL;
+    }
 }

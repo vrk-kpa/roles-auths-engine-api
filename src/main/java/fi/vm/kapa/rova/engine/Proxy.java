@@ -23,8 +23,7 @@
 package fi.vm.kapa.rova.engine;
 
 import fi.vm.kapa.rova.client.ApiSessionType;
-import fi.vm.kapa.rova.external.model.virre.Company;
-import org.springframework.http.ResponseEntity;
+import fi.vm.kapa.rova.engine.model.Company;
 
 import java.util.List;
 
@@ -33,5 +32,5 @@ public interface Proxy extends Engine {
 
     String GET_PROXY_COMPANIES = "/rest/proxy/companies/{serviceIdType}/{apiType}/{service}/{userId}";
 
-    ResponseEntity<List<Company>> getProxyCompanies(String serviceIdType, ApiSessionType apiType, String service, String userId);
+    List<Company> getProxyCompanies(String serviceIdType, ApiSessionType apiType, String service, String userId);
 }

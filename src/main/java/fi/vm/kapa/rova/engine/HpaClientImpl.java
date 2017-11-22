@@ -52,7 +52,7 @@ import java.util.*;
  */
 @RibbonClient(name = HpaClient.CLIENT_NAME)
 @Conditional(HpaClientCondition.class)
-public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient, HpaProxy, HpaProxyClient {
+public class HpaClientImpl extends AbstractProxyClient implements Hpa, HpaClient, HpaProxy, HpaProxyClient {
 
     private static final Logger LOG = Logger.getLogger(HpaClientImpl.class);
 
@@ -167,27 +167,6 @@ public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient, Hpa
         return restTemplate.getForEntity(builder.buildAndExpand(params).toUri(), AuthorizationListInternal.class);
     }
 
-    // Proxy
-
-    @Override
-    public ResponseEntity<List<Company>> getProxyCompanies(String serviceIdType, ApiSessionType apiType, String service,
-            String userId) {
-        RestTemplate restTemplate = hpaRestTemplate;
-        String requestUrl = RIBBON_ENGINE_URL + Proxy.GET_PROXY_COMPANIES;
-
-        Map<String, String> params = new HashMap<>();
-        params.put("serviceIdType", serviceIdType);
-        params.put("apiType", apiType.toString());
-        params.put("service", service);
-        params.put("userId", userId);
-
-        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(requestUrl);
-
-        return restTemplate.exchange(builder.buildAndExpand(params).toUri(), HttpMethod.GET, null, 
-                new ParameterizedTypeReference<List<Company>>() {
-                });
-    }
-
     // HpaProxy
 
     @Override
@@ -255,4 +234,8 @@ public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient, Hpa
         return RestTemplateFactory.forBackendService(apiKey, requestAliveSeconds);
     }
 
+    @Override
+    protected String getRequestUrlBase() {
+        return RIBBON_ENGINE_URL;
+    }
 }
