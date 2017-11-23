@@ -26,7 +26,6 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import fi.vm.kapa.rova.RestTemplateFactory;
 import fi.vm.kapa.rova.client.ApiSessionType;
 import fi.vm.kapa.rova.engine.model.ypa.YpaResult;
-import fi.vm.kapa.rova.external.model.virre.Company;
 import fi.vm.kapa.rova.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -65,9 +64,6 @@ public class YpaClientImpl extends AbstractProxyClient implements Ypa, YpaClient
     public RestTemplate ypaRestTemplate() {
         return getRestTemplate();
     }
-
-    @Autowired
-    private HpaClientImpl hpaClient;
 
     protected static final Logger LOG = Logger.getLogger(YpaClientImpl.class);
 
