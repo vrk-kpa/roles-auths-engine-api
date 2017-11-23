@@ -20,8 +20,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package fi.vm.kapa.rova.vare;
 
-public interface MandateResource extends CheckMandateClient, CheckProxyMandateClient, MandateClient, Vare {
-
+public enum PrincipalType {
+    PERSON,
+    COMPANY
 }
