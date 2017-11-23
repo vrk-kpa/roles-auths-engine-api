@@ -23,8 +23,8 @@
 package fi.vm.kapa.rova.vare;
 
 import fi.vm.kapa.rova.RestTemplateFactory;
+import fi.vm.kapa.rova.engine.model.Company;
 import fi.vm.kapa.rova.engine.model.hpa.Principal;
-import fi.vm.kapa.rova.external.model.virre.Company;
 import fi.vm.kapa.rova.logging.Logger;
 import fi.vm.kapa.rova.vare.model.MandateDTO;
 import fi.vm.kapa.rova.vare.model.MandateResponse;

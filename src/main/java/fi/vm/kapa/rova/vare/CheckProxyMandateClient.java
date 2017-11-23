@@ -22,8 +22,8 @@
  */
 package fi.vm.kapa.rova.vare;
 
+import fi.vm.kapa.rova.engine.model.Company;
 import fi.vm.kapa.rova.engine.model.hpa.Principal;
-import fi.vm.kapa.rova.external.model.virre.Company;
 import fi.vm.kapa.rova.vare.model.MandateResponse;
 
 import java.util.List;
