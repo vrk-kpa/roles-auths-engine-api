@@ -26,6 +26,10 @@ public class Company {
     private String name;
     private String identifier;
 
+    public Company() {
+        // NOP
+    }
+    
     public Company(String identifier, String name) {
         this.identifier = identifier;
         this.name = name;
