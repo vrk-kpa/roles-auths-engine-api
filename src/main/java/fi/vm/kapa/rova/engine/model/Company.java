@@ -22,13 +22,20 @@
  */
 package fi.vm.kapa.rova.engine.model;
 
-public class Company {
+import java.io.Serializable;
+import java.util.Objects;
+
+public class Company implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
     private String name;
     private String identifier;
 
-    public Company() {
+    private Company() {
         // NOP
     }
+
+    // TODO immutable, constructor annotation
     
     public Company(String identifier, String name) {
         this.identifier = identifier;
@@ -41,6 +48,31 @@ public class Company {
 
     public String getIdentifier() {
         return identifier;
+    }
+
+    @Override
+    public String toString() {
+        return "Company [identifier=" + identifier + ", name=" + name + "]";
+    }
+    
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        
+        if (!(other instanceof Company)) {
+            return false;
+        }
+        
+        Company company = (Company) other;
+        
+        return Objects.equals(identifier, company.identifier) && Objects.equals(name, company.name);
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(identifier, name);
     }
 
 }
