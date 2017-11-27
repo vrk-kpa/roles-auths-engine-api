@@ -22,6 +22,9 @@
  */
 package fi.vm.kapa.rova.engine.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -31,13 +34,8 @@ public class Company implements Serializable {
     private String name;
     private String identifier;
 
-    private Company() {
-        // NOP
-    }
-
-    // TODO immutable, constructor annotation
-    
-    public Company(String identifier, String name) {
+    @JsonCreator
+    public Company(@JsonProperty(value="identifier",required=true) String identifier, @JsonProperty(value="name",required=true) String name) {
         this.identifier = identifier;
         this.name = name;
     }
