@@ -35,7 +35,7 @@ public interface YpaProxyClient {
 
     static final String CLIENT_NAME = "roles-auths-engine-ypa";
 
-    YpaResult getProxyRoles(String userId, String companyId, String serviceIdType, ApiSessionType apiType, 
+    YpaResult getProxyRoles(String userId, String companyId, String serviceIdType,
             String service, List<String> organizationIds) throws RestClientException;
 
 }

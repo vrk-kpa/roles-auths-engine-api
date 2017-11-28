@@ -101,15 +101,15 @@ public class YpaClientImpl extends AbstractProxyClient implements Ypa, YpaClient
     // YpaProxyClient & YpaProxy
 
     @Override
-    public YpaResult getProxyRoles(String userId, String companyId, String serviceIdType, ApiSessionType apiType,
+    public YpaResult getProxyRoles(String userId, String companyId, String serviceIdType,
             String service, List<String> organizationIds) throws RestClientException {
-        return getProxyRolesResponse(userId, companyId, serviceIdType, apiType, service, organizationIds).getBody();
+        return getProxyRolesResponse(userId, companyId, serviceIdType, service, organizationIds).getBody();
     }
 
     // impl
 
     public ResponseEntity<YpaResult> getProxyRolesResponse(String userId, String companyId, String serviceIdType, 
-            ApiSessionType apiType, String service, List<String> organizationIds) {
+            String service, List<String> organizationIds) {
         RestTemplate restTemplate = ypaRestTemplate;
         String requestUrl = getRequestUrlBase() + Ypa.GET_ROLES;
 
@@ -117,7 +117,6 @@ public class YpaClientImpl extends AbstractProxyClient implements Ypa, YpaClient
         params.put("userId", userId);
         params.put("companyId", companyId);
         params.put("serviceIdType", serviceIdType);
-        params.put("apiType", apiType.toString());
         params.put("service", service);
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(requestUrl);

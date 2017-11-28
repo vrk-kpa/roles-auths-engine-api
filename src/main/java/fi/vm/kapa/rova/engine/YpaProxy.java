@@ -30,11 +30,11 @@ import java.util.List;
 /**
  * Created by mtom on 14/03/2017.
  */
-public interface YpaProxy extends Proxy {
+public interface YpaProxy extends Engine {
     public String ACTION_ROLES = "proxyRoles";
 
-    String GET_PROXY_ROLES = "/rest/ypa/proxy/roles/{serviceIdType}/{apiType}/{service}/{userId}/{companyId}";
+    String GET_PROXY_ROLES = "/rest/ypa/proxy/roles/{serviceIdType}/{service}/{userId}/{companyId}";
 
-    YpaResult getProxyRoles(String userId, String companyId, String serviceIdType, ApiSessionType apiType, String service, List<String> organizationIds);
+    YpaResult getProxyRoles(String userId, String companyId, String serviceIdType, String service, List<String> organizationIds);
 
 }
