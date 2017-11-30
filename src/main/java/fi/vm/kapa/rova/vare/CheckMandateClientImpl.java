@@ -36,9 +36,7 @@ import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -85,12 +83,15 @@ public class CheckMandateClientImpl extends AbstractVareClient implements CheckM
         for (String issue : issues) {
             builder.queryParam("issues", issue);
         }
+        builder.queryParam("principalType", principalType);
+        
         Map<String, String> params = new HashMap<>();
         params.put("personId", personId);
         params.put("delegateId", companyId);
         params.put("principalId", principalId);
         params.put("subject", subject);
-        params.put("principalType", principalType.toString());  // TODO required? principalType.toString() on huono null:n tapauksessa!
+//        params.put("principalType", principalType.toString());  // TODO path or query parameter?
+        
         return handleSimple(builder, params, MandateResponse.class);
     }
 
@@ -106,18 +107,20 @@ public class CheckMandateClientImpl extends AbstractVareClient implements CheckM
         return handleSimple(builder, params, MandateResponse.class);
     }
     
-    // TODO
     @Override
     public MandateResponse checkProxyMandate(String personId, String companyId, String principalId, List<String> issues, PrincipalType principalType) {
         UriComponentsBuilder builder = getUriComponentsBuilder(CheckProxyMandateClient.MANDATE_EXISTS);
         for (String issue : issues) {
             builder.queryParam("issues", issue);
         }
+        builder.queryParam("principalType", principalType);
+        
         Map<String, String> params = new HashMap<>();
         params.put("personId", personId);
         params.put("delegateId", companyId);
         params.put("principalId", principalId);
-        params.put("principalType", principalType.toString());  // TODO required? principalType.toString() on huono null:n tapauksessa!
+//        params.put("principalType", principalType.toString());  // TODO path or query parameter?
+        
         return handleSimple(builder, params, MandateResponse.class);
     }
 
