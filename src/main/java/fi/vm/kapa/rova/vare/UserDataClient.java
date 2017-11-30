@@ -24,8 +24,6 @@ package fi.vm.kapa.rova.vare;
 
 import fi.vm.kapa.rova.vare.model.UserDataDTO;
 
-import java.util.Date;
-
 public interface UserDataClient {
     
     public static final String AUTH_USER_REGISTER_LOGIN = "/rest/vare/authuser/registerlogin";

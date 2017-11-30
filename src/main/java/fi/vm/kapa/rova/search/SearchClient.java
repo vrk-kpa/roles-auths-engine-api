@@ -26,7 +26,6 @@ import fi.vm.kapa.rova.ClientException;
 import fi.vm.kapa.rova.RestTemplateFactory;
 import fi.vm.kapa.rova.external.model.ytj.CompanyDTO;
 import fi.vm.kapa.rova.logging.Logger;
-import fi.vm.kapa.rova.ptv.model.Channel;
 import fi.vm.kapa.rova.ptv.model.PtvSearchResult;
 import fi.vm.kapa.rova.ptv.model.PtvService;
 import fi.vm.kapa.rova.search.model.CompanySearchResult;
@@ -47,7 +46,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
