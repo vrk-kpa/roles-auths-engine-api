@@ -30,17 +30,38 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.Set;
 
-public interface HpaProxy extends Proxy {
+public interface HpaProxy extends Engine {
 
     String ACTION_PROXY_DELEGATE = "proxyDelegate";
     String ACTION_PROXY_AUTHORIZATION = "proxyAuthorization";
     String ACTION_PROXY_PRINCIPAL_CHOICE = "proxyPrincipalFromChoice";
 
-    String GET_PROXY_DELEGATE = "/rest/hpa/proxy/delegate/{serviceIdType}/{apiType}/{service}/{userId}";
-    String GET_PROXY_AUTHORIZATION = "/rest/hpa/proxy/authorization/{serviceIdType}/{apiType}/{service}/{delegateId}/{principalId}/{companyId}";
-    String GET_PROXY_AUTHORIZATION_LIST = "/rest/hpa/proxy/authorization/list/{serviceIdType}/{apiType}/{service}/{delegateId}/{principalId}/{companyId}";
+    String GET_PROXY_DELEGATE = "/rest/hpa/proxy/delegate/{serviceIdType}/{apiType}/{serviceId}/{userId}";
+    String GET_PROXY_AUTHORIZATION = "/rest/hpa/proxy/authorization/{serviceIdType}/{apiType}/{serviceId}/{delegateId}/{principalId}/{companyId}";
+    String GET_PROXY_AUTHORIZATION_LIST = "/rest/hpa/proxy/authorization/list/{serviceIdType}/{apiType}/{serviceId}/{delegateId}/{principalId}/{companyId}";
 
+    /**
+     * This endpoint is used e.g. in the WebAPI HPA flow. Before getting to this point in the flow, the user has chosen that he wants to represent a
+     * company, and he has already chosen a company to represent. This endpoint returns the persons one whose behalf the user could act as a
+     * representative of the chosen company.
+     * @param serviceIdType The ID type for the service, @see fi.vm.kapa.rova.external.model.SerServiceIdType
+     * @param service The identifier for the service, using the given serviceIdType
+     * @param userId Person id for the user
+     * @param companyId Company if for the company that the user will represent
+     * @return An object containing e.g. a list of the persons that the user is allowed to represent as a representative of the given company.
+     */
     ResponseEntity<HpaDelegate> getProxyDelegateResponse(String serviceIdType, ApiSessionType apiType, String service, String userId, String companyId);
-    ResponseEntity<AuthorizationInternal> getProxyAuthorizationResponse(String serviceIdType, ApiSessionType apiType, String service, String userId, String companyId, String principalId, Set<String> issues);
-    ResponseEntity<AuthorizationListInternal> getProxyAuthorizationListResponse(String serviceIdType, ApiSessionType apiType, String service, String userId, String companyId, String principalId);
+
+    /**
+     * Answers the question "Is the delegate allowed to act on behalf of the principal, through proxy mandates from the given company, on the given
+     * issues?"
+     */
+    ResponseEntity<AuthorizationInternal> getProxyAuthorizationResponse(String serviceIdType, ApiSessionType apiType, String service, String userId, String companyId,
+                                                                        String principalId, Set<String> issues);
+
+    /**
+     * Answers the question "On which issues is the delegate allowed to act on behalf of the principal, through proxy mandates from the given company?"
+     */
+    ResponseEntity<AuthorizationListInternal> getProxyAuthorizationListResponse(String serviceIdType, ApiSessionType apiType, String service, String userId, String companyId,
+                                                                                String principalId);
 }
