@@ -177,7 +177,7 @@ public class HpaClientImpl extends AbstractProxyClient implements Hpa, HpaClient
 
         Map<String, String> params = new HashMap<>();
         params.put("serviceIdType", serviceIdType);
-        params.put("service", service);
+        params.put("serviceId", service);
         params.put("userId", userId);
         params.put("companyId", companyId);
 
@@ -192,7 +192,7 @@ public class HpaClientImpl extends AbstractProxyClient implements Hpa, HpaClient
 
         Map<String, String> params = new HashMap<>();
         params.put("serviceIdType", serviceIdType);
-        params.put("service", service);
+        params.put("serviceId", service);
         params.put("userId", userId);
         params.put("companyId", companyId);
         params.put("principalId", principalId);
@@ -215,7 +215,7 @@ public class HpaClientImpl extends AbstractProxyClient implements Hpa, HpaClient
 
         Map<String, String> params = new HashMap<>();
         params.put("serviceIdType", serviceIdType);
-        params.put("service", service);
+        params.put("serviceId", service);
         params.put("userId", userId);
         params.put("companyId", companyId);
         params.put("principalId", principalId);
