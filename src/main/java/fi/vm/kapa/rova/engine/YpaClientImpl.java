@@ -24,7 +24,6 @@ package fi.vm.kapa.rova.engine;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import fi.vm.kapa.rova.RestTemplateFactory;
-import fi.vm.kapa.rova.client.ApiSessionType;
 import fi.vm.kapa.rova.engine.model.ypa.YpaResult;
 import fi.vm.kapa.rova.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +50,7 @@ import java.util.Map;
  */
 @RibbonClient(name = YpaClient.CLIENT_NAME)
 @Conditional(YpaClientCondition.class)
-public class YpaClientImpl extends AbstractProxyClient implements Ypa, YpaClient, YpaProxy, YpaProxyClient {
+public class YpaClientImpl extends AbstractProxyClient implements Ypa, YpaClient {
 
     private static String RIBBON_CLIENT_ENGINE_URL = "http://" + YpaClient.CLIENT_NAME;
 
@@ -96,14 +95,6 @@ public class YpaClientImpl extends AbstractProxyClient implements Ypa, YpaClient
 
         return restTemplate.exchange(builder.buildAndExpand(params).toUri(),
                 HttpMethod.GET, null, new ParameterizedTypeReference<YpaResult>() {});
-    }
-
-    // YpaProxyClient & YpaProxy
-
-    @Override
-    public YpaResult getProxyRoles(String userId, String companyId, String serviceIdType,
-            String service, List<String> organizationIds) throws RestClientException {
-        return getProxyRolesResponse(userId, companyId, serviceIdType, service, organizationIds).getBody();
     }
 
     // impl

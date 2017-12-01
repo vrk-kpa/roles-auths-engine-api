@@ -25,6 +25,7 @@ package fi.vm.kapa.rova.vare;
 import fi.vm.kapa.rova.RestTemplateFactory;
 import fi.vm.kapa.rova.engine.model.Company;
 import fi.vm.kapa.rova.engine.model.hpa.Principal;
+import fi.vm.kapa.rova.engine.model.ypa.OrganizationResult;
 import fi.vm.kapa.rova.logging.Logger;
 import fi.vm.kapa.rova.vare.model.MandateDTO;
 import fi.vm.kapa.rova.vare.model.MandateResponse;
@@ -36,11 +37,16 @@ import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @RibbonClient(name = CheckMandateClient.CHECK_MANDATE_CLIENT)
 @Conditional(CheckMandateClientCondition.class)
@@ -106,7 +112,7 @@ public class CheckMandateClientImpl extends AbstractVareClient implements CheckM
         params.put("principalId", principalId);
         return handleSimple(builder, params, MandateResponse.class);
     }
-    
+
     @Override
     public MandateResponse checkProxyMandate(String personId, String companyId, String principalId, List<String> issues, PrincipalType principalType) {
         UriComponentsBuilder builder = getUriComponentsBuilder(CheckProxyMandateClient.MANDATE_EXISTS);
@@ -151,7 +157,7 @@ public class CheckMandateClientImpl extends AbstractVareClient implements CheckM
                 });
         return handleResponse(response, expandedUrl);
     }
-    
+
     @Override
     public List<Company> getProxyCompanies(String personId, List<String> issues) {
         UriComponentsBuilder builder = getUriComponentsBuilder(CheckProxyMandateClient.PROXY_COMPANIES);
@@ -167,10 +173,9 @@ public class CheckMandateClientImpl extends AbstractVareClient implements CheckM
         ResponseEntity<List<Company>> response = restTemplate.exchange(expandedUrl, HttpMethod.POST,
                 new HttpEntity<>(issues), new ParameterizedTypeReference<List<Company>>() {
                 });
-        
         return handleResponse(response, expandedUrl);
     }
-    
+
     @Override
     public List<Principal> getMandatePrincipals(String delegateId, List<String> issues) {
         UriComponentsBuilder builder = getUriComponentsBuilder(CheckMandateClient.MANDATE_PRINCIPALS);
@@ -182,42 +187,40 @@ public class CheckMandateClientImpl extends AbstractVareClient implements CheckM
                 });
         return handleResponse(response, expandedUrl);
     }
-    
+
     @Override
-    public List<Company> getMandateProxyPrincipalCompanies(String personId, String companyId, List<String> issues) {
+    public List<OrganizationResult> getMandateProxyPrincipalCompanies(String personId, String companyId, List<String> issues) {
         UriComponentsBuilder builder = getUriComponentsBuilder(CheckProxyMandateClient.COMPANY_PRINCIPALS);
-        
+
         for (String issue : issues) {
             builder.queryParam("issues", issue);
         }
-        
+
         Map<String, String> params = new HashMap<>();
         params.put("personId", personId);
         params.put("delegateId", companyId);
         String expandedUrl = builder.buildAndExpand(params).encode().toUriString();
-        
-        ResponseEntity<List<Company>> response = restTemplate.exchange(expandedUrl, HttpMethod.POST,
-                new HttpEntity<>(issues), new ParameterizedTypeReference<List<Company>>() {});
-        
+
+        ResponseEntity<List<OrganizationResult>> response = restTemplate.exchange(expandedUrl, HttpMethod.POST,
+                new HttpEntity<>(issues), new ParameterizedTypeReference<List<OrganizationResult>>() {});
         return handleResponse(response, expandedUrl);
     }
-    
+
     @Override
     public List<Principal> getMandateProxyPrincipalPersons(String personId, String companyId, List<String> issues) {
         UriComponentsBuilder builder = getUriComponentsBuilder(CheckProxyMandateClient.MANDATE_PRINCIPALS);
-        
+
         for (String issue : issues) {
             builder.queryParam("issues", issue);
         }
-        
+
         Map<String, String> params = new HashMap<>();
         params.put("personId", personId);
         params.put("delegateId", companyId);
         String expandedUrl = builder.buildAndExpand(params).encode().toUriString();
-        
+
         ResponseEntity<List<Principal>> response = restTemplate.exchange(expandedUrl, HttpMethod.POST,
                 new HttpEntity<>(issues), new ParameterizedTypeReference<List<Principal>>() {});
-        
         return handleResponse(response, expandedUrl);
     }
 

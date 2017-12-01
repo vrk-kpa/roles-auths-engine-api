@@ -24,6 +24,7 @@ package fi.vm.kapa.rova.vare;
 
 import fi.vm.kapa.rova.engine.model.Company;
 import fi.vm.kapa.rova.engine.model.hpa.Principal;
+import fi.vm.kapa.rova.engine.model.ypa.OrganizationResult;
 import fi.vm.kapa.rova.vare.model.MandateResponse;
 
 import java.util.List;
@@ -88,7 +89,7 @@ public interface CheckProxyMandateClient {
      * @param issues issue uris
      * @return companies (principals of the mandates given to the representation company)
      */
-    List<Company> getMandateProxyPrincipalCompanies(String personId, String companyId, List<String> issues);
+    List<OrganizationResult> getMandateProxyPrincipalCompanies(String personId, String companyId, List<String> issues);
 
     /**
      * Resource for fetching all principals which have given a mandate (of MANDATE type) to the given companyId and
