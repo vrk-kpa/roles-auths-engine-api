@@ -96,7 +96,6 @@ public class CheckMandateClientImpl extends AbstractVareClient implements CheckM
         params.put("delegateId", companyId);
         params.put("principalId", principalId);
         params.put("subject", subject);
-//        params.put("principalType", principalType.toString());  // TODO path or query parameter?
         
         return handleSimple(builder, params, MandateResponse.class);
     }
@@ -125,7 +124,6 @@ public class CheckMandateClientImpl extends AbstractVareClient implements CheckM
         params.put("personId", personId);
         params.put("delegateId", companyId);
         params.put("principalId", principalId);
-//        params.put("principalType", principalType.toString());  // TODO path or query parameter?
         
         return handleSimple(builder, params, MandateResponse.class);
     }
