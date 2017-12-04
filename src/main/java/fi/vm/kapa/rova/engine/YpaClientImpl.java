@@ -97,30 +97,6 @@ public class YpaClientImpl extends AbstractProxyClient implements Ypa, YpaClient
                 HttpMethod.GET, null, new ParameterizedTypeReference<YpaResult>() {});
     }
 
-    // impl
-
-    public ResponseEntity<YpaResult> getProxyRolesResponse(String userId, String companyId, String serviceIdType, 
-            String service, List<String> organizationIds) {
-        RestTemplate restTemplate = ypaRestTemplate;
-        String requestUrl = getRequestUrlBase() + Ypa.GET_ROLES;
-
-        Map<String, String> params = new HashMap<>();
-        params.put("userId", userId);
-        params.put("companyId", companyId);
-        params.put("serviceIdType", serviceIdType);
-        params.put("service", service);
-
-        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(requestUrl);
-        if (organizationIds != null && !organizationIds.isEmpty()) {
-            MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
-            queryParams.put("organizationId", organizationIds);
-            builder.queryParams(queryParams);
-        }
-
-        return restTemplate.exchange(builder.buildAndExpand(params).toUri(),
-                HttpMethod.GET, null, new ParameterizedTypeReference<YpaResult>() {});
-    }
-
     // AbstractClient
 
     @Override

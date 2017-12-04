@@ -28,11 +28,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Company implements Serializable {
+public final class Company implements Serializable {
     private static final long serialVersionUID = 1L;
-    
-    private String name;
-    private String identifier;
+
+    private final String name;
+    private final String identifier;
 
     @JsonCreator
     public Company(@JsonProperty(value="identifier",required=true) String identifier, @JsonProperty(value="name",required=true) String name) {
@@ -52,22 +52,22 @@ public class Company implements Serializable {
     public String toString() {
         return "Company [identifier=" + identifier + ", name=" + name + "]";
     }
-    
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
             return true;
         }
-        
+
         if (!(other instanceof Company)) {
             return false;
         }
-        
+
         Company company = (Company) other;
-        
+
         return Objects.equals(identifier, company.identifier) && Objects.equals(name, company.name);
     }
-    
+
     @Override
     public int hashCode() {
         return Objects.hash(identifier, name);

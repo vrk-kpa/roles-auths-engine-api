@@ -47,4 +47,29 @@ public class IssueRoleType implements IResultType {
     public void setResult(String result) {
         issue = result;
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((issue == null) ? 0 : issue.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        IssueRoleType other = (IssueRoleType) obj;
+        if (issue == null) {
+            if (other.issue != null)
+                return false;
+        } else if (!issue.equals(other.issue))
+            return false;
+        return true;
+    }
 }
