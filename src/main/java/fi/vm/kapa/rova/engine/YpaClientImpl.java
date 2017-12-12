@@ -53,7 +53,7 @@ import java.util.Map;
  */
 @RibbonClient(name = YpaClient.CLIENT_NAME)
 @Conditional(YpaClientCondition.class)
-public class YpaClientImpl extends AbstractClient implements Ypa, YpaClient {
+public class YpaClientImpl extends AbstractClient implements Ypa, YpaClient, Proxy {
 
     private static String RIBBON_CLIENT_ENGINE_URL = "http://" + YpaClient.CLIENT_NAME;
 

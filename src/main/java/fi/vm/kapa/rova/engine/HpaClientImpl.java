@@ -52,7 +52,7 @@ import java.util.*;
  */
 @RibbonClient(name = HpaClient.CLIENT_NAME)
 @Conditional(HpaClientCondition.class)
-public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient, HpaProxy, HpaProxyClient {
+public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient, HpaProxy, HpaProxyClient, Proxy {
 
     private static final Logger LOG = Logger.getLogger(HpaClientImpl.class);
 
