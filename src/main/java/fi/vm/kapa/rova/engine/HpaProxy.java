@@ -35,7 +35,7 @@ public interface HpaProxy extends Engine {
     String ACTION_PROXY_AUTHORIZATION = "proxyAuthorization";
     String ACTION_PROXY_PRINCIPAL_CHOICE = "proxyPrincipalFromChoice";
 
-    String GET_PROXY_DELEGATE = "/rest/hpa/proxy/delegate/{serviceIdType}/{serviceId}/{userId}";
+    String GET_PROXY_DELEGATE = "/rest/hpa/proxy/delegate/{serviceIdType}/{serviceId}/{userId}/{companyId}";
     String GET_PROXY_AUTHORIZATION = "/rest/hpa/proxy/authorization/{serviceIdType}/{serviceId}/{delegateId}/{principalId}/{companyId}";
     String GET_PROXY_AUTHORIZATION_LIST = "/rest/hpa/proxy/authorization/list/{serviceIdType}/{serviceId}/{delegateId}/{principalId}/{companyId}";
 
