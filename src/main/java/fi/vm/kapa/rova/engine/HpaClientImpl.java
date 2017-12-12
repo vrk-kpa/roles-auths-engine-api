@@ -30,6 +30,7 @@ import fi.vm.kapa.rova.engine.model.hpa.AuthorizationInternal;
 import fi.vm.kapa.rova.engine.model.hpa.AuthorizationListInternal;
 import fi.vm.kapa.rova.engine.model.hpa.HpaDelegate;
 import fi.vm.kapa.rova.logging.Logger;
+import fi.vm.kapa.rova.rest.identification.RequestIdentificationInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -37,6 +38,8 @@ import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
@@ -132,7 +135,11 @@ public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient, Hpa
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(requestUrl);
 
-        return restTemplate.exchange(builder.buildAndExpand(params).toUri(), HttpMethod.GET, null,
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(RequestIdentificationInterceptor.ORIG_END_USER, userId);
+        HttpEntity entity = new HttpEntity(headers);
+
+        return restTemplate.exchange(builder.buildAndExpand(params).toUri(), HttpMethod.GET, entity,
                 new ParameterizedTypeReference<List<Company>>() {
                 });
     }
