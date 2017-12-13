@@ -122,6 +122,7 @@ public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient, Hpa
         return getProxyCompaniesResponse(serviceIdType, apiType, service, userId).getBody();
     }
 
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     private ResponseEntity<List<Company>> getProxyCompaniesResponse(String serviceIdType, ApiSessionType apiType, String service,
                                                                     String userId) {
         RestTemplate restTemplate = hpaRestTemplate;
@@ -199,6 +200,7 @@ public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient, Hpa
     // HpaProxy
 
     @Override
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public ResponseEntity<HpaDelegate> getProxyDelegateResponse(String serviceIdType,
                                                                 String service, String userId, String companyId) {
         RestTemplate restTemplate = hpaRestTemplate;
@@ -210,7 +212,15 @@ public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient, Hpa
         params.put("userId", userId);
         params.put("companyId", companyId);
 
-        return restTemplate.getForEntity(requestUrl, HpaDelegate.class, params);
+        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(requestUrl);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(RequestIdentificationInterceptor.ORIG_END_USER, userId);
+        HttpEntity entity = new HttpEntity(headers);
+
+        return restTemplate.exchange(builder.buildAndExpand(params).toUri(), HttpMethod.GET, entity,
+                new ParameterizedTypeReference<HpaDelegate>() {
+                });
     }
 
     @Override
