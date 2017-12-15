@@ -55,12 +55,12 @@ public interface HpaProxy extends Engine {
      * Answers the question "Is the delegate allowed to act on behalf of the principal, through proxy mandates from the given company, on the given
      * issues?"
      */
-    ResponseEntity<AuthorizationInternal> getProxyAuthorizationResponse(String serviceIdType, String serviceId, String userId, String companyId,
+    ResponseEntity<AuthorizationInternal> getProxyAuthorizationResponse(String serviceIdType, String serviceId, String delegateId, String companyId,
                                                                         String principalId, Set<String> issues);
 
     /**
      * Answers the question "On which issues is the delegate allowed to act on behalf of the principal, through proxy mandates from the given company?"
      */
-    ResponseEntity<AuthorizationListInternal> getProxyAuthorizationListResponse(String serviceIdType, String serviceId, String userId, String companyId,
+    ResponseEntity<AuthorizationListInternal> getProxyAuthorizationListResponse(String serviceIdType, String serviceId, String delegateId, String companyId,
                                                                                 String principalId);
 }

@@ -248,14 +248,14 @@ public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient, Hpa
 
     @Override
     public ResponseEntity<AuthorizationListInternal> getProxyAuthorizationListResponse(String serviceIdType,
-                                                                                       String service, String userId, String companyId, String principalId) {
+                                                                                       String service, String delegateId, String companyId, String principalId) {
         RestTemplate restTemplate = hpaRestTemplate;
         String requestUrl = RIBBON_ENGINE_URL + HpaProxy.GET_PROXY_AUTHORIZATION_LIST;
 
         Map<String, String> params = new HashMap<>();
         params.put("serviceIdType", serviceIdType);
         params.put("serviceId", service);
-        params.put("userId", userId);
+        params.put("delegateId", delegateId);
         params.put("companyId", companyId);
         params.put("principalId", principalId);
 
