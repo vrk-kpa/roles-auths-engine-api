@@ -99,14 +99,14 @@ public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient, Hpa
     @HystrixCommand(commandKey = "HpaClientGetProxyDelegate")
     public HpaDelegate getProxyDelegate(String serviceIdType, String service, 
             String delegateId, String companyId) throws RestClientException {
-        return getProxyDelegateResponse(serviceIdType, serviceIdType, delegateId, companyId).getBody();
+        return getProxyDelegateResponse(serviceIdType, service, delegateId, companyId).getBody();
     }
 
     @Override
     @HystrixCommand(commandKey = "HpaClientGetProxyAuthorization")
     public AuthorizationInternal getProxyAuthorization(String serviceIdType, String service,
             String delegateId, String companyId, String principalId, Set<String> issues) throws RestClientException {
-        return getProxyAuthorizationResponse(serviceIdType, serviceIdType, delegateId, companyId, principalId, issues).getBody();
+        return getProxyAuthorizationResponse(serviceIdType, service, delegateId, companyId, principalId, issues).getBody();
     }
 
     @Override
