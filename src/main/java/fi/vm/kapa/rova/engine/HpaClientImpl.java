@@ -82,14 +82,14 @@ public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient, Hpa
     @Override
     @HystrixCommand(commandKey = "HpaClientGetAuthorization")
     public AuthorizationInternal getAuthorization(String serviceIdType, String service, String delegateId,
-                                                  String principalId, Set<String> issues) throws RestClientException {
+            String principalId, Set<String> issues) throws RestClientException {
         return getAuthorizationResponse(serviceIdType, service, delegateId, principalId, issues).getBody();
     }
 
     @Override
     @HystrixCommand(commandKey = "HpaClientGetAuthorizationList")
-    public AuthorizationListInternal getAuthorizationList(String serviceIdType, String service, String delegateId,
-                                                          String principalId) throws RestClientException {
+    public AuthorizationListInternal getAuthorizationList(String serviceIdType, String service, 
+            String delegateId, String principalId) throws RestClientException {
         return getAuthorizationListResponse(serviceIdType, service, delegateId, principalId).getBody();
     }
 
@@ -97,34 +97,34 @@ public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient, Hpa
 
     @Override
     @HystrixCommand(commandKey = "HpaClientGetProxyDelegate")
-    public HpaDelegate getProxyDelegate(String serviceIdType, String service, String delegateId,
-                                        String companyId) throws RestClientException {
+    public HpaDelegate getProxyDelegate(String serviceIdType, String service, 
+            String delegateId, String companyId) throws RestClientException {
         return getProxyDelegateResponse(serviceIdType, serviceIdType, delegateId, companyId).getBody();
     }
 
     @Override
     @HystrixCommand(commandKey = "HpaClientGetProxyAuthorization")
     public AuthorizationInternal getProxyAuthorization(String serviceIdType, String service,
-                                                       String delegateId, String companyId, String principalId, Set<String> issues) throws RestClientException {
+            String delegateId, String companyId, String principalId, Set<String> issues) throws RestClientException {
         return getProxyAuthorizationResponse(serviceIdType, serviceIdType, delegateId, companyId, principalId, issues).getBody();
     }
 
     @Override
     @HystrixCommand(commandKey = "HpaClientGetProxyAuthorizationList")
     public AuthorizationListInternal getProxyAuthorizationList(String serviceIdType, String service,
-                                                               String delegateId, String companyId, String principalId) throws RestClientException {
+            String delegateId, String companyId, String principalId) throws RestClientException {
         return getProxyAuthorizationListResponse(serviceIdType, service, delegateId, companyId, principalId).getBody();
     }
 
     @HystrixCommand(commandKey = "ClientGetProxyCompanies")
-    public List<Company> getProxyCompanies(String serviceIdType, ApiSessionType apiType, String service,
-                                           String userId) {
-        return getProxyCompaniesResponse(serviceIdType, apiType, service, userId).getBody();
+    public List<Company> getProxyCompanies(String serviceIdType, ApiSessionType apiType, 
+            String service, String delegateId) {
+        return getProxyCompaniesResponse(serviceIdType, apiType, service, delegateId).getBody();
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    private ResponseEntity<List<Company>> getProxyCompaniesResponse(String serviceIdType, ApiSessionType apiType, String service,
-                                                                    String userId) {
+    private ResponseEntity<List<Company>> getProxyCompaniesResponse(String serviceIdType, 
+            ApiSessionType apiType, String service, String delegateId) {
         RestTemplate restTemplate = hpaRestTemplate;
         String requestUrl = getRequestUrlBase() + Proxy.GET_PROXY_COMPANIES;
 
@@ -132,12 +132,12 @@ public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient, Hpa
         params.put("serviceIdType", serviceIdType);
         params.put("apiType", apiType.toString());
         params.put("service", service);
-        params.put("userId", userId);
+        params.put("delegateId", delegateId);
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(requestUrl);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add(RequestIdentificationInterceptor.ORIG_END_USER, userId);
+        headers.add(RequestIdentificationInterceptor.ORIG_END_USER, delegateId);
         HttpEntity entity = new HttpEntity(headers);
 
         return restTemplate.exchange(builder.buildAndExpand(params).toUri(), HttpMethod.GET, entity,
@@ -159,8 +159,8 @@ public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient, Hpa
     }
 
     @Override
-    public ResponseEntity<AuthorizationInternal> getAuthorizationResponse(String serviceIdType, String service, String delegateId,
-                                                                          String principalId, Set<String> issues) {
+    public ResponseEntity<AuthorizationInternal> getAuthorizationResponse(String serviceIdType, 
+            String service, String delegateId, String principalId, Set<String> issues) {
         RestTemplate restTemplate = hpaRestTemplate;
         String requestUrl = RIBBON_ENGINE_URL + Hpa.GET_AUTHORIZATION;
 
@@ -181,8 +181,8 @@ public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient, Hpa
     }
 
     @Override
-    public ResponseEntity<AuthorizationListInternal> getAuthorizationListResponse(String serviceIdType, String service,
-                                                                                  String delegateId, String principalId) {
+    public ResponseEntity<AuthorizationListInternal> getAuthorizationListResponse(String serviceIdType, 
+            String service, String delegateId, String principalId) {
         RestTemplate restTemplate = hpaRestTemplate;
         String requestUrl = RIBBON_ENGINE_URL + Hpa.GET_AUTHORIZATION_LIST;
 
@@ -202,20 +202,20 @@ public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient, Hpa
     @Override
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public ResponseEntity<HpaDelegate> getProxyDelegateResponse(String serviceIdType,
-                                                                String service, String userId, String companyId) {
+            String service, String delegateId, String companyId) {
         RestTemplate restTemplate = hpaRestTemplate;
         String requestUrl = RIBBON_ENGINE_URL + HpaProxy.GET_PROXY_DELEGATE;
 
         Map<String, String> params = new HashMap<>();
         params.put("serviceIdType", serviceIdType);
         params.put("serviceId", service);
-        params.put("userId", userId);
+        params.put("delegateId", delegateId);
         params.put("companyId", companyId);
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(requestUrl);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add(RequestIdentificationInterceptor.ORIG_END_USER, userId);
+        headers.add(RequestIdentificationInterceptor.ORIG_END_USER, delegateId);
         HttpEntity entity = new HttpEntity(headers);
 
         return restTemplate.exchange(builder.buildAndExpand(params).toUri(), HttpMethod.GET, entity,
@@ -225,7 +225,7 @@ public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient, Hpa
 
     @Override
     public ResponseEntity<AuthorizationInternal> getProxyAuthorizationResponse(String serviceIdType,
-                                                                               String service, String delegateId, String companyId, String principalId, Set<String> issues) {
+            String service, String delegateId, String companyId, String principalId, Set<String> issues) {
         RestTemplate restTemplate = hpaRestTemplate;
         String requestUrl = RIBBON_ENGINE_URL + HpaProxy.GET_PROXY_AUTHORIZATION;
 
@@ -248,7 +248,7 @@ public class HpaClientImpl extends AbstractClient implements Hpa, HpaClient, Hpa
 
     @Override
     public ResponseEntity<AuthorizationListInternal> getProxyAuthorizationListResponse(String serviceIdType,
-                                                                                       String service, String delegateId, String companyId, String principalId) {
+            String service, String delegateId, String companyId, String principalId) {
         RestTemplate restTemplate = hpaRestTemplate;
         String requestUrl = RIBBON_ENGINE_URL + HpaProxy.GET_PROXY_AUTHORIZATION_LIST;
 
