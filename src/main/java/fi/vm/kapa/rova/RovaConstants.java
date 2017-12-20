@@ -20,22 +20,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package fi.vm.kapa.rova.engine;
+package fi.vm.kapa.rova;
 
-import fi.vm.kapa.rova.client.ApiSessionType;
-import fi.vm.kapa.rova.engine.model.ypa.YpaResult;
-import org.springframework.web.client.RestClientException;
+public class RovaConstants {
 
-import java.util.List;
+    public static final String NAME_MISSING_MARKER = "[NIMI PUUTTUU]";
 
-/**
- * Created by tkar on 20/11/2017.
- */
-public interface YpaProxyClient {
-
-    static final String CLIENT_NAME = "roles-auths-engine-ypa";
-
-    YpaResult getProxyRoles(String userId, String companyId, String serviceIdType, ApiSessionType apiType, 
-            String service, List<String> organizationIds) throws RestClientException;
-
+    // prevent initialization
+    private RovaConstants() {
+    }
 }

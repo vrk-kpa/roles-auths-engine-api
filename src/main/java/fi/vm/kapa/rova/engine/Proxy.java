@@ -30,7 +30,7 @@ import java.util.List;
 public interface Proxy extends Engine {
     String ACTION_PROXY_COMPANIES = "proxyCompanies";
 
-    String GET_PROXY_COMPANIES = "/rest/proxy/companies/{serviceIdType}/{apiType}/{service}/{userId}";
+    String GET_PROXY_COMPANIES = "/rest/proxy/companies/{serviceIdType}/{apiType}/{service}/{delegateId}";
 
-    List<Company> getProxyCompanies(String serviceIdType, ApiSessionType apiType, String service, String userId);
+    List<Company> getProxyCompanies(String serviceIdType, ApiSessionType apiType, String service, String delegateId);
 }

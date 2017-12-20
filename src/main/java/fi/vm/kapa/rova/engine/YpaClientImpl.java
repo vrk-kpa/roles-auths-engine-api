@@ -25,6 +25,7 @@ package fi.vm.kapa.rova.engine;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import fi.vm.kapa.rova.RestTemplateFactory;
 import fi.vm.kapa.rova.client.ApiSessionType;
+import fi.vm.kapa.rova.engine.model.Company;
 import fi.vm.kapa.rova.engine.model.ypa.YpaResult;
 import fi.vm.kapa.rova.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,7 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,9 +53,10 @@ import java.util.Map;
  */
 @RibbonClient(name = YpaClient.CLIENT_NAME)
 @Conditional(YpaClientCondition.class)
-public class YpaClientImpl extends AbstractProxyClient implements Ypa, YpaClient, YpaProxy, YpaProxyClient {
+public class YpaClientImpl extends AbstractClient implements Ypa, YpaClient, Proxy {
 
     private static String RIBBON_CLIENT_ENGINE_URL = "http://" + YpaClient.CLIENT_NAME;
+
 
     @Autowired
     @Qualifier("engine-ypa")
@@ -67,8 +70,6 @@ public class YpaClientImpl extends AbstractProxyClient implements Ypa, YpaClient
 
     protected static final Logger LOG = Logger.getLogger(YpaClientImpl.class);
 
-    // YpaClient & Ypa
-
     @Override
     @HystrixCommand(commandKey = "YpaClientGetRoles")
     public YpaResult getRoles(String personId, String serviceIdType, String service, List<String> organizationIds)
@@ -76,7 +77,30 @@ public class YpaClientImpl extends AbstractProxyClient implements Ypa, YpaClient
         return getRolesResponse(personId, serviceIdType, service, organizationIds).getBody();
     }
 
-    // impl
+    @HystrixCommand(commandKey = "ClientGetProxyCompanies")
+    public List<Company> getProxyCompanies(String serviceIdType, ApiSessionType apiType, String service,
+                                           String userId) {
+        return getProxyCompaniesResponse(serviceIdType, apiType, service, userId).getBody();
+    }
+
+    private ResponseEntity<List<Company>> getProxyCompaniesResponse(String serviceIdType, ApiSessionType apiType, String service,
+                                                                    String userId) {
+        RestTemplate restTemplate = ypaRestTemplate;
+        String requestUrl = getRequestUrlBase() + Proxy.GET_PROXY_COMPANIES;
+
+        Map<String, String> params = new HashMap<>();
+        params.put("serviceIdType", serviceIdType);
+        params.put("apiType", apiType.toString());
+        params.put("service", service);
+        params.put("userId", userId);
+
+        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(requestUrl);
+        URI urlz = builder.buildAndExpand(params).toUri();
+
+        return restTemplate.exchange(urlz, HttpMethod.GET, null,
+                new ParameterizedTypeReference<List<Company>>() {
+                });
+    }
 
     public ResponseEntity<YpaResult> getRolesResponse(String personId, String serviceIdType, String service, List<String> organizationIds) {
         RestTemplate restTemplate = ypaRestTemplate;
@@ -95,50 +119,15 @@ public class YpaClientImpl extends AbstractProxyClient implements Ypa, YpaClient
         }
 
         return restTemplate.exchange(builder.buildAndExpand(params).toUri(),
-                HttpMethod.GET, null, new ParameterizedTypeReference<YpaResult>() {});
+                HttpMethod.GET, null, new ParameterizedTypeReference<YpaResult>() {
+                });
     }
-
-    // YpaProxyClient & YpaProxy
-
-    @Override
-    public YpaResult getProxyRoles(String userId, String companyId, String serviceIdType, ApiSessionType apiType,
-            String service, List<String> organizationIds) throws RestClientException {
-        return getProxyRolesResponse(userId, companyId, serviceIdType, apiType, service, organizationIds).getBody();
-    }
-
-    // impl
-
-    public ResponseEntity<YpaResult> getProxyRolesResponse(String userId, String companyId, String serviceIdType, 
-            ApiSessionType apiType, String service, List<String> organizationIds) {
-        RestTemplate restTemplate = ypaRestTemplate;
-        String requestUrl = getRequestUrlBase() + Ypa.GET_ROLES;
-
-        Map<String, String> params = new HashMap<>();
-        params.put("userId", userId);
-        params.put("companyId", companyId);
-        params.put("serviceIdType", serviceIdType);
-        params.put("apiType", apiType.toString());
-        params.put("service", service);
-
-        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(requestUrl);
-        if (organizationIds != null && !organizationIds.isEmpty()) {
-            MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
-            queryParams.put("organizationId", organizationIds);
-            builder.queryParams(queryParams);
-        }
-
-        return restTemplate.exchange(builder.buildAndExpand(params).toUri(),
-                HttpMethod.GET, null, new ParameterizedTypeReference<YpaResult>() {});
-    }
-
-    // AbstractClient
 
     @Override
     protected RestTemplate getRestTemplate() {
         return RestTemplateFactory.forBackendService(apiKey, requestAliveSeconds);
     }
 
-    @Override
     protected String getRequestUrlBase() {
         return RIBBON_CLIENT_ENGINE_URL;
     }

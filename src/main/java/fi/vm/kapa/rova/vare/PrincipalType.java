@@ -20,21 +20,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package fi.vm.kapa.rova.engine;
 
-import fi.vm.kapa.rova.client.ApiSessionType;
-import fi.vm.kapa.rova.engine.model.ypa.YpaResult;
+package fi.vm.kapa.rova.vare;
 
-import java.util.List;
-
-/**
- * Created by mtom on 14/03/2017.
- */
-public interface YpaProxy extends Proxy {
-    public String ACTION_ROLES = "proxyRoles";
-
-    String GET_PROXY_ROLES = "/rest/ypa/proxy/roles/{serviceIdType}/{apiType}/{service}/{userId}/{companyId}";
-
-    YpaResult getProxyRoles(String userId, String companyId, String serviceIdType, ApiSessionType apiType, String service, List<String> organizationIds);
-
+public enum PrincipalType {
+    PERSON,
+    COMPANY
 }

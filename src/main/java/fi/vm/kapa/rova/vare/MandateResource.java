@@ -22,6 +22,6 @@
  */
 package fi.vm.kapa.rova.vare;
 
-public interface MandateResource extends CheckMandateClient, MandateClient, Vare {
+public interface MandateResource extends CheckMandateClient, CheckProxyMandateClient, MandateClient, Vare {
 
 }

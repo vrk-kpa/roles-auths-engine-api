@@ -37,11 +37,11 @@ public interface HpaProxyClient {
 
     final static String CLIENT_NAME = "roles-auths-engine-hpa";
 
-    HpaDelegate getProxyDelegate(String serviceIdType, ApiSessionType apiType, String service, String userId, 
+    HpaDelegate getProxyDelegate(String serviceIdType, String service, String delegateId,
             String companyId) throws RestClientException;
-    AuthorizationInternal getProxyAuthorization(String serviceIdType, ApiSessionType apiType, String service, 
-            String userId, String companyId, String principalId, Set<String> issues) throws RestClientException;
-    AuthorizationListInternal getProxyAuthorizationList(String serviceIdType, ApiSessionType apiType, String service, 
-            String userId, String companyId, String principalId) throws RestClientException;
+    AuthorizationInternal getProxyAuthorization(String serviceIdType, String service, 
+            String delegateId, String companyId, String principalId, Set<String> issues) throws RestClientException;
+    AuthorizationListInternal getProxyAuthorizationList(String serviceIdType, String service, 
+            String delegateId, String companyId, String principalId) throws RestClientException;
 
 }

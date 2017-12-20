@@ -22,56 +22,84 @@
  */
 package fi.vm.kapa.rova.vare;
 
+import fi.vm.kapa.rova.engine.model.Company;
 import fi.vm.kapa.rova.engine.model.hpa.Principal;
+import fi.vm.kapa.rova.engine.model.ypa.OrganizationResult;
 import fi.vm.kapa.rova.vare.model.MandateResponse;
 
 import java.util.List;
 
+/**
+ * Interface for the proxy mandate case.
+ * Proxy mandate case requires two valid mandates: MANDATE and PROXY.
+ *
+ * Person is the end user which requires authorization.
+ * Company is the company which has appointed person to act as delegate.
+ * Principal is the party that has authorized the Company that has delegated the Person.
+ */
+
 public interface CheckProxyMandateClient {
-
-    String CHECK_MANDATE_CLIENT = "roles-auths-vare-check-mandate";
-
+    
     String CHECK_MANDATE = "/rest/vare/checkmandate/proxy/{personId}/{delegateId}/{principalId}/{subject}";
     String MANDATE_EXISTS = "/rest/vare/checkmandate/proxy/{personId}/{delegateId}/{principalId}";
+    String PROXY_COMPANIES = "/rest/vare/businessids/proxy/{personId}";
     String COMPANY_PRINCIPALS = "/rest/vare/businessids/proxy/{personId}/{delegateId}";
     String MANDATE_PRINCIPALS = "/rest/vare/principals/proxy/{personId}/{delegateId}";
 
     /**
-     * Interface for the proxy mandate case.
-     * Proxy mandate case requires two valid mandates: MANDATE and PROXY
-     *
-     * Person is the end user which requires authorization
-     * Company is the company which has appointed person to act as delegate
-     * Principal is the party that has authorized the Company that has delegated the Person.
+     * Resource for checking if there is a valid mandate and proxy mandate for the given parameters.
+     * 
+     * @param personId id (hetu) of the proxy delegate (person representing a company)
+     * @param companyId id of the representation company
+     * @param principalId principal of the mandate given to the representation company
+     * @param subject
+     * @param issues issue uris
+     * @param principalType type of the principal
+     * @return
      */
-
+    MandateResponse checkProxyMandate(String personId, String companyId, String principalId, String subject, List<String> issues, PrincipalType principalType);
 
     /**
      * Resource for checking if there is a valid mandate and proxy mandate for the given parameters.
+     * 
+     * @param personId id (hetu) of the proxy delegate (person representing a company)
+     * @param companyId id of the representation company
+     * @param principalId principal of the mandate given to the representation company
+     * @param issues issue uris
+     * @param principalType type of the principal
+     * @return
      */
-    MandateResponse checkProxyMandate(String personId, String delegateId, String principalId, String subject, List<String> issues);
+    MandateResponse checkProxyMandate(String personId, String companyId, String principalId, List<String> issues, PrincipalType principalType);
 
     /**
-     * Resource for checking if there is a valid mandate and proxy mandate for the given parameters.
+     * Resource for fetching businessIds of all companies which have authorized the person to act as company proxy with given issues.
+     * 
+     * @param personId id (hetu) of the proxy delegate (person representing a company)
+     * @param issues issue uris
+     * @return companies which have given proxy mandate for the delegate
      */
-    MandateResponse checkProxyMandate(String personIs, String delegateId, String principalId, List<String> issues);
-
-    /**
-     * Resource for fetching businessIds of all companies which have authorized the person to act as company proxy with given issues
-     *
-     */
-    List<String> getProxyCompanies(String personId, List<String> issues);
+    List<Company> getProxyCompanies(String personId, List<String> issues);
 
     /**
      * Resource for fetching businessIds of all companies which have authorized the person with the given companyId and
      * person must have proxy mandate in same issue from the company.
+     * 
+     * @param personId id (hetu) of the proxy delegate (person representing a company)
+     * @param companyId id of the representation company
+     * @param issues issue uris
+     * @return companies (principals of the mandates given to the representation company)
      */
-    List<String> getCompanyProxyPrincipals(String personId, String companyId, List<String> issues);
+    List<OrganizationResult> getMandateProxyPrincipalCompanies(String personId, String companyId, List<String> issues);
 
     /**
      * Resource for fetching all principals which have given a mandate (of MANDATE type) to the given companyId and
      * person must have proxy mandate in same issue from the company.
+     * 
+     * @param personId id (hetu) of the proxy delegate (person representing a company)
+     * @param companyId id of the representation company
+     * @param issues issue uris
+     * @return persons (principals of the mandates given to the representation company)
      */
-    List<Principal> getMandateProxyPrincipals(String personId, String companyId, List<String> issues);
+    List<Principal> getMandateProxyPrincipalPersons(String personId, String companyId, List<String> issues);
 
 }
